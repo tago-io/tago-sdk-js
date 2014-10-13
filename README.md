@@ -18,14 +18,15 @@ $ npm install tago --save
 ``` javascript
 var Tago = require('tago');
 
-var my_device_x = new Tago("device", "MY-DEVICE-TOKEN");
+var my_token_device = 'add your device token here';
+var my_device_x     = new Tago('device', my_token_device);
 
 var data_to_insert = {
     'variable' : 'temperature',
-    'unit'     : 'C',
-    'value'    : 67,
     'location' : '42.2974279,-85.628292',
-    'time'     : '2014-01-20 03:43:59'
+    'time'     : '2014-01-20 03:43:59',
+    'unit'     : 'C',
+    'value'    : 63
 };
 
 my_device_x.insert(data_to_insert); // Without callback
