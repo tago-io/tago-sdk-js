@@ -1,7 +1,7 @@
 {
   "name": "tago",
   "version": "1.0.2",
-  "description": "Official Lib for use Tago on Node.js",
+  "description": "Official Node.js lib for Tago",
   "author": "Tago LLC",
   "license": "Copyright",
   "homepage": "http://tago.io",

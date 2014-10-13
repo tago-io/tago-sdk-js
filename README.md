@@ -1,6 +1,6 @@
 ## Tago - Node.JS Lib
 
-Official Lib for use Tago on Node.js
+Official Node.js lib for Tago
 
 ## Code Status
 
@@ -22,9 +22,10 @@ var my_device_x = new Tago("device", "MY-DEVICE-TOKEN");
 
 var data_to_insert = {
     'variable' : 'temperature',
-    'unit'     : 'c',
+    'unit'     : 'C',
     'value'    : 67,
-    'location' : "42.2974279,-85.628292"
+    'location' : '42.2974279,-85.628292',
+    'time'     : '2014-01-20 03:43:59'
 };
 
 my_device_x.insert(data_to_insert); // Without callback
@@ -33,7 +34,7 @@ my_device_x.insert(data_to_insert, function (err) { // With callback
     if (err) {
         return console.log(err);
     }
-    console.log('Added data.');
+    console.log('Data added');
 });
 ```
 
@@ -43,7 +44,7 @@ my_device_x.insert(data_to_insert, function (err) { // With callback
 ```
 $ TAGO_TOKEN_DEVICE="c67ad420-5313-11e4-abbc-fb636882321b" TAGO_TOKEN_ACCOUNT="c67ad490-5313-11e4-abbc-fb636874321b" make test
 
-for easier you can create a file to run tests, like:
+We recommend to build a simple script to run tests. One example is given below.
 
 $ echo 'TAGO_TOKEN_DEVICE="c67ad420-5313-11e4-abbc-fb636882321b" TAGO_TOKEN_ACCOUNT="c67ad490-5313-11e4-abbc-fb636874321b" make test' > run_tests.sh
 $ chmod +x run_tests.sh
