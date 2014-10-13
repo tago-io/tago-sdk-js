@@ -14,7 +14,7 @@ test-device:
 	@NODE_ENV="TEST" $(MOCHA_EXEC) \
 	--reporter spec \
 	--ui tdd \
-	--slow 1000 \
+	--slow 5000 \
 	--recursive \
 	test/device/
 

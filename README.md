@@ -21,10 +21,10 @@ var Tago = require('tago');
 var my_device_x = new Tago("device", "MY-DEVICE-TOKEN");
 
 var data_to_insert = {
-    variable : 'temperature',
-    unit     : 'c',
-    value    : 67,
-    location : "42.2974279,-85.628292"
+    'variable' : 'temperature',
+    'unit'     : 'c',
+    'value'    : 67,
+    'location' : "42.2974279,-85.628292"
 };
 
 my_device_x.insert(data_to_insert); // Without callback

@@ -4,8 +4,6 @@ var assert       = require('assert');
 var device_token = process.env.TAGO_TOKEN_DEVICE;
 
 suite('Device - Insert', function () {
-    this.timeout(5000);
-
     suite('Success', function () {
         test('normal', function (done) {
             var device, data;
