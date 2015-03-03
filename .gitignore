@@ -30,3 +30,4 @@ node_modules
 
 # Tago
 run_tests.sh
+.remote-sync.json

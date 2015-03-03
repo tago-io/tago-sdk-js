@@ -15,6 +15,7 @@ $ npm install tago --save
 ```
 #### Usage
 ##### Insert Data
+**.insert(JSON, /CALLBACK/);**
 ``` javascript
 var Tago = require('tago');
 
@@ -39,7 +40,69 @@ my_device.insert(data_to_insert, function (err) { // With callback
 });
 ```
 
-## Only for lib developers
+##### Delete Data
+**.delete(/ID/, /CALLBACK/);**
+``` javascript
+
+my_device.delete('Data_ID'); // Without callback
+// or
+my_device.delete(); // Without callback and ID (We will delete last record)
+// or
+my_device.delete('Data_ID', function (err, result) {
+    if (err) {
+        return console.error(err);
+    }
+    console.log(result);
+});
+
+```
+
+##### Update Data
+**.update(/ID/, JSON, /CALLBACK/);**
+``` javascript
+
+var object_to_update = {
+    'value': 32
+};
+
+my_device.update('Data_ID', object_to_update); // Without callback
+// or
+my_device.update(object_to_update); // Without callback and ID (We will update last record)
+// or
+my_device.update('Data_ID', object_to_update, function (err, result) {
+    if (err) {
+        return console.error(err);
+    }
+    console.log(result);
+});
+
+```
+
+##### Listening new data by Socket
+**.listening(CALLBACK);**
+
+When arrive new data in Tago.io we will send to your device, so you need configure this in **Action** (Menu on Admin) create a new **action** and select the option **Send to Device**. All device using the token with bucket associated will receive the data.
+
+``` javascript
+
+my_device.listening(function (data_from_tago) {
+    console.log(data_from_tago);
+});
+
+
+// If you wanna add listening to connect, you can access socket instance direct using 'mydevice.socket.on', see example below:
+
+my_device.socket.on('connect', function () {
+    console.log('Connected at Tago.io!');
+});
+
+my_device.socket.on('disconnect', function () {
+    console.log('Disconnected at Tago.io!');
+});
+
+```
+
+## Below only for lib developers
 
 #### Run tests
 ```
