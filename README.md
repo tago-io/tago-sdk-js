@@ -81,7 +81,7 @@ my_device.update('Data_ID', object_to_update, function (err, result) {
 ##### Listening new data by Socket
 **.listening(CALLBACK);**
 
-When arrive new data in Tago.io we will send to your device, so you need configure this in **Action** (Menu on Admin) create a new **action** and select the option **Send to Device**. All device using the token with bucket associated will receive the data.
+When new data arrives into Tago.io for you, it will be sent it to your device if you configure for this in the ‘Action’ (Left Menu in Admin). For this purpose, you need to create a new action and select the option ‘Send to Device’. All devices using the token associated with the bucket will receive the data.
 
 ``` javascript
 
