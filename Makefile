@@ -16,6 +16,6 @@ test-device:
 	--ui tdd \
 	--slow 5000 \
 	--recursive \
-	test/device/
+	test/
 
 .PHONY: test jshint test-device
