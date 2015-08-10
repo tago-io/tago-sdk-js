@@ -31,7 +31,7 @@ suite('Device - Insert', function () {
 
             device.insert(data, function (err, result) {
                 assert.ok(!err);
-                assert.equal('Added', result);
+                assert.equal('1 Data Added, 0 Errors', result);
                 done();
             });
         });
@@ -49,7 +49,7 @@ suite('Device - Insert', function () {
 
             device.insert(data, function (err, result) {
                 assert.ok(!result);
-                assert.equal('Invalid variable', err);
+                assert.equal('0 Data Added, 1 Errors', err);
                 done();
             });
         });
@@ -67,7 +67,7 @@ suite('Device - Insert', function () {
 
             device.insert(data, function (err, result) {
                 assert.ok(!result);
-                assert.equal('Invalid location', err);
+                assert.equal('0 Data Added, 1 Errors', err);
                 done();
             });
         });

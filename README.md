@@ -40,6 +40,18 @@ my_device.insert(data_to_insert, function (err) { // With callback
 });
 ```
 
+##### Find Data
+**.find(JSON, /CALLBACK/);**
+``` javascript
+// You can check documentation to see all options you can use in query.
+my_device.find({'query': 'last_value'}, function (err, result) {
+    if (err) {
+        return console.log(err);
+    }
+    console.log(result); // Array with data
+});
+```
+
 ##### Delete Data
 **.delete(/ID/, /CALLBACK/);**
 ``` javascript

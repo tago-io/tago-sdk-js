@@ -16,6 +16,9 @@ test-device:
 	--ui tdd \
 	--slow 5000 \
 	--recursive \
+	--check-leaks \
+	--bail \
+	--inline-diffs \
 	test/
 
 .PHONY: test jshint test-device
