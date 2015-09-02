@@ -1,6 +1,6 @@
 "use strict";
-var infra         = require("../../lib/infra.js");
-var assert       = require('assert');
+var infra  = require("../../lib/infra.js");
+var assert = require('assert');
 
 suite("Infra", function () {
     test("Connection error - server not found", function (done) {
