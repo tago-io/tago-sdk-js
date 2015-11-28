@@ -24,7 +24,7 @@ var my_device       = new Tago('device', my_device_token);
 
 var data_to_insert = {
     'variable' : 'temperature',
-    'location' : '42.2974279,-85.628292',
+    'location' : {'lat': 42.2974279, 'lng': -85.628292},
     'time'     : '2014-01-20 03:43:59',
     'unit'     : 'C',
     'value'    : 63
