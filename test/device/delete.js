@@ -21,7 +21,7 @@ suite('Device - Delete', function () {
 
             device.delete('xxxerrorID', function (err, result) {
                 assert.ok(!result);
-                assert.equal('Not found any data for delete', err);
+                assert.equal('No data were found to be deleted', err);
                 done();
             });
         });
