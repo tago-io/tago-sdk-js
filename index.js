@@ -1,5 +1,5 @@
 'use strict';
-exports.account  = require('./account/');
-exports.analysis = require('./analysis/');
-exports.device   = require('./device/');
-exports.services = require('./services/');
+exports.Account  = require('./account/');
+exports.Analysis = require('./analysis/');
+exports.Device   = require('./device/');
+exports.Services = require('./services/');
