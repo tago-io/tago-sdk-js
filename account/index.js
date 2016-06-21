@@ -31,6 +31,16 @@ class Account {
         return request(options);
     }
 
+    /** List Tokens of the Account
+    * @return {Promise}
+     */
+    tokenlist() {
+        let uri    = `${config.api_uri}/account/token`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {uri, method});
+        return request(options);
+    }
     // ----------- Sub-methods -----------
     get actions() {
         return new Actions(this.token);
