@@ -1,0 +1,14 @@
+box: node
+build:
+    steps:
+        - script:
+            name: install dependencies
+            code: npm install --silent
+        - script:
+            name: run tests
+            code: npm test
+        - script:
+            name: environment info
+            code: |-
+                echo "node version: $(node -v)"
+                echo "npm version: $(npm -v)"

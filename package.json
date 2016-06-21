@@ -1,0 +1,35 @@
+{
+  "name": "tago",
+  "version": "2.0.0",
+  "description": "Official Node.js lib for Tago",
+  "main": "index.js",
+  "homepage": "http://tago.io",
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tago-io/tago-nodejs.git"
+  },
+  "author": "Tago LLC",
+  "license": "Copyright",
+  "keywords": [
+    "tago",
+    "iot"
+  ],
+  "bugs": {
+    "url": "https://github.com/tago-io/tago-nodejs/issues"
+  },
+  "dependencies": {
+    "request-promise": "3.0.0",
+    "socket.io-client": "1.4.6"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "eslint": "2.13.1",
+    "mocha": "2.5.3"
+  }
+}
