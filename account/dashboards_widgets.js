@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class Analyzes {
+class Widgets {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -12,23 +12,12 @@ class Analyzes {
         };
     }
 
-    /** List Analysis
-     * @return {Promise}
-     */
-    list() {
-        let uri    = `${config.api_uri}/analyze`;
-        let method = 'GET';
-
-        let options = Object.assign({}, this.default_options, {uri, method});
-        return request(options);
-    }
-
-    /** Create a Analyze
+    /** Create a Dashboard Widget
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
-        let uri    = `${config.api_uri}/analyze`;
+    create(dash_id = '',data = {}) {
+        let uri    = `${config.api_uri}/dashboard/${dash_id}/widget/`;
         let method = 'POST';
         let body   = data;
 
@@ -36,13 +25,13 @@ class Analyzes {
         return request(options);
     }
 
-    /** Edit the Analyze
-    * @param  {String} analyze id
+    /** Edit the Dashboard Widget
+    * @param  {String} dashboard id
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(query_id = '', data = {}) {
-        let uri    = `${config.api_uri}/analyze/${query_id}`;
+    edit(dash_id = '', query_id = '', data = {}) {
+        let uri    = `${config.api_uri}/dashboard/${dash_id}/widget/${query_id}`;
         let method = 'PUT';
         let body   = data;
 
@@ -50,36 +39,24 @@ class Analyzes {
         return request(options);
     }
 
-    /** Delete the Analyze
-    * @param  {String} analyze id
+    /** Delete the Dashboard Widget
+    * @param  {String} dashboard id
     * @return {Promise}
      */
-    delete(query_id = '') {
-        let uri    = `${config.api_uri}/analyze/${query_id}`;
+    delete(dash_id = '', query_id = '') {
+        let uri    = `${config.api_uri}/dashboard/${dash_id}/widget/${query_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {uri, method});
         return request(options);
     }
 
-    /** Get Info of the Analyze
-    * @param  {String} analyze id
+    /** Get Info of the Dashboard Widget
+    * @param  {String} dashboard id
     * @return {Promise}
      */
-    info(query_id = '') {
-        let uri    = `${config.api_uri}/analyze/${query_id}`;
-        let method = 'GET';
-
-        let options = Object.assign({}, this.default_options, {uri, method});
-        return request(options);
-    }
-
-    /** Force Analyze to Run
-    * @param  {String} analyze id
-    * @return {Promise}
-     */
-    run(query_id = '') {
-        let uri    = `${config.api_uri}/analyze/${query_id}/run`;
+    info(dash_id = '', query_id = '') {
+        let uri    = `${config.api_uri}/dashboard/${dash_id}/widget/${query_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -87,4 +64,4 @@ class Analyzes {
     }
 }
 
-module.exports = Analyzes;
+module.exports = Widgets;
