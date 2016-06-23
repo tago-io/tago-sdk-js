@@ -1,5 +1,5 @@
 'use strict';
-const Device = require('tago/device');
+const Device = require('../device');
 const mydevice = new Device('079a01a0-2ec4-11e6-a77d-991b8f63b767');
 
 var mydata = [

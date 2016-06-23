@@ -1,8 +1,48 @@
 'use strict';
-exports.currency  = require('./currency.js');
-exports.distance  = require('./distance.js');
-exports.email     = require('./email.js');
-exports.geocoding = require('./geocoding.js');
-exports.sms       = require('./sms.js');
-exports.socket    = require('./socket.js');
-exports.weather   = require('./weather.js');
+const config = require('../config.js');
+const default_headers = require('../comum/default_headers.js');
+const request = require('../comum/tago_request.js');
+
+const Currency  = require('./currency.js');
+const Distance  = require('./distance.js');
+const Email     = require('./email.js');
+const Geocoding = require('./geocoding.js');
+const SMS       = require('./sms.js');
+const Socket    = require('./socket.js');
+const Weather   = require('./weather.js');
+
+class Services {
+    constructor(token) {
+        this.token = token;
+    }
+
+    get sms() {
+        return new SMS(this.token);
+    }
+
+    get email() {
+        return new Email(this.token);
+    }
+
+    get geocoding() {
+        return new Geocoding(this.token);
+    }
+
+    get currency() {
+        return new Currency(this.token);
+    }
+
+    get distance() {
+        return new Distance(this.token);
+    }
+    
+    get socket() {
+        return new Socket(this.token);
+    }
+
+    get weather() {
+        return new Weather(this.token);
+    }
+}
+
+module.exports = Services;
