@@ -41,8 +41,8 @@ class Devices {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(query_id = '', data = {}) {
-        let uri    = `${config.api_uri}/device/${query_id}`;
+    edit(device_id, data = {}) {
+        let uri    = `${config.api_uri}/device/${device_id}`;
         let method = 'PUT';
         let body   = data;
 
@@ -54,8 +54,8 @@ class Devices {
     * @param  {String} device id
     * @return {Promise}
      */
-    delete(query_id = '') {
-        let uri    = `${config.api_uri}/device/${query_id}`;
+    delete(device_id) {
+        let uri    = `${config.api_uri}/device/${device_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -66,8 +66,8 @@ class Devices {
     * @param  {String} device id
     * @return {Promise}
      */
-    tokenlist(query_id = '') {
-        let uri    = `${config.api_uri}/device/token/${query_id}`;
+    tokenList(device_id) {
+        let uri    = `${config.api_uri}/device/token/${device_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -78,8 +78,12 @@ class Devices {
     * @param  {String} device id
     * @return {Promise}
      */
-    info(query_id = '') {
-        let uri    = `${config.api_uri}/device/${query_id}`;
+    info(device_id) {
+        if (!device_id || device_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Device ID parameter is obrigatory.'));
+        }
+        let uri    = `${config.api_uri}/device/${device_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});

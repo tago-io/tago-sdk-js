@@ -41,8 +41,8 @@ class Actions {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(query_id = '', data = {}) {
-        let uri    = `${config.api_uri}/action/${query_id}`;
+    edit(action_id, data = {}) {
+        let uri    = `${config.api_uri}/action/${action_id}`;
         let method = 'PUT';
         let body   = data;
 
@@ -54,8 +54,8 @@ class Actions {
     * @param  {String} action id
     * @return {Promise}
      */
-    delete(query_id = '') {
-        let uri    = `${config.api_uri}/action/${query_id}`;
+    delete(action_id) {
+        let uri    = `${config.api_uri}/action/${action_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -66,8 +66,12 @@ class Actions {
     * @param  {String} action id
     * @return {Promise}
      */
-    info(query_id = '') {
-        let uri    = `${config.api_uri}/action/${query_id}`;
+    info(action_id) {
+        if (!action_id || action_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Action ID parameter is obrigatory.'));
+        }
+        let uri    = `${config.api_uri}/action/${action_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});

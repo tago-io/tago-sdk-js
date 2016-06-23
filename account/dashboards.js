@@ -2,7 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const Widgets         = require('./dashboards_widgets.js');
+const Widgets         = require('./dashboards.widgets.js');
 
 class Dashboards {
     constructor(acc_token) {
@@ -42,8 +42,8 @@ class Dashboards {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(query_id = '', data = {}) {
-        let uri    = `${config.api_uri}/dashboard/${query_id}`;
+    edit(dashboard_id, data = {}) {
+        let uri    = `${config.api_uri}/dashboard/${dashboard_id}`;
         let method = 'PUT';
         let body   = data;
 
@@ -55,8 +55,8 @@ class Dashboards {
     * @param  {String} dashboard id
     * @return {Promise}
      */
-    delete(query_id = '') {
-        let uri    = `${config.api_uri}/dashboard/${query_id}`;
+    delete(dashboard_id) {
+        let uri    = `${config.api_uri}/dashboard/${dashboard_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -67,8 +67,12 @@ class Dashboards {
     * @param  {String} dashboard id
     * @return {Promise}
      */
-    info(query_id = '') {
-        let uri    = `${config.api_uri}/dashboard/${query_id}`;
+    info(dashboard_id) {
+        if (!dashboard_id || dashboard_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        }
+        let uri    = `${config.api_uri}/dashboard/${dashboard_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});

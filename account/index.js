@@ -34,7 +34,7 @@ class Account {
     /** List Tokens of the Account
     * @return {Promise}
      */
-    tokenlist() {
+    tokenList() {
         let uri    = `${config.api_uri}/account/token`;
         let method = 'GET';
 

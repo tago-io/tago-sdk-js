@@ -41,8 +41,8 @@ class Buckets {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(query_id = '', data = {}) {
-        let uri    = `${config.api_uri}/bucket/${query_id}`;
+    edit(bkt_id, data = {}) {
+        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
         let method = 'PUT';
         let body   = data;
 
@@ -54,8 +54,8 @@ class Buckets {
     * @param  {String} bucket id
     * @return {Promise}
      */
-    delete(query_id = '') {
-        let uri    = `${config.api_uri}/bucket/${query_id}`;
+    delete(bkt_id) {
+        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {uri, method});
@@ -66,8 +66,12 @@ class Buckets {
     * @param  {String} bucket id
     * @return {Promise}
      */
-    info(query_id = '') {
-        let uri    = `${config.api_uri}/bucket/${query_id}`;
+    info(bkt_id) {
+        if (!bkt_id || bkt_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
+        }
+        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {uri, method});
