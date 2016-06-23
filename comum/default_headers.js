@@ -1,6 +1,5 @@
 'use strict';
-const config = require('../config.js');
-
+const pkg    = require('../package.json');
 /** default_headers
  * Generate default headers
  * @private
@@ -9,7 +8,7 @@ const config = require('../config.js');
 function default_headers(class_context) {
     return {
         'Token': class_context.token,
-        'User-Agent': `Tago-Nodelib-${config.version}`
+        'User-Agent': `Tago-Nodelib-${pkg.version}`
     };
 }
 

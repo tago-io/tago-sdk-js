@@ -4,8 +4,8 @@
   "description": "Official Node.js lib for Tago",
   "main": "index.js",
   "homepage": "http://tago.io",
-  "engines" : {
-    "node" : ">=6.0.0"
+  "engines": {
+    "node": ">=6.0.0"
   },
   "scripts": {
     "test": "make test"
@@ -30,6 +30,7 @@
   "devDependencies": {
     "chai": "3.5.0",
     "eslint": "2.13.1",
+    "express": "4.14.0",
     "mocha": "2.5.3"
   }
 }

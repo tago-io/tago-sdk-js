@@ -10,15 +10,20 @@ eslint:
 	@$(ESLINT_EXEC) .
 
 test-exec:
+	-@killall node
+	@node mock_server.js &
+	@sleep 1
 	@echo "\n---| Mocha (Unit) |---"
-	@$(MOCHA_EXEC) \
+	@TAGO_API=http://localhost:5000 $(MOCHA_EXEC) \
 	--reporter spec \
 	--ui tdd \
 	--recursive \
 	--check-leaks \
 	--bail \
 	--inline-diffs \
+	--timeout 5000 \
 	test/
+	-@killall node
 
 showtodo:
 	@find . \
