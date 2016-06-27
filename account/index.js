@@ -45,14 +45,15 @@ class Account {
     /** Generate Account Token
      * @return {Promise}
      */
-    gen_token(data = {}) {
+    static gen_token(data = {}) {
         let url    = `${config.api_url}/account/token`;
         let method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        let headers = default_headers();
+        let options = {url, method, data, headers};
         return request(options);
     }
-    
+
     // ----------- Sub-methods -----------
     get actions() {
         return new Actions(this.token);

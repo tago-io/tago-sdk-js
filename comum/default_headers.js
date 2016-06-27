@@ -9,8 +9,11 @@ const isBrowser = this.window !== undefined;
  */
 function default_headers(class_context) {
     let headers = {};
-    headers.Token = class_context.token;
-    
+
+    if (class_context.token) {
+        headers.Token = class_context.token;
+    }
+
     if (!isBrowser) {
         headers['User-Agent'] = `Tago-Nodelib-${pkg.version}`;
     }
