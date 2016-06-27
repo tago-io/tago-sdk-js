@@ -16,10 +16,10 @@ class Analysis {
      * @return {Promise}
      */
     list() {
-        let uri    = `${config.api_uri}/analyze`;
+        let url    = `${config.api_url}/analyze`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -28,11 +28,10 @@ class Analysis {
     * @return {Promise}
      */
     create(data = {}) {
-        let uri    = `${config.api_uri}/analyze`;
+        let url    = `${config.api_url}/analyze`;
         let method = 'POST';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -42,11 +41,10 @@ class Analysis {
     * @return {Promise}
      */
     edit(analyze_id, data = {}) {
-        let uri    = `${config.api_uri}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analyze/${analyze_id}`;
         let method = 'PUT';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -55,10 +53,10 @@ class Analysis {
     * @return {Promise}
      */
     delete(analyze_id) {
-        let uri    = `${config.api_uri}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analyze/${analyze_id}`;
         let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -71,10 +69,10 @@ class Analysis {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Analyze ID parameter is obrigatory.'));
         }
-        let uri    = `${config.api_uri}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analyze/${analyze_id}`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -83,10 +81,10 @@ class Analysis {
     * @return {Promise}
      */
     run(analyze_id) {
-        let uri    = `${config.api_uri}/analyze/${analyze_id}/run`;
+        let url    = `${config.api_url}/analyze/${analyze_id}/run`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 }

@@ -26,7 +26,7 @@ class Analysis {
         if (!this._token) {
             throw 'To run locally, needs a token.';
         }
-        const scon = socketio(config.realtime_uri);
+        const scon = socketio(config.realtime_url);
         scon.on('connect', () => {
             console.log('Connected on Tago.io.');
             scon.emit('register:analysis', this._token);

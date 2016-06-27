@@ -16,10 +16,10 @@ class Actions {
      * @return {Promise}
      */
     list() {
-        let uri    = `${config.api_uri}/action`;
+        let url    = `${config.api_url}/action`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -28,11 +28,10 @@ class Actions {
     * @return {Promise}
      */
     create(data = {}) {
-        let uri    = `${config.api_uri}/action`;
+        let url    = `${config.api_url}/action`;
         let method = 'POST';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -42,11 +41,10 @@ class Actions {
     * @return {Promise}
      */
     edit(action_id, data = {}) {
-        let uri    = `${config.api_uri}/action/${action_id}`;
+        let url    = `${config.api_url}/action/${action_id}`;
         let method = 'PUT';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -55,10 +53,10 @@ class Actions {
     * @return {Promise}
      */
     delete(action_id) {
-        let uri    = `${config.api_uri}/action/${action_id}`;
+        let url    = `${config.api_url}/action/${action_id}`;
         let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -71,10 +69,10 @@ class Actions {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Action ID parameter is obrigatory.'));
         }
-        let uri    = `${config.api_uri}/action/${action_id}`;
+        let url    = `${config.api_url}/action/${action_id}`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 }

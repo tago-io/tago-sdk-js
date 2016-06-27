@@ -5,7 +5,7 @@ app.all('*', function (req, res) {
     let model = {
         'url'  : req.url,
         'token': req.headers.token,
-        'body' : req.body,
+        'data' : req.data,
         'query': req.query,
         'method': req.method
     };

@@ -24,10 +24,10 @@ class Account {
      * @return {Promise}
      */
     info() {
-        let uri    = `${config.api_uri}/account`;
+        let url    = `${config.api_url}/account`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -35,10 +35,10 @@ class Account {
     * @return {Promise}
      */
     tokenList() {
-        let uri    = `${config.api_uri}/account/token`;
+        let url    = `${config.api_url}/account/token`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
     // ----------- Sub-methods -----------

@@ -16,10 +16,10 @@ class Devices {
      * @return {Promise}
      */
     list() {
-        let uri    = `${config.api_uri}/device`;
+        let url    = `${config.api_url}/device`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -28,11 +28,10 @@ class Devices {
     * @return {Promise}
      */
     create(data = {}) {
-        let uri    = `${config.api_uri}/device`;
+        let url    = `${config.api_url}/device`;
         let method = 'POST';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -42,11 +41,10 @@ class Devices {
     * @return {Promise}
      */
     edit(device_id, data = {}) {
-        let uri    = `${config.api_uri}/device/${device_id}`;
+        let url    = `${config.api_url}/device/${device_id}`;
         let method = 'PUT';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -55,10 +53,10 @@ class Devices {
     * @return {Promise}
      */
     delete(device_id) {
-        let uri    = `${config.api_uri}/device/${device_id}`;
+        let url    = `${config.api_url}/device/${device_id}`;
         let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -67,10 +65,10 @@ class Devices {
     * @return {Promise}
      */
     tokenList(device_id) {
-        let uri    = `${config.api_uri}/device/token/${device_id}`;
+        let url    = `${config.api_url}/device/token/${device_id}`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -83,10 +81,10 @@ class Devices {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Device ID parameter is obrigatory.'));
         }
-        let uri    = `${config.api_uri}/device/${device_id}`;
+        let url    = `${config.api_url}/device/${device_id}`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 }

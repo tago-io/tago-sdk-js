@@ -1,11 +1,14 @@
 'use strict';
-const rp = require('request-promise');
+const axios = require('axios');
 
 module.exports = function tago_request(request_options) {
-    return rp(request_options).then(result => {
-        if (!result.status) {
-            throw result.message || result;
+    return axios(request_options).then(result => {
+        if (!result.data) {
+            throw result.statusText;
         }
-        return result.result;
+        if (!result.data.status) {
+            throw result.data.message || result;
+        }
+        return result.data.result;
     });
 };

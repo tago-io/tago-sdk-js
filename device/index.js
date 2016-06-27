@@ -26,11 +26,10 @@ class Device {
      * @return {Promise}
      */
     insert(data = {}) {
-        let uri    = `${config.api_uri}/data`;
+        let url    = `${config.api_url}/data`;
         let method = 'POST';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -39,11 +38,11 @@ class Device {
      * @return {Promise}
      */
     find(query_obj = {}) {
-        let uri    = `${config.api_uri}/data`;
+        let url    = `${config.api_url}/data`;
         let method = 'GET';
         let qs     = Object.assign({}, this.default_options.qs || {}, query_obj);
 
-        let options = Object.assign({}, this.default_options, {uri, method, qs});
+        let options = Object.assign({}, this.default_options, {url, method, qs});
         return request(options);
     }
 }

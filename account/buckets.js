@@ -16,10 +16,10 @@ class Buckets {
      * @return {Promise}
      */
     list() {
-        let uri    = `${config.api_uri}/bucket`;
+        let url    = `${config.api_url}/bucket`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -28,11 +28,10 @@ class Buckets {
     * @return {Promise}
      */
     create(data = {}) {
-        let uri    = `${config.api_uri}/bucket`;
+        let url    = `${config.api_url}/bucket`;
         let method = 'POST';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -42,11 +41,10 @@ class Buckets {
     * @return {Promise}
      */
     edit(bkt_id, data = {}) {
-        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
+        let url    = `${config.api_url}/bucket/${bkt_id}`;
         let method = 'PUT';
-        let body   = data;
 
-        let options = Object.assign({}, this.default_options, {uri, method, body});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -55,10 +53,10 @@ class Buckets {
     * @return {Promise}
      */
     delete(bkt_id) {
-        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
+        let url    = `${config.api_url}/bucket/${bkt_id}`;
         let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -71,10 +69,10 @@ class Buckets {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
         }
-        let uri    = `${config.api_uri}/bucket/${bkt_id}`;
+        let url    = `${config.api_url}/bucket/${bkt_id}`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {uri, method});
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 }
