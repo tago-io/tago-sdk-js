@@ -7,7 +7,7 @@ const isBrowser = this.window !== undefined;
  * @private
  * @return {JSON}
  */
-function default_headers(class_context) {
+function default_headers(class_context = {}) {
     let headers = {};
 
     if (class_context.token) {
