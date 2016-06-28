@@ -58,21 +58,7 @@ class Weather {
      * @return {Weather}
      */
     geolocation(geolocation) {
-        if (typeof geolocation === 'string') {
-            let geoplited = geolocation.split(',');
-
-            if (geolocation.length > 1) {
-                geolocation = [geoplited[0].trim(), geoplited[1].trim()];
-            } else {
-                throw 'Invalid geolocation';
-            }
-        } else if (geolocation.coordinates) {
-            geolocation = geolocation.coordinates;
-        } else {
-            throw 'Invalid geolocation';
-        }
-
-        this._query = [geolocation[0], geolocation[1]].join(',');
+        this._query = geolocation;
         return this;
     }
 
