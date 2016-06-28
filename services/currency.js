@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class SMS {
+class Currency {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -13,7 +13,7 @@ class SMS {
     }
 
     /**
-     * Send SMS to number
+     * Convert between two coins
      * @param  {STRING} c_from  To convert from
      * @param  {STRING} c_to    To convert to
      * @return {Promise}
@@ -30,4 +30,4 @@ class SMS {
 
 }
 
-module.exports = SMS;
+module.exports = Currency;

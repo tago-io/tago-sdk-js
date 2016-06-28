@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class GEOCODING {
+class Geocoding {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -40,4 +40,4 @@ class GEOCODING {
 
 }
 
-module.exports = GEOCODING;
+module.exports = Geocoding;

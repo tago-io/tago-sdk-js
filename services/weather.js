@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class WEATHER {
+class Weather {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -17,7 +17,7 @@ class WEATHER {
 
     /** Set to come with full description, or not
      * @param  {BOOLEAN} full
-     * @return {WEATHER}
+     * @return {Weather}
      */
     full(full) {
         if (full === true) {
@@ -28,7 +28,7 @@ class WEATHER {
 
     /** Set a zipcode
      * @param  {STRING} zipcode
-     * @return {WEATHER}
+     * @return {Weather}
      */
     zipcode(zipcode) {
         this._query = zipcode;
@@ -37,7 +37,7 @@ class WEATHER {
 
     /** Set a address name
      * @param  {STRING} name
-     * @return {WEATHER}
+     * @return {Weather}
      */
     name(name) {
         this._query = name;
@@ -46,7 +46,7 @@ class WEATHER {
 
     /** Set a lang
      * @param  {STRING} lang
-     * @return {WEATHER}
+     * @return {Weather}
      */
     lang(lang) {
         this._language = lang;
@@ -55,7 +55,7 @@ class WEATHER {
 
     /** Set a geolocation
      * @param  {STRING} geolocation
-     * @return {WEATHER}
+     * @return {Weather}
      */
     geolocation(geolocation) {
         if (typeof geolocation === 'string') {
@@ -126,4 +126,4 @@ class WEATHER {
     }
 }
 
-module.exports = WEATHER;
+module.exports = Weather;

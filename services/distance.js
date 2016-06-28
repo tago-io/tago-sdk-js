@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class DISTANCE {
+class Distance {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -30,4 +30,4 @@ class DISTANCE {
 
 }
 
-module.exports = DISTANCE;
+module.exports = Distance;
