@@ -28,7 +28,8 @@ class Dashboards {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
+    create(data) {
+        data       = data || {};
         let url    = `${config.api_url}/dashboard`;
         let method = 'POST';
 
@@ -41,7 +42,8 @@ class Dashboards {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(dashboard_id, data = {}) {
+    edit(dashboard_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/dashboard/${dashboard_id}`;
         let method = 'PUT';
 

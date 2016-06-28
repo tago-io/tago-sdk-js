@@ -27,7 +27,8 @@ class Actions {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
+    create(data) {
+        data       = data || {};
         let url    = `${config.api_url}/action`;
         let method = 'POST';
 
@@ -40,7 +41,8 @@ class Actions {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(action_id, data = {}) {
+    edit(action_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/action/${action_id}`;
         let method = 'PUT';
 

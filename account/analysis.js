@@ -27,7 +27,8 @@ class Analysis {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
+    create(data) {
+        data       = data || {};
         let url    = `${config.api_url}/analyze`;
         let method = 'POST';
 
@@ -40,7 +41,8 @@ class Analysis {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(analyze_id, data = {}) {
+    edit(analyze_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/analyze/${analyze_id}`;
         let method = 'PUT';
 

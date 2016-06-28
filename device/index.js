@@ -9,7 +9,7 @@ class Device {
      * @param  {Boolean} Show Details
      * @return {Object} Device Object
      */
-    constructor(token, details = false) {
+    constructor(token, details) {
         this.token   = token;
         this.default_options = {
             'json': true,
@@ -25,7 +25,8 @@ class Device {
      * @param  {Object|Array} data
      * @return {Promise}
      */
-    insert(data = {}) {
+    insert(data) {
+        data       = data || {};
         let url    = `${config.api_url}/data`;
         let method = 'POST';
 
@@ -37,7 +38,8 @@ class Device {
      * @param  {JSON} query object
      * @return {Promise}
      */
-    find(query_obj = {}) {
+    find(query_obj) {
+        query_obj  = query_obj || {};
         let url    = `${config.api_url}/data`;
         let method = 'GET';
         let qs     = Object.assign({}, this.default_options.qs || {}, query_obj);

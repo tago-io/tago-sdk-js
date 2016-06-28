@@ -45,7 +45,8 @@ class Account {
     /** Generate Account Token
      * @return {Promise}
      */
-    static gen_token(data = {}) {
+    static gen_token(data) {
+        data       = data || {};
         let url    = `${config.api_url}/account/token`;
         let method = 'POST';
 

@@ -27,7 +27,8 @@ class Buckets {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
+    create(data) {
+        data       = data || {};
         let url    = `${config.api_url}/bucket`;
         let method = 'POST';
 
@@ -40,7 +41,8 @@ class Buckets {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(bkt_id, data = {}) {
+    edit(bkt_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/bucket/${bkt_id}`;
         let method = 'PUT';
 

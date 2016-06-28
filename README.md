@@ -10,12 +10,12 @@ Official Node.js lib for Tago
 
 #### Installation
 
-NODE >= v6
+NODE >= v4.4
 ```
 $ npm install tago --save
 ```
 
-NODE < v6
+NODE < v4.4
 ```
 $ npm install tago@1.* --save
 ```

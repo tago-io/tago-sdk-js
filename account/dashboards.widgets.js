@@ -17,7 +17,8 @@ class Widgets {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(dash_id,data = {}) {
+    create(dash_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/dashboard/${dash_id}/widget/`;
         let method = 'POST';
 
@@ -31,7 +32,8 @@ class Widgets {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(dash_id, widget_id, data = {}) {
+    edit(dash_id, widget_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
         let method = 'PUT';
 

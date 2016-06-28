@@ -27,7 +27,8 @@ class Devices {
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data = {}) {
+    create(data) {
+        data       = data || {};
         let url    = `${config.api_url}/device`;
         let method = 'POST';
 
@@ -40,7 +41,8 @@ class Devices {
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(device_id, data = {}) {
+    edit(device_id, data) {
+        data       = data || {};
         let url    = `${config.api_url}/device/${device_id}`;
         let method = 'PUT';
 
