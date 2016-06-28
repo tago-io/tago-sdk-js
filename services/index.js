@@ -1,8 +1,4 @@
 'use strict';
-const config = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const request = require('../comum/tago_request.js');
-
 const Currency  = require('./currency.js');
 const Distance  = require('./distance.js');
 const Email     = require('./email.js');
@@ -35,7 +31,7 @@ class Services {
     get distance() {
         return new Distance(this.token);
     }
-    
+
     get socket() {
         return new Socket(this.token);
     }
