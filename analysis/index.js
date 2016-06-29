@@ -14,12 +14,11 @@ class Analysis {
     }
 
     run(environment, data, token) {
-        let scope = {
-            'environment': environment,
-            'data': data,
-            'services': new Services(token)
+        let context = {
+            token,
+            environment
         };
-        this._analysis(scope);
+        this._analysis(context, data || []);
     }
 
     local_runtime() {
