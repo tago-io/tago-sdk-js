@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Tago SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
   "homepage": "https://tago.io",
@@ -24,7 +24,14 @@
     "url": "https://tago.io"
   },
   "license": "Apache-2.0",
-  "keywords": [ "tago","iot","tago.io","sdk","analysis","device" ],
+  "keywords": [
+    "tago",
+    "iot",
+    "tago.io",
+    "sdk",
+    "analysis",
+    "device"
+  ],
   "bugs": {
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
