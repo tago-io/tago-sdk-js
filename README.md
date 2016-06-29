@@ -1,12 +1,8 @@
-## Tago - Node.JS Lib
+## Tago - SDK for JavaScript
+[![wercker status](https://app.wercker.com/status/7eba1fa5503f7f5ad61a15a0a6e63234/s/master "wercker status")](https://app.wercker.com/project/bykey/7eba1fa5503f7f5ad61a15a0a6e63234)
+[![Documentation Status](https://readthedocs.org/projects/tago-sdk-js-documentation/badge/?version=latest)](http://tago-sdk-js-documentation.readthedocs.io/en/latest/?badge=latest)
 
-Official Node.js lib for Tago
-
-## Code Status
-
-[![wercker status](https://app.wercker.com/status/7eba1fa5503f7f5ad61a15a0a6e63234/m "wercker status")](https://app.wercker.com/project/bykey/7eba1fa5503f7f5ad61a15a0a6e63234)
-
-## Documentation
+[Documentation Link](http://sdk.js.tago.io/)
 
 #### Installation
 
@@ -19,6 +15,8 @@ NODE < v4.4
 ```
 $ npm install tago@1.* --save
 ```
+
+If you will use it on browser, you should convert it using babel. If you use webpack to build you can add rule like this: ```'exclude': /node_modules\/(?!tago)/```
 
 #### Usage
 ##### Insert Data
@@ -46,4 +44,4 @@ my_device.insert(data_to_insert)
 
 ## License
 
-Tago lib client for Node.js is released under the [Copyright License](https://github.com/tago-io/tago-nodejs/blob/master/LICENSE.md).
+Tago SDK for JavaScript in the browser and Node.js is released under the [Apache-2.0 License](https://github.com/tago-io/tago-nodejs/blob/master/LICENSE.md).

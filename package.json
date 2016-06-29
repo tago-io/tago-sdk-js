@@ -1,27 +1,39 @@
 {
   "name": "tago",
-  "version": "2.0.0",
-  "description": "Official Node.js lib for Tago",
+  "version": "2.0.1",
+  "description": "Tago SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
-  "homepage": "http://tago.io",
+  "homepage": "https://tago.io",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=4.0.0"
   },
   "scripts": {
     "test": "make test"
   },
+  "contributors": [
+    "Felipe Lima <felipe@ferreiradelima.com>",
+    "Vitor Lima <vitor@ferreiradelima.com>"
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tago-io/tago-nodejs.git"
+    "url": "git+https://github.com/tago-io/tago-sdk-js.git"
   },
-  "author": "Tago LLC",
-  "license": "Copyright",
+  "author": {
+    "name": "Tago LLC",
+    "email": "contact@tago.io",
+    "url": "https://tago.io"
+  },
+  "license": "Apache-2.0",
   "keywords": [
     "tago",
-    "iot"
+    "iot",
+    "tago.io",
+    "sdk",
+    "analysis",
+    "device"
   ],
   "bugs": {
-    "url": "https://github.com/tago-io/tago-nodejs/issues"
+    "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
   "dependencies": {
     "axios": "0.12.0",

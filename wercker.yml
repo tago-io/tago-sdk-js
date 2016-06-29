@@ -1,4 +1,4 @@
-box: node
+box: node:argon
 build:
     steps:
         - script:

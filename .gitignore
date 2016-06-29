@@ -32,3 +32,4 @@ node_modules
 run_tests.sh
 .remote-sync.json
 .zsh_history
+_build/
