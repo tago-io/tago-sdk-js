@@ -1,13 +1,8 @@
-## Tago - Node.JS Lib
-
-Official Node.js lib for Tago
-
-## Code Status
-
-[![wercker status](https://app.wercker.com/status/7eba1fa5503f7f5ad61a15a0a6e63234/m "wercker status")](https://app.wercker.com/project/bykey/7eba1fa5503f7f5ad61a15a0a6e63234)
+## Tago - SDK for JavaScript
+[![wercker status](https://app.wercker.com/status/7eba1fa5503f7f5ad61a15a0a6e63234/s/master "wercker status")](https://app.wercker.com/project/bykey/7eba1fa5503f7f5ad61a15a0a6e63234)
 [![Documentation Status](https://readthedocs.org/projects/tago-sdk-js-documentation/badge/?version=latest)](http://tago-sdk-js-documentation.readthedocs.io/en/latest/?badge=latest)
 
-## Documentation
+[Documentation Link](http://sdk.js.tago.io/)
 
 #### Installation
 
