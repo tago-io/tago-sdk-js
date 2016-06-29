@@ -16,6 +16,8 @@ NODE < v4.4
 $ npm install tago@1.* --save
 ```
 
+If you will use it on browser, you should convert it using babel. If you use webpack to build you can add rule like this: ```'exclude': /node_modules\/(?!tago)/```
+
 #### Usage
 ##### Insert Data
 **.insert(JSON || Array);**
