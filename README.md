@@ -46,4 +46,4 @@ my_device.insert(data_to_insert)
 
 ## License
 
-Tago lib client for Node.js is released under the [Apache-2.0 License](https://github.com/tago-io/tago-nodejs/blob/master/LICENSE.md).
+Tago SDK for JavaScript in the browser and Node.js is released under the [Apache-2.0 License](https://github.com/tago-io/tago-nodejs/blob/master/LICENSE.md).
