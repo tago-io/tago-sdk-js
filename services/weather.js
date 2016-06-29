@@ -81,7 +81,7 @@ class Weather {
     history(date) {
         let url    = `${config.api_url}/analysis/services/weather/history`;
         let method = 'POST';
-        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang, 'date':date };
+        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang, date };
 
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
