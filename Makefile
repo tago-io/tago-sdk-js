@@ -32,6 +32,7 @@ showtodo:
 	-not -path "*.git*" \
 	-not -path "*Makefile*" \
 	-not -path "*wercker.yml*" \
+	-not -path "*_build*" \
 	-type f \
 	-exec egrep --color -inH "TODO|FIXME" {} \;
 
@@ -42,6 +43,7 @@ countconsolelog:
 	-not -path "*coverage*" \
 	-not -path "*.git*" \
 	-not -path "*Makefile*" \
+	-not -path "*_build*" \
 	-type f \
 	-exec egrep --color -inH "console.log" {} \; | wc -l
 
@@ -51,6 +53,7 @@ showconsolelog:
 	-not -path "*coverage*" \
 	-not -path "*.git*" \
 	-not -path "*Makefile*" \
+	-not -path "*_build*" \
 	-type f \
 	-exec egrep --color -inH "console.log" {} \;
 

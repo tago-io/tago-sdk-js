@@ -1,6 +1,11 @@
 'use strict';
-const pkg    = require('../package.json');
-const isBrowser = this.window !== undefined;
+const pkg = require('../package.json');
+
+// Check if env is on browser.
+let isBrowser = false;
+try {
+    isBrowser = window !== undefined; // eslint-disable-line
+} catch (e) {/*ignore */}
 
 /** default_headers
  * Generate default headers
