@@ -7,7 +7,10 @@
  * @return {Object}
  */
 function env_to_obj(environment) {
-    return environment.reduce((pv,cv) => pv[cv.key] = cv.value, {});
+    return environment.reduce((pv,cv) => { 
+        pv[cv.key] = cv.value;
+        return pv; 
+    }, {});
 }
 
 module.exports = env_to_obj;
