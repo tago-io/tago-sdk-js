@@ -42,9 +42,11 @@ class Device {
         query_obj  = query_obj || {};
         let url    = `${config.api_url}/data`;
         let method = 'GET';
-        let qs     = Object.assign({}, this.default_options.qs || {}, query_obj);
+        let params = Object.assign({}, this.default_options.qs || {}, query_obj);
 
-        let options = Object.assign({}, this.default_options, {url, method, qs});
+        let options = Object.assign({}, this.default_options, {url, method, params});
+
+        console.log(options);
         return request(options);
     }
 }
