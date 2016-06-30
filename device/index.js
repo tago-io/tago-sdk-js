@@ -46,7 +46,6 @@ class Device {
 
         let options = Object.assign({}, this.default_options, {url, method, params});
 
-        console.log(options);
         return request(options);
     }
 }
