@@ -70,6 +70,18 @@ class Widgets {
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
+
+    /** Get all data for the current widget
+    * @param  {String} widget id
+    * @return {Promise}
+    */
+    data(widget_id) {
+        let url    = `${config.api_url}/dashboard/widget/data/${widget_id}`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
 }
 
 module.exports = Widgets;
