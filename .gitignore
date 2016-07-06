@@ -27,6 +27,7 @@ node_modules
 
 # Editor
 *.sublime-*
+.vscode
 
 # Tago
 build/
