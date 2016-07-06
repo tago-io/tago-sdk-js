@@ -7,7 +7,7 @@ To setup an device object, you need a token (that you need to get in our website
 
 .insert
 *******
-Insert a new data into the bucket. You can get more informations about what can be passed to insert in our `api documentation http://docs.tago.io/en/latest/api.html#send-data>`_
+Insert a new data into the bucket. You can get more informations about what can be passed to insert in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
 
 | **Syntax**
 | *.insert(/data/)*
@@ -46,12 +46,12 @@ Insert a new data into the bucket. You can get more informations about what can 
         });
 
 
-.info
+.find
 *******
-Get a list of data from bucket respecting the query options passed. You can get more informations about what can be passed to info in our `api documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
+Get a list of data from bucket respecting the query options passed. You can get more informations about what can be passed to find in our `api documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
 
 | **Syntax**
-| *.info(/filter/)*
+| *.find(/filter/)*
 |
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
