@@ -84,12 +84,12 @@ Generate and retrieve a new token for the account
             //You can treat errors here
         });
 
-Device
+Devices
 *******
 Across the account function, it is possible to manage all your devices. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The Device method is completly different from the class Device, since this one can only manage devices, and can't do anything with data related to the device.
 
 .list
-========
+=====
 Retrieve a list with all devices from account
 
 | **Syntax**
@@ -114,7 +114,7 @@ Retrieve a list with all devices from account
 
 
 .create
-===============
+=======
 Generate and retrieve a new device for the account
 
 | **Syntax**
@@ -158,7 +158,7 @@ Generate and retrieve a new device for the account
 
 
 .edit
-===================
+=====
 Modify any property of the device.
 
 | **Syntax**
@@ -201,7 +201,7 @@ Modify any property of the device.
 
 
 .info
-===========
+=====
 Get informations about the device
 
 | **Syntax**
@@ -229,7 +229,7 @@ Get informations about the device
 
 
 .tokenList
-================
+==========
 Retrieve a list of all tokens of the device
 
 | **Syntax**
@@ -257,7 +257,7 @@ Retrieve a list of all tokens of the device
 
 
 .delete
-=============
+=======
 Delete device for the account
 
 | **Syntax**
@@ -283,7 +283,7 @@ Delete device for the account
             //You can treat errors here
         });
 
-Bucket
+Buckets
 *******
 Across the account function, it is possible to manage all your buckets. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The bucket method is completly different from the class bucket, since this one can only manage buckets, and can't do anything with data related to the bucket.
 
@@ -313,7 +313,7 @@ Retrieve a list with all buckets from account
 
 
 .create
-===============
+=======
 Generate and retrieve a new bucket for the account
 
 | **Syntax**
@@ -354,7 +354,7 @@ Generate and retrieve a new bucket for the account
 
 
 .edit
-===================
+===========
 Modify any property of the bucket.
 
 | **Syntax**
@@ -395,7 +395,7 @@ Modify any property of the bucket.
 
 
 .info
-===========
+======
 Get informations about the bucket
 
 | **Syntax**
@@ -423,7 +423,7 @@ Get informations about the bucket
 
 
 .delete
-=============
+========
 Delete bucket for the account
 
 | **Syntax**
@@ -480,7 +480,7 @@ Retrieve a list with all actions from account
 
 
 .create
-===============
+=======
 Generate and retrieve a new action for the account
 
 | **Syntax**
@@ -554,7 +554,7 @@ Generate and retrieve a new action for the account
 
 
 .edit
-===================
+=====
 Modify any property of the action.
 
 | **Syntax**
@@ -591,7 +591,7 @@ Modify any property of the action.
 
 
 .info
-===========
+=====
 Get informations about the action
 
 | **Syntax**
@@ -619,7 +619,7 @@ Get informations about the action
 
 
 .delete
-=============
+=======
 Delete action for the account
 
 | **Syntax**

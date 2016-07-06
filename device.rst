@@ -48,7 +48,7 @@ Insert a new data into the bucket. You can get more informations about what can 
 
 .find
 *******
-Get a list of data from bucket respecting the query options passed. You can get more informations about what can be passed to find in our `api documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
+Get a list of data from bucket respecting the query options passed. You can get more informations about what can be passed to find in our `get documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
 
 | **Syntax**
 | *.find(/filter/)*
@@ -56,7 +56,7 @@ Get a list of data from bucket respecting the query options passed. You can get 
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
 |   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last ones (optional);*
-|   *\*query(string)*: *Do a specific query. See the `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ to know what can be passed. (optional)*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ *to know what can be passed. (optional)*
 |   *\*end_date(string)*: *Get data until a specific date. (optional)*
 |   *\*start_date(string)*: *Get data started from a specific date. (optional)*
 |   *\*qty(number)*: *Number of data to be retrieve. Default is 15. (optional)*
