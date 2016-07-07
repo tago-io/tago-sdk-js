@@ -247,7 +247,7 @@ Retrieve a list of all tokens of the device
     const Account    = require('tago/account');
     const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
     
-    accdevices.list('576dc932415f403531fd2cf6')
+    accdevices.tokenList('576dc932415f403531fd2cf6')
         .then((result) => { 
             //You can treat the result here
         })

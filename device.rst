@@ -97,7 +97,7 @@ Remove a data from the bucket. It's possible to remove in three ways:
 |
 | **Arguments**
 | *variable_or_id(string) a variable name or an specific ID. (optional)*
-| If no parameter is passed, will automaticly remove the last data inserted by this device.
+| If no parameter is passed, will automatically remove the last data inserted by this device.
 |
 | **Returns**
 | *(Promise)*
