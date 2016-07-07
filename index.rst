@@ -11,6 +11,7 @@ Tago's SDK for JavaScript Documentation
 
    Sign up for free! <https://admin.tago.io/signup>
    device
+   analysis
    services
    account
    Forum <https://community.tago.io/>
