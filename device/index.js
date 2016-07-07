@@ -48,6 +48,23 @@ class Device {
 
         return request(options);
     }
+
+    /** remove
+     * @param  {JSON} query object
+     * @return {Promise}
+     */
+    remove(variable_or_id) {
+        let url    = `${config.api_url}/data`;
+        if (variable_or_id) {
+            url += `/${variable_or_id}`;
+        }
+        
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+
+        return request(options);
+    }
 }
 
 module.exports = Device;
