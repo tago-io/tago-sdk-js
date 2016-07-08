@@ -1,6 +1,6 @@
 'use strict';
 const socketio = require('socket.io-client');
-const config = require('./../config.js');
+const config   = require('./../config.js');
 const Services = require('./../services/');
 
 class Analysis {
@@ -14,7 +14,13 @@ class Analysis {
     }
 
     run(environment, data, token) {
+        let tago_console = new Services(token).console;
+        function log(message) {
+            return tago_console.log(message);
+        }
+
         let context = {
+            log,
             token,
             environment
         };

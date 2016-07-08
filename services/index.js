@@ -6,6 +6,7 @@ const Geocoding = require('./geocoding.js');
 const SMS       = require('./sms.js');
 const Socket    = require('./socket.js');
 const Weather   = require('./weather.js');
+const Console   = require('./console.js');
 
 class Services {
     constructor(token) {
@@ -14,6 +15,10 @@ class Services {
 
     get sms() {
         return new SMS(this.token);
+    }
+
+    get console() {
+        return new Console(this.token);
     }
 
     get email() {
