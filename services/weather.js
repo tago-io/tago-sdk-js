@@ -10,63 +10,27 @@ class Weather {
             'json':    true,
             'headers': default_headers(this)
         };
-        this._query = null;
-        this._full  = false;
-        this._lang  = 'EN';
     }
 
-    /** Set to come with full description, or not
-     * @param  {BOOLEAN} full
-     * @return {Weather}
+    /** set params for the Weather
+     * @private
+     * @param  {object} params 
      */
-    full(full) {
-        if (full === true) {
-            this._full = true;
-        }
-        return this;
+    _setParams(params) {
+        this._query = params.query || null;
+        this._full  = params.full || false;
+        this._lang  = params.lang || 'EN';
     }
 
-    /** Set a zipcode
-     * @param  {STRING} zipcode
-     * @return {Weather}
-     */
-    zipcode(zipcode) {
-        this._query = zipcode;
-        return this;
-    }
-
-    /** Set a address name
-     * @param  {STRING} name
-     * @return {Weather}
-     */
-    name(name) {
-        this._query = name;
-        return this;
-    }
-
-    /** Set a lang
-     * @param  {STRING} lang
-     * @return {Weather}
-     */
-    lang(lang) {
-        this._language = lang;
-        return this;
-    }
-
-    /** Set a geolocation
-     * @param  {STRING} geolocation
-     * @return {Weather}
-     */
-    geolocation(geolocation) {
-        this._query = geolocation;
-        return this;
-    }
-
-
-    /** Get the current weather conditions.
+    /** 
+     * Get the current weather conditions.
+     * @param  {string} query - Could be an address name, a zipcode or a geojson.
+     * @param  {boolean} full - Set to come with full description, or not
+     * @param  {string} lang - Set a language. Default is 'EN'
      * @return {Promise}
      */
-    current() {
+    current(query, full, lang) {
+        this._setParams({query, full, lang});
         let url    = `${config.api_url}/analysis/services/weather/current`;
         let method = 'POST';
         let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
@@ -75,10 +39,16 @@ class Weather {
         return request(options);
     }
 
-    /** Get history of the weather broadcast in the last week
+    /** 
+     * Get history of the weather broadcast in the last week
+     * @param  {string} date - Get history until specified date
+     * @param  {string|object} query - Could be an address name, a zipcode or a geojson.
+     * @param  {boolean} full - Set to come with full description, or not
+     * @param  {string} lang - Set a language. Default is 'EN'
      * @return {Promise}
      */
-    history(date) {
+    history(date, query, full, lang) {
+        this._setParams({query, full, lang});
         let url    = `${config.api_url}/analysis/services/weather/history`;
         let method = 'POST';
         let data = { 'query': this._query,  'full': this._full, 'lang': this._lang, date };
@@ -87,10 +57,15 @@ class Weather {
         return request(options);
     }
 
-    /** Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
+    /** 
+     * Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
+     * @param  {string} query - Could be an address name, a zipcode or a geojson.
+     * @param  {boolean} full - Set to come with full description, or not
+     * @param  {string} lang - Set a language. Default is 'EN'
      * @return {Promise}
      */
-    forecast() {
+    forecast(query, full, lang) {
+        this._setParams({query, full, lang});
         let url    = `${config.api_url}/analysis/services/weather/forecast`;
         let method = 'POST';
         let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
@@ -100,9 +75,13 @@ class Weather {
     }
 
     /** Returns the short name description, expiration time and a long text description of a severe alert, if one has been issued for the searched upon location.
+     * @param  {string} query Could be an address name, a zipcode or a geojson.
+     * @param  {boolean} full Set to come with full description, or not
+     * @param  {string} lang Set a language. Default is 'EN'
      * @return {Promise}
      */
-    alerts() {
+    alerts(query, full, lang) {
+        this._setParams({query, full, lang});
         let url    = `${config.api_url}/analysis/services/weather/alerts`;
         let method = 'POST';
         let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
