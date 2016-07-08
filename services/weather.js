@@ -26,7 +26,7 @@ class Weather {
      * Get the current weather conditions.
      * @param  {string} query - Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full - Set to come with full description, or not
-     * @param  {string} lang - Set a language. Default is 'EN'
+     * @param  {string} [lang] - Set a language. Default is 'EN'
      * @return {Promise}
      */
     current(query, full, lang) {
@@ -44,7 +44,7 @@ class Weather {
      * @param  {string} date - Get history until specified date
      * @param  {string|object} query - Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full - Set to come with full description, or not
-     * @param  {string} lang - Set a language. Default is 'EN'
+     * @param  {string} [lang] - Set a language. Default is 'EN'
      * @return {Promise}
      */
     history(date, query, full, lang) {
@@ -61,7 +61,7 @@ class Weather {
      * Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
      * @param  {string} query - Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full - Set to come with full description, or not
-     * @param  {string} lang - Set a language. Default is 'EN'
+     * @param  {string} [lang] - Set a language. Default is 'EN'
      * @return {Promise}
      */
     forecast(query, full, lang) {
@@ -77,7 +77,7 @@ class Weather {
     /** Returns the short name description, expiration time and a long text description of a severe alert, if one has been issued for the searched upon location.
      * @param  {string} query Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full Set to come with full description, or not
-     * @param  {string} lang Set a language. Default is 'EN'
+     * @param  {string} [lang] Set a language. Default is 'EN'
      * @return {Promise}
      */
     alerts(query, full, lang) {

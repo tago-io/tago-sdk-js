@@ -26,6 +26,7 @@ class Dashboards {
 
     /** Create a Dashboard
     * @param  {JSON} data
+    * @param  {string} data.name - Name of the dashboard
     * @return {Promise}
      */
     create(data) {
