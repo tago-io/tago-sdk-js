@@ -38,15 +38,15 @@ context
 *******
 As you can setup some pre-defined things in your analysis, inside admin, it's possible to get these by the context variable. It is a object, and come with follow properties:
 
-    +----------------+-------------------------------+
-    | PROPERTY       |  VALUE                        |
-    +================+===============================+
-    | environment    | All environment variables     |
-    +----------------+-------------------------------+
-    | token          | Token of the analysis         |
-    +----------------+-------------------------------+
-    | id             | ID of the analysis            |
-    +----------------+-------------------------------+
+    +----------------+--------------------------------------+
+    | PROPERTY       |  VALUE                               |
+    +================+======================================+
+    | environment    | All environment variables            |
+    +----------------+--------------------------------------+
+    | token          | Token of the analysis                |
+    +----------------+--------------------------------------+
+    | .log(/msg/)    | Print something to the admin console |
+    +----------------+--------------------------------------+
 
 scope
 *****
@@ -54,6 +54,7 @@ Every time an action triggers a script, the variable **scope** will be generated
 
 Build
 *****
+//TODO: Felipe should document here
 
 Services
 ********
