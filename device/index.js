@@ -65,6 +65,27 @@ class Device {
 
         return request(options);
     }
+
+     /** Get Parameters
+     * @return {Promise}
+     */
+    get_params() {
+        let url     = `${config.api_url}/device/params`;
+        let method  = 'GET';
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Mark Parameters as sent
+     * @param  {String} Key
+     * @return {Promise}
+     */
+    mark_param(key_name) {
+        let url     = `${config.api_url}/device/params/${encodeURIComponent(key_name)}`;
+        let method  = 'PUT';
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
 }
 
 module.exports = Device;
