@@ -644,3 +644,382 @@ Delete action for the account
         .catch((error) => {
             //You can treat errors here
         });
+
+
+Analysis
+*******
+Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since this one can only manage analysis, and can't do anything with data related to the analysis.
+
+.list
+=====
+Retrieve a list with all analysis from account
+
+| **Syntax**
+| *.list()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    
+    accanalysis.list()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.create
+=======
+Generate and retrieve a new analysis for the account
+
+| **Syntax**
+| *.create(/data/)*
+|
+| **Arguments**
+| *data(object) options for the new analysis.*
+|   *\*name(string)*: *a name for the analysis;*
+|   *\*description(string)*: *description for the analysis. (optional)*
+|   *\*interval(string)*: *time interval for analysis to run. Default is Never;*
+|   *\*active(bool)*: *Set if the analysis will be active or not. Default True. (optional)*
+|   *\*variables(array)*: *Environment variables to be passed when analysis run. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|   *\*token*: *token for the generated analysis;*
+|   *\*id*: *id of the new analysis;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    var data = {
+        "name":"My first analysis",
+        "description":"Creating my first analysis",
+        "active":true,
+        "interval": '1 minute',
+        "variables": [
+            {"key": "max_battery", "value": "3100"}
+        ],
+        "tags": [
+            {"key": "client", "value": "Francisco"}
+        ]
+    };
+
+    accanalysis.create(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.edit
+=====
+Modify any property of the analysis.
+
+| **Syntax**
+| *.edit(/id/, /data/)*
+|
+| **Arguments**
+| *id(string) reference ID of the analysis.*
+| *data(object) options to be modified in the analysis.*
+|   *\*name(string)*: *a name for the analysis; (optional)*
+|   *\*description(string)*: *description for the analysis. (optional)*
+|   *\*interval(string)*: *time interval for analysis to run. Default is Never;*
+|   *\*active(bool)*: *Set if the analysis will be active or not. Default True. (optional)*
+|   *\*variables(array)*: *Environment variables to be passed when analysis run. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    var data = {
+        "name":"New name for my analysis",
+        "description":"This way I can change the description too",
+        "active":false,
+        "interval": '2 minutes',
+        "variables": [
+            {"key": "max_battery", "value": "3000"}
+        ],
+        "tags": [
+            {"key": "client", "value": "Francisco"}
+        ]
+    };
+
+    accanalysis.edit('576dc932415f403531fd2cf6', data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.info
+=====
+Get informations about the analysis
+
+| **Syntax**
+| *.info(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the analysis.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    
+    accanalysis.info('576dc932415f403531fd2cf6')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.delete
+=======
+Delete analysis for the account
+
+| **Syntax**
+| *.delete(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the analysis.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    
+    accanalysis.delete('576dc932415f403531fd2cf6')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.run
+=======
+Force Analysis to run immediately
+
+| **Syntax**
+| *.run(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the analysis.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    
+    accanalysis.run('576dc932415f403531fd2cf6')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+Dashboards
+*******
+Across the account function, it is possible to manage all your dashboards. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The dashboards method is completly different from the class dashboards, since this one can only manage dashboards, and can't do anything with data related to the dashboards.
+
+.list
+=====
+Retrieve a list with all dashboards from account
+
+| **Syntax**
+| *.list()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    
+    accdashboards.list()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.create
+=======
+Generate and retrieve a new dashboards for the account
+
+| **Syntax**
+| *.create(/data/)*
+|
+| **Arguments**
+| *data(object) options for the new dashboards.*
+|   *\*label(string)*: *a label for the dashboards;*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widgest inside dashboard. (optional)*
+|       *\*widget_id(string)*: *id of the widget*
+|       *\*x(number)*: *position x of the widget. 1 to 4;*
+|       *\*y(number)*: *position y of the widget. 1 to 20*
+|       *\*width(number)*: *width of the widget. 1 to 4*
+|       *\*height(number)*: *height of the widget. 1 to 20*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|   *\*token*: *token for the generated dashboards;*
+|   *\*id*: *id of the new dashboards;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    var data = {
+        "name":"My first dashboards",
+        "arrangement": [
+            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
+        ]
+        "tags": [
+            {"key": "client", "value": "Francisco"}
+        ]
+    };
+
+    accdashboards.create(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.edit
+=====
+Modify any property of the dashboards.
+
+| **Syntax**
+| *.edit(/id/, /data/)*
+|
+| **Arguments**
+| *id(string) reference ID of the dashboards.*
+| *data(object) options to be modified in the dashboards.*
+|   *\*label(string)*: *a label for the dashboards;*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widgest inside dashboard. (optional)*
+|       *\*widget_id(string)*: *id of the widget*
+|       *\*x(number)*: *position x of the widget. 1 to 4;*
+|       *\*y(number)*: *position y of the widget. 1 to 20*
+|       *\*width(number)*: *width of the widget. 1 to 4*
+|       *\*height(number)*: *height of the widget. 1 to 20*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    var data = {
+        "label":"New name for my dashboards",
+    };
+
+    accdashboards.edit('877c28d269d2861f1b2e96b8', data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.info
+=====
+Get informations about the dashboards
+
+| **Syntax**
+| *.info(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the dashboards.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    
+    accdashboards.info('877c28d269d2861f1b2e96b8')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.delete
+=======
+Delete dashboards for the account
+
+| **Syntax**
+| *.delete(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the dashboards.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    
+    accdashboards.delete('877c28d269d2861f1b2e96b8')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
