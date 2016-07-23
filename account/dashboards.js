@@ -89,13 +89,13 @@ class Dashboards {
     listening(dashboard_id, func) {
         if (!dashboard_id || dashboard_id == '') {
             //If ID is send with null, it will get List instead info.
-            return new Promise.reject('Dashboard ID parameter is obrigatory.');
+            return Promise.reject('Dashboard ID parameter is obrigatory.');
         }
         
         this.socket = new Socket(this.token);
         this.socket.listen_dashboard(dashboard_id, func);
 
-        return new Promise.resolve('Listening to Dashboard ' +dashboard_id);
+        return Promise.resolve('Listening to Dashboard ' +dashboard_id);
     }
 
     // ----------- Sub-methods -----------
