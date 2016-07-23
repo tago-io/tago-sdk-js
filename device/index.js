@@ -2,7 +2,9 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
+const Socket          = require('./../utils/').socket;
 
+/** Class for the device and data */
 class Device {
     /** Device
      * @param  {String} Device Token
@@ -35,6 +37,7 @@ class Device {
     }
 
     /** Find
+     * @class
      * @param  {JSON} query object
      * @return {Promise}
      */
@@ -85,6 +88,29 @@ class Device {
         let method  = 'PUT';
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
+    }
+
+     /** Listen to device socket
+     * @param  {function} callback to be executable
+     * @return {function}
+     */
+    listening(callback) {
+        this.socket = new Socket(this.token);
+        this.socket.listen_device(callback);
+        this.socket.register = (result) => {
+            if (result.error) return console.log(result.error);
+            console.log(result.message);
+        };
+        return Promise.resolve('Trying to listen the device');
+    }
+
+    /** Stop to Listen the device */
+    stopListen() {
+        if (this.socket) {
+            this.socket.stop_device();
+            return Promise.resolve('Not listening to the device anymore');
+        }
+        return Promise.reject('Use .listening before trying to stop listening');
     }
 }
 

@@ -24,7 +24,13 @@ class Buckets {
     }
 
     /** Create a Bucket
-    * @param  {JSON} data
+    * @param  {object} data
+    * @param  {string} data.name - Name of the bucket
+    * @param  {string} data.description - description of the bucket
+    * @param  {boolean} data.active - Set if bucket is active or not
+    * @param  {object[]} tags[] - bucket tags for categorization
+    * @param  {string} tags[].key - key of the tag
+    * @param  {string} tags[].value - value of the tag
     * @return {Promise}
      */
     create(data) {
@@ -38,7 +44,13 @@ class Buckets {
 
     /** Edit the Bucket
     * @param  {String} bucket id
-    * @param  {Object} data
+    * @param  {object} data
+    * @param  {string} data.name - Name of the bucket
+    * @param  {string} data.description - description of the bucket
+    * @param  {boolean} data.active - Set if bucket is active or not
+    * @param  {object[]} tags[] - bucket tags for categorization
+    * @param  {string} tags[].key - key of the tag
+    * @param  {string} tags[].value - value of the tag
     * @return {Promise}
      */
     edit(bkt_id, data) {

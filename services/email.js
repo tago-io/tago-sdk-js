@@ -13,10 +13,10 @@ class Email {
     }
 
     /** Send email
-     * @param  {STRING} to
-     * @param  {STRING} subject
-     * @param  {STRING} message
-     * @param  {STRING} from (optional)
+     * @param  {string} to - E-mail address to be sent.
+     * @param  {string} subject - Subject of the e-mail
+     * @param  {string} message - Message scope for the e-mail
+     * @param  {string} [from] - E-mail to be indicated for reply
      * @return {Promise}
      */
     send(to, subject, message, from) {

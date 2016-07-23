@@ -3,6 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const Widgets         = require('./dashboards.widgets.js');
+const Socket   = require('./../utils/').socket;
 
 class Dashboards {
     constructor(acc_token) {
@@ -26,6 +27,7 @@ class Dashboards {
 
     /** Create a Dashboard
     * @param  {JSON} data
+    * @param  {string} data.name - Name of the dashboard
     * @return {Promise}
      */
     create(data) {
@@ -77,6 +79,23 @@ class Dashboards {
 
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
+    }
+
+    /** Get Info of the Dashboard
+    * @param  {String} dashboard id of the dashboard
+    * @param  {function} func function to run when socket is triggered
+    * @return {Promise}
+     */
+    listening(dashboard_id, func) {
+        if (!dashboard_id || dashboard_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return Promise.reject('Dashboard ID parameter is obrigatory.');
+        }
+        
+        this.socket = new Socket(this.token);
+        this.socket.listen_dashboard(dashboard_id, func);
+
+        return Promise.resolve('Listening to Dashboard ' +dashboard_id);
     }
 
     // ----------- Sub-methods -----------
