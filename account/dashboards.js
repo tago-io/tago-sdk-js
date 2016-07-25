@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const Widgets         = require('./dashboards.widgets.js');
-const Socket   = require('./../utils/').socket;
+const Realtime          = require('./../utils/').realtime;
 
 class Dashboards {
     constructor(acc_token) {
@@ -82,22 +82,33 @@ class Dashboards {
     }
 
     /** Get Info of the Dashboard
-    * @param  {String} dashboard id of the dashboard
-    * @param  {function} func function to run when socket is triggered
+    * @param  {String} dashboard_id id of the dashboard
+    * @param  {function} func function to run when realtime is triggered
     * @return {Promise}
      */
-    listening(dashboard_id, func) {
+    listening(dashboard_id, func, realtime) {
         if (!dashboard_id || dashboard_id == '') {
             //If ID is send with null, it will get List instead info.
             return Promise.reject('Dashboard ID parameter is obrigatory.');
         }
-        
-        this.socket = new Socket(this.token);
-        this.socket.listen_dashboard(dashboard_id, func);
+
+        if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
+
+        realtime = realtime || this.realtime;
+        realtime.on('dashboard:'+dashboard_id, func);
 
         return Promise.resolve('Listening to Dashboard ' +dashboard_id);
     }
 
+    /** Stop to listen the dashboard by its ID
+    * @param  {String} dashboard_id id of the dashboard
+     */
+    stop_litening(id, realtime) {
+        if (!this.realtime && !realtime) return;
+
+        realtime = realtime || this.realtime;
+        realtime.off('dashboard:'+id);
+    }
     // ----------- Sub-methods -----------
     get widgets() {
         return new Widgets(this.token);

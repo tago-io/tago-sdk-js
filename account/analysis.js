@@ -2,6 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
+const Realtime          = require('./../utils/').realtime;
 
 class Analysis {
     constructor(acc_token) {
@@ -24,8 +25,8 @@ class Analysis {
     }
 
     /** Create a Analyze
-    * @param  {JSON} data
-    * @return {Promise}
+     * @param  {JSON} data
+     * @return {Promise}
      */
     create(data) {
         data       = data || {};
@@ -37,9 +38,9 @@ class Analysis {
     }
 
     /** Edit the Analyze
-    * @param  {String} analyze id
-    * @param  {Object} data
-    * @return {Promise}
+     * @param  {String} analyze id
+     * @param  {Object} data
+     * @return {Promise}
      */
     edit(analyze_id, data) {
         data       = data || {};
@@ -51,8 +52,8 @@ class Analysis {
     }
 
     /** Delete the Analyze
-    * @param  {String} analyze id
-    * @return {Promise}
+     * @param  {String} analyze id
+     * @return {Promise}
      */
     delete(analyze_id) {
         let url    = `${config.api_url}/analyze/${analyze_id}`;
@@ -63,8 +64,8 @@ class Analysis {
     }
 
     /** Get Info of the Analyze
-    * @param  {String} analyze id
-    * @return {Promise}
+     * @param  {String} analyze id
+     * @return {Promise}
      */
     info(analyze_id) {
         if (!analyze_id || analyze_id == '') {
@@ -79,8 +80,8 @@ class Analysis {
     }
 
     /** Force Analyze to Run
-    * @param  {String} analyze id
-    * @return {Promise}
+     * @param  {String} analyze id
+     * @return {Promise}
      */
     run(analyze_id) {
         let url    = `${config.api_url}/analyze/${analyze_id}/run`;
@@ -88,6 +89,35 @@ class Analysis {
 
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
+    }
+
+    /** Start listening the analysis
+     * @param  {String} analyze_id id
+     * @param  {function} function function to run when realtime is triggered
+     * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
+     */
+    listening(analyze_id, func, realtime) {
+        if (!analyze_id || analyze_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return Promise.reject('Analyze ID parameter is obrigatory.');
+        }
+
+        if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
+
+        realtime = realtime || this.realtime;
+        realtime.on('analyze:'+analyze_id, func);
+
+        return Promise.resolve('Listening to Analyze ' +analyze_id);
+    }
+
+    /** Stop to listen the analysis by its ID
+    * @param  {String} analyze_id id of the analysis
+     */
+    stop_litening(analyze_id, realtime) {
+        if (!this.realtime && !realtime) return;
+
+        realtime = realtime || this.realtime;
+        realtime.off('analyze:'+analyze_id);
     }
 }
 

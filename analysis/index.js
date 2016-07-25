@@ -1,10 +1,10 @@
 'use strict';
 const Services = require('./../services/');
-const Socket   = require('./../utils/').socket;
-
+const Realtime = require('./../services/realtime.js');
+ 
 class Analysis {
     constructor(analysis, token) {
-        this._token = token;
+        this._token    = token;
         this._analysis = analysis;
 
         if (!process.env.TAGO_RUNTIME) {
@@ -30,8 +30,19 @@ class Analysis {
         if (!this._token) {
             throw 'To run locally, needs a token.';
         }
-        const scon = new Socket(this._token);
-        scon.listen_analysis((scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
+        const scon = new Realtime(this._token);
+        scon.connect = () => {
+            console.log('Connected on Tago.io.');
+            scon.emit('register:analysis', this._token);
+            scon.on('register:analysis', (result) => {
+                if (!result.status) {
+                    return console.log(result.result);
+                } else {
+                    console.log(result.result);
+                }
+            });
+        };
+        scon.on('run:analysis', (scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
     }
 }
 
