@@ -105,7 +105,7 @@ class Analysis {
         if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
 
         realtime = realtime || this.realtime;
-        realtime.get_socket.on('analyze:'+analyze_id, func);
+        realtime.get_socket.on(`analyze:${analyze_id}`, func);
 
         return Promise.resolve('Listening to Analyze ' +analyze_id);
     }
@@ -117,7 +117,7 @@ class Analysis {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
-        realtime.get_socket.off('analyze:'+analyze_id);
+        realtime.get_socket.off(`analyze:${analyze_id}`);
     }
 }
 
