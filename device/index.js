@@ -2,7 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const Socket          = require('./../utils/').socket;
+const Realtime        = require('./../utils/').realtime;
 
 /** Class for the device and data */
 class Device {
@@ -95,9 +95,9 @@ class Device {
      * @return {function}
      */
     listening(callback) {
-        this.socket = new Socket(this.token);
-        this.socket.listen_device(callback);
-        this.socket.register = (result) => {
+        this.realtime = new Realtime(this.token);
+        this.realtime.on('data', callback);
+        this.realtime.register = (result) => {
             if (result.error) return console.log(result.error);
             console.log(result.message);
         };
@@ -105,9 +105,9 @@ class Device {
     }
 
     /** Stop to Listen the device */
-    stopListen() {
-        if (this.socket) {
-            this.socket.stop_device();
+    stop_listening() {
+        if (this.realtime) {
+            this.realtime.off('data');
             return Promise.resolve('Not listening to the device anymore');
         }
         return Promise.reject('Use .listening before trying to stop listening');
