@@ -4,8 +4,8 @@ const socketclient = require('socket.io-client');
 const config       = require('../config.js');
 const options = {
     'reconnectionDelay': 10000,
-    'reconnection': true,
-    'transports': ['websocket']
+    'reconnection': true
+    // 'transports': ['websocket']
 };
 
 class Realtime {
@@ -47,6 +47,9 @@ class Realtime {
     set error(func) {
         this.socket.off('error');
         this.socket.on('error', func);
+    }
+    get get_socket() {
+        return this.socket;
     }
     
     /**

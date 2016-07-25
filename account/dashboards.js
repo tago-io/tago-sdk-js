@@ -95,7 +95,7 @@ class Dashboards {
         if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
 
         realtime = realtime || this.realtime;
-        realtime.on('dashboard:'+dashboard_id, func);
+        realtime.get_socket.on('dashboard:'+dashboard_id, func);
 
         return Promise.resolve('Listening to Dashboard ' +dashboard_id);
     }
@@ -107,7 +107,7 @@ class Dashboards {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
-        realtime.off('dashboard:'+id);
+        realtime.get_socket.off('dashboard:'+id);
     }
     // ----------- Sub-methods -----------
     get widgets() {

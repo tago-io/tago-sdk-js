@@ -96,18 +96,18 @@ class Device {
      */
     listening(callback) {
         this.realtime = new Realtime(this.token);
-        this.realtime.on('data', callback);
+        this.realtime.get_socket.on('data', callback);
         this.realtime.register = (result) => {
             if (result.error) return console.log(result.error);
             console.log(result.message);
         };
-        return Promise.resolve('Trying to listen the device');
+        return Promise.resolve('Trying to listen to the device');
     }
 
     /** Stop to Listen the device */
     stop_listening() {
         if (this.realtime) {
-            this.realtime.off('data');
+            this.realtime.get_socket.off('data');
             return Promise.resolve('Not listening to the device anymore');
         }
         return Promise.reject('Use .listening before trying to stop listening');

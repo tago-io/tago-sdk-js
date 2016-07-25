@@ -1,6 +1,6 @@
 'use strict';
 const Services = require('./../services/');
-const Realtime = require('./../services/realtime.js');
+const Realtime = require('./../utils/realtime.js');
  
 class Analysis {
     constructor(analysis, token) {
@@ -33,8 +33,8 @@ class Analysis {
         const scon = new Realtime(this._token);
         scon.connect = () => {
             console.log('Connected on Tago.io.');
-            scon.emit('register:analysis', this._token);
-            scon.on('register:analysis', (result) => {
+            scon.get_socket.emit('register:analysis', this._token);
+            scon.get_socket.on('register:analysis', (result) => {
                 if (!result.status) {
                     return console.log(result.result);
                 } else {
@@ -42,7 +42,7 @@ class Analysis {
                 }
             });
         };
-        scon.on('run:analysis', (scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
+        scon.get_socket.on('run:analysis', (scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
     }
 }
 
