@@ -122,7 +122,7 @@ Remove a data from the bucket. It's possible to remove in three ways:
 |
 | **Arguments**
 | *variable_or_id(string) a variable name or an specific ID. (optional)*
-| *qty(number) specify a number of records to be removed. Default is 1. (optional)*
+| *qty(number) specify a number of records to be removed. You can pass "all" to remove all records. Default is 1. (optional)*
 | If no parameter is passed, will automatically remove the last data inserted by this device.
 |
 | **Returns**
