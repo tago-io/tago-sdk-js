@@ -5,6 +5,31 @@ In order to modify, add, delete or do anything with data inside buckets, is nece
 
 To setup an device object, you need a token (that you need to get in our website). Make sure to use tokens with correct write/read previlegies for the currenct function you want to use. For example, token with only read previlegies can't create, modify or delete anything from a device.
 
+.info
+*******
+Get all device informations
+
+| **Syntax**
+| *.info()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Device = require('tago/device');
+    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+
+    mydev.info()
+        .then((result) => {
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
 .insert
 *******
 Insert a new data into the bucket. You can get more informations about what can be passed to insert in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
@@ -28,7 +53,7 @@ Insert a new data into the bucket. You can get more informations about what can 
 .. code-block:: javascript
 
     const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
     var data = {
         'variable': 'temperature',
         'unit'    : 'F',
@@ -93,10 +118,11 @@ Remove a data from the bucket. It's possible to remove in three ways:
 * A specific data by it ID
 
 | **Syntax**
-| *.remove(/variable_or_id/)*
+| *.remove(/variable_or_id/, /qty/)*
 |
 | **Arguments**
 | *variable_or_id(string) a variable name or an specific ID. (optional)*
+| *qty(number) specify a number of records to be removed. Default is 1. (optional)*
 | If no parameter is passed, will automatically remove the last data inserted by this device.
 |
 | **Returns**
