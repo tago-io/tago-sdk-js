@@ -23,6 +23,18 @@ class Device {
         }
     }
 
+    /** Info
+     * Get information about the current device
+     * @return {Promise}
+     */
+    info() {
+        let url    = `${config.api_url}/info`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
     /** Insert
      * @param  {Object|Array} data
      * @return {Promise}
@@ -53,18 +65,20 @@ class Device {
     }
 
     /** remove
-     * @param  {JSON} query object
+     * @param  {string} variable_or_id
+     * @param  {number} [qty] default is 1
      * @return {Promise}
      */
-    remove(variable_or_id) {
+    remove(variable_or_id, qty) {
         let url    = `${config.api_url}/data`;
         if (variable_or_id) {
             url += `/${variable_or_id}`;
         }
-        
+
+        let params = Object.assign({}, this.default_options.qs || {}, qty ? {qty} : {});
         let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {url, method, params});
 
         return request(options);
     }
