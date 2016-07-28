@@ -396,7 +396,7 @@ Modify any property of the bucket.
 
 .info
 ======
-Get informations about the bucket
+Get information about the bucket
 
 | **Syntax**
 | *.info(/id/)*
@@ -592,7 +592,7 @@ Modify any property of the action.
 
 .info
 =====
-Get informations about the action
+Get information about the action
 
 | **Syntax**
 | *.info(/id/)*
@@ -772,7 +772,7 @@ Modify any property of the analysis.
 
 .info
 =====
-Get informations about the analysis
+Get information about the analysis
 
 | **Syntax**
 | *.info(/id/)*
