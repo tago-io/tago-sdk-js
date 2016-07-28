@@ -1,9 +1,9 @@
 ******
 Device 
 ******
-In order to modify, add, delete or do anything with data inside buckets, is necessary to use the device function.
+In order to modify, add, delete or do anything else with the data inside buckets, it is necessary to use the device function.
 
-To setup an device object, you need a token (that you need to get in our website). Make sure to use tokens with correct write/read previlegies for the currenct function you want to use. For example, token with only read previlegies can't create, modify or delete anything from a device.
+To setup an device object, you need a token (that you need to get in our website). Be sure to use tokens with the correct write/read previlegies for the current function that you want to use. For example, a token with only read previlegies can't create, modify or delete anything from a device.
 
 .info
 *******
@@ -32,18 +32,18 @@ Get all device informations
 
 .insert
 *******
-Insert a new data into the bucket. You can get more informations about what can be passed to insert in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
+Insert a new data into a bucket. You can get more information about what information can be passed with insert in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
 
 | **Syntax**
 | *.insert(/data/)*
 |
 | **Arguments**
 | *data(object) properties for the new data.*
-|   *\*variable(string)*: *name of the variable. Obrigatory for data to be inserted;*
+|   *\*variable(string)*: *name of the variable. Obrigatory when inserting;*
 |   *\*value(string)*: *a value for the data (optional);*
-|   *\*unit(string)*: *a unit for the data, like 'km', or 'l'. It shows in some widgets (optional);*
+|   *\*unit(string)*: *a unit for the data, like 'km', or 'F'. The unit may be showed in some widgets (optional);*
 |   *\*time(string)*: *a time for the data. Default is now;*
-|   *\*serie(string)*: *a serie for the data. Only useful for some widgets and grouping with other datas;*
+|   *\*serie(string)*: *a serie for the data. Useful for some widgets when grouping with other data;*
 |   *\*location(object/geojson)*: *a location object or geojson containing lat and lang;*
 |
 | **Returns**
@@ -73,18 +73,18 @@ Insert a new data into the bucket. You can get more informations about what can 
 
 .find
 *******
-Get a list of data from bucket respecting the query options passed. You can get more informations about what can be passed to find in our `get documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
+Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
 
 | **Syntax**
 | *.find(/filter/)*
 |
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
-|   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last ones (optional);*
+|   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
 |   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ *to know what can be passed. (optional)*
-|   *\*end_date(string)*: *Get data until a specific date. (optional)*
-|   *\*start_date(string)*: *Get data started from a specific date. (optional)*
-|   *\*qty(number)*: *Number of data to be retrieve. Default is 15. (optional)*
+|   *\*end_date(string)*: *Get data older than a specific date. (optional)*
+|   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
+|   *\*qty(number)*: *Number of data to be retrieved. Default is 15. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -123,7 +123,7 @@ Remove a data from the bucket. It's possible to remove in three ways:
 | **Arguments**
 | *variable_or_id(string) a variable name or an specific ID. (optional)*
 | *qty(number) specify a number of records to be removed. You can pass "all" to remove all records. Default is 1. (optional)*
-| If no parameter is passed, will automatically remove the last data inserted by this device.
+| If no parameter is passed, it will automatically remove the last data inserted by this specific device.
 |
 | **Returns**
 | *(Promise)*
