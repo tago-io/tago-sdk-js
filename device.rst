@@ -7,7 +7,7 @@ To setup an device object, you need a token (that you need to get in our website
 
 .info
 *******
-Get all device informations
+Get all information from the device 
 
 | **Syntax**
 | *.info()*
