@@ -285,7 +285,7 @@ Delete device for the account
 
 Buckets
 *******
-Across the account function, it is possible to manage all your buckets. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The bucket method is completly different from the class bucket, since this one can only manage buckets, and can't do anything with data related to the bucket.
+Across the account function, it is possible to manage all your buckets. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 ========
@@ -452,7 +452,7 @@ Delete bucket for the account
 
 Actions
 *******
-Across the account function, it is possible to manage all your actions. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The action method is completly different from the class action, since this one can only manage actions, and can't do anything with data related to the action.
+Across the account function, it is possible to manage all your actions. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 ========
@@ -648,7 +648,7 @@ Delete action for the account
 
 Analysis
 *******
-Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since this one can only manage analysis, and can't do anything with data related to the analysis.
+Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since its only manage analysis informations and not the code it runs.
 
 .list
 =====
@@ -855,7 +855,7 @@ Force Analysis to run immediately
 
 Dashboards
 *******
-Across the account function, it is possible to manage all your dashboards. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The dashboards method is completly different from the class dashboards, since this one can only manage dashboards, and it can't do anything with data related to the dashboards.
+Across the account function, it is possible to manage all your dashboards. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 =====
