@@ -17,7 +17,7 @@ class Analysis {
      * @return {Promise}
      */
     list() {
-        let url    = `${config.api_url}/analyze`;
+        let url    = `${config.api_url}/analysis`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});
@@ -30,7 +30,7 @@ class Analysis {
      */
     create(data) {
         data       = data || {};
-        let url    = `${config.api_url}/analyze`;
+        let url    = `${config.api_url}/analysis`;
         let method = 'POST';
 
         let options = Object.assign({}, this.default_options, {url, method, data});
@@ -44,7 +44,7 @@ class Analysis {
      */
     edit(analyze_id, data) {
         data       = data || {};
-        let url    = `${config.api_url}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analysis/${analyze_id}`;
         let method = 'PUT';
 
         let options = Object.assign({}, this.default_options, {url, method, data});
@@ -56,7 +56,7 @@ class Analysis {
      * @return {Promise}
      */
     delete(analyze_id) {
-        let url    = `${config.api_url}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analysis/${analyze_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {url, method});
@@ -72,7 +72,7 @@ class Analysis {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Analyze ID parameter is obrigatory.'));
         }
-        let url    = `${config.api_url}/analyze/${analyze_id}`;
+        let url    = `${config.api_url}/analysis/${analyze_id}`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});
@@ -84,7 +84,7 @@ class Analysis {
      * @return {Promise}
      */
     run(analyze_id) {
-        let url    = `${config.api_url}/analyze/${analyze_id}/run`;
+        let url    = `${config.api_url}/analysis/${analyze_id}/run`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});

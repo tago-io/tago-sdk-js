@@ -10,7 +10,7 @@ suite('Account - Analysis', () => {
             myacc.analysis.list()
                 .then((x) => {
                     expect(x).to.exist;
-                    expect(x.url).to.be.equal('/analyze');
+                    expect(x.url).to.be.equal('/analysis');
                     expect(x.method).to.be.equal('GET');
                     expect(x.token).to.be.equal(token);
                     done();
@@ -24,7 +24,7 @@ suite('Account - Analysis', () => {
             myacc.analysis.create({'name':'Test'})
                 .then((x) => {
                     expect(x).to.exist;
-                    expect(x.url).to.be.equal('/analyze');
+                    expect(x.url).to.be.equal('/analysis');
                     expect(x.method).to.be.equal('POST');
                     expect(x.token).to.be.equal(token);
                     done();
@@ -37,7 +37,7 @@ suite('Account - Analysis', () => {
             myacc.analysis.edit('xxx', {'name':'Another Test'})
                 .then((x) => {
                     expect(x).to.exist;
-                    expect(x.url).to.be.equal('/analyze/xxx');
+                    expect(x.url).to.be.equal('/analysis/xxx');
                     expect(x.method).to.be.equal('PUT');
                     expect(x.token).to.be.equal(token);
                     done();
@@ -50,7 +50,7 @@ suite('Account - Analysis', () => {
             myacc.analysis.info('xxx')
                 .then((x) => {
                     expect(x).to.exist;
-                    expect(x.url).to.be.equal('/analyze/xxx');
+                    expect(x.url).to.be.equal('/analysis/xxx');
                     expect(x.method).to.be.equal('GET');
                     expect(x.token).to.be.equal(token);
                     done();
@@ -71,7 +71,7 @@ suite('Account - Analysis', () => {
             myacc.analysis.delete('xxx')
                 .then((x) => {
                     expect(x).to.exist;
-                    expect(x.url).to.be.equal('/analyze/xxx');
+                    expect(x.url).to.be.equal('/analysis/xxx');
                     expect(x.method).to.be.equal('DELETE');
                     expect(x.token).to.be.equal(token);
                     done();
