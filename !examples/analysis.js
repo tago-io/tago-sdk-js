@@ -2,11 +2,11 @@
 const Analysis = require('../analysis');
 
 function myanalysis(context, scope) {
-    console.log('my context:', context);
-    console.log('my scope:', scope);
+    context.log('my context:', context);
+    context.log('my scope:', scope);
 }
 
-module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+module.exports = new Analysis(myanalysis, '330291f0-5295-11e6-ac61-35b09393a722');
 
 /**
  * That analysis can run on your machine, 

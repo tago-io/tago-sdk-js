@@ -14,8 +14,9 @@ class Analysis {
 
     run(environment, data, token) {
         let tago_console = new Services(token).console;
-        function log(message) {
-            return tago_console.log(message);
+        function log(...args) {
+            if (!process.env.TAGO_RUNTIME) console.log.apply(null, args);
+            return tago_console.log(args);
         }
 
         let context = {
