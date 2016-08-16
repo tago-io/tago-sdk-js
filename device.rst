@@ -101,7 +101,7 @@ Get a list of data from bucket respecting the query options passed. You can get 
         'start_date': '2014-12-20 23:33:22'
     };
     
-    mydev.info(filter)
+    mydev.find(filter)
         .then((result) => {
             //You can treat the result here
         })
