@@ -1,22 +1,22 @@
 ********
 Analysis
 ********
-It's possible to run analysis scripts on your computer, or inside tago server. In the follow pages you will be instructed on how to setup an analysis on your computer, use our services and manage any data from tago.
+It's possible to run analysis scripts on your computer, or inside Tago server. In the follow pages, you will be instructed on how to setup an analysis on your computer, use our services, and manage any data from Tago.
 
-If you want to get instructions about how to upload your script, use and use third-party packages inside our server, see the `admin analysis documentation <http://docs.tago.io/en/latest/analysis.html>`_
+If you want to get instructions about how to upload your script or how to use third-party packages inside our server, take a look at `admin analysis documentation <http://docs.tago.io/en/latest/analysis.html>`_
 
 Setting Up Analysis
 *******************
-Through analysis, it's possible to insert any calculation and manage your data from tago in any way you want. We provide some services, like sms and email, but you are free to use any third party packages you want.
+Through analysis, it is possible to insert any calculation and manage your data from Tago in any way you want. We provide some services, such as SMS and email, but you are free to use any third party packages that you need.
 
-To setup an analysis, you first need a analysis token. That can be retrieve in the `admin analysis section. <http://docs.tago.io/en/latest/analysis.html#setting-up-analysis>`_.
+To setup an analysis, you first need a analysis token. That can be retrieved from the `admin analysis section. <http://docs.tago.io/en/latest/analysis.html#setting-up-analysis>`_.
 
 | **Syntax**
 | *new Analysis(/function/, /analysis_token/)*
 |
 | **Arguments**
-| *function(function) a function to be executed when analysis run.*
-| *analysis_token(string) analysis token. Only needed if script will run locally (Optional).*
+| *function(function) a function to be executed when the analysis runs.*
+| *analysis_token(string) analysis token. Only needed if the script will run remotelly (Optional).*
 |
 
 .. code-block:: javascript
@@ -24,7 +24,7 @@ To setup an analysis, you first need a analysis token. That can be retrieve in t
     'use strict';
     const Analysis = require('tago/Analysis');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
         console.log('my context:', context);
         console.log('my scope:', scope);
@@ -36,7 +36,7 @@ To setup an analysis, you first need a analysis token. That can be retrieve in t
 
 context
 *******
-As you can setup some pre-defined things in your analysis, inside admin, it's possible to get these by the context variable. It is a object, and come with follow properties:
+As you can setup some predefined parameters in your analysis, it's possible to get these value from the context variable defined in the admin. It is a object, and it comes with follow properties:
 
     +----------------+--------------------------------------+
     | PROPERTY       |  VALUE                               |
@@ -45,12 +45,12 @@ As you can setup some pre-defined things in your analysis, inside admin, it's po
     +----------------+--------------------------------------+
     | token          | Token of the analysis                |
     +----------------+--------------------------------------+
-    | .log(/msg/)    | Print something to the admin console |
+    | .log(/msg/)    | Print a message to the admin console |
     +----------------+--------------------------------------+
 
 scope
 *****
-Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <http://docs.tago.io/en/latest/dashboard.html#widget-form>`, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate in real time, and more easily, any new value inserted in your bucket.
+Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <http://docs.tago.io/en/latest/dashboard.html#widget-form>`, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate data in real time, and more easily the new values inserted in your bucket.
 
 Build
 *****
@@ -58,9 +58,9 @@ Build
 
 Services
 ********
-We provide some inside functions, that are paid. When creating a analysis, you are free to use our services on your own. Just be cautious.
+We provide some functions that can greatly help your application. When creating a analysis, you are can use Tago services on your own, just make sure you understand the policies and cost associate with the usage.
 
-When setting up a service, you need to pass an analysis token. For convenience, context return a property token, that you can use to setup a service object.
+When setting up a service, you need to pass an analysis-token. For convenience, the context returns a property token that you can use to setup a service object.
 
 .. code-block:: javascript
 
@@ -68,9 +68,9 @@ When setting up a service, you need to pass an analysis token. For convenience, 
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
-        //Setting up a sms service for example
+        //Setting up a SMS service
         let sms = Services(context.token).sms;
 
     }
@@ -79,7 +79,7 @@ When setting up a service, you need to pass an analysis token. For convenience, 
 
 sms
 ===
-You can configure the system to send sms directly from your analysis. Another option is to use the Actions to send SMS.
+You can configure the system to send SMS directly from your analysis to yourself or your customers. Another option is to use the Actions to send SMS.
 
 Some costs may occur when using the SMS service, which varies based on the country of operation. Check pricing, terms of use, and your plan before using the SMS service.
 
@@ -109,7 +109,7 @@ Whenever you need to send a sms, use .send function.
         let sms = Services(context.token).sms;
 
         let to      = '2693856214';
-        let message = 'Hi! This is a sms example. \nWith a breakline in the sms message.';
+        let message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
 
         sms.send(to, message).then(console.log).catch(console.log);
         //Print "Sending";
@@ -120,7 +120,7 @@ Whenever you need to send a sms, use .send function.
 
 email
 =====
-Email service allows you to send e-mail through your analysis. Some costs may occur when using the e-mail service
+Email service allows you to send e-mail through your analysis.  Cost may occur when using the e-mail service.
 
 .send
 -----
@@ -133,7 +133,7 @@ Whenever you need to send an email, use .send function.
 | *to(string) E-mail address which will receive the email.*
 | *subject(string) Subject of the email;*
 | *message(string) message to be sent. Use "<br>" to breakline.*
-| *from(string) E-mail address to receive replies. Default is tago@tago.io (optional);*
+| *from(string) E-mail address for the receiver to reply. Default is tago@tago.io (optional);*
 |
 | **Returns**
 | *(Promise)*
@@ -145,13 +145,13 @@ Whenever you need to send an email, use .send function.
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
         let email = Services(context.token).email;
 
         let to      = 'myuser@gmail.com';
         let subject = 'E-mail example';
-        let message = 'Hi! This is a email example. \nWith a breakline in the email message.';
+        let message = 'Hi! This is an email example. \nWith a breakline in the email message.';
         let from    = 'me@gmail.com';
 
         email.send(to, subject, message, from).then(console.log).catch(console.log);
@@ -163,7 +163,7 @@ Whenever you need to send an email, use .send function.
 
 geocoding
 =========
-Whenever you need to get a geolocation by it address, or vice versa. Use geocoding function. 
+Whenever you need to get a geolocation (lat/lon) based on a valid address, or vice versa. Use geocoding function. 
 
 .get_geolocation
 ----------------
@@ -185,11 +185,11 @@ Convert the address to a valid geolocation, if it exists.
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when an analysis is called
     function myanalysis(context, scope) {
         let geocoding = Services(context.token).geocoding;
 
-        let address = '1017 Main Campus Dr, Raleigh, NC 27606, EUA';
+        let address = '1017 Main Campus Dr, Raleigh, NC 27606, USA';
 
         geocoding.get_geolocation(address).then(console.log).catch(console.log);
         //Print [-78.6772532,35.7704823];
@@ -217,25 +217,25 @@ Convert a valid geolocation to an address, if it exists.
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when an analysis is called
     function myanalysis(context, scope) {
         let geocoding = Services(context.token).geocoding;
 
         let geolocation = '35.7704823,-78.6772532';
 
         geocoding.get_address(geolocation).then(console.log).catch(console.log);
-        //Print '1017 Main Campus Dr, Raleigh, NC 27606, EUA';
+        //Print '1017 Main Campus Dr, Raleigh, NC 27606, USA';
     }
     
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
     
 currency
 ========
-Check currency real-time and historical exchange rates for 168 world currencies.
+Check several currencies in real-time, and the historical exchange rates for more than 168 countries.
 
 .convert
 --------
-Return a current value of the coin in to another one.
+Return the current exchange rate of one currency to another one.
 
 | **Syntax**
 | *.convert(/origins/, /destinations/, /language/, /mode/)*
@@ -253,7 +253,7 @@ Return a current value of the coin in to another one.
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
         let currency = Services(context.token).currency;
 
@@ -268,11 +268,11 @@ Return a current value of the coin in to another one.
 
 distance
 ========
-Whenever you need to calculate distance between points. Use distance service.
+Whenever you need to calculate the distance between two points use distance service.
 
 .measure
 --------
-Measure is a service that provides travel distance and time for a matrix of origins and destinations.
+Measure is a service that provides the travel distance and time for a matrix of origins and destinations.
 
 | **Syntax**
 | *.measure(/origins/, /destinations/, /language/, /mode/)*
@@ -310,7 +310,7 @@ Measure is a service that provides travel distance and time for a matrix of orig
 
 weather
 =======
-Whenever you need to get weather conditions. Use weather service.
+Whenever you need to get weather conditions around the world, use weather service.
 
 .current
 --------
@@ -320,9 +320,9 @@ Get the current weather conditions.
 | *.current(/query/, /full/, /language/)*
 |
 | **Arguments**
-| *query(string) Could be an address name, a zipcode or a geojson.*
-| *full(boolean) Set to come with full description. Default is false. (optional)*
-| *language(string) Set a language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
+| *query(string) It can be address, zipcode or geojson.*
+| *full(boolean) Set to get response with full description. Default is false. (optional)*
+| *language(string) Set the language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -333,11 +333,11 @@ Get the current weather conditions.
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
         let weather = Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, EUA'; //address
+        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
@@ -355,15 +355,15 @@ Get the current weather conditions.
 
 .forecast
 ---------
-Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
+Returns a summary of the weather forecast for the next 10 days. This includes high and low temperatures, a string text forecast and other conditions.
 
 | **Syntax**
 | *.forecast(/query/, /full/, /language/)*
 |
 | **Arguments**
-| *query(string) Could be an address name, a zipcode or a geojson.*
-| *full(boolean) Set to come with full description. Default is false. (optional)*
-| *language(string) Set a language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
+| *query(string) It can be address, zipcode or geojson.*
+| *full(boolean) Set to get the response with full description. Default is false. (optional)*
+| *language(string) Set the language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -374,11 +374,11 @@ Returns a summary of the weather for the next 10 days. This includes high and lo
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
         let weather = Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, EUA'; //address
+        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
@@ -396,16 +396,16 @@ Returns a summary of the weather for the next 10 days. This includes high and lo
 
 .history
 --------
-Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
+Returns a summary of the weather conditions for the last 10 days. This includes high and low temperatures, a string text and other conditions.
 
 | **Syntax**
 | *.history(/date/, /query/, /full/, /language/)*
 |
 | **Arguments**
 | *date(string) a past date.*
-| *query(string) Could be an address name, a zipcode or a geojson.*
-| *full(boolean) Set to come with full description. Default is false. (optional)*
-| *language(string) Set a language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
+| *query(string) It can be address, zipcode or geojson.*
+| *full(boolean) Set to get response with full description. Default is false. (optional)*
+| *language(string) Set the language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -416,13 +416,13 @@ Returns a summary of the weather for the next 10 days. This includes high and lo
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
         let weather = Services(context.token).weather;
 
         let date  = '2016-07-07';
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, EUA'; //address
+        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
@@ -439,14 +439,14 @@ Returns a summary of the weather for the next 10 days. This includes high and lo
 
 .alert
 --------
-Returns the short name description, expiration time and a long text description of a severe alert, if one has been issued for the searched upon location.
+Returns the short name description, expiration time and a long text description of a severe alert, if one has been issued for the searched location.
 
 | **Syntax**
 | *.alert(/query/, /full/, /language/)*
 |
 | **Arguments**
-| *query(string) Could be an address name, a zipcode or a geojson.*
-| *full(boolean) Set to come with full description. Default is false. (optional)*
+| *query(string) It can be address, zipcode or geojson.*
+| *full(boolean) Set to get response with full description. Default is false. (optional)*
 | *language(string) Set a language. Default is 'EN'. See `language support <https://www.wunderground.com/weather/api/d/docs?d=language-support>`_ for more information. (optional)*
 |
 | **Returns**
@@ -458,11 +458,11 @@ Returns the short name description, expiration time and a long text description 
     const Analysis = require('tago/Analysis');
     const Services = require('tago/Services');
 
-    //Main function to be executed when analysis are called
+    //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
         let weather = Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, EUA'; //address
+        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or

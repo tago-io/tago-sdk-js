@@ -1,13 +1,13 @@
 #######
 Account
 #######
-In order to modify account, dashboard, bucket, devices and other settings, its necessary to use the device functions.
+In order to modify information in the account, dashboard, bucket, device and any other settings, it is necessary to use the device functions.
 
-To setup an account object, you need a token (that you need to get in our website). Make sure to use tokens with correct write/read previlegies for the currenct function you want to use. For example, token with only read previlegies can't create, modify or delete anything from an account.
+To setup an account object, you need a token that you need to get in our admin website. Make sure to use tokens with the correct write/read previlegies for the current function that you want to use. For example, a token with only read previlegies can't create, modify or delete anything from an account.
 
 .info
 *******
-Get all account informations
+Get all account information
 
 | **Syntax**
 | *.info()*
@@ -86,7 +86,7 @@ Generate and retrieve a new token for the account
 
 Devices
 *******
-Across the account function, it is possible to manage all your devices. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The Device method is completly different from the class Device, since this one can only manage devices, and can't do anything with data related to the device.
+Across the account function, it is possible to manage all your devices. Make sure that you use an account token with "write" permission when using functions to create, edit and delete. The Device method is completly different from the class Device, since this one can only manage devices, and can't do anything with data related to the device.
 
 .list
 =====
@@ -124,8 +124,8 @@ Generate and retrieve a new device for the account
 | *data(object) options for the new device.*
 |   *\*name(string)*: *a name for the device;*
 |   *\*description(string)*: *description for the device. (optional)*
-|   *\*active(bool)*: *Set if the device will be active or not. Default True. (optional)*
-|   *\*visible(bool)*: *Set if the device will be visible or not. Default True. (optional)*
+|   *\*active(bool)*: *Set if the device will be active. Default True. (optional)*
+|   *\*visible(bool)*: *Set if the device will be visible. Default True. (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
@@ -144,7 +144,7 @@ Generate and retrieve a new device for the account
         "active":true,
         "visible":true,
         "tags": [
-            {"key": "client", "value": "Francisco"}
+            {"key": "client", "value": "John"}
         ]
     };
 
@@ -169,8 +169,8 @@ Modify any property of the device.
 | *data(object) options to be modified in the device.*
 |   *\*name(string)*: *a name for the device; (optional)*
 |   *\*description(string)*: *description for the device. (optional)*
-|   *\*active(bool)*: *Set if the device will be active or not. Default True. (optional)*
-|   *\*visible(bool)*: *Set if the device will be visible or not. Default True. (optional)*
+|   *\*active(bool)*: *Set if the device will be active. Default True. (optional)*
+|   *\*visible(bool)*: *Set if the device will be visible. Default True. (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
@@ -183,11 +183,11 @@ Modify any property of the device.
     const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
     var data = {
         "name":"New name for my device",
-        "description":"This way I can change the description too",
+        "description":"In this way I can change the description too",
         "active":false,
         "visible":true,
         "tags": [
-            {"key": "client", "value": "Leonardo"}
+            {"key": "client", "value": "Mark"}
         ]
     };
 
@@ -202,7 +202,7 @@ Modify any property of the device.
 
 .info
 =====
-Get informations about the device
+Get information about the device
 
 | **Syntax**
 | *.info(/id/)*
@@ -285,7 +285,7 @@ Delete device for the account
 
 Buckets
 *******
-Across the account function, it is possible to manage all your buckets. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The bucket method is completly different from the class bucket, since this one can only manage buckets, and can't do anything with data related to the bucket.
+Across the account function, it is possible to manage all your buckets. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 ========
@@ -396,7 +396,7 @@ Modify any property of the bucket.
 
 .info
 ======
-Get informations about the bucket
+Get information about the bucket
 
 | **Syntax**
 | *.info(/id/)*
@@ -452,7 +452,7 @@ Delete bucket for the account
 
 Actions
 *******
-Across the account function, it is possible to manage all your actions. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The action method is completly different from the class action, since this one can only manage actions, and can't do anything with data related to the action.
+Across the account function, it is possible to manage all your actions. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 ========
@@ -524,7 +524,7 @@ Generate and retrieve a new action for the account
     const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
     var data = {
         "name": "a simple action",
-        "description": "to trigger when variable test is higher than 2 and reset when is less than 2",
+        "description": "trigger when the variable test is higher than 2, and reset it when is less than 2",
         "when_reset_bucket": "571920982c452fa00c6af660",
         "when_reset_origin": "571920a5cc7d43a00c642ca1",
         "when_reset_variable": "test",
@@ -574,10 +574,10 @@ Modify any property of the action.
     const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
     var data = {
         "name":"New name for my action",
-        "description":"This way I can change the description too",
+        "description":"In this way I can change the description too",
         "visible":true,
         "tags": [
-            {"key": "client", "value": "Leonardo"}
+            {"key": "client", "value": "Mark"}
         ]
     };
 
@@ -592,7 +592,7 @@ Modify any property of the action.
 
 .info
 =====
-Get informations about the action
+Get information about the action
 
 | **Syntax**
 | *.info(/id/)*
@@ -648,7 +648,7 @@ Delete action for the account
 
 Analysis
 *******
-Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since this one can only manage analysis, and can't do anything with data related to the analysis.
+Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since its only manage analysis informations and not the code it runs.
 
 .list
 =====
@@ -687,8 +687,8 @@ Generate and retrieve a new analysis for the account
 |   *\*name(string)*: *a name for the analysis;*
 |   *\*description(string)*: *description for the analysis. (optional)*
 |   *\*interval(string)*: *time interval for analysis to run. Default is Never;*
-|   *\*active(bool)*: *Set if the analysis will be active or not. Default True. (optional)*
-|   *\*variables(array)*: *Environment variables to be passed when analysis run. (optional)*
+|   *\*active(bool)*: *Set if the analysis will be active. Default True. (optional)*
+|   *\*variables(array)*: *Environment variables to be passed when the analysis runs. (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
@@ -710,7 +710,7 @@ Generate and retrieve a new analysis for the account
             {"key": "max_battery", "value": "3100"}
         ],
         "tags": [
-            {"key": "client", "value": "Francisco"}
+            {"key": "client", "value": "Mark"}
         ]
     };
 
@@ -736,8 +736,8 @@ Modify any property of the analysis.
 |   *\*name(string)*: *a name for the analysis; (optional)*
 |   *\*description(string)*: *description for the analysis. (optional)*
 |   *\*interval(string)*: *time interval for analysis to run. Default is Never;*
-|   *\*active(bool)*: *Set if the analysis will be active or not. Default True. (optional)*
-|   *\*variables(array)*: *Environment variables to be passed when analysis run. (optional)*
+|   *\*active(bool)*: *Set if the analysis will be active. Default True. (optional)*
+|   *\*variables(array)*: *Environment variables to be passed when the analysis runs. (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
@@ -750,14 +750,14 @@ Modify any property of the analysis.
     const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
     var data = {
         "name":"New name for my analysis",
-        "description":"This way I can change the description too",
+        "description":"In this way I can change the description too",
         "active":false,
         "interval": '2 minutes',
         "variables": [
             {"key": "max_battery", "value": "3000"}
         ],
         "tags": [
-            {"key": "client", "value": "Francisco"}
+            {"key": "client", "value": "Mark"}
         ]
     };
 
@@ -772,7 +772,7 @@ Modify any property of the analysis.
 
 .info
 =====
-Get informations about the analysis
+Get information about the analysis
 
 | **Syntax**
 | *.info(/id/)*
@@ -855,7 +855,7 @@ Force Analysis to run immediately
 
 Dashboards
 *******
-Across the account function, it is possible to manage all your dashboards. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The dashboards method is completly different from the class dashboards, since this one can only manage dashboards, and can't do anything with data related to the dashboards.
+Across the account function, it is possible to manage all your dashboards. Be sure to use an account token with "write" permissions when using functions like create, edit and delete.
 
 .list
 =====
@@ -884,15 +884,15 @@ Retrieve a list with all dashboards from account
 
 .create
 =======
-Generate and retrieve a new dashboards for the account
+Generate and retrieve a new dashboard for the account
 
 | **Syntax**
 | *.create(/data/)*
 |
 | **Arguments**
-| *data(object) options for the new dashboards.*
+| *data(object) options for the new dashboard.*
 |   *\*label(string)*: *a label for the dashboards;*
-|   *\*arrangement(array)*: *array of objects with arrangement of the widgest inside dashboard. (optional)*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widget inside the dashboard. (optional)*
 |       *\*widget_id(string)*: *id of the widget*
 |       *\*x(number)*: *position x of the widget. 1 to 4;*
 |       *\*y(number)*: *position y of the widget. 1 to 20*
@@ -902,8 +902,8 @@ Generate and retrieve a new dashboards for the account
 |
 | **Returns**
 | *(Promise)*
-|   *\*token*: *token for the generated dashboards;*
-|   *\*id*: *id of the new dashboards;*
+|   *\*token*: *token for the generated dashboard;*
+|   *\*id*: *id of the new dashboard;*
 |
 
 .. code-block:: javascript
@@ -911,12 +911,12 @@ Generate and retrieve a new dashboards for the account
     const Account = require('tago/account');
     const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
     var data = {
-        "name":"My first dashboards",
+        "name":"My first dashboard",
         "arrangement": [
             {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
         ]
         "tags": [
-            {"key": "client", "value": "Francisco"}
+            {"key": "client", "value": "Mark"}
         ]
     };
 
@@ -940,7 +940,7 @@ Modify any property of the dashboards.
 | *id(string) reference ID of the dashboards.*
 | *data(object) options to be modified in the dashboards.*
 |   *\*label(string)*: *a label for the dashboards;*
-|   *\*arrangement(array)*: *array of objects with arrangement of the widgest inside dashboard. (optional)*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widgest inside the dashboard. (optional)*
 |       *\*widget_id(string)*: *id of the widget*
 |       *\*x(number)*: *position x of the widget. 1 to 4;*
 |       *\*y(number)*: *position y of the widget. 1 to 20*
@@ -971,7 +971,7 @@ Modify any property of the dashboards.
 
 .info
 =====
-Get informations about the dashboards
+Get information about the dashboards
 
 | **Syntax**
 | *.info(/id/)*
