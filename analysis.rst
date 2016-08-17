@@ -52,9 +52,19 @@ scope
 *****
 Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <http://docs.tago.io/en/latest/dashboard.html#widget-form>`, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate data in real time, and more easily the new values inserted in your bucket.
 
-Build
-*****
-//TODO: Felipe should document here
+CLI and Using Another Packages
+******************************
+Sometimes could be useful to use another packages inside your analysis project, like lodash or moment.js for example. Or maybe all you want is to organize your project using *require* e and *subfoulders*. But Tago only accepts a single .js archive when uploading your script to our servers. So, what can you do?
+
+If that is the case, Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <>`._
+
+To easy use our CLI, follow these steps:
+1. Type in your terminal `npm install -g tago-cli`
+2. Wait it for install
+3. Type in your terminal `tago analysis build 'your-script-directory' --pwd 'folder-where-node_modules-can-be-found'`
+4. Upload the 'your-script'.tago.js file to Tago.
+
+If everything is okay, a new file will be generated called 'your-script'.tago.js. Now you can upload it to Tago!
 
 Services
 ********
