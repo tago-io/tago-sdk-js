@@ -56,7 +56,7 @@ CLI and Using Another Packages
 ******************************
 Sometimes could be useful to use another packages inside your analysis project, like lodash or moment.js for example. Or maybe all you want is to organize your project using *require* e and *subfoulders*. But Tago only accepts a single .js archive when uploading your script to our servers. So, what can you do?
 
-If that is the case, Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <>`._
+If that is the case, Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://github.com/tago-io/tago-cli>`._
 
 To easy use our CLI, follow these steps:
 
