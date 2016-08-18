@@ -58,11 +58,12 @@ Sometimes could be useful to use another packages inside your analysis project, 
 
 If that is the case, Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <>`._
 
-To easy use our CLI, follow these steps:
-1. Type in your terminal `npm install -g tago-cli`
-2. Wait it for install
-3. Type in your terminal `tago analysis build 'your-script-directory' --pwd 'folder-where-node_modules-can-be-found'`
-4. Upload the 'your-script'.tago.js file to Tago.
+| To easy use our CLI, follow these steps:
+| 1. Type in your terminal `npm install -g tago-cli`
+| 2. Wait it for install
+| 3. Type in your terminal `tago analysis build 'your-script-directory' --pwd 'folder-where-node_modules-can-be-found'`
+| 4. Upload the 'your-script'.tago.js file to Tago.
+| 
 
 If everything is okay, a new file will be generated called 'your-script'.tago.js. Now you can upload it to Tago!
 
