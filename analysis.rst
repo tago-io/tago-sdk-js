@@ -54,19 +54,19 @@ Every time an action triggers a script, the variable **scope** will be generated
 
 CLI and Using Another Packages
 ******************************
-Sometimes could be useful to use another packages inside your analysis project, like lodash or moment.js for example. Or maybe all you want is to organize your project using *require* e and *subfoulders*. But Tago only accepts a single .js archive when uploading your script to our servers. So, what can you do?
+When you are programming, it can be useful to use another packages inside your code; some examples are the lodash or moment.js. Or you may want to organize your project using *require* and *subfoulders*. 
 
-If that is the case, Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://github.com/tago-io/tago-cli>`._
+Also, Tago only accepts one single .js file when uploading your script to our servers. Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://github.com/tago-io/tago-cli>`._
 
-To easy use our CLI, follow these steps:
+To use our CLI, follow the following steps:
 
 1. **Type** in your terminal **`npm install -g tago-cli`**
-2. **Wait** it for install
+2. **Wait** it for the installation to be completed
 3. **Type** in your terminal **`tago analysis build 'your-script-directory' --pwd 'folder-where-node_modules-can-be-found'`**
 4. **Upload** the **'your-script'.tago.js** file to **Tago**.
 
 
-If everything is okay, a new file will be generated called 'your-script'.tago.js. Now you can upload it to Tago!
+If everything is okay, a new file called 'your-script'.tago.js will be generated. Now you can upload this file to Tago!
 
 Services
 ********
