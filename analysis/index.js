@@ -1,7 +1,11 @@
 'use strict';
 const Services = require('./../services/');
 const Realtime = require('./../utils/realtime.js');
- 
+
+function stringify_msg(msg) {
+    return (typeof msg === 'object' && !Array.isArray(msg) ? JSON.stringify(msg) : String(msg));
+}
+
 class Analysis {
     constructor(analysis, token) {
         this._token    = token;
@@ -16,7 +20,7 @@ class Analysis {
         let tago_console = new Services(token).console;
         function log() {
             if (!process.env.TAGO_RUNTIME) console.log.apply(null, arguments);
-            return tago_console.log(arguments);
+            return tago_console.log(Object.keys(arguments).map(x => stringify_msg(arguments[x])).join(' '));
         }
 
         let context = {
