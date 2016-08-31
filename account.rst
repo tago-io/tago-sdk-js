@@ -102,7 +102,7 @@ Retrieve a list with all devices from account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     
     accdevices.list()
         .then((result) => { 
@@ -137,7 +137,7 @@ Generate and retrieve a new device for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     var data = {
         "name":"My first device",
         "description":"Creating my first device",
@@ -180,7 +180,7 @@ Modify any property of the device.
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     var data = {
         "name":"New name for my device",
         "description":"In this way I can change the description too",
@@ -217,7 +217,7 @@ Get information about the device
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     
     accdevices.info('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -245,7 +245,7 @@ Retrieve a list of all tokens of the device
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     
     accdevices.tokenList('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -273,7 +273,7 @@ Delete device for the account
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Devices;
+    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     
     accdevices.delete('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -301,7 +301,7 @@ Retrieve a list with all buckets from account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Buckets;
+    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
     
     accbuckets.list()
         .then((result) => { 
@@ -334,7 +334,7 @@ Generate and retrieve a new bucket for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Buckets;
+    const accbuckets   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
     var data = {
         "name":"My first bucket",
         "description":"Creating my first bucket",
@@ -375,7 +375,7 @@ Modify any property of the bucket.
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Buckets;
+    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
     var data = {
         "name":"New name for my bucket",
         "description":"This way I can change the description too",
@@ -411,7 +411,7 @@ Get information about the bucket
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Buckets;
+    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
     
     accbuckets.info('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -439,7 +439,7 @@ Delete bucket for the account
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Buckets;
+    const accbuckets = new Account('0e479db0-tag0-11e6-8888-790d555b633a').buckets;
     
     accbuckets.delete('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -468,7 +468,7 @@ Retrieve a list with all actions from account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
+    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
     
     accactions.list()
         .then((result) => { 
@@ -521,7 +521,7 @@ Generate and retrieve a new action for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
+    const accactions   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
     var data = {
         "name": "a simple action",
         "description": "trigger when the variable test is higher than 2, and reset it when is less than 2",
@@ -571,7 +571,7 @@ Modify any property of the action.
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
+    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
     var data = {
         "name":"New name for my action",
         "description":"In this way I can change the description too",
@@ -607,7 +607,7 @@ Get information about the action
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
+    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
     
     accactions.info('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -635,7 +635,7 @@ Delete action for the account
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Actions;
+    const accactions = new Account('0e479db0-tag0-11e6-8888-790d555b633a').actions;
     
     accactions.delete('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -664,7 +664,7 @@ Retrieve a list with all analysis from account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     
     accanalysis.list()
         .then((result) => { 
@@ -700,7 +700,7 @@ Generate and retrieve a new analysis for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     var data = {
         "name":"My first analysis",
         "description":"Creating my first analysis",
@@ -747,7 +747,7 @@ Modify any property of the analysis.
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     var data = {
         "name":"New name for my analysis",
         "description":"In this way I can change the description too",
@@ -787,7 +787,7 @@ Get information about the analysis
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     
     accanalysis.info('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -815,7 +815,7 @@ Delete analysis for the account
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     
     accanalysis.delete('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -843,7 +843,7 @@ Force Analysis to run immediately
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Analysis;
+    const accanalysis = new Account('0e479db0-tag0-11e6-8888-790d555b633a').analysis;
     
     accanalysis.run('576dc932415f403531fd2cf6')
         .then((result) => { 
@@ -871,7 +871,7 @@ Retrieve a list with all dashboards from account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     
     accdashboards.list()
         .then((result) => { 
@@ -909,7 +909,7 @@ Generate and retrieve a new dashboard for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     var data = {
         "name":"My first dashboard",
         "arrangement": [
@@ -955,7 +955,7 @@ Modify any property of the dashboards.
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     var data = {
         "label":"New name for my dashboards",
     };
@@ -986,7 +986,7 @@ Get information about the dashboards
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     
     accdashboards.info('877c28d269d2861f1b2e96b8')
         .then((result) => { 
@@ -1014,7 +1014,7 @@ Delete dashboards for the account
 .. code-block:: javascript
 
     const Account    = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').Dashboards;
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     
     accdashboards.delete('877c28d269d2861f1b2e96b8')
         .then((result) => { 
