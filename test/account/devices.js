@@ -47,7 +47,7 @@ suite('Account - Devices', () => {
 
     suite('Get Token List', () => {
         test('Success', (done) => {
-            myacc.devices.tokenList('xxx')
+            myacc.devices.token_list('xxx')
                 .then((x) => {
                     expect(x).to.exist;
                     expect(x.url).to.be.equal('/device/token/xxx');
@@ -60,7 +60,7 @@ suite('Account - Devices', () => {
 
     suite('Create Token', () => {
         test('Success', (done) => {
-            myacc.devices.tokenCreate('xxx', {'name':'New Token', 'permission':'Full', 'expire_time':'never'})
+            myacc.devices.gen_token('xxx', {'name':'New Token', 'permission':'Full', 'expire_time':'never'})
                 .then((x) => {
                     expect(x).to.exist;
                     expect(x.url).to.be.equal('/device/token');
@@ -73,7 +73,7 @@ suite('Account - Devices', () => {
 
     suite('Delete Token', () => {
         test('Success', (done) => {
-            myacc.devices.tokenDelete('xxx')
+            myacc.devices.del_token('xxx')
                 .then((x) => {
                     expect(x).to.exist;
                     expect(x.url).to.be.equal('/device/token/xxx');
