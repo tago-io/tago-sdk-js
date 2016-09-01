@@ -34,7 +34,7 @@ class Account {
     /** List Tokens of the Account
      * @return {Promise}
      */
-    tokenList() {
+    token_list() {
         let url    = `${config.api_url}/account/token`;
         let method = 'GET';
 
@@ -45,13 +45,24 @@ class Account {
     /** Generate Account Token
      * @return {Promise}
      */
-    static gen_token(data) {
+    gen_token(data) {
         data       = data || {};
         let url    = `${config.api_url}/account/token`;
         let method = 'POST';
 
         let headers = default_headers();
         let options = {url, method, data, headers};
+        return request(options);
+    }
+
+    /** List Tokens of the Account
+     * @return {Promise}
+     */
+    del_token() {
+        let url    = `${config.api_url}/account/token`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
