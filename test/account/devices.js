@@ -58,6 +58,32 @@ suite('Account - Devices', () => {
         });
     });
 
+    suite('Create Token', () => {
+        test('Success', (done) => {
+            myacc.devices.tokenCreate('xxx', {'name':'New Token', 'permission':'Full', 'expire_time':'never'})
+                .then((x) => {
+                    expect(x).to.exist;
+                    expect(x.url).to.be.equal('/device/token');
+                    expect(x.method).to.be.equal('POST');
+                    expect(x.token).to.be.equal(token);
+                    done();
+                });
+        });
+    });
+
+    suite('Delete Token', () => {
+        test('Success', (done) => {
+            myacc.devices.tokenDelete('xxx')
+                .then((x) => {
+                    expect(x).to.exist;
+                    expect(x.url).to.be.equal('/device/token/xxx');
+                    expect(x.method).to.be.equal('DELETE');
+                    expect(x.token).to.be.equal(token);
+                    done();
+                });
+        });
+    });
+
     suite('Info', () => {
         test('Success', (done) => {
             myacc.devices.info('xxx')

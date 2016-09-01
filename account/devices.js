@@ -74,6 +74,34 @@ class Devices {
         return request(options);
     }
 
+    /** Create Token for the Device
+    * @param  {String} device id
+    * @param  {Object} data {permission, expire_time_select, name, expire_time}
+    * @return {Promise}
+     */
+    tokenCreate(device_id, data) {
+        data       = data || {};
+        data.device = device_id;
+
+        let url    = `${config.api_url}/device/token`;
+        let method = 'POST';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+   /** Delete Token from the Device
+    * @param  {String} token_id id
+    * @return {Promise}
+     */
+    tokenDelete(token_id) {
+        let url    = `${config.api_url}/device/token/${token_id}`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
     /** Get Info of the Device
     * @param  {String} device id
     * @return {Promise}
