@@ -30,12 +30,12 @@ Get all account information
         });
 
 
-.token_list
+.tokenList
 ************
 Get all tokens from the account
 
 | **Syntax**
-| *.token_list()*
+| *.tokenList()*
 |
 | **Returns**
 | *(Promise)*
@@ -46,7 +46,7 @@ Get all tokens from the account
     const Account = require('tago/account');
     const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
 
-    myacc.token_list()
+    myacc.tokenList()
         .then((result) => {
             //You can treat the result here
         })
@@ -55,12 +55,12 @@ Get all tokens from the account
         });
 
 
-.gen_token
+.tokenCreate
 **********
 Generate and retrieve a new token for the account
 
 | **Syntax**
-| *.gen_token()*
+| *.tokenCreate()*
 |
 | **Arguments**
 | *data(object) options for the new token.*
@@ -76,7 +76,7 @@ Generate and retrieve a new token for the account
     const Account = require('tago/account');
     const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
 
-    myacc.gen_token({"name":"My First Token", "expire_time": New Date()})
+    myacc.tokenCreate({"name":"My First Token", "expire_time": New Date()})
         .then((result) => {
             //You can treat the result here
         })
@@ -84,12 +84,12 @@ Generate and retrieve a new token for the account
             //You can treat errors here
         });
 
-.del_token
+.tokenDelete
 **********
 Delete current token of the account
 
 | **Syntax**
-| *.del_token()*
+| *.tokenDelete()*
 |
 | **Returns**
 | *(Promise)*
@@ -100,7 +100,7 @@ Delete current token of the account
     const Account = require('tago/account');
     const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
 
-    myacc.del_token()
+    myacc.tokenDelete()
         .then((result) => {
             //You can treat the result here
         })
@@ -253,12 +253,12 @@ Get information about the device
         });
 
 
-.token_list
+.tokenList
 ==========
 Retrieve a list of all tokens of the device
 
 | **Syntax**
-| *.token_list(/id/)*
+| *.tokenList(/id/)*
 |
 | **Arguments**
 | *id(string) reference ID of the device.*
@@ -272,7 +272,7 @@ Retrieve a list of all tokens of the device
     const Account    = require('tago/account');
     const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
     
-    accdevices.token_list('576dc932415f403531fd2cf6')
+    accdevices.tokenList('576dc932415f403531fd2cf6')
         .then((result) => { 
             //You can treat the result here
         })
@@ -280,12 +280,12 @@ Retrieve a list of all tokens of the device
             //You can treat errors here
         });
 
-.gen_token
+.tokenCreate
 **********
 Generate and retrieve a new token for the account
 
 | **Syntax**
-| *.gen_token(/id/, /data/)*
+| *.tokenCreate(/id/, /data/)*
 |
 | **Arguments**
 | *id(string) reference ID of the device.*
@@ -303,7 +303,7 @@ Generate and retrieve a new token for the account
     const Account    = require('tago/account');
     const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
 
-    accdevices.gen_token({"name":"My First Token", "expire_time": "never", "permission":"full"})
+    accdevices.tokenCreate({"name":"My First Token", "expire_time": "never", "permission":"full"})
         .then((result) => {
             //You can treat the result here
         })
@@ -311,12 +311,12 @@ Generate and retrieve a new token for the account
             //You can treat errors here
         });
 
-.del_token
+.tokenDelete
 **********
 Delete an token of the Device
 
 | **Syntax**
-| *.del_token(/token/)*
+| *.tokenDelete(/token/)*
 |
 | **Arguments**
 | *token(string) reference token.*
@@ -330,7 +330,7 @@ Delete an token of the Device
     const Account    = require('tago/account');
     const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
 
-    accdevices.del_token('298d17f0-7061-11e6-ab66-b174d8afb89d')
+    accdevices.tokenDelete('298d17f0-7061-11e6-ab66-b174d8afb89d')
         .then((result) => {
             //You can treat the result here
         })

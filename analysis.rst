@@ -177,12 +177,12 @@ geocoding
 =========
 Whenever you need to get a geolocation (lat/lon) based on a valid address, or vice versa. Use geocoding function. 
 
-.get_geolocation
+.getGeolocation
 ----------------
 Convert the address to a valid geolocation, if it exists.
 
 | **Syntax**
-| *.get_geolocation(/address/)*
+| *.getGeolocation(/address/)*
 |
 | **Arguments**
 | *address(string) A valid address.*
@@ -203,18 +203,18 @@ Convert the address to a valid geolocation, if it exists.
 
         let address = '1017 Main Campus Dr, Raleigh, NC 27606, USA';
 
-        geocoding.get_geolocation(address).then(console.log).catch(console.log);
+        geocoding.getGeolocation(address).then(console.log).catch(console.log);
         //Print [-78.6772532,35.7704823];
     }
 
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
 
-.get_address
+.getAddress
 ------------
 Convert a valid geolocation to an address, if it exists.
 
 | **Syntax**
-| *.get_address(/geolocation/)*
+| *.getAddress(/geolocation/)*
 |
 | **Arguments**
 | *geolocation(string) A valid geolocation.*
@@ -235,7 +235,7 @@ Convert a valid geolocation to an address, if it exists.
 
         let geolocation = '35.7704823,-78.6772532';
 
-        geocoding.get_address(geolocation).then(console.log).catch(console.log);
+        geocoding.getAddress(geolocation).then(console.log).catch(console.log);
         //Print '1017 Main Campus Dr, Raleigh, NC 27606, USA';
     }
     
