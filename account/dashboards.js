@@ -103,7 +103,7 @@ class Dashboards {
     /** Stop to listen the dashboard by its ID
     * @param  {String} dashboard_id id of the dashboard
      */
-    stop_litening(id, realtime) {
+    stopeListening(id, realtime) {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;

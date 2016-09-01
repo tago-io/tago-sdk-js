@@ -12,7 +12,7 @@ class Analysis {
         this._analysis = analysis;
 
         if (!process.env.TAGO_RUNTIME) {
-            this.local_runtime();
+            this.localRuntime();
         }
     }
 
@@ -31,7 +31,7 @@ class Analysis {
         this._analysis(context, data || []);
     }
 
-    local_runtime() {
+    localRuntime() {
         if (!this._token) {
             throw 'To run locally, needs a token.';
         }

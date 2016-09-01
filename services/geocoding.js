@@ -16,7 +16,7 @@ class Geocoding {
      * @param  {STRING} geolocation - Pass lat,lng
      * @return {Promise}
      */
-    get_address(address) {
+    getAddress(address) {
         let url    = `${config.api_url}/analysis/services/geocoding/get_address`;
         let method = 'POST';
         let data = { address };
@@ -29,7 +29,7 @@ class Geocoding {
      * @param  {STRING} address
      * @return {Promise}
      */
-    get_geolocation(geolocation) {
+    getGeolocation(geolocation) {
         let url    = `${config.api_url}/analysis/services/geocoding/get_geolocation`;
         let method = 'POST';
         let data = { geolocation };

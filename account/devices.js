@@ -66,7 +66,7 @@ class Devices {
     * @param  {String} device id
     * @return {Promise}
      */
-    token_list(device_id) {
+    tokenList(device_id) {
         let url    = `${config.api_url}/device/token/${device_id}`;
         let method = 'GET';
 
@@ -79,7 +79,7 @@ class Devices {
     * @param  {Object} data {permission, expire_time_select, name, expire_time}
     * @return {Promise}
      */
-    gen_token(device_id, data) {
+    tokenCreate(device_id, data) {
         data       = data || {};
         data.device = device_id;
 
@@ -94,7 +94,7 @@ class Devices {
     * @param  {String} token_id id
     * @return {Promise}
      */
-    del_token(token_id) {
+    tokenDelete(token_id) {
         let url    = `${config.api_url}/device/token/${token_id}`;
         let method = 'DELETE';
 

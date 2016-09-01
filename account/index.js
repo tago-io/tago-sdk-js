@@ -34,7 +34,7 @@ class Account {
     /** List Tokens of the Account
      * @return {Promise}
      */
-    token_list() {
+    tokenList() {
         let url    = `${config.api_url}/account/token`;
         let method = 'GET';
 
@@ -45,7 +45,7 @@ class Account {
     /** Generate Account Token
      * @return {Promise}
      */
-    gen_token(data) {
+    tokenCreate(data) {
         data       = data || {};
         let url    = `${config.api_url}/account/token`;
         let method = 'POST';
@@ -58,7 +58,7 @@ class Account {
     /** List Tokens of the Account
      * @return {Promise}
      */
-    del_token() {
+    tokenDelete() {
         let url    = `${config.api_url}/account/token`;
         let method = 'DELETE';
 
