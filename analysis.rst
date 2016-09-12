@@ -52,21 +52,29 @@ scope
 *****
 Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <http://docs.tago.io/en/latest/dashboard.html#widget-form>`, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate data in real time, and more easily the new values inserted in your bucket.
 
-CLI and Using Another Packages
-******************************
-When you are programming, it can be useful to use another packages inside your code; some examples are the lodash or moment.js. Or you may want to organize your project using *require* and *subfoulders*. 
+Tago-Builder and Using Another Packages
+***************************************
+When you are programming, it can be useful to use another packages inside your code; Or you may want to organize your project using *require* and *subfoulders*.
 
-Also, Tago only accepts one single .js file when uploading your script to our servers. Tago provides you with a CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://github.com/tago-io/tago-cli>`._
+| Tago is friendly with some packages:
+| * **moment** and **moment-timezone**
+| * **lodash**
+| * **co**
+| * **Tago** itself
+|
+| So you don't need to generate a build if you are using **only** them.
+|
 
-To use our CLI, follow the following steps:
+Also, Tago only accepts one single .js file when uploading your script to our servers. Tago provides you with a Tago-Builder CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://www.npmjs.com/package/tago-builder>`._
 
-1. **Type** in your terminal **`npm install -g tago-cli`**
+To use our Tago-Builder, follow the following steps:
+
+1. **Type** in your terminal **`npm install -g tago-builder`**
 2. **Wait** it for the installation to be completed
-3. **Type** in your terminal **`tago analysis build 'your-script-directory' --pwd 'folder-where-node_modules-can-be-found'`**
-4. **Upload** the **'your-script'.tago.js** file to **Tago**.
+3. **Type** in your terminal **`tago-builder 'my script'.js**
+4. **Upload** the generated **'my script'.tago.js** file to **Tago**.
 
-
-If everything is okay, a new file called 'your-script'.tago.js will be generated. Now you can upload this file to Tago!
+If everything is okay, a new file called 'my script'.tago.js will be generated. Now you can upload this file to Tago!
 
 Services
 ********
