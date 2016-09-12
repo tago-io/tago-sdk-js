@@ -71,7 +71,7 @@ To use our Tago-Builder, follow the following steps:
 
 1. **Type** in your terminal **`npm install -g tago-builder`**
 2. **Wait** it for the installation to be completed
-3. **Type** in your terminal **`tago-builder 'my script'.js**
+3. **Type** in your terminal **`tago-builder 'my script'.js 'new name'.tago.js** *(the last parameter is optional)*.
 4. **Upload** the generated **'my script'.tago.js** file to **Tago**.
 
 If everything is okay, a new file called 'my script'.tago.js will be generated. Now you can upload this file to Tago!
