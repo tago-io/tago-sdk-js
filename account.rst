@@ -31,7 +31,7 @@ Get all account information
 
 
 .tokenList
-************
+**********
 Get all tokens from the account
 
 | **Syntax**
@@ -56,7 +56,7 @@ Get all tokens from the account
 
 
 .tokenCreate
-**********
+************
 Generate and retrieve a new token for the account
 
 | **Syntax**
@@ -85,7 +85,7 @@ Generate and retrieve a new token for the account
         });
 
 .tokenDelete
-**********
+************
 Delete current token of the account
 
 | **Syntax**
@@ -253,6 +253,34 @@ Get information about the device
         });
 
 
+.delete
+=======
+Delete device for the account
+
+| **Syntax**
+| *.delete(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the device.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
+    
+    accdevices.delete('576dc932415f403531fd2cf6')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
 .tokenList
 ==========
 Retrieve a list of all tokens of the device
@@ -281,8 +309,8 @@ Retrieve a list of all tokens of the device
         });
 
 .tokenCreate
-**********
-Generate and retrieve a new token for the account
+============
+Generate and retrieve a new token for the device
 
 | **Syntax**
 | *.tokenCreate(/id/, /data/)*
@@ -312,7 +340,7 @@ Generate and retrieve a new token for the account
         });
 
 .tokenDelete
-**********
+============
 Delete an token of the Device
 
 | **Syntax**
@@ -332,33 +360,6 @@ Delete an token of the Device
 
     accdevices.tokenDelete('298d17f0-7061-11e6-ab66-b174d8afb89d')
         .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-
-.delete
-=======
-Delete device for the account
-
-| **Syntax**
-| *.delete(/id/)*
-|
-| **Arguments**
-| *id(string) reference ID of the device.*
-|
-| **Returns**
-| *(Promise)*
-|
-
-.. code-block:: javascript
-
-    const Account    = require('tago/account');
-    const accdevices = new Account('0e479db0-tag0-11e6-8888-790d555b633a').devices;
-    
-    accdevices.delete('576dc932415f403531fd2cf6')
-        .then((result) => { 
             //You can treat the result here
         })
         .catch((error) => {
