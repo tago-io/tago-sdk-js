@@ -91,7 +91,7 @@ When setting up a service, you need to pass an analysis-token. For convenience, 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
         //Setting up a SMS service
-        let sms = Services(context.token).sms;
+        const sms = new Services(context.token).sms;
 
     }
 
@@ -126,10 +126,10 @@ Whenever you need to send a sms, use .send function.
 
     //Main function to be executed when analysis are called
     function myanalysis(context, scope) {
-        let sms = Services(context.token).sms;
+        const sms = new Services(context.token).sms;
 
-        let to      = '2693856214';
-        let message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
+        const to      = '2693856214';
+        const message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
 
         sms.send(to, message).then(console.log).catch(console.log);
         //Print "Sending";
@@ -167,12 +167,12 @@ Whenever you need to send an email, use .send function.
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
-        let email = Services(context.token).email;
+        const email = new Services(context.token).email;
 
-        let to      = 'myuser@gmail.com';
-        let subject = 'E-mail example';
-        let message = 'Hi! This is an email example. \nWith a breakline in the email message.';
-        let from    = 'me@gmail.com';
+        const to      = 'myuser@gmail.com';
+        const subject = 'E-mail example';
+        const message = 'Hi! This is an email example. \nWith a breakline in the email message.';
+        const from    = 'me@gmail.com';
 
         email.send(to, subject, message, from).then(console.log).catch(console.log);
         //Print "Sending";
@@ -207,9 +207,9 @@ Convert the address to a valid geolocation, if it exists.
 
     //Main function to be executed when an analysis is called
     function myanalysis(context, scope) {
-        let geocoding = Services(context.token).geocoding;
+        const geocoding = new Services(context.token).geocoding;
 
-        let address = '1017 Main Campus Dr, Raleigh, NC 27606, USA';
+        const address = '1017 Main Campus Dr, Raleigh, NC 27606, USA';
 
         geocoding.getGeolocation(address).then(console.log).catch(console.log);
         //Print [-78.6772532,35.7704823];
@@ -239,9 +239,9 @@ Convert a valid geolocation to an address, if it exists.
 
     //Main function to be executed when an analysis is called
     function myanalysis(context, scope) {
-        let geocoding = Services(context.token).geocoding;
+        const geocoding = new Services(context.token).geocoding;
 
-        let geolocation = '35.7704823,-78.6772532';
+        const geolocation = '35.7704823,-78.6772532';
 
         geocoding.getAddress(geolocation).then(console.log).catch(console.log);
         //Print '1017 Main Campus Dr, Raleigh, NC 27606, USA';
@@ -275,10 +275,10 @@ Return the current exchange rate of one currency to another one.
 
     //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
-        let currency = Services(context.token).currency;
+        const currency = new Services(context.token).currency;
 
-        let from = 'USD';
-        let to   = 'BRL';
+        const from = 'USD';
+        const to   = 'BRL';
 
         currency.convert(from, to).then(console.log).catch(console.log);
         //Print Example: 3.29883848
@@ -314,12 +314,12 @@ Measure is a service that provides the travel distance and time for a matrix of 
 
     //Main function to be executed when analysis are called
     function myanalysis(context, scope) {
-        let distance = Services(context.token).distance;
+        const distance = new Services(context.token).distance;
 
-        let origins      = [ "New York, NY, USA" ];
-        let destinations = [ "Washington, DC, USA" ];
-        let language     = 'EN';
-        let mode         = 'driving';
+        const origins      = [ "New York, NY, USA" ];
+        const destinations = [ "Washington, DC, USA" ];
+        const language     = 'EN';
+        const mode         = 'driving';
 
         distance.measure(origins, destinations, language, mode).then(console.log).catch(console.log);
         //Print
@@ -355,16 +355,16 @@ Get the current weather conditions.
 
     //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
-        let weather = Services(context.token).weather;
+        const weather = new Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
+        const query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
         query = '27605'; //zipcode
 
-        let full     = false;
-        let language = "EN"
+        const full     = false;
+        const language = "EN"
 
         weather.current(query, full, language).then(console.log).catch(console.log);
         //Print {"station_id":"KNCRALEI48","observation_time":"Last Updated on July 8, 5:40 PM EDT","observation_time_rfc822":"Fri, 08 Jul 2016 17:40:04 -0400","observation_epoch":"1468014004","local_time_rfc822":"Fri, 08 Jul 2016 17:42:43 -0400","local_epoch":"1468014163","local_tz_short":"EDT","local_tz_long":"America/New_York","local_tz_offset":"-0400","weather":"Partly Cloudy","temperature_string":"88.9 F (31.6 C)","temp_f":88.9,"temp_c":31.6,"relative_humidity":"68%","wind_string":"Calm","wind_dir":"North","wind_degrees":-9999,"wind_mph":0,"wind_gust_mph":0,"wind_kph":0,"wind_gust_kph":0,"pressure_mb":"1011","pressure_in":"29.86","pressure_trend":"-","dewpoint_string":"77 F (25 C)","dewpoint_f":77,"dewpoint_c":25,"heat_index_string":"102 F (39 C)","heat_index_f":102,"heat_index_c":39,"windchill_string":"NA","windchill_f":"NA","windchill_c":"NA","feelslike_string":"102 F (39 C)","feelslike_f":"102","feelslike_c":"39","visibility_mi":"10.0","visibility_km":"16.1","solarradiation":"--","UV":"3","precip_1hr_string":"0.00 in ( 0 mm)","precip_1hr_in":"0.00","precip_1hr_metric":" 0","precip_today_string":"0.00 in (0 mm)","precip_today_in":"0.00","precip_today_metric":"0","icon":"partlycloudy","nowcast":""}";
@@ -396,16 +396,16 @@ Returns a summary of the weather forecast for the next 10 days. This includes hi
 
     //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
-        let weather = Services(context.token).weather;
+        const weather = new Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
+        const query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
         query = '27605'; //zipcode
 
-        let full     = false;
-        let language = "EN"
+        const full     = false;
+        const language = "EN"
 
         weather.forecast(query, full, language).then(console.log).catch(console.log);
         //Print array of 'current weather' for every day in the next 10 days;
@@ -438,18 +438,18 @@ Returns a summary of the weather conditions for the last 10 days. This includes 
 
     //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
-        let weather = Services(context.token).weather;
+        const weather = new Services(context.token).weather;
 
-        let date  = '2016-07-07';
+        const date  = '2016-07-07';
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
+        const query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
         query = '27605'; //zipcode
 
-        let full     = false;
-        let language = "EN"
+        const full     = false;
+        const language = "EN"
 
         weather.history(date, query, full, language).then(console.log).catch(console.log);
         //Print array of 'current weather' for every day until reachs a specified date in the past;
@@ -480,16 +480,16 @@ Returns the short name description, expiration time and a long text description 
 
     //Main function to be executed when the analysis is called
     function myanalysis(context, scope) {
-        let weather = Services(context.token).weather;
+        const weather = new Services(context.token).weather;
 
-        let query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
+        const query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
         //or
         query = '35.7704823,-78.6772532'; //geolocation
         //or
         query = '27605'; //zipcode
 
-        let full     = false;
-        let language = "EN"
+        const full     = false;
+        const language = "EN"
 
         weather.alert(query, full, language).then(console.log).catch(console.log);
         //Print array of the several alerts in the last days;
