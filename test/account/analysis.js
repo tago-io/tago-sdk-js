@@ -77,6 +77,19 @@ suite('Account - Analysis', () => {
                     done();
                 });
         });
+    });
+
+    suite('Run', () => {
+        test('Success', (done) => {
+            myacc.analysis.run('xxx')
+                .then((x) => {
+                    expect(x).to.exist;
+                    expect(x.url).to.be.equal('/analysis/xxx/run');
+                    expect(x.method).to.be.equal('POST');
+                    expect(x.token).to.be.equal(token);
+                    done();
+                });
+        });
 
     });
 });

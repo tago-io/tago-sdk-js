@@ -81,13 +81,15 @@ class Analysis {
 
     /** Force Analyze to Run
      * @param  {String} analyze id
+     * @param  {Object} scope simulate scope for analysis (optional)
      * @return {Promise}
      */
-    run(analyze_id) {
+    run(analyze_id, scope) {
+        const data = { scope };
         let url    = `${config.api_url}/analysis/${analyze_id}/run`;
-        let method = 'GET';
+        let method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
