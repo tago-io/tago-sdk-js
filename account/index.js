@@ -31,11 +31,46 @@ class Account {
         return request(options);
     }
 
+    /** List Profiles of the Account
+     * @return {Promise}
+     */
+    profileList() {
+        let url    = `${config.api_url}/account/profile`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Generate a new Profile
+     * @return {Promise}
+     */
+    profileCreate(data) {
+        data       = data || {};
+        let url    = `${config.api_url}/account/profile`;
+        let method = 'POST';
+
+        let headers = default_headers();
+        let options = {url, method, data, headers};
+        return request(options);
+    }
+
+    /** List Profiles of the Account
+     * @return {Promise}
+     */
+    profileDelete() {
+        let url    = `${config.api_url}/account/profile`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
     /** List Tokens of the Account
      * @return {Promise}
      */
     tokenList() {
-        let url    = `${config.api_url}/account/token`;
+        let url    = `${config.api_url}/account/profile/token`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});
@@ -47,7 +82,7 @@ class Account {
      */
     tokenCreate(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account/token`;
+        let url    = `${config.api_url}/account/profile/token`;
         let method = 'POST';
 
         let headers = default_headers();
@@ -59,7 +94,7 @@ class Account {
      * @return {Promise}
      */
     tokenDelete() {
-        let url    = `${config.api_url}/account/token`;
+        let url    = `${config.api_url}/account/profile/token`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {url, method});
