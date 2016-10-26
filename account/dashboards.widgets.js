@@ -82,6 +82,28 @@ class Widgets {
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
+
+    /** Update value of variable for the current widget
+    * @param  {String} widget_id
+    * @param  {String} variable
+    * @param  {String} value
+    * @param  {String} bucket
+    * @param  {String} origin
+    * @return {Promise}
+    */
+    updateVariable(widget_id, variable, value, bucket, origin) {
+        let url    = `${config.api_url}/dashboard/widget/data/${widget_id}`;
+        let method = 'POST';
+        let data = {
+            variable,
+            value,
+            bucket,
+            origin
+        };
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
 }
 
 module.exports = Widgets;
