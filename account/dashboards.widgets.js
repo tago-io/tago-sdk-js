@@ -16,7 +16,7 @@ class Widgets {
     * @param  {String} dashboard id
     * @param  {JSON} data
     * @return {Promise}
-     */
+    */
     create(dash_id, data) {
         data       = data || {};
         let url    = `${config.api_url}/dashboard/${dash_id}/widget/`;
@@ -31,7 +31,7 @@ class Widgets {
     * @param  {String} widget id
     * @param  {Object} data
     * @return {Promise}
-     */
+    */
     edit(dash_id, widget_id, data) {
         data       = data || {};
         let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
@@ -45,7 +45,7 @@ class Widgets {
     * @param  {String} dashboard id
     * @param  {String} widget id
     * @return {Promise}
-     */
+    */
     delete(dash_id, widget_id) {
         let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
         let method = 'DELETE';
@@ -58,7 +58,7 @@ class Widgets {
     * @param  {String} dashboard id
     * @param  {String} widget id
     * @return {Promise}
-     */
+    */
     info(dash_id, widget_id) {
         if (!widget_id || widget_id == '') {
             //If ID is send with null, it will get List instead info.
@@ -85,21 +85,12 @@ class Widgets {
 
     /** Update value of variable for the current widget
     * @param  {String} widget_id
-    * @param  {String} variable
-    * @param  {String} value
-    * @param  {String} bucket
-    * @param  {String} origin
+    * @param  {JSON} data
     * @return {Promise}
     */
-    updateVariable(widget_id, variable, value, bucket, origin) {
+    updateVariable(widget_id, data) {
         let url    = `${config.api_url}/dashboard/widget/data/${widget_id}`;
         let method = 'POST';
-        let data = {
-            variable,
-            value,
-            bucket,
-            origin
-        };
 
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
