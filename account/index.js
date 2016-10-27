@@ -108,7 +108,7 @@ class Account {
      */
     login(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account/login`;
+        let url    = `${config.api_url}/account/profile/login`;
         let method = 'POST';
 
         let headers = default_headers();
