@@ -101,6 +101,21 @@ class Account {
         return request(options);
     }
 
+    /** Retrieve list of profiles for login
+     * @param  {string} data.email - email for login
+     * @param  {string} data.password - password for login
+     * @return {Promise}
+     */
+    login(data) {
+        data       = data || {};
+        let url    = `${config.api_url}/account/login`;
+        let method = 'POST';
+
+        let headers = default_headers();
+        let options = {url, method, data, headers};
+        return request(options);
+    }
+
     // ----------- Sub-methods -----------
     get actions() {
         return new Actions(this.token);
