@@ -151,6 +151,7 @@ Generate and retrieve a new device for the account
 |   *\*description(string)*: *description for the device. (optional)*
 |   *\*active(bool)*: *Set if the device will be active. Default True. (optional)*
 |   *\*visible(bool)*: *Set if the device will be visible. Default True. (optional)*
+|   *\*configuration_params(array)*: *An array of objects with sent(bool), key(string) and value(string). (optional)*
 |   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
@@ -170,6 +171,10 @@ Generate and retrieve a new device for the account
         "visible":true,
         "tags": [
             {"key": "client", "value": "John"}
+        ]
+        "configuration_params": [
+            {"sent": false, "key": "check_rate", "value": 600}
+            {"sent": false, "key": "measure_time", "value": 0}
         ]
     };
 
