@@ -14,7 +14,7 @@ Tago SDK for JavaScript in the browser and Node.js.
 | Tago website          | http://tago.io           |
 | SDK documentation     | http://sdk.js.tago.io    |
 | General documentation | http://docs.tago.io      |
-| Forum / Community     | http://community.tago.io |
+| Slack / Community     | http://community.tago.io |
 
 # Installation
 
