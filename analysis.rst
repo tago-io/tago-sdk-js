@@ -61,6 +61,7 @@ When you are programming, it can be useful to use another packages inside your c
 | * **lodash**
 | * **co**
 | * **async**
+| * **axios**
 | * **crypto**
 | * **Tago** itself
 |
