@@ -60,6 +60,8 @@ When you are programming, it can be useful to use another packages inside your c
 | * **moment** and **moment-timezone**
 | * **lodash**
 | * **co**
+| * **async**
+| * **crypto**
 | * **Tago** itself
 |
 | So you don't need to generate a build if you are using **only** them.
