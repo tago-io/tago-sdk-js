@@ -54,16 +54,16 @@ Every time an action triggers a script, the variable **scope** will be generated
 
 Runtime Timeout
 ***************
-The analysis on Tago have a runtime timout of 30 seconds. That means if you script take longer than 30 seconds to finish, Tago will shutdow the script before it end all your operations.
+Tago Analysis has a mechanism that prevents scripts from being locked in their executions by applying a timeout of 30 seconds. It means that if a script takes more than 30 seconds to be completed, Tago will abort it, and the script will not be completed.
 
-This limitation doesn't apply when running the analyze from your machine. See the information below to know how to run a script outside Tago.
+This limitation doesn't apply when running the analyze from your own machine.  Check the information below to learn how to run scripts from an external server (e.g. from your own computer).
 
 Running in your machine
 ***********************
-Running inside Tago or in your own machine doesn't have too much difference. When running a script by yourself, you need to install all packages used by your analyze using the command **npm install mypackage**.
+You always have the option to run your script from your own machine or from Tago server without any technical difference. When running the script from your machine, you will need to install all the packages used by your analysis by using the command  **npm install mypackage**.
 
-Be sure to set on your analysis inside Tago admin, to run it from "external". 
-Latest, get the analyze token on the same page, and put it on the second parameter when calling **new Analysis**. Look the example:
+Be sure to set your analysis configuration with the option to run the script from "external". 
+And finally, get the analysis token from the same configuration screen, and put it on the second parameter when calling  **new Analysis**. Check out this example:
 
 `module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');`
 
@@ -83,7 +83,7 @@ When you are programming, it can be useful to use another packages inside your c
 | So you don't need to generate a build if you are using **only** them.
 |
 
-Also, Tago only accepts one single .js file when uploading your script to our servers. Tago provides you with a Tago-Builder CLI that will build your entire project in that single .js file. You can access the repository `clicking here <https://www.npmjs.com/package/tago-builder>`_
+Also, Tago only accepts one single .js file when uploading your script to our servers. ago provides a builder CLI that can build your entire project and generate a single .js file with the whole code. You can access the repository `clicking here <https://www.npmjs.com/package/tago-builder>`_
 
 To use our Tago-Builder, follow the following steps:
 

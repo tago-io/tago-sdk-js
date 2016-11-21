@@ -736,7 +736,7 @@ Delete action for the account
 
 Analysis
 ********
-Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis, since its only manage analysis informations and not the code it runs.
+Across the account function, it is possible to manage all your analysis. Be sure to use an account token with "write" permissions when using functions like create, edit and delete. The analysis method is completly different from the class analysis,  since it only manages the analysis information and not the code that it runs.
 
 .list
 =====
