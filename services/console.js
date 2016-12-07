@@ -12,10 +12,11 @@ class Console {
         };
     }
 
-    log(message) {
+    log(message, timestamp) {
+        if (!timestamp) timestamp = new Date().getTime();
         let url    = `${config.api_url}/analysis/services/console/send`;
         let method = 'post';
-        let data = { message };
+        let data = { message, timestamp };
 
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);

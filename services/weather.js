@@ -1,13 +1,15 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
+const request         = require('../comum/service_request.js');
 const default_headers = require('../comum/default_headers.js');
 
+/*
+Wunderground docs: http://www.wunderground.com/weather/api/d/docs
+*/
 class Weather {
-    constructor(acc_token) {
-        this.token = acc_token;
+    constructor(key) {
+        this.key = key;
         this.default_options = {
-            'json':    true,
+            'json': true,
             'headers': default_headers(this)
         };
     }
@@ -18,8 +20,28 @@ class Weather {
      */
     _setParams(params) {
         this._query = params.query || null;
-        this._full  = params.full || false;
-        this._lang  = params.lang || 'EN';
+        this._full = params.full || false;
+        this._lang = params.lang || 'EN';
+    }
+        /** verify if geolocation is a valid Geolocation
+         * @param  {string|array} geolocation
+         */
+    geolocation_verify(geolocation) {
+        if (typeof geolocation === 'string') {
+            let geoplited = geolocation.split(',');
+
+            if (geolocation.length > 1) {
+                geolocation = [geoplited[0].trim(), geoplited[1].trim()];
+            } else {
+                return null;
+            }
+        } else if (geolocation.coordinates) {
+            geolocation = geolocation.coordinates;
+        } else {
+            return null;
+        }
+
+        return [geolocation[0], geolocation[1]].join(',');
     }
 
     /** 
@@ -30,13 +52,44 @@ class Weather {
      * @return {Promise}
      */
     current(query, full, lang) {
-        this._setParams({query, full, lang});
-        let url    = `${config.api_url}/analysis/services/weather/current`;
-        let method = 'POST';
-        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
+        return new Promise((resolve, reject) => {
+            this._setParams({ query, full, lang });
+            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/conditions/q/${this._query}.json`;
+            let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+            let options = Object.assign({}, this.default_options, {
+                url,
+                method
+            });
+
+            request(options).then((result) => {
+                if (!result.current_observation && result.response.results) {
+                    return reject(`Invalid address, ${result.response.results.length} match.`);
+                } else if (!result.current_observation) {
+                    return reject('Invalid address');
+                }
+
+                result = result.current_observation;
+                try {
+                    delete result.image;
+                    delete result.icon_url;
+                    delete result.forecast_url;
+                    delete result.history_url;
+                    delete result.ob_url;
+                    delete result.estimated;
+
+                    if (!this.full) {
+                        delete result.display_location;
+                        delete result.observation_location;
+                    }
+                } catch (e) {
+                    console.log(`weather system, ${e}`);
+                }
+                resolve(result);
+
+            }).catch((error) => reject(error));
+        });
+
     }
 
     /** 
@@ -48,13 +101,29 @@ class Weather {
      * @return {Promise}
      */
     history(date, query, full, lang) {
-        this._setParams({query, full, lang});
-        let url    = `${config.api_url}/analysis/services/weather/history`;
-        let method = 'POST';
-        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang, date };
+        return new Promise((resolve, reject) => {
+            this._setParams({ query, full, lang });
+            try {
+                date = new Date(date);
+                date = `${date.getFullYear()}${date.getMonth()}${date.getDate()}`;
+            } catch (e) {
+                return reject('Invalid date');
+            }
+  
+            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/history_${date}/q/${this._query}.json`;
+            let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+            let options = Object.assign({}, this.default_options, {
+                url,
+                method
+            });
+
+            request(options).then((result) => {
+                result = result.history;
+                resolve(result);
+            })
+            .catch((error) => reject(error));
+        });
     }
 
     /** 
@@ -65,13 +134,29 @@ class Weather {
      * @return {Promise}
      */
     forecast(query, full, lang) {
-        this._setParams({query, full, lang});
-        let url    = `${config.api_url}/analysis/services/weather/forecast`;
-        let method = 'POST';
-        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
+        return new Promise((resolve, reject) => {
+            this._setParams({ query, full, lang });
+            let url    = `http: //api.wunderground.com/api/${this.key}/lang: ${this._lang}/forecast10day/q/${this._query}.json`;
+            let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+            let options = Object.assign({}, this.default_options, {
+                url,
+                method
+            });
+
+            request(options).then((result) => {
+                try {
+                    result = result.forecast.simpleforecast.forecastday;
+                    result.forEach(function (x) {
+                        delete x.icon_url;
+                        delete x.skyicon;
+                    });
+                } catch (e) {
+                    return reject('Error on parse weather forecast');
+                }
+                resolve(result);
+            }).catch((error) => reject(error));
+        });
     }
 
     /** Returns the short name description, expiration time and a long text description of a severe alert, if one has been issued for the searched upon location.
@@ -81,14 +166,25 @@ class Weather {
      * @return {Promise}
      */
     alerts(query, full, lang) {
-        this._setParams({query, full, lang});
-        let url    = `${config.api_url}/analysis/services/weather/alerts`;
-        let method = 'POST';
-        let data = { 'query': this._query,  'full': this._full, 'lang': this._lang };
+        return new Promise((resolve, reject) => {
+            this._setParams({ query, full, lang });
+            let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/alerts/q/${this._query}.json`;
+            let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+            let options = Object.assign({}, this.default_options, {
+                url,
+                method
+            });
+
+            request(options).then((result) => {
+                delete result.response;
+
+                resolve(result);
+            })
+            .catch((error) => reject(error));
+        });
     }
 }
 
 module.exports = Weather;
+
