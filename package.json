@@ -36,13 +36,13 @@
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
   "dependencies": {
-    "axios": "0.15.2",
-    "socket.io-client": "1.5.1"
+    "axios": "0.15.3",
+    "socket.io-client": "1.7.1"
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "eslint": "3.9.1",
+    "eslint": "3.11.1",
     "express": "4.14.0",
-    "mocha": "3.1.2"
+    "mocha": "3.2.0"
   }
 }
