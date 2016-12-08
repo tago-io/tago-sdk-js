@@ -3,11 +3,11 @@ const axios = require('axios');
 
 module.exports = function service_request(request_options) {
     return new Promise((resolve, reject) => {
-        return axios(request_options, function (error, response, body) {
-
-            if (response.statusCode !== 200) {
+        axios(request_options).then((result) => {
+            if (result.status !== 200) {
                 return reject('Error on Third-Party service');
             }
+            let body = result.data;
 
             try {
                 body = JSON.parse(body);
@@ -15,11 +15,10 @@ module.exports = function service_request(request_options) {
                 return reject('Can\'t parse JSON');
             }
 
-            if (body.status !== 'OK') {
+            if (result.statusText !== 'OK') {
                 console.error(body);
                 return reject('Error on Third-Party service');
             }
-
             resolve(body);
         });
     });
