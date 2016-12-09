@@ -6,9 +6,7 @@ Tago support 3party API's to make your life easily, like Google Maps and Weather
 geocoding
 *********
 Whenever you need to get a geolocation (lat/lon) based on a valid address, or vice versa. Use geocoding function. 
-/*
 Google Geocoding API docs: https://developers.google.com/maps/documentation/geocoding/
-*/
 
 .getGeolocation
 ===============
@@ -79,6 +77,7 @@ Convert a valid geolocation to an address, if it exists.
 currency
 ********
 Check several currencies in real-time, and the historical exchange rates for more than 168 countries.
+Currency API: https://currencylayer.com/
 
 .convert
 ========
@@ -117,6 +116,7 @@ Return the current exchange rate of one currency to another one.
 distance
 ********
 Whenever you need to calculate the distance between two points use distance service.
+Google Distance API docs: https://developers.google.com/maps/documentation/distance-matrix/intro
 
 .measure
 ========
@@ -160,6 +160,7 @@ Measure is a service that provides the travel distance and time for a matrix of 
 weather
 *******
 Whenever you need to get weather conditions around the world, use weather service.
+Wunderground API: https://www.wunderground.com/weather/api/
 
 .current
 ========
