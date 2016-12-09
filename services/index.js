@@ -1,11 +1,7 @@
 'use strict';
-const Currency  = require('./currency.js');
-const Distance  = require('./distance.js');
 const Email     = require('./email.js');
-const Geocoding = require('./geocoding.js');
 const SMS       = require('./sms.js');
 const Socket    = require('./socket.js');
-const Weather   = require('./weather.js');
 const Console   = require('./console.js');
 
 class Services {

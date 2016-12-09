@@ -6,7 +6,7 @@ function myanalysis(context, scope) {
     context.log('my scope:', scope);
 }
 
-module.exports = new Analysis(myanalysis, '330291f0-5295-11e6-ac61-35b09393a722');
+module.exports = new Analysis(myanalysis, '606109f0-bda3-11e6-a1e0-f13b10826644');
 
 /**
  * That analysis can run on your machine, 
