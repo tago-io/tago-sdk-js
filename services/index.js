@@ -21,25 +21,10 @@ class Services {
         return new Email(this.token);
     }
 
-    get geocoding() {
-        return new Geocoding(this.token);
-    }
-
-    get currency() {
-        return new Currency(this.token);
-    }
-
-    get distance() {
-        return new Distance(this.token);
-    }
-
     get socket() {
         return new Socket(this.token);
     }
 
-    get weather() {
-        return new Weather(this.token);
-    }
 }
 
 module.exports = Services;
