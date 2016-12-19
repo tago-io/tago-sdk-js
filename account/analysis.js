@@ -113,13 +113,25 @@ class Analysis {
     }
 
     /** Stop to listen the analysis by its ID
-    * @param  {String} analyze_id id of the analysis
+     * @param  {String} analyze_id id of the analysis
      */
     stopeListening(analyze_id, realtime) {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
         realtime.get_socket.off(`analyze:${analyze_id}`);
+    }
+
+    /** Generate a new token for the analysis
+     * @param  {String} analysis id
+     * @return {Promise}
+     */
+    tokenGenerate(analyze_id) {
+        let url    = `${config.api_url}/analysis/${analyze_id}/token`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
     }
 }
 
