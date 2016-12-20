@@ -17,10 +17,10 @@ class Analysis {
      * @return {Promise}
      */
     list() {
-        let url    = `${config.api_url}/analysis`;
-        let method = 'GET';
+        const url    = `${config.api_url}/analysis`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -30,10 +30,10 @@ class Analysis {
      */
     create(data) {
         data       = data || {};
-        let url    = `${config.api_url}/analysis`;
-        let method = 'POST';
+        const url    = `${config.api_url}/analysis`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -44,10 +44,10 @@ class Analysis {
      */
     edit(analyze_id, data) {
         data       = data || {};
-        let url    = `${config.api_url}/analysis/${analyze_id}`;
-        let method = 'PUT';
+        const url    = `${config.api_url}/analysis/${analyze_id}`;
+        const method = 'PUT';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -56,10 +56,10 @@ class Analysis {
      * @return {Promise}
      */
     delete(analyze_id) {
-        let url    = `${config.api_url}/analysis/${analyze_id}`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/analysis/${analyze_id}`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -72,10 +72,10 @@ class Analysis {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Analyze ID parameter is obrigatory.'));
         }
-        let url    = `${config.api_url}/analysis/${analyze_id}`;
-        let method = 'GET';
+        const url    = `${config.api_url}/analysis/${analyze_id}`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -86,10 +86,10 @@ class Analysis {
      */
     run(analyze_id, scope) {
         const data = { scope };
-        let url    = `${config.api_url}/analysis/${analyze_id}/run`;
-        let method = 'POST';
+        const url    = `${config.api_url}/analysis/${analyze_id}/run`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -127,10 +127,24 @@ class Analysis {
      * @return {Promise}
      */
     tokenGenerate(analyze_id) {
-        let url    = `${config.api_url}/analysis/${analyze_id}/token`;
-        let method = 'GET';
+        const url    = `${config.api_url}/analysis/${analyze_id}/token`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Upload a file (base64) to Analysis. Automatically erase the old one.
+     * @param  {String} analysis id
+     * @param  {String} file file base64
+     * @return {Promise}
+     */
+    uploadScript(analyze_id, file) {
+        const data = { file };
+        const url    = `${config.api_url}/analysis/${analyze_id}/upload`;
+        const method = 'POST';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 }
