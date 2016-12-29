@@ -89,6 +89,62 @@ class Buckets {
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
+
+    /** Get Info of the Backup
+    * @param  {String} backup id
+    * @return {Promise}
+     */
+    backupInfo(backup_id) {
+        if (!backup_id || backup_id == '') {
+            return new Promise((resolve,reject) => reject('Backup ID parameter is obrigatory.'));
+        }
+        let url    = `${config.api_url}/backup/${backup_id}`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** List all backups of the account
+    * @return {Promise}
+     */
+    backupList() {
+        let url    = `${config.api_url}/backup`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Delete the Backup 
+    * @param  {String} backup_id id
+    * @return {Promise}
+     */
+    backupDelete(backup_id) {
+        if (!backup_id || backup_id == '') {
+            return new Promise((resolve,reject) => reject('Backup ID parameter is obrigatory.'));
+        }
+        let url    = `${config.api_url}/backup/${backup_id}`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Recover the Backup 
+    * @param  {JSON} data object with parameters for recover
+    * @param  {String} data.id backup id to be recovered
+    * @param  {Array} data.ids multiple id's to be recovered
+    * @return {Promise}
+     */
+    backupRecover(data) {
+        data       = data || {};
+        let url    = `${config.api_url}/backup/recover`;
+        let method = 'POST';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
 }
 
 module.exports = Buckets;

@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const Widgets         = require('./dashboards.widgets.js');
-const Realtime          = require('./../utils/').realtime;
+const Realtime        = require('./../utils/').realtime;
 
 class Dashboards {
     constructor(acc_token) {
@@ -103,11 +103,111 @@ class Dashboards {
     /** Stop to listen the dashboard by its ID
     * @param  {String} dashboard_id id of the dashboard
      */
-    stopeListening(id, realtime) {
+    stopListening(id, realtime) {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
         realtime.get_socket.off(`dashboard:${id}`);
+    }
+
+    /** Get share list of the dashboard
+    * @param  {String} dashboard id
+    * @return {Promise}
+     */
+    shareList(dashboard_id) {
+        if (!dashboard_id || dashboard_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        }
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/list`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Generate a new public token for the dashboard
+    * @param  {String} dashboard id
+    * @return {Promise}
+     */
+    genPublicToken(dashboard_id) {
+        if (!dashboard_id || dashboard_id == '') {
+            //If ID is send with null, it will get List instead info.
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        }
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/public`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Share the dashboard with another person
+    * @param  {String} dashboard id
+    * @param  {JSON} data - Name of the dashboard
+    * @param  {String} data{}.email - Email to receive invitation
+    * @param  {String} data{}.message - Scope message for the email
+    * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @return {Promise}
+     */
+    shareInvite(dashboard_id, data) {
+        data = data || {};
+        if (!dashboard_id || dashboard_id == '') {
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        } else if (!data.email) {
+            return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+        }
+
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/invite`;
+        let method = 'POST';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** Clone the dashboard with special parameters
+    * @param  {String} dashboard id
+    * @param  {JSON} data - Name of the dashboard
+    * @param  {String} data{}.email - Email to receive invitation
+    * @param  {String} data{}.message - Scope message for the email
+    * @param  {JSON} data{}.setup - special setup for clone 
+    * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @return {Promise}
+     */
+    shareClone(dashboard_id, data) {
+        data = data || {};
+        if (!dashboard_id || dashboard_id == '') {
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        } else if (!data.email) {
+            return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+        }
+
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/clone`;
+        let method = 'POST';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** Delete the invitation/share of the dashboard for a person
+    * @param  {String} dashboard id
+    * @param  {JSON} data - Name of the dashboard
+    * @param  {String} data{}.email - Email to be removed
+    * @return {Promise}
+     */
+    shareRemove(dashboard_id, data) {
+        data = data || {};
+        if (!dashboard_id || dashboard_id == '') {
+            return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+        } else if (!data.email) {
+            return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+        }
+
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/delete`;
+        let method = 'POST';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
     }
     // ----------- Sub-methods -----------
     get widgets() {
