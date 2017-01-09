@@ -182,7 +182,7 @@ class Dashboards {
             return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
         }
 
-        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/clone`;
+        let url    = `${config.api_url}/dashboard/${dashboard_id}/share/copy`;
         let method = 'POST';
 
         let options = Object.assign({}, this.default_options, {url, method, data});

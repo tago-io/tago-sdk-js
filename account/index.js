@@ -31,6 +31,33 @@ class Account {
         return request(options);
     }
 
+    /** Edit Account
+    * @param  {String} device id
+    * @param  {Object} data
+    * @return {Promise}
+     */
+    edit(data) {
+        data       = data || {};
+        let url    = `${config.api_url}/account`;
+        let method = 'PUT';
+
+        let options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** Delete Account
+    * @param  {String} device id
+    * @param  {Object} data
+    * @return {Promise}
+     */
+    delete() {
+        let url    = `${config.api_url}/account`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
     /** List Profiles of the Account
      * @return {Promise}
      */
