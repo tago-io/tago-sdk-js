@@ -3,6 +3,7 @@ const axios = require('axios');
 
 module.exports = function service_request(request_options) {
     return new Promise((resolve, reject) => {
+        console.log(request_options);
         axios(request_options).then((result) => {
             if (result.status !== 200) {
                 return reject('Error on Third-Party service');

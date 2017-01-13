@@ -1,7 +1,7 @@
 'use strict';
-const config = require('../config.js');
+const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const request = require('../comum/tago_request.js');
+const request         = require('../comum/tago_request.js');
 
 const Actions    = require('./actions.js');
 const Analysis   = require('./analysis.js');
@@ -25,6 +25,17 @@ class Account {
      */
     info() {
         let url    = `${config.api_url}/account`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Account statistics
+     * @return {Promise}
+     */
+    statistics() {
+        let url    = `${config.api_url}/statistics`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});
@@ -77,16 +88,15 @@ class Account {
         let url    = `${config.api_url}/account/profile`;
         let method = 'POST';
 
-        let headers = default_headers();
-        let options = {url, method, data, headers};
+        let options = Object.assign({}, this.default_options, {url, method, data}); 
         return request(options);
     }
 
     /** List Profiles of the Account
      * @return {Promise}
      */
-    profileDelete() {
-        let url    = `${config.api_url}/account/profile`;
+    profileDelete(profile_id) {
+        let url    = `${config.api_url}/account/profile/${profile_id}`;
         let method = 'DELETE';
 
         let options = Object.assign({}, this.default_options, {url, method});
