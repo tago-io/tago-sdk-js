@@ -32,13 +32,16 @@ class Account {
     }
 
     /** Account statistics
+     * @param  {Object} params
+     * @param  {String} params{}.month
+     * @param  {String} params{}.year
      * @return {Promise}
      */
-    statistics() {
-        let url    = `${config.api_url}/statistics`;
-        let method = 'GET';
+    statistics(params) {
+        const url    = `${config.api_url}/statistics`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method, params});
         return request(options);
     }
 
