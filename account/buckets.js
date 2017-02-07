@@ -2,6 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
+const share           = require('./_share.js');
 
 class Buckets {
     constructor(acc_token) {
@@ -145,6 +146,7 @@ class Buckets {
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
+    
     /** Get share list of the dashboard
     * @param  {String} dashboard id
     * @return {Promise}
@@ -154,11 +156,7 @@ class Buckets {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
         }
-        let url    = `${config.api_url}/bucket/${bucket_id}/share/list`;
-        let method = 'GET';
-
-        let options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
+        return share.list('bucket', bucket_id, this.default_options);
     }
 
     /** Share the bucket with another person
@@ -170,44 +168,43 @@ class Buckets {
     * @param  {boolean} data{}.copy_me - true to send a copy to yourself
     * @return {Promise}
      */
-    shareInvite(bucket_id, data) {
+    shareSendInvite(bucket_id, data) {
         data = data || {};
         if (!bucket_id || bucket_id == '') {
             return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
         } else if (!data.email) {
             return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
         }
-
-        let url    = `${config.api_url}/bucket/${bucket_id}/share/invite`;
-        let method = 'POST';
-
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+        return share.invite('bucket', bucket_id, data, this.default_options);
     }
 
     /** Change permissions of the bucket
-    * @param  {String} bucket id
+    * @param  {String} share id
     * @param  {JSON} data - 
     * @param  {String} data{}.email - Email to change permissions
     * @param  {String} data{}.permission - New Permission to be applied
-    * @param  {String} data{}.everyone
     * @return {Promise}
      */
-    shareChange(bucket_id, data) {
+    shareEdit(share_id, data) {
         data = data || {};
-        if (!bucket_id || bucket_id == '') {
-            return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
+        if (!share_id || share_id == '') {
+            return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
         } else if (!data.email) {
             return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
         }
-
-        let url    = `${config.api_url}/bucket/${bucket_id}/share/change`;
-        let method = 'PUT';
-
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
+        return share.edit('bucket', share_id, data, this.default_options);
     }
 
+    /** Remove share of the bucket
+    * @param  {String} share id
+    * @return {Promise}
+     */
+    shareDelete(share_id) {
+        if (!share_id || share_id == '') {
+            return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
+        } 
+        return share.remove('bucket', share_id, this.default_options);
+    }
 }
 
 module.exports = Buckets;
