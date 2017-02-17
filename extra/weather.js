@@ -54,7 +54,7 @@ class Weather {
     current(query, full, lang) {
         return new Promise((resolve, reject) => {
             this._setParams({ query, full, lang });
-            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/conditions/q/${this._query}.json`;
+            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/conditions/q/${encodeURIComponent(this._query)}.json`;
             let method = 'GET';
 
             let options = Object.assign({}, this.default_options, {
@@ -110,7 +110,7 @@ class Weather {
                 return reject('Invalid date');
             }
   
-            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/history_${date}/q/${this._query}.json`;
+            let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/history_${date}/q/${encodeURIComponent(this._query)}.json`;
             let method = 'GET';
 
             let options = Object.assign({}, this.default_options, {
@@ -136,7 +136,7 @@ class Weather {
     forecast(query, full, lang) {
         return new Promise((resolve, reject) => {
             this._setParams({ query, full, lang });
-            let url    = `http: //api.wunderground.com/api/${this.key}/lang: ${this._lang}/forecast10day/q/${this._query}.json`;
+            let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/forecast10day/q/${encodeURIComponent(this._query)}.json`;
             let method = 'GET';
 
             let options = Object.assign({}, this.default_options, {
@@ -168,7 +168,7 @@ class Weather {
     alerts(query, full, lang) {
         return new Promise((resolve, reject) => {
             this._setParams({ query, full, lang });
-            let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/alerts/q/${this._query}.json`;
+            let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/alerts/q/${encodeURIComponent(this._query)}.json`;
             let method = 'GET';
 
             let options = Object.assign({}, this.default_options, {

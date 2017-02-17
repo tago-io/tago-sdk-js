@@ -9,17 +9,17 @@ module.exports = function service_request(request_options) {
                 return reject('Error on Third-Party service');
             }
             let body = result.data;
-
             try {
                 body = JSON.parse(body);
             } catch (e) {
-                return reject('Can\'t parse JSON');
+                // return reject('Can\'t parse JSON');
             }
 
             if (result.statusText !== 'OK') {
                 console.error(body);
                 return reject('Error on Third-Party service');
             }
+
             resolve(body);
         });
     });
