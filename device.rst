@@ -70,39 +70,6 @@ Insert a new data into a bucket. You can get more information about what informa
             //You can treat errors here
         });
 
-.edit
-*******
-Edit an existing data from bucket. You can get more information about what information can be passed with edit in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
-
-| **Syntax**
-| *.edit(/data_id/, /data/)*
-|
-| **Arguments**
-| *variable_id(string) specific ID of a variable data. (optional)*
-| *data(object) properties for the new data.*
-|   *Use any of the insert parameters to be edited*
-|
-| **Returns**
-| *(Promise)*
-|
-
-.. code-block:: javascript
-
-    const Device = require('tago/device');
-    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-    var data = {
-        'unit'    : 'C',
-        'value'   : 12,
-    };
-
-    mydev.edit('57c730af5c00ce0c7046c3c2', data)
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-
 .find
 *******
 Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
