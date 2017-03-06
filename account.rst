@@ -999,10 +999,10 @@ Generate and retrieve a new dashboard for the account
     const Account = require('tago/account');
     const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     var data = {
-        "name":"My first dashboard",
+        "label":"My first dashboard",
         "arrangement": [
             {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
-        ]
+        ],
         "tags": [
             {"key": "client", "value": "Mark"}
         ]
@@ -1105,6 +1105,57 @@ Delete dashboards for the account
     const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
     
     accdashboards.delete('877c28d269d2861f1b2e96b8')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+Widgets
+********
+Inside dashboards, you need widgets to show and control information inside buckets. Every widget have their data slighty different from each other, to know how do they work
+
+.create
+=======
+Generate and retrieve a new dashboard for the account
+
+| **Syntax**
+| *.create(/data/)*
+|
+| **Arguments**
+| *data(object) options for the new dashboard.*
+|   *\*label(string)*: *a label for the dashboards;*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widget inside the dashboard. (optional)*
+|       *\*widget_id(string)*: *id of the widget*
+|       *\*x(number)*: *position x of the widget. 1 to 4;*
+|       *\*y(number)*: *position y of the widget. 1 to 20*
+|       *\*width(number)*: *width of the widget. 1 to 4*
+|       *\*height(number)*: *height of the widget. 1 to 20*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|   *\*token*: *token for the generated dashboard;*
+|   *\*id*: *id of the new dashboard;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    var data = {
+        "label":"My first dashboard",
+        "arrangement": [
+            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
+        ],
+        "tags": [
+            {"key": "client", "value": "Mark"}
+        ]
+    };
+
+    accdashboards.create(data)
         .then((result) => { 
             //You can treat the result here
         })
