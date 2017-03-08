@@ -6,7 +6,10 @@ module.exports = function tago_request(request_options) {
         if (!result.data) {
             throw result.statusText;
         }
-        if (!result.data.status) {
+        else if (request_options.url.indexOf('/data/export') !== -1) {
+            return result.data;
+        }
+        else if (!result.data.status) {
             throw result.data.message || result;
         }
         return result.data.result;

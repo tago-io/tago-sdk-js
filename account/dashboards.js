@@ -145,9 +145,9 @@ class Dashboards {
     /** Share the dashboard with another person
     * @param  {String} dashboard id
     * @param  {JSON} data - Name of the dashboard
-    * @param  {String} data{}.email - Email to receive invitation
-    * @param  {String} data{}.message - Scope message for the email
-    * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @param  {String} dataemail - Email to receive invitation
+    * @param  {String} datamessage - Scope message for the email
+    * @param  {boolean} datacopy_me - true to send a copy to yourself
     * @return {Promise}
      */
     shareInvite(dashboard_id, data) {
@@ -168,10 +168,10 @@ class Dashboards {
     /** Clone the dashboard with special parameters
     * @param  {String} dashboard id
     * @param  {JSON} data - Name of the dashboard
-    * @param  {String} data{}.email - Email to receive invitation
-    * @param  {String} data{}.message - Scope message for the email
-    * @param  {JSON} data{}.setup - special setup for clone 
-    * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @param  {String} dataemail - Email to receive invitation
+    * @param  {String} datamessage - Scope message for the email
+    * @param  {JSON} datasetup - special setup for clone 
+    * @param  {boolean} datacopy_me - true to send a copy to yourself
     * @return {Promise}
      */
     shareClone(dashboard_id, data) {
@@ -192,7 +192,7 @@ class Dashboards {
     /** Delete the invitation/share of the dashboard for a person
     * @param  {String} dashboard id
     * @param  {JSON} data - Name of the dashboard
-    * @param  {String} data{}.email - Email to be removed
+    * @param  {String} dataemail - Email to be removed
     * @return {Promise}
      */
     shareRemove(dashboard_id, data) {

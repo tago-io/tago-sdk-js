@@ -33,8 +33,8 @@ class Account {
 
     /** Account statistics
      * @param  {Object} params
-     * @param  {String} params{}.month
-     * @param  {String} params{}.year
+     * @param  {String} paramsmonth
+     * @param  {String} paramsyear
      * @return {Promise}
      */
     statistics(params) {

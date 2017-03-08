@@ -28,7 +28,7 @@ class Buckets {
     * @param  {string} data.name - Name of the bucket
     * @param  {string} data.description - description of the bucket
     * @param  {boolean} data.active - Set if bucket is active or not
-    * @param  {object[]} tags[] - bucket tags for categorization
+    * @param  {object[]} tags - bucket tags for categorization
     * @param  {string} tags[].key - key of the tag
     * @param  {string} tags[].value - value of the tag
     * @return {Promise}
@@ -48,7 +48,7 @@ class Buckets {
     * @param  {string} data.name - Name of the bucket
     * @param  {string} data.description - description of the bucket
     * @param  {boolean} data.active - Set if bucket is active or not
-    * @param  {object[]} tags[] - bucket tags for categorization
+    * @param  {object[]} tags - bucket tags for categorization
     * @param  {string} tags[].key - key of the tag
     * @param  {string} tags[].value - value of the tag
     * @return {Promise}
@@ -164,10 +164,10 @@ class Buckets {
     /** Share the bucket with another person
     * @param  {String} bucket id
     * @param  {JSON} data - 
-    * @param  {String} data{}.email - Email to receive invitation
-    * @param  {String} data{}.message - Scope message for the email
-    * @param  {String} data{}.permission - Permission to be applied
-    * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @param  {String} data.email - Email to receive invitation
+    * @param  {String} data.message - Scope message for the email
+    * @param  {String} data.permission - Permission to be applied
+    * @param  {boolean} data.copy_me - true to send a copy to yourself
     * @return {Promise}
      */
     shareInvite(bucket_id, data) {
@@ -188,9 +188,9 @@ class Buckets {
     /** Change permissions of the bucket
     * @param  {String} bucket id
     * @param  {JSON} data - 
-    * @param  {String} data{}.email - Email to change permissions
-    * @param  {String} data{}.permission - New Permission to be applied
-    * @param  {String} data{}.everyone
+    * @param  {String} data.email - Email to change permissions
+    * @param  {String} data.permission - New Permission to be applied
+    * @param  {String} data.everyone
     * @return {Promise}
      */
     shareChange(bucket_id, data) {
@@ -208,6 +208,34 @@ class Buckets {
         return request(options);
     }
 
+    /** Share the bucket with another person
+    * @param  {String} output csv/json/xml
+    * @param  {Object[]} buckets - 
+    * @param  {String} buckets[].id - bucket id to be filtred
+    * @param  {String} buckets[].origin - variable origin to be filtred
+    * @param  {Object[]} buckets[].variables - Array with variables name to be exported
+    * @param  {Object} options - 
+    * @param  {String} options.start_date - start date to be filtred
+    * @param  {String} options.end_date - end date to be filtred
+    * @return {Promise}
+     */
+    exportData(output, buckets, options) {
+        buckets = buckets || [];
+        options = options || {};
+        if (!output || output == '') {
+            return new Promise((resolve,reject) => reject('Output parameter is obrigatory.'));
+        } else if (!buckets || !buckets[0]) {
+            return new Promise((resolve,reject) => reject('Buckets parameter is obrigatory.'));
+        }
+
+        const data = Object.assign({ buckets }, options);
+
+        let url    = `${config.api_url}/data/export?output=${output}`;
+        let method = 'POST';
+
+        let request_options = Object.assign({}, this.default_options, {url, method, data});
+        return request(request_options);
+    }
 }
 
 module.exports = Buckets;
