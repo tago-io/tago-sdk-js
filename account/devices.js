@@ -16,10 +16,10 @@ class Devices {
      * @return {Promise}
      */
     list() {
-        let url    = `${config.api_url}/device`;
-        let method = 'GET';
+        const url    = `${config.api_url}/device`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -29,10 +29,10 @@ class Devices {
      */
     create(data) {
         data       = data || {};
-        let url    = `${config.api_url}/device`;
-        let method = 'POST';
+        const url    = `${config.api_url}/device`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -43,10 +43,10 @@ class Devices {
      */
     edit(device_id, data) {
         data       = data || {};
-        let url    = `${config.api_url}/device/${device_id}`;
-        let method = 'PUT';
+        const url    = `${config.api_url}/device/${device_id}`;
+        const method = 'PUT';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -55,10 +55,10 @@ class Devices {
     * @return {Promise}
      */
     delete(device_id) {
-        let url    = `${config.api_url}/device/${device_id}`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/device/${device_id}`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -67,10 +67,10 @@ class Devices {
     * @return {Promise}
      */
     tokenList(device_id) {
-        let url    = `${config.api_url}/device/token/${device_id}`;
-        let method = 'GET';
+        const url    = `${config.api_url}/device/token/${device_id}`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -83,10 +83,10 @@ class Devices {
         data       = data || {};
         data.device = device_id;
 
-        let url    = `${config.api_url}/device/token`;
-        let method = 'POST';
+        const url    = `${config.api_url}/device/token`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -95,10 +95,10 @@ class Devices {
     * @return {Promise}
      */
     tokenDelete(token_id) {
-        let url    = `${config.api_url}/device/token/${token_id}`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/device/token/${token_id}`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -111,10 +111,66 @@ class Devices {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Device ID parameter is obrigatory.'));
         }
-        let url    = `${config.api_url}/device/${device_id}`;
-        let method = 'GET';
+        const url    = `${config.api_url}/device/${device_id}`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
+        return request(options);
+    }
+
+    /** Create Param for the Device
+    * @param  {String} device id
+    * @param  {Object} data {key, value, sent}
+    * @return {Promise}
+     */
+    paramCreate(device_id, data) {
+        const url    = `${config.api_url}/device/${device_id}/params`;
+        const method = 'POST';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** List Params for the Device
+    * @param  {String} device id
+    * @param  {Boolean} sent_status return only sent true or false
+    * @return {Promise}
+     */
+    paramList(device_id, sent_status) {
+        const url    = `${config.api_url}/device/${device_id}/params`;
+        const params = {
+            sent_status,
+        };
+        const method = 'GET';
+
+        const options = Object.assign({}, this.default_options, {url, method, params});
+        return request(options);
+    }
+
+    /** Edit Param of the Device
+    * @param  {String} device id
+    * @param  {String} param_id id
+    * @param  {Object} data {key, value, sent}
+    * @return {Promise}
+     */
+    paramEdit(device_id, param_id, data) {
+        const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
+        const method = 'PUT';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** Complete remove Param for the Device
+    * @param  {String} device id
+    * @param  {String} param_id id
+    * @return {Promise}
+     */
+    paramRemove(device_id, param_id) {
+        const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
+        const method = 'DELETE';
+
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 }

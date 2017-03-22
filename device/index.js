@@ -100,19 +100,22 @@ class Device {
      /** Get Parameters
      * @return {Promise}
      */
-    get_params() {
+    getParams(sent_status) {
         let url     = `${config.api_url}/device/params`;
         let method  = 'GET';
-        let options = Object.assign({}, this.default_options, {url, method});
+        let params  = {
+            sent_status
+        };
+        let options = Object.assign({}, this.default_options, {url, method, params});
         return request(options);
     }
 
     /** Mark Parameters as sent
-     * @param  {String} Key
+     * @param  {String} param_id Id of the parameter
      * @return {Promise}
      */
-    mark_param(key_name) {
-        let url     = `${config.api_url}/device/params/${encodeURIComponent(key_name)}`;
+    markParam(param_id) {
+        let url     = `${config.api_url}/device/params/${param_id}`;
         let method  = 'PUT';
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
@@ -133,7 +136,7 @@ class Device {
     }
 
     /** Stop to Listen the device */
-    stop_listening() {
+    stopListening() {
         if (this.realtime) {
             this.realtime.get_socket.off('data');
             return Promise.resolve('Not listening to the device anymore');
