@@ -48,20 +48,6 @@ class Device {
         return request(options);
     }
 
-    /** Edit
-     * @param  {string} variable_id
-     * @param  {Object} data
-     * @return {Promise}
-     */
-    edit(variable_id, data) {
-        data       = data || {};
-        let url    = `${config.api_url}/data/${variable_id}`;
-        let method = 'PUT';
-
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
-
     /** Find
      * @class
      * @param  {JSON} query object
