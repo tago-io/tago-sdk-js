@@ -19,10 +19,10 @@ class Widgets {
     */
     create(dash_id, data) {
         data       = data || {};
-        let url    = `${config.api_url}/dashboard/${dash_id}/widget/`;
-        let method = 'POST';
+        const url    = `${config.api_url}/dashboard/${dash_id}/widget/`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -34,10 +34,10 @@ class Widgets {
     */
     edit(dash_id, widget_id, data) {
         data       = data || {};
-        let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
-        let method = 'PUT';
+        const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
+        const method = 'PUT';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -47,10 +47,10 @@ class Widgets {
     * @return {Promise}
     */
     delete(dash_id, widget_id) {
-        let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -64,35 +64,37 @@ class Widgets {
             //If ID is send with null, it will get List instead info.
             return new Promise((resolve,reject) => reject('Widget ID parameter is obrigatory.'));
         }
-        let url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
-        let method = 'GET';
+        const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
     /** Get all data for the current widget
+    * @param  {String} dashboard id
     * @param  {String} widget id
     * @return {Promise}
     */
-    data(widget_id) {
-        let url    = `${config.api_url}/dashboard/widget/data/${widget_id}`;
-        let method = 'GET';
+    getData(dashboard_id, widget_id) {
+        const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
     /** Update value of variable for the current widget
+    * @param  {String} dashboard id
     * @param  {String} widget_id
     * @param  {JSON} data
     * @return {Promise}
     */
-    updateVariable(widget_id, data) {
-        let url    = `${config.api_url}/dashboard/widget/data/${widget_id}`;
-        let method = 'POST';
+    sendData(dashboard_id, widget_id, data) {
+        const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 }
