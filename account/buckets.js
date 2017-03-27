@@ -14,10 +14,12 @@ class Buckets {
     }
 
     /** List Buckets
+     * @param  {boolean} devices - Get all devices linked to buckets too.
      * @return {Promise}
      */
-    list() {
+    list(devices) {
         let url    = `${config.api_url}/bucket`;
+        if (devices) url = `${url}?devices=true`;
         let method = 'GET';
 
         let options = Object.assign({}, this.default_options, {url, method});
