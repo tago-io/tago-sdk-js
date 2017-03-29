@@ -14,4 +14,4 @@ Tago's SDK for JavaScript Documentation
    analysis
    extra
    account
-   Forum <https://community.tago.io/>
+   Slack / Community <http://community.tago.io/>
