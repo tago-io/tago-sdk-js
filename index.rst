@@ -14,4 +14,6 @@ Tago's SDK for JavaScript Documentation
    analysis
    extra
    account
+   Source Code <https://github.com/tago-io/tago-sdk-js>
+   NPM <https://www.npmjs.com/package/tago>
    Slack / Community <http://community.tago.io/>
