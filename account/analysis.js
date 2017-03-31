@@ -136,11 +136,12 @@ class Analysis {
 
     /** Upload a file (base64) to Analysis. Automatically erase the old one.
      * @param  {String} analysis id
+     * @param  {String} file_name name for the file
      * @param  {String} file file base64
      * @return {Promise}
      */
-    uploadScript(analyze_id, file) {
-        const data = { file };
+    uploadScript(analyze_id, file_name, file) {
+        const data = { file, file_name };
         const url    = `${config.api_url}/analysis/${analyze_id}/upload`;
         const method = 'POST';
 
