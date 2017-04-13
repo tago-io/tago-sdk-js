@@ -16,13 +16,16 @@ class Email {
      * @param  {string} to - E-mail address to be sent.
      * @param  {string} subject - Subject of the e-mail
      * @param  {string} message - Message scope for the e-mail
-     * @param  {string} [from] - E-mail to be indicated for reply
+     * @param  {string} [from] - E-mail to be indicated for reply (optional)
+     * @param  {JSON} attachment - Message scope for the e-mail
+     * @param  {string} attachment.archive - archive itself
+     * @param  {string} attachment.filename - Name for the archive
      * @return {Promise}
      */
-    send(to, subject, message, from) {
+    send(to, subject, message, from, attachment) {
         let url    = `${config.api_url}/analysis/services/email/send`;
         let method = 'POST';
-        let data = { to, subject, message, from };
+        let data = { to, subject, message, from, attachment };
 
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
