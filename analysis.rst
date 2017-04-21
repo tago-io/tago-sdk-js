@@ -198,3 +198,43 @@ Whenever you need to send an email, use .send function.
     }
 
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+
+MQTT
+=====
+This option gives you a lot of flexibility to interpret any kind of data depending on your application. You can send any data format with any content to this topic, your data will go directly to your Analysis inside the scope on the first position of the array. The data will not be stored automatically, your script need to take care of it.
+
+You can read more about MQTT on Tago in our `MQTT documentation <http://docs.tago.io/en/mqtt/mqtt.html>`_
+
+.send
+-----
+Use this topic when you want to send a payload data in any format to be first parsed by a specific script.
+
+| **Syntax**
+| *.send(/topic/, /message/)*
+|
+| **Arguments**
+| *topic(string) Topic of the message.*
+| *message(string) message to be sent.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    'use strict';
+    const Analysis = require('tago/analysis');
+    const Services = require('tago/Services');
+
+    //Main function to be executed when the analysis are called
+    function myanalysis(context, scope) {
+        const email = new Services(context.token).email;
+
+        const topic   = 'my topic';
+        const message = 'new message';
+
+        email.send(topic, message).then(console.log).catch(console.log);
+        //Print "Sending";
+    }
+
+    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
