@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class SMS {
+class MQTT {
     constructor(analysis_token) {
         this.token = analysis_token;
         this.default_options = {
@@ -12,16 +12,15 @@ class SMS {
         };
     }
 
-    /**
-     * Send SMS to number
-     * @param  {STRING} to      Number to send SMS, Example: +554498774411
-     * @param  {STRING} message Message to be send
+    /** Send MQTT
+     * @param  {string} topic - topic of the message
+     * @param  {string} message - Message scope
      * @return {Promise}
      */
-    send(to, message) {
-        let url    = `${config.api_url}/analysis/services/sms/send`;
-        let method = 'post';
-        let data = { to, message};
+    send(topic, message) {
+        let url    = `${config.api_url}/analysis/services/mqtt/publish`;
+        let method = 'POST';
+        let data = { topic, message };
 
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
@@ -30,4 +29,4 @@ class SMS {
 
 }
 
-module.exports = SMS;
+module.exports = MQTT;

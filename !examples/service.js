@@ -1,15 +1,14 @@
 'use strict';
-const Extra = require('../extra');
+const Services = require('../services');
 
 (function init() {
 
-    const api_key = 'xxxxxxxxx'; // API KEY wunderground website
-    const weather = new Extra('weather', api_key);
+    const analysis_token = 'xxxxxxxxx'; // Analysis token from TAGO
+    const email = new Services(analysis_token).email;
 
-    const query = '1017 Main Campus Dr, Raleigh, NC 27606, USA'; //address
-
-    const full = false;
-
-    weather.forecast(query, full).then(console.log).catch(console.log);
+    const to = 'test@tago.io';
+    const subject = 'Email Service Test';
+    const message = 'Scope of my message';
     
+    email.send(to, subject, message).then(console.log).catch(console.log);
 })();

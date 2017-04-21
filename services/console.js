@@ -4,8 +4,8 @@ const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
 class Console {
-    constructor(acc_token) {
-        this.token = acc_token;
+    constructor(analysis_token) {
+        this.token = analysis_token;
         this.default_options = {
             'json':    true,
             'headers': default_headers(this)

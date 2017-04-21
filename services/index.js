@@ -1,8 +1,9 @@
 'use strict';
-const Email     = require('./email.js');
-const SMS       = require('./sms.js');
-const Socket    = require('./socket.js');
-const Console   = require('./console.js');
+const Email   = require('./email.js');
+const SMS     = require('./sms.js');
+const Socket  = require('./socket.js');
+const Console = require('./console.js');
+const MQTT    = require('./mqtt.js');
 
 class Services {
     constructor(token) {
@@ -23,6 +24,9 @@ class Services {
 
     get socket() {
         return new Socket(this.token);
+    }
+    get MQTT() {
+        return new MQTT(this.token);
     }
 
 }
