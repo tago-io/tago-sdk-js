@@ -10,7 +10,7 @@ function invite(type, ref_id, data, default_options) {
         return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
     }
 
-    let url    = `${config.api_url}/share/type/${ref_id}`;
+    let url    = `${config.api_url}/share/${type}/${ref_id}`;
     let method = 'POST';
 
     let options = Object.assign({}, default_options, {url, method, data});
@@ -35,7 +35,7 @@ function list(type, ref_id, default_options) {
         return new Promise((resolve,reject) => reject(`${type} ID parameter is obrigatory.`));
     }
 
-    let url    = `${config.api_url}/share/type/ref_id`;
+    let url    = `${config.api_url}/share/${type}/ref_id`;
     let method = 'GET';
 
     let options = Object.assign({}, default_options, {url, method});
@@ -47,7 +47,7 @@ function remove(type, share_id, default_options) {
         return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
     }
 
-    let url    = `${config.api_url}/share/type?id=${share_id}`;
+    let url    = `${config.api_url}/share/${type}?id=${share_id}`;
     let method = 'DELETE';
 
     let options = Object.assign({}, default_options, {url, method});
