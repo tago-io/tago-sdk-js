@@ -215,6 +215,7 @@ Use this topic when you want to send a payload data in any format to be first pa
 | **Arguments**
 | *topic(string) Topic of the message.*
 | *message(string) message to be sent.*
+| *bucket(string) bucket id to receive the message. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -228,12 +229,12 @@ Use this topic when you want to send a payload data in any format to be first pa
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
-        const email = new Services(context.token).email;
+        const MQTT = new Services(context.token).MQTT;
 
         const topic   = 'my topic';
         const message = 'new message';
 
-        email.send(topic, message).then(console.log).catch(console.log);
+        MQTT.send(topic, message).then(console.log).catch(console.log);
         //Print "Sending";
     }
 
