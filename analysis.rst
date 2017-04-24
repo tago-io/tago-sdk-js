@@ -210,7 +210,7 @@ You can read more about MQTT on Tago in our `MQTT documentation <http://docs.tag
 Use this topic when you want to send a payload data in any format to be first parsed by a specific script.
 
 | **Syntax**
-| *.send(/topic/, /message/)*
+| *.publish(/topic/, /message/)*
 |
 | **Arguments**
 | *topic(string) Topic of the message.*
@@ -234,7 +234,7 @@ Use this topic when you want to send a payload data in any format to be first pa
         const topic   = 'my topic';
         const message = 'new message';
 
-        MQTT.send(topic, message).then(console.log).catch(console.log);
+        MQTT.publish(topic, message).then(console.log).catch(console.log);
         //Print "Sending";
     }
 
