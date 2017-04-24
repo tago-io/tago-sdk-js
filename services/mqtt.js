@@ -12,13 +12,13 @@ class MQTT {
         };
     }
 
-    /** Send MQTT
+    /** publish MQTT
      * @param  {string} topic - topic of the message
      * @param  {string} message - Message scope
      * @param  {string} [bucket] - Bucket to receive message
      * @return {Promise}
      */
-    send(topic, message, bucket) {
+    publish(topic, message, bucket) {
         let url    = `${config.api_url}/analysis/services/mqtt/publish`;
         let method = 'POST';
         let data = { topic, message, bucket };
