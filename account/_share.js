@@ -35,7 +35,7 @@ function list(type, ref_id, default_options) {
         return new Promise((resolve,reject) => reject(`${type} ID parameter is obrigatory.`));
     }
 
-    let url    = `${config.api_url}/share/${type}/ref_id`;
+    let url    = `${config.api_url}/share/${type}/${ref_id}`;
     let method = 'GET';
 
     let options = Object.assign({}, default_options, {url, method});
