@@ -47,7 +47,7 @@ function remove(type, share_id, default_options) {
         return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
     }
 
-    let url    = `${config.api_url}/share/${type}?id=${share_id}`;
+    let url    = `${config.api_url}/share/${share_id}`;
     let method = 'DELETE';
 
     let options = Object.assign({}, default_options, {url, method});
