@@ -120,6 +120,23 @@ class Devices {
 
     /** Create Param for the Device
     * @param  {String} device id
+    * @param  {Array<Object>} params list of params to be added or edit
+    * @param  {String} params[].key key of the param
+    * @param  {String} params[].value value of the param
+    * @param  {Boolean} params[].sent sent status of the param
+    * @param  {String} [params[].id] id of the paramater for edit (optional)
+    * @return {Promise}
+     */
+    paramSet(device_id, data) {
+        const url    = `${config.api_url}/device/${device_id}/params`;
+        const method = 'POST';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
+    /** Create Param for the Device (Deprecated, use paramSet instead)
+    * @param  {String} device id
     * @param  {Object} data {key, value, sent}
     * @return {Promise}
      */
@@ -130,6 +147,21 @@ class Devices {
         const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
+
+    /** Edit Param of the Device (Deprecated, use paramSet instead)
+    * @param  {String} device id
+    * @param  {String} param_id id
+    * @param  {Object} data {key, value, sent}
+    * @return {Promise}
+     */
+    paramEdit(device_id, param_id, data) {
+        const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
+        const method = 'PUT';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+
 
     /** List Params for the Device
     * @param  {String} device id
@@ -144,20 +176,6 @@ class Devices {
         const method = 'GET';
 
         const options = Object.assign({}, this.default_options, {url, method, params});
-        return request(options);
-    }
-
-    /** Edit Param of the Device
-    * @param  {String} device id
-    * @param  {String} param_id id
-    * @param  {Object} data {key, value, sent}
-    * @return {Promise}
-     */
-    paramEdit(device_id, param_id, data) {
-        const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
-        const method = 'PUT';
-
-        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
