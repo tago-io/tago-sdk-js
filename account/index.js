@@ -3,11 +3,12 @@ const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const request         = require('../comum/tago_request.js');
 
-const Actions    = require('./actions.js');
-const Analysis   = require('./analysis.js');
-const Buckets    = require('./buckets.js');
-const Dashboards = require('./dashboards.js');
-const Devices    = require('./devices.js');
+const Actions       = require('./actions.js');
+const Analysis      = require('./analysis.js');
+const Buckets       = require('./buckets.js');
+const Dashboards    = require('./dashboards.js');
+const Devices       = require('./devices.js');
+const Notifications = require('./notifications.js');
 
 class Account {
     constructor(token) {
@@ -171,6 +172,9 @@ class Account {
     }
     get devices() {
         return new Devices(this.token);
+    }
+    get notifications() {
+        return new Notifications(this.token);
     }
 }
 
