@@ -25,10 +25,10 @@ class Account {
      * @return {Promise}
      */
     info() {
-        let url    = `${config.api_url}/account`;
-        let method = 'GET';
+        const url    = `${config.api_url}/account`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -53,10 +53,10 @@ class Account {
      */
     edit(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account`;
-        let method = 'PUT';
+        const url    = `${config.api_url}/account`;
+        const method = 'PUT';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -66,10 +66,10 @@ class Account {
     * @return {Promise}
      */
     delete() {
-        let url    = `${config.api_url}/account`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/account`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -77,10 +77,10 @@ class Account {
      * @return {Promise}
      */
     profileList() {
-        let url    = `${config.api_url}/account/profile`;
-        let method = 'GET';
+        const url    = `${config.api_url}/account/profile`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -89,10 +89,10 @@ class Account {
      */
     profileCreate(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account/profile`;
-        let method = 'POST';
+        const url    = `${config.api_url}/account/profile`;
+        const method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data}); 
+        const options = Object.assign({}, this.default_options, {url, method, data}); 
         return request(options);
     }
 
@@ -100,10 +100,10 @@ class Account {
      * @return {Promise}
      */
     profileDelete(profile_id) {
-        let url    = `${config.api_url}/account/profile/${profile_id}`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/account/profile/${profile_id}`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -111,10 +111,10 @@ class Account {
      * @return {Promise}
      */
     tokenList() {
-        let url    = `${config.api_url}/account/profile/token`;
-        let method = 'GET';
+        const url    = `${config.api_url}/account/profile/token`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -123,11 +123,11 @@ class Account {
      */
     tokenCreate(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account/profile/token`;
-        let method = 'POST';
+        const url    = `${config.api_url}/account/profile/token`;
+        const method = 'POST';
 
-        let headers = default_headers();
-        let options = {url, method, data, headers};
+        const headers = default_headers();
+        const options = {url, method, data, headers};
         return request(options);
     }
 
@@ -135,10 +135,10 @@ class Account {
      * @return {Promise}
      */
     tokenDelete() {
-        let url    = `${config.api_url}/account/profile/token`;
-        let method = 'DELETE';
+        const url    = `${config.api_url}/account/profile/token`;
+        const method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
     }
 
@@ -149,11 +149,37 @@ class Account {
      */
     login(data) {
         data       = data || {};
-        let url    = `${config.api_url}/account/profile/login`;
-        let method = 'POST';
+        const url    = `${config.api_url}/account/profile/login`;
+        const method = 'POST';
 
-        let headers = default_headers();
-        let options = {url, method, data, headers};
+        const headers = default_headers();
+        const options = {url, method, data, headers};
+        return request(options);
+    }
+
+    /** Send password recover email
+     * @param  {string} email - email of the account
+     * @return {Promise}
+     */
+    static passwordRecover(email) {
+        const url    = `${config.api_url}/account/passwordreset/${email}`;
+        const method = 'GET';
+
+        const headers = default_headers();
+        const options = {url, method, headers};
+        return request(options);
+    }
+
+    /** Change password using token of the password recover
+     * @param  {string} password - new password
+     * @return {Promise}
+     */
+    passwordChange(password) {
+        const data   = { password };
+        const url    = `${config.api_url}/account/passwordreset`;
+        const method = 'POST';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
