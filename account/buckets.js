@@ -93,6 +93,19 @@ class Buckets {
         return request(options);
     }
 
+    /** Delete the Bucket
+    * @param  {String} bucket id
+    * @param  {Array} variables array of variable id
+    * @return {Promise}
+     */
+    deleteData(bucket, variables) {
+        const url    = `${config.api_url}/bucket/${bucket}/variables`;
+        const method = 'DELETE';
+        const params = { variable: variables };
+
+        const options = Object.assign({}, this.default_options, {url, method, params});
+        return request(options);
+    }
     /** Get Info of the Backup
     * @param  {String} backup id
     * @return {Promise}

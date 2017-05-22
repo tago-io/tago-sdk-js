@@ -183,6 +183,41 @@ class Account {
         return request(options);
     }
 
+    /** Create new account on Tago
+     * @param  {string} name - name of the account
+     * @param  {string} email - email of the account
+     * @param  {string} password - password of the account
+     * @param  {string} cpassword - password confirmation of the account
+     * @param  {string} country - country of the account
+     * @param  {string} timezone - timezone for the account
+     * @param  {string} company - company of the account
+     * @param  {boolean} newsletter - newsletter activated
+     * @return {Promise}
+     */
+    static create(name, email, password, cpassword, country, timezone, company, newsletter) {
+        const url    = `${config.api_url}/account`;
+        const method = 'POST';
+        const data = {
+            name, email, password, cpassword, country, timezone, company, newsletter,
+        };
+
+        const headers = default_headers();
+        const options = {url, method, headers, data};
+        return request(options);
+    }
+
+    /** Re-send confirmation account email
+     * @param  {string} email - email of the account
+     * @return {Promise}
+     */
+    static resendConfirmation(email) {
+        const url    = `${config.api_url}/account/resend_confirmation/${email}`;
+        const method = 'GET';
+
+        const headers = default_headers();
+        const options = {url, method, headers};
+        return request(options);
+    }
     // ----------- Sub-methods -----------
     get actions() {
         return new Actions(this.token);

@@ -3,7 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 
-class Notificatios {
+class Notifications {
     constructor(acc_token) {
         this.token = acc_token;
         this.default_options = {
@@ -40,7 +40,7 @@ class Notificatios {
         const method = 'PUT';
         const data = {
             notification_ids: notifications,
-        }
+        };
 
         const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
@@ -82,3 +82,5 @@ class Notificatios {
         return request(options);
     }
 }
+
+module.exports = Notifications;
