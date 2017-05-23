@@ -78,17 +78,4 @@ suite('Account - Buckets', () => {
                 });
         });
     });
-
-    suite('DeleteData', () => {
-        test('Success', (done) => {
-            myacc.buckets.deleteData('xxx', ['aaa','bbb'])
-                .then((x) => {
-                    expect(x).to.exist;
-                    expect(x.url).to.be.equal('/bucket/xxx/variables?variable[]=aaa&variable[]=bbb');
-                    expect(x.method).to.be.equal('DELETE');
-                    expect(x.token).to.be.equal(token);
-                    done();
-                });
-        });
-    });
 });
