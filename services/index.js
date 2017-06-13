@@ -28,7 +28,6 @@ class Services {
     get MQTT() {
         return new MQTT(this.token);
     }
-
 }
 
 module.exports = Services;
