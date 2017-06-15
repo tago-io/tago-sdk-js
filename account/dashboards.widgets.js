@@ -97,6 +97,35 @@ class Widgets {
         const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
+
+    /** Run analysis without inserting data to bucket
+    * @param  {String} dashboard id
+    * @param  {String} widget_id
+    * @param  {JSON} data
+    * @return {Promise}
+    */
+    runAnalysis(dashboard_id, widget_id, data) {
+        const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}/run`;
+        const method = 'POST';
+
+        const options = Object.assign({}, this.default_options, {url, method, data});
+        return request(options);
+    }
+       
+    /** Delete data by it's id, bucket and variable must be associeted with the widget
+    * @param  {String} dashboard id
+    * @param  {String} widget_id
+    * @param  {JSON} data
+    * @return {Promise}
+    */
+    deleteData(dashboard_id, widget_id, ids) {
+        const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
+        const method = 'DELETE';
+        const params = { ids };
+
+        const options = Object.assign({}, this.default_options, {url, method, params});
+        return request(options);
+    }
 }
 
 module.exports = Widgets;
