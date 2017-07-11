@@ -218,6 +218,20 @@ class Account {
         const options = {url, method, headers};
         return request(options);
     }
+
+    /** Confirm account creation
+     * @param  {string} token - confirmation token
+     * @return {Promise}
+     */
+    static confirmAccount(token) {
+        const url    = `${config.api_url}/account/confirm/${token}`;
+        const method = 'GET';
+
+        const headers = default_headers();
+        const options = {url, method, headers};
+        return request(options);
+        
+    }
     // ----------- Sub-methods -----------
     get actions() {
         return new Actions(this.token);
