@@ -14,7 +14,7 @@ class Realtime {
         this.token = token;
 
         this.socket = socketclient(config.realtime_url, options);
-        this.socket.on('connect', () => {
+        this.socket.once('connect', () => {
             this.socket.emit('register', this.token);
         });
 
@@ -22,6 +22,8 @@ class Realtime {
         this.socket.on('disconnect', () => {
             console.log('Disconnected from Tago.io.');
         });
+        this.socket.on('reconnect', () => this.socket.emit('register', this.token));
+        this.socket.on('reconnect_error', () => console.log('Failed to reestablish connection.'));
     }
 
     set disconnect(func) {
@@ -30,11 +32,11 @@ class Realtime {
     }
     set connect(func) {
         this.socket.off('connect');
-        this.socket.on('connect', func);
+        this.socket.once('connect', func);
     }
     set reconnect(func) {
-        this.socket.off('reconnecting');
-        this.socket.on('reconnecting', func);
+        this.socket.off('reconnect');
+        this.socket.on('reconnect', func);
     }
     set connect_timeout(func) {
         this.socket.off('connect_timeout');

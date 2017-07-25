@@ -47,6 +47,9 @@ class Analysis {
                 }
             });
         };
+        scon.reconnect = () => {
+            scon.get_socket.emit('register:analysis', this._token);
+        };
         scon.get_socket.on('run:analysis', (scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
     }
 }
