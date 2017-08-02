@@ -2,6 +2,7 @@
 const axios = require('axios');
 
 module.exports = function tago_request(request_options) {
+    request_options.timeout = 60000;
     return axios(request_options).then(result => {
         if (!result.data) {
             throw result.statusText;
