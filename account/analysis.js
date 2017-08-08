@@ -93,7 +93,7 @@ class Analysis {
         return request(options);
     }
 
-    /** Start listening the analysis
+    /** Start listening the analysis console
      * @param  {String} analyze_id id
      * @param  {function} function function to run when realtime is triggered
      * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
