@@ -115,7 +115,7 @@ class Analysis {
     /** Stop to listen the analysis by its ID
      * @param  {String} analyze_id id of the analysis
      */
-    stopeListening(analyze_id, realtime) {
+    stopListening(analyze_id, realtime) {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;

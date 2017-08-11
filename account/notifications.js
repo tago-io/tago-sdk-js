@@ -2,6 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
+const Realtime        = require('./../utils/').realtime;
 
 class Notifications {
     constructor(acc_token) {
@@ -86,7 +87,7 @@ class Notifications {
      * @param  {function} function function to run when realtime is triggered
      * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
      */
-    listen(func, realtime) {
+    listening(func, realtime) {
         if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
 
         realtime = realtime || this.realtime;
@@ -98,7 +99,7 @@ class Notifications {
     /** Stop to listen the analysis by its ID
      * @param  {String} analyze_id id of the analysis
      */
-    stoplisten(realtime) {
+    stoplistening(realtime) {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
