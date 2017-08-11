@@ -80,6 +80,28 @@ class Notifications {
 
         const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
+    }    
+    
+    /** Start listening the notifaticons
+     * @param  {function} function function to run when realtime is triggered
+     * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
+     */
+    listen(func, realtime) {
+        if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
+
+        realtime = realtime || this.realtime;
+        realtime.get_socket.on('notification', func);
+
+        return Promise.resolve('Listening to Notifications.');
+    }
+
+    /** Stop to listen the analysis by its ID
+     * @param  {String} analyze_id id of the analysis
+     */
+    stoplisten(realtime) {
+        if (!this.realtime && !realtime) return;
+
+        realtime = realtime || this.realtime;
     }
 }
 

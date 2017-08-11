@@ -3,12 +3,13 @@ const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const request         = require('../comum/tago_request.js');
 
-const Actions         = require('./actions.js');
-const Analysis        = require('./analysis.js');
-const Buckets         = require('./buckets.js');
-const Dashboards      = require('./dashboards.js');
-const Devices         = require('./devices.js');
-const Notifications   = require('./notifications.js');
+const Actions       = require('./actions.js');
+const Analysis      = require('./analysis.js');
+const Buckets       = require('./buckets.js');
+const Dashboards    = require('./dashboards.js');
+const Devices       = require('./devices.js');
+const Notifications = require('./notifications.js');
+const Middlewares   = require('./middlewares.js');
 
 const Realtime        = require('./../utils/').realtime;
 
@@ -234,28 +235,6 @@ class Account {
         return request(options);
         
     }
-    
-    /** Start listening the notifaticons
-     * @param  {function} function function to run when realtime is triggered
-     * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
-     */
-    notificationListening(func, realtime) {
-        if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
-
-        realtime = realtime || this.realtime;
-        realtime.get_socket.on('notification', func);
-
-        return Promise.resolve('Listening to Notifications.');
-    }
-
-    /** Stop to listen the analysis by its ID
-     * @param  {String} analyze_id id of the analysis
-     */
-    notificationStoplisten(realtime) {
-        if (!this.realtime && !realtime) return;
-
-        realtime = realtime || this.realtime;
-    }
 
     // ----------- Sub-methods -----------
     get actions() {
@@ -275,6 +254,9 @@ class Account {
     }
     get notifications() {
         return new Notifications(this.token);
+    }
+    get middlewares() {
+        return new Middlewares(this.token);
     }
 }
 
