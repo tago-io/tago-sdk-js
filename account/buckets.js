@@ -77,6 +77,22 @@ class Buckets {
         return request(options);
     }
 
+    /** DeleteVariable the variables inside the bucket
+    * @param  {String} bucket id
+    * @param  {object} data
+    * @param  {string} data.variable - Name of the variable
+    * @param  {string} data.origin - Name of the origin
+    * @return {Promise}
+    */
+    deleteVariable(bkt_id, data) {
+        data = data || {};
+        let url = `${config.api_url}/bucket/${bkt_id}/variable`;
+        let method = 'DELETE';
+
+        let options = Object.assign({}, this.default_options, { url, method, data });
+        return request(options);
+    }
+
     /** Get Info of the Bucket
     * @param  {String} bucket id
     * @return {Promise}

@@ -14,5 +14,6 @@
 'use strict';
 const Account = require('../account');
 const myacc = new Account('168fd610-dc14-11e5-b427-4b150a362960');
+myacc.buckets.deleteVariable('bucket_id', { variable: 'var', origin: 'or' });
 
 myacc.dashboards.listening('578300a21cfac79f7c9d7da2').then(console.log);
