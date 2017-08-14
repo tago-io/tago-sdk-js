@@ -11,7 +11,6 @@ const Devices       = require('./devices.js');
 const Notifications = require('./notifications.js');
 const Middlewares   = require('./middlewares.js');
 
-const Realtime        = require('./../utils/').realtime;
 
 class Account {
     constructor(token) {
