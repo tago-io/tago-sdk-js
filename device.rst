@@ -170,3 +170,61 @@ or
         .catch((error) => {
             //You can treat errors here
         });
+
+
+.getParams
+*******
+Get all params from the device 
+
+| **Syntax**
+| *.getParams()*
+|
+| **Arguments**
+| filter(boolean) filter options for retrieving device parameters. (optional)*
+|   *\*boolean(false)*: *Retrieves all non-sent device parameter;*
+|   *\*boolean(true)*: *Retrieves all sent device parameter;*
+| 
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Device = require('tago/device');
+    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+
+    mydev.getParams() // you can use getParams(false) or getParams(true)
+        .then((result) => {
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.markParam
+*******
+Mark specific parameter that was not read to read by id
+
+| **Syntax**
+| *.markParam(/id/)*
+|
+| **Arguments**
+| *id(string) using a specific ID. (required)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Device = require('tago/device');
+    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+
+    mydev.markParam('59933d82b09301ab13b844ac')
+        .then((result) => {
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
