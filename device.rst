@@ -180,7 +180,7 @@ Get all params from the device
 | *.getParams()*
 |
 | **Arguments**
-| filter(boolean) filter options for retrieving device parameters. (optional)*
+| filter(boolean) filter options for retrieving the device parameters. (optional)*
 |   *\*boolean(false)*: *Retrieves all non-sent device parameter;*
 |   *\*boolean(true)*: *Retrieves all sent device parameter;*
 | 
@@ -204,7 +204,7 @@ Get all params from the device
 
 .markParam
 *******
-Mark specific parameter that was not read to read by id
+Marks as read a specific not yet read parameter
 
 | **Syntax**
 | *.markParam(/id/)*
