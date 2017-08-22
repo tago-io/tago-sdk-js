@@ -14,5 +14,13 @@ module.exports = function tago_request(request_options) {
             throw result.data.message || result;
         }
         return result.data.result;
+    }).catch((error) => {
+        if (!error.response.data) {
+            throw error;
+        }
+        else if (!error.response.data.status) {
+            throw error.response.data.message || error;
+        }
+        return error.response.data.result;
     });
 };
