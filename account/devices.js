@@ -33,8 +33,8 @@ class Devices {
      * 
      * TIP: On name you can use * (asterisk) as wildcard.
      * @return {Promise}
-     * Array of buckets in alphabetically order.
-     */
+     * Array of devices in alphabetically order.
+    */
     list(page = 1, fields = ['id', 'name'], filter = {}) {
         const url    = `${config.api_url}/device`;
         const method = 'GET';

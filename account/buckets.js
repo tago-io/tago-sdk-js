@@ -35,7 +35,7 @@ class Buckets {
      * TIP: On name you can use * (asterisk) as wildcard.
      * @return {Promise}
      * Array of buckets in alphabetically order.
-     */
+    */
     list(page = 1, fields = ['id', 'name'], filter = {}) {
         let url    = `${config.api_url}/bucket`;
         let method = 'GET';

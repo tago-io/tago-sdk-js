@@ -1,7 +1,8 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
 
 class Actions {
     constructor(acc_token) {
@@ -12,14 +13,42 @@ class Actions {
         };
     }
 
-    /** List Actions
+    /** List Action
+     * @param  {Number} page 
+     * Page of list starting from 1
+     * Default: 1
+     * @param  {Array} fields
+     * Array of field names
+     * Default: ['id', 'name']
+     * Example: ['id', 'name', 'lock']
+     * 
+     * Values allowed:
+     * id, name, description, active, lock, last_run, action,
+     * account, tags, created_at, updated_at.
+     * @param  {JSON} filter 
+     * JSON of filter
+     * Without default
+     * Example: {name: 'Motor'}
+     * Values allowed: same of fields parameter.
+     * 
+     * TIP: On name you can use * (asterisk) as wildcard.
      * @return {Promise}
-     */
-    list() {
-        let url    = `${config.api_url}/action`;
-        let method = 'GET';
+     * Array of action in alphabetically order.
+    */
+    list(page = 1, fields = ['id', 'name'], filter = {}) {
+        const url    = `${config.api_url}/action`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {
+            url,
+            method,
+            paramsSerializer,
+            params: {
+                page,
+                filter,
+                fields,
+            },
+        });
         return request(options);
     }
 

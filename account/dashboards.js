@@ -1,10 +1,11 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const Widgets         = require('./dashboards.widgets.js');
-const Realtime        = require('./../utils/').realtime;
-const share           = require('./_share.js');
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
+const Widgets          = require('./dashboards.widgets.js');
+const Realtime         = require('./../utils/').realtime;
+const share            = require('./_share.js');
 
 class Dashboards {
     constructor(acc_token) {
@@ -16,13 +17,41 @@ class Dashboards {
     }
 
     /** List Dashboards
+     * @param  {Number} page 
+     * Page of list starting from 1
+     * Default: 1
+     * @param  {Array} fields
+     * Array of field names
+     * Default: ['id', 'label']
+     * Example: ['id', 'label', 'visible']
+     * 
+     * Values allowed:
+     * id, label, description, public_token, group_by,
+     * account, tags, created_at, updated_at.
+     * @param  {JSON} filter 
+     * JSON of filter
+     * Without default
+     * Example: {label: 'Motor'}
+     * Values allowed: same of fields parameter.
+     * 
+     * TIP: On name you can use * (asterisk) as wildcard.
      * @return {Promise}
-     */
-    list() {
-        let url    = `${config.api_url}/dashboard`;
-        let method = 'GET';
+     * Array of dashboards in alphabetically order.
+    */
+    list(page = 1, fields = ['id', 'name'], filter = {}) {
+        const url = `${config.api_url}/dashboard`;
+        const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {
+            url,
+            method,
+            paramsSerializer,
+            params: {
+                page,
+                filter,
+                fields,
+            },
+        });
         return request(options);
     }
 
