@@ -93,6 +93,18 @@ class Buckets {
         return request(options);
     }
 
+    /** listVariables the variables inside the bucket
+    * @param  {String} bucket id
+    * @return {Promise}
+    */
+    listVariables(bkt_id) {
+        let url = `${config.api_url}/bucket/${bkt_id}/variable`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, { url, method });
+        return request(options);
+    }
+
     /** Get Info of the Bucket
     * @param  {String} bucket id
     * @return {Promise}
