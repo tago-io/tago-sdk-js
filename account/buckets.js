@@ -95,13 +95,22 @@ class Buckets {
 
     /** listVariables the variables inside the bucket
     * @param  {String} bucket id
+    * @param  {Boolean} showAmount return amount of each variable
+    * @param  {Boolean} showDeleted return array of async deleted
     * @return {Promise}
     */
-    listVariables(bkt_id) {
+    listVariables(bkt_id, show_amount = false, show_deleted = false) {
         let url = `${config.api_url}/bucket/${bkt_id}/variable`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, { url, method });
+        let options = Object.assign({}, this.default_options, {
+            url,
+            method,
+            params: {
+                amount: show_amount,
+                deleted: show_deleted,
+            },
+        });
         return request(options);
     }
 
