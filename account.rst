@@ -326,6 +326,9 @@ Generate and retrieve a new token for the device
 |   *\*name(string)*: *a name for the token;*
 |   *\*expire_time(string)*: *Time when token should expire. It will be randomly generated if not included. Accept "never" as value.*
 |   *\*permission(string)*: *Token permission, should be `write`, `read` or `full`.*
+|   *\*serie_number(string)*: *Serial number of the device. (optional)*
+|   *\*verification_code(string)*: *Verification code to validate middleware requests. (optional)*
+|   *\*middleware(string)*: *Middleware or type of the device that will be added.. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -1156,6 +1159,123 @@ Generate and retrieve a new dashboard for the account
     };
 
     accdashboards.create(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+notifications
+*************
+All accounts have an notification system, where you can see important alerts and accept/refuse share of dashboards, profiles and buckets.
+
+.list
+=====
+Retrieve a list with all notifications from account
+
+| **Syntax**
+| *.list()*
+|
+| **Returns**
+| *(Promise)*
+|   *\*result(array)*: *Array list of notifications;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
+    
+    notifications.list()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+.markAsRead
+===========
+Mark a notification as read/ignored.
+
+| **Syntax**
+| *.markAsRead(/id_list/)*
+|
+| **Arguments**
+| *\*id_list(array)*: *array of notification ids;*
+|
+| **Returns**
+| *(Promise)*
+|   *\*result*: *Notifications marked as read;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
+    
+    const id_list = ['5915e4a302a0a7002f2a0960', '4915e4a302a0a7002f3a0982']
+    notifications.markAsRead(id_list)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.accept
+=======
+Accept the notification if it has a condition.
+
+| **Syntax**
+| *.accept(/notification_id/)*
+|
+| **Arguments**
+| *\*notification_id(string)*: *ID of the notification;*
+|
+| **Returns**
+| *(Promise)*
+|   *\*result*: *Notification succesfully accepted;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
+    
+    const notification_id = '5915e4a302a0a7002f2a0960'
+    notifications.accept(notification_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+.refuse
+=======
+Refuse the notification if it has a condition.
+
+| **Syntax**
+| *.refuse(/notification_id/)*
+|
+| **Arguments**
+| *\*notification_id(array)*: *ID of the notification;*
+|
+| **Returns**
+| *(Promise)*
+|   *\*result*: *Notification succesfully refused;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const notifications   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').notifications;
+    
+    const notification_id = '5915e4a302a0a7002f2a0960'
+    notifications.refuse(notification_id)
         .then((result) => { 
             //You can treat the result here
         })

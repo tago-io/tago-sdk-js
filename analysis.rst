@@ -239,3 +239,46 @@ Use this topic when you want to send a payload data in any format to be first pa
     }
 
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+
+
+Notification
+============
+Sometimes you may want to send an alert to the account through notification system. You can do it in three ways: pointing to a dashboard, to a bucket or just a notification to the account itself.
+
+When pointing to a dashboard or a bucket, the account owner and anyone he shared the dashboard/bucket will receive the notification.
+
+.send
+-----
+Use this topic to send a notification.
+
+| **Syntax**
+| *.send(/title/, /message/, /ref_id/ )*
+|
+| **Arguments**
+| *title(string) Title of the message.*
+| *message(string) message to be sent.*
+| *ref_id(string) dashboard/bucket id that your notification will point to. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    'use strict';
+    const Analysis = require('tago/analysis');
+    const Services = require('tago/Services');
+
+    //Main function to be executed when the analysis are called
+    function myanalysis(context, scope) {
+        const Notification = new Services(context.token).Notification;
+
+        const title   = 'my title';
+        const message = 'new message';
+        const ref_id = '5915e4a302a0a7002f2a0960'; //bucket id
+
+        Notification.send(title, message, ref_id).then(console.log).catch(console.log);
+        //Print "Notification sent";
+    }
+
+    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
