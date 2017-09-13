@@ -32,18 +32,23 @@ function errorHandler(error) {
 
 const waitTime = () => new Promise(resolve => setTimeout(() => resolve(), 1000));
 
-module.exports = function tago_request(request_options) {
+function tago_request(request_options) {
+    let _axios = axios;
+    if (this && this.axios) _axios = this.axios;
+    
     return co(function* _() {
         request_options.timeout = 60000;
         let result;
         const _resultHandler = resultHandler.bind(null, request_options);
         for (let i = 1; i <= config.request_attempts; i+=1) {
-            result = yield axios(request_options).then(_resultHandler, errorHandler);
-            if (result) continue;
+            result = yield _axios(request_options).then(_resultHandler, errorHandler);
+            if (result) i = config.request_attempts + 1;
             
             yield waitTime();
         }
         if (!result) result = 'SDK: Request timed out';
         return result;
     });
-};
+}
+
+module.exports = tago_request;
