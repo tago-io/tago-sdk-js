@@ -104,7 +104,7 @@ When setting up a service, you need to pass an analysis-token. For convenience, 
 
     'use strict';
     const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    const Services = require('tago/services');
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
@@ -140,7 +140,7 @@ Whenever you need to send a sms, use .send function.
 
     'use strict';
     const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    const Services = require('tago/services');
 
     //Main function to be executed when analysis are called
     function myanalysis(context, scope) {
@@ -181,7 +181,7 @@ Whenever you need to send an email, use .send function.
 
     'use strict';
     const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    const Services = require('tago/services');
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
@@ -225,7 +225,7 @@ Use this topic when you want to send a payload data in any format to be first pa
 
     'use strict';
     const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    const Services = require('tago/services');
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
@@ -267,7 +267,7 @@ Use this topic to send a notification.
 
     'use strict';
     const Analysis = require('tago/analysis');
-    const Services = require('tago/Services');
+    const Services = require('tago/services');
 
     //Main function to be executed when the analysis are called
     function myanalysis(context, scope) {
