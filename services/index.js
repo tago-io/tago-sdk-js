@@ -4,6 +4,7 @@ const SMS     = require('./sms.js');
 const Socket  = require('./socket.js');
 const Console = require('./console.js');
 const MQTT    = require('./mqtt.js');
+const Notification    = require('./notification.js');
 
 class Services {
     constructor(token) {
@@ -27,6 +28,9 @@ class Services {
     }
     get MQTT() {
         return new MQTT(this.token);
+    }
+    get Notification() {
+        return new Notification(this.token);
     }
 }
 
