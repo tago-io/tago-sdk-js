@@ -21,7 +21,7 @@ function errorHandler(error) {
         throw error;
     }
     const { message, status, result } = error.response.data;
-    if (message.includes(['Timeout']) || message.includes(['SequelizeDatabaseError'])) {
+    if (message.includes(['Timeout'])) {
         return false;
     }
     else if (!status) {
