@@ -45,6 +45,7 @@ class Actions {
      * Array of action in alphabetically order.
     */
     list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         const url    = `${config.api_url}/action`;
         const method = 'GET';
 
@@ -61,6 +62,21 @@ class Actions {
             },
         });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['action', 'active', 'created_at', 'id', 'last_run', 'lock', 'name', 'tags'],
+            {},
+            1000,
+            'name'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Action

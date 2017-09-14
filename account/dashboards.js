@@ -17,23 +17,23 @@ class Dashboards {
     }
 
     /** List Dashboards
-     * @param  {Number} page 
+     * @param  {Number} page
      * Page of list starting from 1
      * Default: 1
      * @param  {Array} fields
      * Array of field names
      * Default: ['id', 'label']
      * Example: ['id', 'label', 'visible']
-     * 
+     *
      * Values allowed:
      * id, label, description, public_token, group_by,
      * account, tags, created_at, updated_at.
-     * @param  {JSON} filter 
+     * @param  {JSON} filter
      * JSON of filter
      * Without default
      * Example: {label: 'Motor'}
      * Values allowed: same of fields parameter.
-     * 
+     *
      * TIP: On name you can use * (asterisk) as wildcard.
      * @param {Number} amount
      * Amount of items will return
@@ -48,6 +48,7 @@ class Dashboards {
      * Array of dashboards in alphabetically order.
     */
     list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'label,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         const url = `${config.api_url}/dashboard`;
         const method = 'GET';
 
@@ -64,6 +65,21 @@ class Dashboards {
             },
         });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['account', 'created_at', 'group_by', 'id', 'label', 'tags', 'visible'],
+            {},
+            1000,
+            'label'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Dashboard
@@ -153,7 +169,7 @@ class Dashboards {
 
 
     /******************************************* */
-    
+
     /** Get share list of the dashboard
     * @param  {String} dashboard id
     * @return {Promise}
@@ -168,7 +184,7 @@ class Dashboards {
 
     /** Share the dashboard with another person
     * @param  {String} dashboard id
-    * @param  {JSON} data 
+    * @param  {JSON} data
     * @param  {String} data{}.email - Email to receive invitation
     * @param  {String} data{}.message - Scope message for the email
     * @param  {boolean} data{}.copy_me - true to send a copy to yourself
@@ -186,7 +202,7 @@ class Dashboards {
 
     /** Change permissions of the bucket
     * @param  {String} share id
-    * @param  {JSON} data - 
+    * @param  {JSON} data -
     * @param  {String} data{}.email - Email to change permissions
     * @param  {String} data{}.permission - New Permission to be applied
     * @return {Promise}
@@ -208,7 +224,7 @@ class Dashboards {
     shareDelete(share_id) {
         if (!share_id || share_id == '') {
             return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
-        } 
+        }
         return share.remove('dashboard', share_id, this.default_options);
     }
     /******************************************* */
@@ -235,7 +251,7 @@ class Dashboards {
     * @param  {JSON} data - Name of the dashboard
     * @param  {String} data{}.email - Email to receive invitation
     * @param  {String} data{}.message - Scope message for the email
-    * @param  {JSON} data{}.setup - special setup for clone 
+    * @param  {JSON} data{}.setup - special setup for clone
     * @param  {boolean} data{}.copy_me - true to send a copy to yourself
     * @return {Promise}
      */

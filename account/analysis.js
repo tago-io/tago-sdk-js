@@ -46,6 +46,7 @@ class Analysis {
      * Array of analysis in alphabetically order.
     */
     list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         const url    = `${config.api_url}/analysis`;
         const method = 'GET';
 
@@ -62,6 +63,21 @@ class Analysis {
             },
         });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['active', 'id', 'interval', 'language', 'last_run', 'name', 'run_on', 'tags'],
+            {},
+            1000,
+            'name'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Analyze

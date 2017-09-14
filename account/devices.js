@@ -14,23 +14,23 @@ class Devices {
     }
 
     /** List Devices
-     * @param  {Number} page 
+     * @param  {Number} page
      * Page of list starting from 1
      * Default: 1
      * @param  {Array} fields
      * Array of field names
      * Default: ['id', 'name']
      * Example: ['id', 'name', 'visible']
-     * 
+     *
      * Values allowed:
      * id, name, description, visible, active, last_access, bucket,
      * account, tags, created_at, updated_at.
-     * @param  {JSON} filter 
+     * @param  {JSON} filter
      * JSON of filter
      * Without default
      * Example: {name: 'Motor'}
      * Values allowed: same of fields parameter.
-     * 
+     *
      * TIP: On name you can use * (asterisk) as wildcard.
      * @param {Number} amount
      * Amount of items will return
@@ -48,6 +48,7 @@ class Devices {
      * Array of devices in alphabetically order.
     */
     list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc', resolveBucketName = false) {
+        if (!arguments.length) return this._list(); // @deprecated
         const url    = `${config.api_url}/device`;
         const method = 'GET';
 
@@ -65,6 +66,31 @@ class Devices {
             },
         });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['active', 'bucket', 'created_at', 'id', 'last_access', 'name', 'tags', 'visible'],
+            {},
+            1000,
+            'name',
+            true
+        ];
+        return this.list.call(this, ...parameters).then(result => {
+            return result.map(item => {
+                item.bucket = {
+                    id: item.bucket,
+                    name: item.bucket_name,
+                };
+                delete item.bucket_name;
+                return item;
+            });
+        });
     }
 
     /** Create a Device
