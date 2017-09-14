@@ -46,6 +46,7 @@ class Buckets {
      * Array of buckets in alphabetically order.
     */
     list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         let url    = `${config.api_url}/bucket`;
         let method = 'GET';
 
@@ -62,6 +63,21 @@ class Buckets {
             },
         });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['account', 'backup', 'created_at', 'id', 'name', 'tags', 'visible'],
+            {},
+            1000,
+            'name'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Bucket
