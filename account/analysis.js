@@ -33,10 +33,19 @@ class Analysis {
      * Values allowed: same of fields parameter.
      * 
      * TIP: On name you can use * (asterisk) as wildcard.
+     * @param {Number} amount
+     * Amount of items will return
+     * Default is 20
+     * @param {String} orderBy
+     * Order by a field
+     * Examples:
+     *  'name,asc'
+     *  'name,desc'
+     *  'name' [default: asc]
      * @return {Promise}
      * Array of analysis in alphabetically order.
     */
-    list(page = 1, fields = ['id', 'name'], filter = {}) {
+    list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
         const url    = `${config.api_url}/analysis`;
         const method = 'GET';
 
@@ -48,6 +57,8 @@ class Analysis {
                 page,
                 filter,
                 fields,
+                amount,
+                orderBy,
             },
         });
         return request(options);

@@ -33,10 +33,19 @@ class Buckets {
      * Values allowed: same of fields parameter.
      * 
      * TIP: On name you can use * (asterisk) as wildcard.
+     * @param {Number} amount
+     * Amount of items will return
+     * Default is 20
+     * @param {String} orderBy
+     * Order by a field
+     * Examples:
+     *  'name,asc'
+     *  'name,desc'
+     *  'name' [default: asc]
      * @return {Promise}
      * Array of buckets in alphabetically order.
     */
-    list(page = 1, fields = ['id', 'name'], filter = {}) {
+    list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
         let url    = `${config.api_url}/bucket`;
         let method = 'GET';
 
@@ -48,6 +57,8 @@ class Buckets {
                 page,
                 filter,
                 fields,
+                amount,
+                orderBy,
             },
         });
         return request(options);
@@ -124,9 +135,11 @@ class Buckets {
     * @param  {String} bucket id
     * @param  {Boolean} showAmount return amount of each variable
     * @param  {Boolean} showDeleted return array of async deleted
+    * @param  {Boolean} resolveOriginName
+    * Change origins to array of object with id and name
     * @return {Promise}
     */
-    listVariables(bkt_id, show_amount = false, show_deleted = false) {
+    listVariables(bkt_id, show_amount = false, show_deleted = false, resolveOriginName = false) {
         let url = `${config.api_url}/bucket/${bkt_id}/variable`;
         let method = 'GET';
 
@@ -136,6 +149,7 @@ class Buckets {
             params: {
                 amount: show_amount,
                 deleted: show_deleted,
+                resolveOriginName,
             },
         });
         return request(options);
