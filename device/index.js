@@ -2,7 +2,6 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const Realtime        = require('./../utils/').realtime;
 
 /** Class for the device and data */
 class Device {

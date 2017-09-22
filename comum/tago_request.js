@@ -21,7 +21,7 @@ function errorHandler(error) {
         throw error;
     }
     const { message, status, result } = error.response.data;
-    if (message.includes(['Timeout'])) {
+    if (message.includes('Timeout') && error.config.method != 'POST') {
         return false;
     }
     else if (!status) {
@@ -42,7 +42,7 @@ function tago_request(request_options) {
         const _resultHandler = resultHandler.bind(null, request_options);
         for (let i = 1; i <= config.request_attempts; i+=1) {
             result = yield _axios(request_options).then(_resultHandler, errorHandler);
-            if (result) i = config.request_attempts + 1;
+            if (result) break;
             
             yield waitTime();
         }
