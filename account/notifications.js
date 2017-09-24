@@ -81,8 +81,8 @@ class Notifications {
 
         const options = Object.assign({}, this.default_options, {url, method});
         return request(options);
-    }    
-    
+    }
+
     /** Start listening the notifaticons
      * @param  {function} function function to run when realtime is triggered
      * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
@@ -103,6 +103,24 @@ class Notifications {
         if (!this.realtime && !realtime) return;
 
         realtime = realtime || this.realtime;
+    }
+
+    /**
+     * Register device Token on Push Notification Service
+     * @param {String} device_token Token of device
+     * @param {String} platform Platform of device
+     * @internal
+     */
+    registerDevice(device_token, platform) {
+        const url = `${config.api_url}/notification/push/register`;
+        const method = 'POST';
+        const data = {
+            device_token,
+            platform,
+        };
+
+        const options = Object.assign({}, this.default_options, { url, method, data });
+        return request(options);
     }
 }
 
