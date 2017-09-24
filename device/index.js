@@ -2,7 +2,6 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const Realtime        = require('./../utils/').realtime;
 
 /** Class for the device and data */
 class Device {
@@ -105,29 +104,6 @@ class Device {
         let method  = 'PUT';
         let options = Object.assign({}, this.default_options, {url, method});
         return request(options);
-    }
-
-     /** Listen to device socket
-     * @param  {function} callback to be executable
-     * @return {function}
-     */
-    listening(callback) {
-        this.realtime = new Realtime(this.token);
-        this.realtime.get_socket.on('data', callback);
-        this.realtime.register = (result) => {
-            if (result.error) return console.log(result.error);
-            console.log(result.message);
-        };
-        return Promise.resolve('Trying to listen to the device');
-    }
-
-    /** Stop to Listen the device */
-    stopListening() {
-        if (this.realtime) {
-            this.realtime.get_socket.off('data');
-            return Promise.resolve('Not listening to the device anymore');
-        }
-        return Promise.reject('Use .listening before trying to stop listening');
     }
 }
 
