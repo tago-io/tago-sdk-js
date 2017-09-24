@@ -270,6 +270,18 @@ class Dashboards {
         return request(options);
     }
 
+    /** Get list of devices related with dashboard
+    * @param  {String} dashboard id
+    * @return {Promise}
+     */
+    listDevicesRelated(dashboard_id) {
+        let url = `${config.api_url}/dashboard/${dashboard_id}/devices`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, { url, method });
+        return request(options);
+    }
+
     // ----------- Sub-methods -----------
     get widgets() {
         return new Widgets(this.token);
