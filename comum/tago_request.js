@@ -21,7 +21,7 @@ function errorHandler(error) {
         throw error;
     }
     const { message, status, result } = error.response.data;
-    if (message.includes('Timeout') && error.config.method != 'POST') {
+    if (error.config.method != 'POST' && message && message.includes('Timeout')) {
         return 'Timeout';
     }
     else if (!status) {
