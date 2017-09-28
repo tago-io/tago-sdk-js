@@ -1,7 +1,7 @@
 const expect  = require('chai').expect;
 const tagoRequest = require('../../comum/tago_request');
 
-suite.only('Tago - Request', () => {
+suite('Tago - Request', () => {
     test('Success', (done) => {
         let count_for = 0;
         const axios = () => {
@@ -96,7 +96,7 @@ suite.only('Tago - Request', () => {
             done(); 
         });
     });
-    test.only('Response data not exist', (done) => {
+    test('Response data not exist', (done) => {
         let count_for = 0;
         const axios = () => {
             count_for += 1;
