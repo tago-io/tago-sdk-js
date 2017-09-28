@@ -10,6 +10,7 @@ const Dashboards    = require('./dashboards.js');
 const Devices       = require('./devices.js');
 const Notifications = require('./notifications.js');
 const Middlewares   = require('./middlewares.js');
+const Tags          = require('./tags.js');
 
 
 class Account {
@@ -94,7 +95,7 @@ class Account {
         const url    = `${config.api_url}/account/profile`;
         const method = 'POST';
 
-        const options = Object.assign({}, this.default_options, {url, method, data}); 
+        const options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
 
@@ -232,7 +233,7 @@ class Account {
         const headers = default_headers();
         const options = {url, method, headers};
         return request(options);
-        
+
     }
 
     // ----------- Sub-methods -----------
@@ -256,6 +257,9 @@ class Account {
     }
     get middlewares() {
         return new Middlewares(this.token);
+    }
+    get tags() {
+        return new Tags(this.token);
     }
 }
 
