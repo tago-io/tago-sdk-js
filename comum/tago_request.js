@@ -22,7 +22,7 @@ function errorHandler(error) {
     }
     const { message, status, result } = error.response.data;
     if (message.includes('Timeout') && error.config.method != 'POST') {
-        return false;
+        return 'Timeout';
     }
     else if (!status) {
         throw message || error;
@@ -42,11 +42,11 @@ function tago_request(request_options) {
         const _resultHandler = resultHandler.bind(null, request_options);
         for (let i = 1; i <= config.request_attempts; i+=1) {
             result = yield _axios(request_options).then(_resultHandler, errorHandler);
-            if (result) break;
+            if (result !== 'Timeout') break;
             
             yield waitTime();
         }
-        if (!result) result = 'SDK: Request timed out';
+        if (result === 'Timeout') result = 'SDK: Request timed out';
         return result;
     });
 }
