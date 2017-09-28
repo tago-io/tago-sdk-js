@@ -36,8 +36,8 @@
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
   "dependencies": {
-    "axios": "0.16.1",
-    "qs": "6.5.0",
+    "axios": "0.16.2",
+    "qs": "6.5.1",
     "socket.io-client": "2.0.3"
   },
   "devDependencies": {
