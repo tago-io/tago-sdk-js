@@ -1,6 +1,10 @@
 {
   "name": "tago",
+<<<<<<< HEAD
   "version": "5.0.3",
+=======
+  "version": "4.2.18",
+>>>>>>> feature/performanceImprove
   "description": "Tago SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
   "homepage": "https://tago.io",
@@ -36,8 +40,8 @@
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
   "dependencies": {
-    "axios": "0.16.1",
-    "qs": "6.5.0",
+    "axios": "0.16.2",
+    "qs": "6.5.1",
     "socket.io-client": "2.0.3"
   },
   "devDependencies": {
