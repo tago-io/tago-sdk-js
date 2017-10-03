@@ -1,7 +1,7 @@
 const expect  = require('chai').expect;
 const tagoRequest = require('../../comum/tago_request');
 
-suite.only('Tago - Request', () => {
+suite('Tago - Request', () => {
     test('Success', (done) => {
         let count_for = 0;
         const axios = () => {
@@ -79,7 +79,7 @@ suite.only('Tago - Request', () => {
             done(); 
         });
     });
-    test.only('Data is 0', (done) => {
+    test('Data is 0', (done) => {
         let count_for = 0;
         const axios = () => {
             count_for += 1;
@@ -93,6 +93,22 @@ suite.only('Tago - Request', () => {
         }).catch((er) => {
             expect(count_for).to.be.equal(1);
             expect(er).to.not.exist;
+            done(); 
+        });
+    });
+    test('Response data not exist', (done) => {
+        let count_for = 0;
+        const axios = () => {
+            count_for += 1;
+            return Promise.reject({ config: { method: 'GET' }, response: { }});
+        };
+        const tr = tagoRequest.bind({axios});
+        tr({ url: '' }).then((x) => {
+            expect(x).to.be.false; 
+            done();
+        }).catch((x) => {
+            expect(typeof x).to.be.equal('object'); 
+            expect(count_for).to.be.equal(1);
             done(); 
         });
     });
