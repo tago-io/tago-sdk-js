@@ -165,13 +165,16 @@ Email service allows you to send e-mail through your analysis.  Cost may occur w
 Whenever you need to send an email, use .send function.
 
 | **Syntax**
-| *.send(/to/, /subject/, /message/, /from/)*
+| *.send(/to/, /subject/, /message/, /from/, /attachment/)*
 |
 | **Arguments**
 | *to(string) E-mail address which will receive the email.*
 | *subject(string) Subject of the email;*
 | *message(string) message to be sent. Use "<br>" to breakline.*
 | *from(string) E-mail address for the receiver to reply. Default is tago@tago.io (optional);*
+| *attachment(json) Send an attachment with the email (optional);*
+|   *archive Can be anything: binary, string, number...;*
+|   *filename(string) Name of the archive with extension. Example: document.txt;*
 |
 | **Returns**
 | *(Promise)*
