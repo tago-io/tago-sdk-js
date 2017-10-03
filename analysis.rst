@@ -194,8 +194,12 @@ Whenever you need to send an email, use .send function.
         const subject = 'E-mail example';
         const message = 'Hi! This is an email example. \nWith a breakline in the email message.';
         const from    = 'me@gmail.com';
+        const attachment = {
+            archive: 'This is a txt archive',
+            filename: 'document.txt'
+        };
 
-        email.send(to, subject, message, from).then(console.log).catch(console.log);
+        email.send(to, subject, message, from, attachment).then(console.log).catch(console.log);
         //Print "Sending";
 
     }
