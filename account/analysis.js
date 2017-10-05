@@ -1,8 +1,9 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const Realtime          = require('./../utils/').realtime;
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
+const Realtime         = require('./../utils/').realtime;
 
 class Analysis {
     constructor(acc_token) {
@@ -12,16 +13,71 @@ class Analysis {
             'headers': default_headers(this)
         };
     }
-
+    
     /** List Analysis
+     * @param  {Number} page 
+     * Page of list starting from 1
+     * Default: 1
+     * @param  {Array} fields
+     * Array of field names
+     * Default: ['id', 'name']
+     * Example: ['id', 'name', 'visible']
+     * 
+     * Values allowed:
+     * id, name, description, visible, backup, data_retention, last_backup,
+     * account, tags, created_at, updated_at.
+     * @param  {JSON} filter 
+     * JSON of filter
+     * Without default
+     * Example: {name: 'Motor'}
+     * Values allowed: same of fields parameter.
+     * 
+     * TIP: On name you can use * (asterisk) as wildcard.
+     * @param {Number} amount
+     * Amount of items will return
+     * Default is 20
+     * @param {String} orderBy
+     * Order by a field
+     * Examples:
+     *  'name,asc'
+     *  'name,desc'
+     *  'name' [default: asc]
      * @return {Promise}
-     */
-    list() {
+     * Array of analysis in alphabetically order.
+    */
+    list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         const url    = `${config.api_url}/analysis`;
         const method = 'GET';
 
-        const options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {
+            url,
+            method,
+            paramsSerializer,
+            params: {
+                page,
+                filter,
+                fields,
+                amount,
+                orderBy,
+            },
+        });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['active', 'id', 'interval', 'language', 'last_run', 'name', 'run_on', 'tags'],
+            {},
+            1000,
+            'name'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Analyze

@@ -1,8 +1,9 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const share           = require('./_share.js');
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
+const share            = require('./_share.js');
 
 class Buckets {
     constructor(acc_token) {
@@ -14,16 +15,69 @@ class Buckets {
     }
 
     /** List Buckets
-     * @param  {boolean} devices - Get all devices linked to buckets too.
+     * @param  {Number} page
+     * Page of list starting from 1
+     * Default: 1
+     * @param  {Array} fields
+     * Array of field names
+     * Default: ['id', 'name']
+     * Example: ['id', 'name', 'visible']
+     *
+     * Values allowed:
+     * id, name, description, visible, backup, data_retention, last_backup,
+     * account, tags, created_at, updated_at.
+     * @param  {JSON} filter
+     * JSON of filter
+     * Without default
+     * Example: {name: 'Motor'}
+     * Values allowed: same of fields parameter.
+     *
+     * TIP: On name you can use * (asterisk) as wildcard.
+     * @param {Number} amount
+     * Amount of items will return
+     * Default is 20
+     * @param {String} orderBy
+     * Order by a field
+     * Examples:
+     *  'name,asc'
+     *  'name,desc'
+     *  'name' [default: asc]
      * @return {Promise}
-     */
-    list(devices) {
+     * Array of buckets in alphabetically order.
+    */
+    list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+        if (!arguments.length) return this._list(); // @deprecated
         let url    = `${config.api_url}/bucket`;
-        if (devices) url = `${url}?devices=true`;
         let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
+        let options = Object.assign({}, this.default_options, {
+            url,
+            method,
+            paramsSerializer,
+            params: {
+                page,
+                filter,
+                fields,
+                amount,
+                orderBy,
+            },
+        });
         return request(options);
+    }
+
+    /**
+     * It return old api style
+     * @deprecated
+     */
+    _list() {
+        const parameters = [
+            1,
+            ['account', 'backup', 'created_at', 'id', 'name', 'tags', 'visible'],
+            {},
+            1000,
+            'name'
+        ];
+        return this.list.call(this, ...parameters);
     }
 
     /** Create a Bucket
@@ -97,9 +151,11 @@ class Buckets {
     * @param  {String} bucket id
     * @param  {Boolean} showAmount return amount of each variable
     * @param  {Boolean} showDeleted return array of async deleted
+    * @param  {Boolean} resolveOriginName
+    * Change origins to array of object with id and name
     * @return {Promise}
     */
-    listVariables(bkt_id, show_amount = false, show_deleted = false) {
+    listVariables(bkt_id, show_amount = false, show_deleted = false, resolveOriginName = false) {
         let url = `${config.api_url}/bucket/${bkt_id}/variable`;
         let method = 'GET';
 
@@ -109,15 +165,31 @@ class Buckets {
             params: {
                 amount: show_amount,
                 deleted: show_deleted,
+                resolveOriginName,
             },
         });
+        return request(options);
+    }
+
+    /** Get Amount of data on the Bucket
+    * @param  {String} Bucket id
+    * @return {Promise} With number of amount
+    */
+    amount(bkt_id) {
+        if (!bkt_id || bkt_id == '') {
+            return Promise.reject('Bucket ID parameter is obrigatory.');
+        }
+        let url = `${config.api_url}/bucket/${bkt_id}/data_amount`;
+        let method = 'GET';
+
+        let options = Object.assign({}, this.default_options, { url, method });
         return request(options);
     }
 
     /** Get Info of the Bucket
     * @param  {String} bucket id
     * @return {Promise}
-     */
+    */
     info(bkt_id) {
         if (!bkt_id || bkt_id == '') {
             //If ID is send with null, it will get List instead info.
@@ -156,7 +228,7 @@ class Buckets {
         return request(options);
     }
 
-    /** Delete the Backup 
+    /** Delete the Backup
     * @param  {String} backup_id id
     * @return {Promise}
      */
@@ -171,7 +243,7 @@ class Buckets {
         return request(options);
     }
 
-    /** Recover the Backup 
+    /** Recover the Backup
     * @param  {JSON} data object with parameters for recover
     * @param  {String} data.id backup id to be recovered
     * @param  {Array} data.ids multiple id's to be recovered
@@ -185,7 +257,7 @@ class Buckets {
         let options = Object.assign({}, this.default_options, {url, method, data});
         return request(options);
     }
-    
+
     /** Get share list of the dashboard
     * @param  {String} dashboard id
     * @return {Promise}
@@ -200,7 +272,7 @@ class Buckets {
 
     /** Share the bucket with another person
     * @param  {String} bucket id
-    * @param  {JSON} data - 
+    * @param  {JSON} data -
     * @param  {String} data.email - Email to receive invitation
     * @param  {String} data.message - Scope message for the email
     * @param  {String} data.permission - Permission to be applied
@@ -219,7 +291,7 @@ class Buckets {
 
     /** Change permissions of the bucket
     * @param  {String} share id
-    * @param  {JSON} data - 
+    * @param  {JSON} data -
     * @param  {String} data.email - Email to change permissions
     * @param  {String} data.permission - New Permission to be applied
     * @param  {String} data.everyone
@@ -242,17 +314,17 @@ class Buckets {
     shareDelete(share_id) {
         if (!share_id || share_id == '') {
             return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
-        } 
+        }
         return share.remove('bucket', share_id, this.default_options);
     }
 
     /** Share the bucket with another person
     * @param  {String} output csv/json/xml
-    * @param  {Object[]} buckets - 
+    * @param  {Object[]} buckets -
     * @param  {String} buckets[].id - bucket id to be filtred
     * @param  {String} buckets[].origin - variable origin to be filtred
     * @param  {Object[]} buckets[].variables - Array with variables name to be exported
-    * @param  {Object} options - 
+    * @param  {Object} options -
     * @param  {String} options.start_date - start date to be filtred
     * @param  {String} options.end_date - end date to be filtred
     * @return {Promise}
