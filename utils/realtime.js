@@ -8,6 +8,10 @@ const options = {
     // 'transports': ['websocket']
 };
 
+/**
+ * Create a realtime object to connect with Tago
+ * .Clear(/event/) - Erase an default event.
+ */
 class Realtime {
     constructor(token) {
         if (!token) throw 'Needs a token';
@@ -25,29 +29,28 @@ class Realtime {
         this.socket.on('reconnect', () => this.socket.emit('register', this.token));
         this.socket.on('reconnect_error', () => console.log('Failed to reestablish connection.'));
     }
-
+    clear(event) {
+        this.socket.off(event);
+    }
     set disconnect(func) {
-        this.socket.off('disconnect');
         this.socket.on('disconnect', func);
     }
     set connect(func) {
-        this.socket.off('connect');
         this.socket.once('connect', func);
     }
     set reconnect(func) {
-        this.socket.off('reconnect');
         this.socket.on('reconnect', func);
     }
+    set reconnecting(func) {
+        this.socket.on('reconnecting', func);
+    }
     set connect_timeout(func) {
-        this.socket.off('connect_timeout');
         this.socket.on('connect_timeout', func);
     }
     set register(func) {
-        this.socket.off('register');
         this.socket.on('register', func);
     }
     set error(func) {
-        this.socket.off('error');
         this.socket.on('error', func);
     }
     get get_socket() {
@@ -62,6 +65,7 @@ class Realtime {
     get methods() {
         return {
             'disconnect':      this.disconnect,
+            'clear':           this.clear,
             'connect':         this.connect,
             'reconnect':       this.reconnecting,
             'register':        this.register,
