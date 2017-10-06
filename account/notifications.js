@@ -122,6 +122,22 @@ class Notifications {
         const options = Object.assign({}, this.default_options, { url, method, data });
         return request(options);
     }
+
+    /**
+     * Unregister device Token on Push Notification Service
+     * @param {String} device_token Token of device
+     * @internal
+     */
+    unRegisterDevice(device_token) {
+        const url = `${config.api_url}/notification/push/unregister`;
+        const method = 'POST';
+        const data = {
+            device_token,
+        };
+
+        const options = Object.assign({}, this.default_options, { url, method, data });
+        return request(options);
+    }
 }
 
 module.exports = Notifications;
