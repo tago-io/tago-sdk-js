@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "axios": "0.16.2",
+    "co": "4.6.0",
     "qs": "6.5.1",
     "socket.io-client": "2.0.3"
   },
