@@ -4,7 +4,6 @@ const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const Widgets          = require('./dashboards.widgets.js');
-const Realtime         = require('./../utils/').realtime;
 const share            = require('./_share.js');
 
 class Dashboards {
@@ -137,36 +136,6 @@ class Dashboards {
     let options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
-
-  /** Get Info of the Dashboard
-    * @param  {String} dashboard_id id of the dashboard
-    * @param  {function} func function to run when realtime is triggered
-    * @return {Promise}
-     */
-  listening(dashboard_id, func, realtime) {
-    if (!dashboard_id || dashboard_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return Promise.reject('Dashboard ID parameter is obrigatory.');
-    }
-
-    if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
-
-    realtime = realtime || this.realtime;
-    realtime.get_socket.on(`dashboard:${dashboard_id}`, func);
-
-    return Promise.resolve('Listening to Dashboard ' +dashboard_id);
-  }
-
-  /** Stop to listen the dashboard by its ID
-    * @param  {String} dashboard_id id of the dashboard
-     */
-  stopListening(id, realtime) {
-    if (!this.realtime && !realtime) return;
-
-    realtime = realtime || this.realtime;
-    realtime.get_socket.off(`dashboard:${id}`);
-  }
-
 
   /******************************************* */
 

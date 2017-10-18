@@ -3,7 +3,7 @@ const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
-const Realtime         = require('./../utils/').realtime;
+const Realtime         = require('../realtime');
 
 class Analysis {
   constructor(acc_token) {
@@ -13,38 +13,38 @@ class Analysis {
       'headers': default_headers(this)
     };
   }
-    
+
   /** List Analysis
-     * @param  {Number} page 
-     * Page of list starting from 1
-     * Default: 1
-     * @param  {Array} fields
-     * Array of field names
-     * Default: ['id', 'name']
-     * Example: ['id', 'name', 'visible']
-     * 
-     * Values allowed:
-     * id, name, description, visible, backup, data_retention, last_backup,
-     * account, tags, created_at, updated_at.
-     * @param  {JSON} filter 
-     * JSON of filter
-     * Without default
-     * Example: {name: 'Motor'}
-     * Values allowed: same of fields parameter.
-     * 
-     * TIP: On name you can use * (asterisk) as wildcard.
-     * @param {Number} amount
-     * Amount of items will return
-     * Default is 20
-     * @param {String} orderBy
-     * Order by a field
-     * Examples:
-     *  'name,asc'
-     *  'name,desc'
-     *  'name' [default: asc]
-     * @return {Promise}
-     * Array of analysis in alphabetically order.
-    */
+   * @param  {Number} page
+   * Page of list starting from 1
+   * Default: 1
+   * @param  {Array} fields
+   * Array of field names
+   * Default: ['id', 'name']
+   * Example: ['id', 'name', 'visible']
+   *
+   * Values allowed:
+   * id, name, description, visible, backup, data_retention, last_backup,
+   * account, tags, created_at, updated_at.
+   * @param  {JSON} filter
+   * JSON of filter
+   * Without default
+   * Example: {name: 'Motor'}
+   * Values allowed: same of fields parameter.
+   *
+   * TIP: On name you can use * (asterisk) as wildcard.
+   * @param {Number} amount
+   * Amount of items will return
+   * Default is 20
+   * @param {String} orderBy
+   * Order by a field
+   * Examples:
+   *  'name,asc'
+   *  'name,desc'
+   *  'name' [default: asc]
+   * @return {Promise}
+   * Array of analysis in alphabetically order.
+  */
   list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
     if (!arguments.length) return this._list(); // @deprecated
     const url    = `${config.api_url}/analysis`;
@@ -149,33 +149,38 @@ class Analysis {
     return request(options);
   }
 
-  /** Start listening the analysis console
-     * @param  {String} analyze_id id
-     * @param  {function} function function to run when realtime is triggered
-     * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
-     */
-  listening(analyze_id, func, realtime) {
+  /** Start listening the analyze console
+   * @param  {String} analyze_id Analyze ID
+   * @param  {function} func Function to run when realtime is triggered
+   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
+  */
+  listening(analyze_id, func, realtimeInstance) {
     if (!analyze_id || analyze_id == '') {
-      //If ID is send with null, it will get List instead info.
       return Promise.reject('Analyze ID parameter is obrigatory.');
     }
 
-    if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
+    if (!(realtimeInstance instanceof Realtime)) {
+      return Promise.reject('Invalid realtime instance');
+    }
 
-    realtime = realtime || this.realtime;
-    realtime.get_socket.on(`analyze:${analyze_id}`, func);
+    realtimeInstance.listening(`analysis:${analyze_id}`, func);
 
-    return Promise.resolve('Listening to Analyze ' +analyze_id);
+    return Promise.resolve('Listening to Analysis Console.');
   }
 
-  /** Stop to listen the analysis by its ID
-     * @param  {String} analyze_id id of the analysis
-     */
-  stopListening(analyze_id, realtime) {
-    if (!this.realtime && !realtime) return;
+  /** Stop to listen analyze console events
+   * @param  {String} analyze_id Analyze ID
+   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
+   * You should use same Realtime instance for listening and stopListening
+  */
+  stopListening(analyze_id, realtimeInstance) {
+    if (!(realtimeInstance instanceof Realtime)) {
+      return Promise.reject('Invalid realtime instance');
+    }
 
-    realtime = realtime || this.realtime;
-    realtime.get_socket.off(`analyze:${analyze_id}`);
+    realtimeInstance.stopListening(`analysis:${analyze_id}`);
+
+    return Promise.resolve('Stopped listening Analysis Console.');
   }
 
   /** Generate a new token for the analysis

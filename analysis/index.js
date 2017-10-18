@@ -1,6 +1,6 @@
 'use strict';
 const Services = require('./../services/');
-const Realtime = require('./../utils/realtime.js');
+const Realtime = require('../realtime');
 
 function stringify_msg(msg) {
   return (typeof msg === 'object' && !Array.isArray(msg) ? JSON.stringify(msg) : String(msg));
@@ -36,23 +36,15 @@ class Analysis {
       throw 'To run locally, needs a token.';
     }
     const scon = new Realtime(this._token);
-    scon.clear('connect');
-    scon.clear('reconnect');
-    scon.connect = () => {
-      console.log('Connected on Tago.io.');
-      scon.get_socket.emit('register:analysis', this._token);
-      scon.get_socket.on('register:analysis', (result) => {
-        if (!result.status) {
-          return console.log(result.result);
-        } else {
-          console.log(result.result);
-        }
+    scon.onConnect = () => console.log('Connected to Tago.');
+    scon.onDisconnect = () => console.log('Disconnected from Tago.');
+    scon.onError = (e) => console.error(e);
+
+    scon.connect().then(() => {
+      scon.listening('run:analysis', (scope) => {
+        this.run(scope.environment, scope.data, this._token);
       });
-    };
-    scon.reconnect = () => {
-      scon.get_socket.emit('register:analysis', this._token);
-    };
-    scon.get_socket.on('run:analysis', (scopes) => scopes.forEach(x => this.run(x.environment, x.data, this._token)));
+    }).catch(console.error);
   }
 }
 

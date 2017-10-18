@@ -2,7 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const Realtime        = require('./../utils/').realtime;
+const Realtime        = require('../realtime');
 
 class Notifications {
   constructor(acc_token) {
@@ -83,26 +83,32 @@ class Notifications {
     return request(options);
   }
 
-  /** Start listening the notifaticons
-     * @param  {function} function function to run when realtime is triggered
-     * @param  {class} realtime an realtime with personalized function. Be sure to call listening only inside a connect function (optional)
-     */
-  listening(func, realtime) {
-    if (!this.realtime && !realtime) this.realtime = new Realtime(this.token);
+  /** Start listening the notifications
+   * @param  {function} func Function to run when realtime is triggered
+   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
+  */
+  listening(func, realtimeInstance) {
+    if (!(realtimeInstance instanceof Realtime)) {
+      return Promise.reject('Invalid realtime instance');
+    }
 
-    realtime = realtime || this.realtime;
-    realtime.get_socket.on('notification', func);
+    realtimeInstance.listening('notification', func);
 
     return Promise.resolve('Listening to Notifications.');
   }
 
-  /** Stop to listen the analysis by its ID
-     * @param  {String} analyze_id id of the analysis
-     */
-  stoplistening(realtime) {
-    if (!this.realtime && !realtime) return;
+  /** Stop to listen notifications events
+   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
+   * You should use same Realtime instance for listening and stopListening
+  */
+  stopListening(realtimeInstance) {
+    if (!(realtimeInstance instanceof Realtime)) {
+      return Promise.reject('Invalid realtime instance');
+    }
 
-    realtime = realtime || this.realtime;
+    realtimeInstance.stopListening('notification');
+
+    return Promise.resolve('Stoped listening Notifications.');
   }
 
   /**
