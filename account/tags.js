@@ -4,27 +4,27 @@ const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 
 class Tags {
-    constructor(acc_token) {
-        this.token = acc_token;
-        this.default_options = {
-            'json':    true,
-            'headers': default_headers(this)
-        };
-    }
+  constructor(acc_token) {
+    this.token = acc_token;
+    this.default_options = {
+      'json':    true,
+      'headers': default_headers(this)
+    };
+  }
 
-    /** Get all Keys from certain type of section
+  /** Get all Keys from certain type of section
     * @param  {String} type
     * Type list to get the array of tags keys
     * It can be: bucket, device, dashboard, action, analysis
     * @return {Promise} Array of key name
     */
-    getTagKeys(type) {
-        let url    = `${config.api_url}/tags/keys/${type}`;
-        let method = 'GET';
+  getTagKeys(type) {
+    let url    = `${config.api_url}/tags/keys/${type}`;
+    let method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    let options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 }
 
 module.exports = Tags;

@@ -9,12 +9,12 @@ const default_headers = require('../comum/default_headers.js');
  * @return {Object}
  */
 function version() {
-    const url    = `${config.api_url}/status`;
-    const method = 'GET';
-    const headers = default_headers();
+  const url    = `${config.api_url}/status`;
+  const method = 'GET';
+  const headers = default_headers();
 
-    const options = Object.assign({}, headers, {url, method});
-    return request(options);
+  const options = Object.assign({}, headers, {url, method});
+  return request(options);
 }
 
 module.exports = version;

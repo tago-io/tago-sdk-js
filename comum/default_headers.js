@@ -13,18 +13,18 @@ try {
  * @return {JSON}
  */
 function default_headers(class_context) {
-    class_context = class_context || {};
-    let headers   = {};
+  class_context = class_context || {};
+  let headers   = {};
 
-    if (class_context.token) {
-        headers.Token = class_context.token;
-    }
+  if (class_context.token) {
+    headers.Token = class_context.token;
+  }
 
-    if (!isBrowser) {
-        headers['User-Agent'] = `Tago-Nodelib-${pkg.version}`;
-    }
+  if (!isBrowser) {
+    headers['User-Agent'] = `Tago-Nodelib-${pkg.version}`;
+  }
 
-    return headers;
+  return headers;
 }
 
 module.exports = default_headers;

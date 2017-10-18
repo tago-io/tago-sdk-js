@@ -14,179 +14,179 @@ const Tags          = require('./tags.js');
 
 
 class Account {
-    constructor(token) {
-        this.token = token;
-        this.default_options = {
-            'json':    true,
-            'headers': default_headers(this)
-        };
-    }
+  constructor(token) {
+    this.token = token;
+    this.default_options = {
+      'json':    true,
+      'headers': default_headers(this)
+    };
+  }
 
-    // ----------- Account methods -----------
+  // ----------- Account methods -----------
 
-    /** Account info
+  /** Account info
      * @return {Promise}
      */
-    info() {
-        const url    = `${config.api_url}/account`;
-        const method = 'GET';
+  info() {
+    const url    = `${config.api_url}/account`;
+    const method = 'GET';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** Account statistics
+  /** Account statistics
      * @param  {Object} params
      * @param  {String} paramsmonth
      * @param  {String} paramsyear
      * @return {Promise}
      */
-    statistics(params) {
-        const url    = `${config.api_url}/statistics`;
-        const method = 'GET';
+  statistics(params) {
+    const url    = `${config.api_url}/statistics`;
+    const method = 'GET';
 
-        const options = Object.assign({}, this.default_options, {url, method, params});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method, params});
+    return request(options);
+  }
 
-    /** Edit Account
+  /** Edit Account
     * @param  {String} device id
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(data) {
-        data       = data || {};
-        const url    = `${config.api_url}/account`;
-        const method = 'PUT';
+  edit(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account`;
+    const method = 'PUT';
 
-        const options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 
-    /** Delete Account
+  /** Delete Account
     * @param  {String} device id
     * @param  {Object} data
     * @return {Promise}
      */
-    delete() {
-        const url    = `${config.api_url}/account`;
-        const method = 'DELETE';
+  delete() {
+    const url    = `${config.api_url}/account`;
+    const method = 'DELETE';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** List Profiles of the Account
+  /** List Profiles of the Account
      * @return {Promise}
      */
-    profileList() {
-        const url    = `${config.api_url}/account/profile`;
-        const method = 'GET';
+  profileList() {
+    const url    = `${config.api_url}/account/profile`;
+    const method = 'GET';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** Generate a new Profile
+  /** Generate a new Profile
      * @return {Promise}
      */
-    profileCreate(data) {
-        data       = data || {};
-        const url    = `${config.api_url}/account/profile`;
-        const method = 'POST';
+  profileCreate(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account/profile`;
+    const method = 'POST';
 
-        const options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 
-    /** List Profiles of the Account
+  /** List Profiles of the Account
      * @return {Promise}
      */
-    profileDelete(profile_id) {
-        const url    = `${config.api_url}/account/profile/${profile_id}`;
-        const method = 'DELETE';
+  profileDelete(profile_id) {
+    const url    = `${config.api_url}/account/profile/${profile_id}`;
+    const method = 'DELETE';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** List Tokens of the Account
+  /** List Tokens of the Account
      * @return {Promise}
      */
-    tokenList() {
-        const url    = `${config.api_url}/account/profile/token`;
-        const method = 'GET';
+  tokenList() {
+    const url    = `${config.api_url}/account/profile/token`;
+    const method = 'GET';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** Generate Account Token
+  /** Generate Account Token
      * @return {Promise}
      */
-    tokenCreate(data) {
-        data       = data || {};
-        const url    = `${config.api_url}/account/profile/token`;
-        const method = 'POST';
+  tokenCreate(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account/profile/token`;
+    const method = 'POST';
 
-        const headers = default_headers();
-        const options = {url, method, data, headers};
-        return request(options);
-    }
+    const headers = default_headers();
+    const options = {url, method, data, headers};
+    return request(options);
+  }
 
-    /** List Tokens of the Account
+  /** List Tokens of the Account
      * @return {Promise}
      */
-    tokenDelete() {
-        const url    = `${config.api_url}/account/profile/token`;
-        const method = 'DELETE';
+  tokenDelete() {
+    const url    = `${config.api_url}/account/profile/token`;
+    const method = 'DELETE';
 
-        const options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** Retrieve list of profiles for login
+  /** Retrieve list of profiles for login
      * @param  {string} data.email - email for login
      * @param  {string} data.password - password for login
      * @return {Promise}
      */
-    login(data) {
-        data       = data || {};
-        const url    = `${config.api_url}/account/profile/login`;
-        const method = 'POST';
+  login(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account/profile/login`;
+    const method = 'POST';
 
-        const headers = default_headers();
-        const options = {url, method, data, headers};
-        return request(options);
-    }
+    const headers = default_headers();
+    const options = {url, method, data, headers};
+    return request(options);
+  }
 
-    /** Send password recover email
+  /** Send password recover email
      * @param  {string} email - email of the account
      * @return {Promise}
      */
-    static passwordRecover(email) {
-        const url    = `${config.api_url}/account/passwordreset/${email}`;
-        const method = 'GET';
+  static passwordRecover(email) {
+    const url    = `${config.api_url}/account/passwordreset/${email}`;
+    const method = 'GET';
 
-        const headers = default_headers();
-        const options = {url, method, headers};
-        return request(options);
-    }
+    const headers = default_headers();
+    const options = {url, method, headers};
+    return request(options);
+  }
 
-    /** Change password using token of the password recover
+  /** Change password using token of the password recover
      * @param  {string} password - new password
      * @return {Promise}
      */
-    passwordChange(password) {
-        const data   = { password };
-        const url    = `${config.api_url}/account/passwordreset`;
-        const method = 'POST';
+  passwordChange(password) {
+    const data   = { password };
+    const url    = `${config.api_url}/account/passwordreset`;
+    const method = 'POST';
 
-        const options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 
-    /** Create new account on Tago
+  /** Create new account on Tago
      * @param  {string} name - name of the account
      * @param  {string} email - email of the account
      * @param  {string} password - password of the account
@@ -197,70 +197,70 @@ class Account {
      * @param  {boolean} newsletter - newsletter activated
      * @return {Promise}
      */
-    static create(name, email, password, cpassword, country, timezone, company, newsletter) {
-        const url    = `${config.api_url}/account`;
-        const method = 'POST';
-        const data = {
-            name, email, password, cpassword, country, timezone, company, newsletter,
-        };
+  static create(name, email, password, cpassword, country, timezone, company, newsletter) {
+    const url    = `${config.api_url}/account`;
+    const method = 'POST';
+    const data = {
+      name, email, password, cpassword, country, timezone, company, newsletter,
+    };
 
-        const headers = default_headers();
-        const options = {url, method, headers, data};
-        return request(options);
-    }
+    const headers = default_headers();
+    const options = {url, method, headers, data};
+    return request(options);
+  }
 
-    /** Re-send confirmation account email
+  /** Re-send confirmation account email
      * @param  {string} email - email of the account
      * @return {Promise}
      */
-    static resendConfirmation(email) {
-        const url    = `${config.api_url}/account/resend_confirmation/${email}`;
-        const method = 'GET';
+  static resendConfirmation(email) {
+    const url    = `${config.api_url}/account/resend_confirmation/${email}`;
+    const method = 'GET';
 
-        const headers = default_headers();
-        const options = {url, method, headers};
-        return request(options);
-    }
+    const headers = default_headers();
+    const options = {url, method, headers};
+    return request(options);
+  }
 
-    /** Confirm account creation
+  /** Confirm account creation
      * @param  {string} token - confirmation token
      * @return {Promise}
      */
-    static confirmAccount(token) {
-        const url    = `${config.api_url}/account/confirm/${token}`;
-        const method = 'GET';
+  static confirmAccount(token) {
+    const url    = `${config.api_url}/account/confirm/${token}`;
+    const method = 'GET';
 
-        const headers = default_headers();
-        const options = {url, method, headers};
-        return request(options);
+    const headers = default_headers();
+    const options = {url, method, headers};
+    return request(options);
 
-    }
+  }
 
-    // ----------- Sub-methods -----------
-    get actions() {
-        return new Actions(this.token);
-    }
-    get analysis() {
-        return new Analysis(this.token);
-    }
-    get buckets() {
-        return new Buckets(this.token);
-    }
-    get dashboards() {
-        return new Dashboards(this.token);
-    }
-    get devices() {
-        return new Devices(this.token);
-    }
-    get notifications() {
-        return new Notifications(this.token);
-    }
-    get middlewares() {
-        return new Middlewares(this.token);
-    }
-    get tags() {
-        return new Tags(this.token);
-    }
+  // ----------- Sub-methods -----------
+  get actions() {
+    return new Actions(this.token);
+  }
+  get analysis() {
+    return new Analysis(this.token);
+  }
+  get buckets() {
+    return new Buckets(this.token);
+  }
+  get dashboards() {
+    return new Dashboards(this.token);
+  }
+  get devices() {
+    return new Devices(this.token);
+  }
+  get notifications() {
+    return new Notifications(this.token);
+  }
+  get middlewares() {
+    return new Middlewares(this.token);
+  }
+  get tags() {
+    return new Tags(this.token);
+  }
 }
 
 module.exports = Account;
