@@ -1,7 +1,7 @@
 'use strict';
 /* eslint no-unused-vars: 0 */
 
-process.env.DEBUG = '*';
+// process.env.DEBUG = '*';
 
 const socketclient = require('socket.io-client');
 const config  = require('../config.js');
