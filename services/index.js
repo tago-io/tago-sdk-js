@@ -7,31 +7,31 @@ const MQTT    = require('./mqtt.js');
 const Notification    = require('./notification.js');
 
 class Services {
-    constructor(token) {
-        this.token = token;
-    }
+  constructor(token) {
+    this.token = token;
+  }
 
-    get sms() {
-        return new SMS(this.token);
-    }
+  get sms() {
+    return new SMS(this.token);
+  }
 
-    get console() {
-        return new Console(this.token);
-    }
+  get console() {
+    return new Console(this.token);
+  }
 
-    get email() {
-        return new Email(this.token);
-    }
+  get email() {
+    return new Email(this.token);
+  }
 
-    get socket() {
-        return new Socket(this.token);
-    }
-    get MQTT() {
-        return new MQTT(this.token);
-    }
-    get Notification() {
-        return new Notification(this.token);
-    }
+  get socket() {
+    return new Socket(this.token);
+  }
+  get MQTT() {
+    return new MQTT(this.token);
+  }
+  get Notification() {
+    return new Notification(this.token);
+  }
 }
 
 module.exports = Services;

@@ -2,13 +2,13 @@
 const express = require('express');
 const app     = new express();
 app.all('*', function (req, res) {
-    let model = {
-        'url'  : req.url,
-        'token': req.headers.token,
-        'data' : req.data,
-        'query': req.query,
-        'method': req.method
-    };
-    res.send({'status': true, 'result':model});
+  let model = {
+    'url'  : req.url,
+    'token': req.headers.token,
+    'data' : req.data,
+    'query': req.query,
+    'method': req.method
+  };
+  res.send({'status': true, 'result':model});
 });
 app.listen(5000);

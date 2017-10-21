@@ -2,8 +2,8 @@
 const Extra = require('../extra');
 
 function getWeather(address) {
-    const weather = new Extra('weather', 'wunderground_api_key');
-    weather.current(address).then(console.log, console.log);
+  const weather = new Extra('weather', 'wunderground_api_key');
+  weather.current(address).then(console.log, console.log);
 }
 
 getWeather('Paranavaí');

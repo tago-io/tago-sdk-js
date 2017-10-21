@@ -5,15 +5,15 @@ const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 
 class Actions {
-    constructor(acc_token) {
-        this.token = acc_token;
-        this.default_options = {
-            'json':    true,
-            'headers': default_headers(this)
-        };
-    }
+  constructor(acc_token) {
+    this.token = acc_token;
+    this.default_options = {
+      'json':    true,
+      'headers': default_headers(this)
+    };
+  }
 
-    /** List Action
+  /** List Action
      * @param  {Number} page 
      * Page of list starting from 1
      * Default: 1
@@ -44,95 +44,95 @@ class Actions {
      * @return {Promise}
      * Array of action in alphabetically order.
     */
-    list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
-        if (!arguments.length) return this._list(); // @deprecated
-        const url    = `${config.api_url}/action`;
-        const method = 'GET';
+  list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+    if (!arguments.length) return this._list(); // @deprecated
+    const url    = `${config.api_url}/action`;
+    const method = 'GET';
 
-        let options = Object.assign({}, this.default_options, {
-            url,
-            method,
-            paramsSerializer,
-            params: {
-                page,
-                filter,
-                fields,
-                amount,
-                orderBy,
-            },
-        });
-        return request(options);
-    }
+    let options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: {
+        page,
+        filter,
+        fields,
+        amount,
+        orderBy,
+      },
+    });
+    return request(options);
+  }
 
-    /**
+  /**
      * It return old api style
      * @deprecated
      */
-    _list() {
-        const parameters = [
-            1,
-            ['action', 'active', 'created_at', 'id', 'last_run', 'lock', 'name', 'tags'],
-            {},
-            1000,
-            'name'
-        ];
-        return this.list.call(this, ...parameters);
-    }
+  _list() {
+    const parameters = [
+      1,
+      ['action', 'active', 'created_at', 'id', 'last_run', 'lock', 'name', 'tags'],
+      {},
+      1000,
+      'name'
+    ];
+    return this.list.call(this, ...parameters);
+  }
 
-    /** Create a Action
+  /** Create a Action
     * @param  {JSON} data
     * @return {Promise}
      */
-    create(data) {
-        data       = data || {};
-        let url    = `${config.api_url}/action`;
-        let method = 'POST';
+  create(data) {
+    data       = data || {};
+    let url    = `${config.api_url}/action`;
+    let method = 'POST';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
+    let options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 
-    /** Edit the Action
+  /** Edit the Action
     * @param  {String} action id
     * @param  {Object} data
     * @return {Promise}
      */
-    edit(action_id, data) {
-        data       = data || {};
-        let url    = `${config.api_url}/action/${action_id}`;
-        let method = 'PUT';
+  edit(action_id, data) {
+    data       = data || {};
+    let url    = `${config.api_url}/action/${action_id}`;
+    let method = 'PUT';
 
-        let options = Object.assign({}, this.default_options, {url, method, data});
-        return request(options);
-    }
+    let options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 
-    /** Delete the Action
+  /** Delete the Action
     * @param  {String} action id
     * @return {Promise}
      */
-    delete(action_id) {
-        let url    = `${config.api_url}/action/${action_id}`;
-        let method = 'DELETE';
+  delete(action_id) {
+    let url    = `${config.api_url}/action/${action_id}`;
+    let method = 'DELETE';
 
-        let options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
-    }
+    let options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
-    /** Get Info of the Action
+  /** Get Info of the Action
     * @param  {String} action id
     * @return {Promise}
      */
-    info(action_id) {
-        if (!action_id || action_id == '') {
-            //If ID is send with null, it will get List instead info.
-            return new Promise((resolve,reject) => reject('Action ID parameter is obrigatory.'));
-        }
-        let url    = `${config.api_url}/action/${action_id}`;
-        let method = 'GET';
-
-        let options = Object.assign({}, this.default_options, {url, method});
-        return request(options);
+  info(action_id) {
+    if (!action_id || action_id == '') {
+      //If ID is send with null, it will get List instead info.
+      return new Promise((resolve,reject) => reject('Action ID parameter is obrigatory.'));
     }
+    let url    = `${config.api_url}/action/${action_id}`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 }
 
 module.exports = Actions;
