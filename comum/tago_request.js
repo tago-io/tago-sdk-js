@@ -17,7 +17,7 @@ function resultHandler(request_options, result) {
 }
 
 function errorHandler(error) {
-  if (!error.response.data) {
+  if (!error.response || !error.response.data) {
     throw error;
   }
   const { message, status, result } = error.response.data;
@@ -35,7 +35,7 @@ const waitTime = () => new Promise(resolve => setTimeout(() => resolve(), 1000))
 function tago_request(request_options) {
   let _axios = axios;
   if (this && this.axios) _axios = this.axios;
-    
+
   return co(function* _() {
     request_options.timeout = 60000;
     let result;
@@ -43,7 +43,7 @@ function tago_request(request_options) {
     for (let i = 1; i <= config.request_attempts; i+=1) {
       result = yield _axios(request_options).then(_resultHandler, errorHandler);
       if (result !== 'Timeout') break;
-            
+
       yield waitTime();
     }
     if (result === 'Timeout') result = 'SDK: Request timed out';
