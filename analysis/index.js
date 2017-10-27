@@ -36,9 +36,10 @@ class Analysis {
       throw 'To run locally, needs a token.';
     }
     const scon = new Realtime(this._token);
-    scon.onConnect = () => console.log('Connected to Tago.');
-    scon.onDisconnect = () => console.log('Disconnected from Tago.');
+    scon.onConnect = () => console.info('Connected to Tago.');
+    scon.onDisconnect = () => console.info('Disconnected from Tago.');
     scon.onError = (e) => console.error(e);
+    scon.onRegisterAnalysis = (analysis) => console.info(`Analysis [${analysis.name}] Started.`);
 
     scon.connect().then(() => {
       scon.listening('run:analysis', (scope) => {

@@ -33,6 +33,7 @@ class Realtime {
         this.socket = socket;
         resolve();
       });
+      socket.once('register:analysis', this.onRegisterAnalysis);
 
       socket.on('register', () => (this._shouldUpdateWaitFor = true));
 
@@ -111,6 +112,10 @@ class Realtime {
    * { status: true, result: 'Attached 2 events' }
    */
   onWaitForResponse(msg) { }
+  /**
+   * @interface
+   */
+  onRegisterAnalysis(analysisObj) { }
 }
 
 module.exports = Realtime;
