@@ -36,8 +36,6 @@ function tago_request(request_options) {
   let _axios = axios;
   if (this && this.axios) _axios = this.axios;
 
-<<<<<<< HEAD
-=======
   if (String(request_options.method).toLowerCase() === 'get') {
     if (!request_options.params) {
       request_options.params = {};
@@ -45,7 +43,6 @@ function tago_request(request_options) {
     request_options.params.avoidCache = new Date().getTime();
   }
 
->>>>>>> 53c3659abd77672f64202fc110d5ad9d99656d9f
   return co(function* _() {
     request_options.timeout = 60000;
     let result;
