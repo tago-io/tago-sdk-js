@@ -4,7 +4,7 @@ const co = require('co');
 /**
  * Get a token of a device by its name
  * @param  {account} account account object from tago
- * @param  {string} device_id id of the device 
+ * @param  {string} device_id id of the device
  * @param  {string|array} name name of the token, if null will return the first token found
  * @return {String} token
  */
@@ -18,7 +18,7 @@ function getTokenByName(account, device_id, names = null) {
       names = Array.isArray(names) ? names : [names];
       for (const name of names) {
         token = tokens.find((token) => token.name.indexOf(name) >= 0);
-        if (token) return;
+        if (token) break;
       }
     } else {
       token = tokens[0];
