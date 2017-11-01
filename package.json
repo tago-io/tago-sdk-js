@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "5.2.5",
+  "version": "5.2.6",
   "description": "Tago SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
   "homepage": "https://tago.io",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "axios": "0.16.2",
+    "co": "4.6.0",
     "qs": "6.5.1",
     "socket.io-client": "2.0.3"
   },

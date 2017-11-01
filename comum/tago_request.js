@@ -17,7 +17,7 @@ function resultHandler(request_options, result) {
 }
 
 function errorHandler(error) {
-  if (!error.response.data) {
+  if (!error.response || !error.response.data) {
     throw error;
   }
   const { message, status, result } = error.response.data;
