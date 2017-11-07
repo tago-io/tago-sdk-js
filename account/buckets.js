@@ -171,6 +171,22 @@ class Buckets {
     return request(options);
   }
 
+  /**
+   * Get all device associated with bucket
+   * @param {String} bkt_id Bucket id
+   * @return {Promise} Array of Devices with ID and Name
+   */
+  getDevicesAssociated(bkt_id) {
+    if (!bkt_id || bkt_id == '') {
+      return Promise.reject('Bucket ID parameter is obrigatory.');
+    }
+    let url = `${config.api_url}/bucket/${bkt_id}/device`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
   /** Get Amount of data on the Bucket
     * @param  {String} Bucket id
     * @return {Promise} With number of amount
