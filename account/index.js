@@ -3,14 +3,16 @@ const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const request         = require('../comum/tago_request.js');
 
-const Actions       = require('./actions.js');
-const Analysis      = require('./analysis.js');
-const Buckets       = require('./buckets.js');
-const Dashboards    = require('./dashboards.js');
-const Devices       = require('./devices.js');
-const Notifications = require('./notifications.js');
-const Middlewares   = require('./middlewares.js');
-const Tags          = require('./tags.js');
+const Actions        = require('./actions.js');
+const Analysis       = require('./analysis.js');
+const Buckets        = require('./buckets.js');
+const Dashboards     = require('./dashboards.js');
+const Devices        = require('./devices.js');
+const Notifications  = require('./notifications.js');
+const Middlewares    = require('./middlewares.js');
+const Tags           = require('./tags.js');
+const PaymentMethods = require('./paymentMethods');
+const Plan           = require('./plan');
 
 
 class Account {
@@ -260,6 +262,12 @@ class Account {
   }
   get tags() {
     return new Tags(this.token);
+  }
+  get paymentMethods() {
+    return new PaymentMethods(this.token);
+  }
+  get plan() {
+    return new Plan(this.token);
   }
 }
 
