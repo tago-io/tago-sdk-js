@@ -201,6 +201,7 @@ class Dashboards {
 
   /** Generate a new public token for the dashboard
     * @param  {String} dashboard id
+    * @param  {String} expire_time time when token will expire. (optional)
     * @return {Promise}
      */
   genPublicToken(dashboard_id, expire_time = 'never') {
