@@ -203,15 +203,16 @@ class Dashboards {
     * @param  {String} dashboard id
     * @return {Promise}
      */
-  genPublicToken(dashboard_id) {
+  genPublicToken(dashboard_id, expire_time = 'never') {
     if (!dashboard_id || dashboard_id == '') {
       //If ID is send with null, it will get List instead info.
       return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
     }
-    let url    = `${config.api_url}/dashboard/${dashboard_id}/share/public`;
-    let method = 'GET';
+    const url    = `${config.api_url}/dashboard/${dashboard_id}/share/public`;
+    const method = 'GET';
+    const params = { expire_time };
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = Object.assign({}, this.default_options, {url, method, params});
     return request(options);
   }
 
