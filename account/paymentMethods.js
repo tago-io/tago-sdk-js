@@ -16,12 +16,7 @@ class PaymentMethods {
   * @param  {JSON} data
   * @argument {*String} data.name
   * @argument {*String} data.token
-  * @argument {*String} data.brand
-  * @argument {*String} data.country
-  * @argument {*String} data.last4
-  * @argument {*String} data.funding
-  * @argument {*String} data.card_id
-  * @argument {*String} data.client_ip
+  * @argument {*Boolean} data.default_card
   * @return {Promise}
   */
   create(data) {
@@ -43,6 +38,39 @@ class PaymentMethods {
     let options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
+
+  /**
+   * Set the default payment method.
+   * @param {*JSON} data 
+   * @argument {*String} data.id
+   * @return {Promise}
+   */
+  setDefaultPaymentMethod(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account/payment_method`;
+    const method = 'PUT';
+
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    console.log(url);
+    return request(options);
+  }
+
+  /**
+   * Set the default payment method.
+   * @param {*JSON} data 
+   * @argument {*String} data.id
+   * @return {Promise}
+   */
+  deletePaymentMethod(data) {
+    data       = data || {};
+    const url    = `${config.api_url}/account/payment_method`;
+    const method = 'DELETE';
+
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 }
+
+
 
 module.exports = PaymentMethods;
