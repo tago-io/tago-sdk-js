@@ -236,6 +236,25 @@ class Account {
 
   }
 
+  /** Confirm account creation
+     * @param  {object} filter - auditlog filter
+     * @param  {string} filter.nextToken - next token for pagination
+     * @param  {string} filter.ref_id - id of an analysis, device, bucket, action, dashboard, or widget
+     * @param  {string} filter.find - text to find on log, can accept "*"
+     * @param  {string} filter.start_date - start date
+     * @param  {string} filter.end_date - end date
+     * @return {Promise}
+     */
+  static auditlog(filter) {
+    const url    = `${config.api_url}/auditlog`;
+    const method = 'GET';
+
+    const headers = default_headers();
+    const options = {url, method, headers, params: filter};
+    return request(options);
+
+  }
+
   // ----------- Sub-methods -----------
   get actions() {
     return new Actions(this.token);
