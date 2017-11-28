@@ -2,6 +2,7 @@
 const request          = require('../comum/tago_request.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
+const paramsSerializer = require('../comum/paramsSerializer');
 
 class Plan {
   constructor(acc_token) {
@@ -23,6 +24,25 @@ class Plan {
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
+  
+  /** Activate a plan
+  * @param  {*String} plan_id
+  * @return {Promise}
+  */
+  getCurrentValue(plan_id) {
+    const url    = `${config.api_url}/account/plan_value`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: {
+        id: plan_id,
+      },
+    });
     return request(options);
   }
 }
