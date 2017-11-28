@@ -247,12 +247,11 @@ class Account {
      * @param  {string} filter.end_date - end date
      * @return {Promise}
      */
-  static auditlog(filter) {
+  auditlog(params = {}) {
     const url    = `${config.api_url}/auditlog`;
     const method = 'GET';
 
-    const headers = default_headers();
-    const options = {url, method, headers, params: filter};
+    const options = Object.assign({}, this.default_options, {url, method, params});
     return request(options);
 
   }
