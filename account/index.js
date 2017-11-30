@@ -13,6 +13,7 @@ const Middlewares    = require('./middlewares.js');
 const Tags           = require('./tags.js');
 const PaymentMethods = require('./paymentMethods');
 const Plan           = require('./plan');
+const PaymentHistory = require('./paymentHistory');
 
 
 class Account {
@@ -286,6 +287,9 @@ class Account {
   }
   get plan() {
     return new Plan(this.token);
+  }
+  get PaymentHistory() {
+    return new PaymentHistory(this.token);
   }
 }
 
