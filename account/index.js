@@ -288,7 +288,7 @@ class Account {
   get plan() {
     return new Plan(this.token);
   }
-  get PaymentHistory() {
+  get paymentHistory() {
     return new PaymentHistory(this.token);
   }
 }
