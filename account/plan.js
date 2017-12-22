@@ -19,7 +19,7 @@ class Plan {
   * @return {Promise}
   */
   activate(data) {
-    data       = data || {};
+    data         = data || {};
     const url    = `${config.api_url}/account/plan`;
     const method = 'POST';
 
