@@ -9,6 +9,6 @@ const Services = require('../services');
   const to = 'test@tago.io';
   const subject = 'Email Service Test';
   const message = 'Scope of my message';
-    
+
   email.send(to, subject, message).then(console.log).catch(console.log);
 })();

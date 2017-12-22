@@ -19,7 +19,7 @@ class Plan {
   * @return {Promise}
   */
   activate(data) {
-    data       = data || {};
+    data         = data || {};
     const url    = `${config.api_url}/account/plan`;
     const method = 'POST';
 
@@ -42,6 +42,21 @@ class Plan {
       params: {
         id: plan_id,
       },
+    });
+    return request(options);
+  }
+
+  /** Activate a plan
+  * @return {Promise}
+  */
+  getActivePlan() {
+    const url    = `${config.api_url}/account/plan`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
     });
     return request(options);
   }
