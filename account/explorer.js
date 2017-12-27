@@ -50,13 +50,15 @@ class Explorer {
 
   /** Install an application in your account
      * @param  {string} explorer_id
+     * @param  {string} pincode pincode for installation, if needed
      * @return {Promise}
      */
-  installApplication(explorer_id) {
+  installApplication(explorer_id, pincode) {
+    const data       = {pincode};
     const url    = `${config.api_url}/application/install/${explorer_id}`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
 
