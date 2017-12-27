@@ -19,7 +19,7 @@ class Explorer {
     const url    = `${config.api_url}/explorer`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options);
+    let options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
 
@@ -53,7 +53,7 @@ class Explorer {
      * @return {Promise}
      */
   installApplication(explorer_id) {
-    const url    = `${config.api_url}/explorer/install/${explorer_id}`;
+    const url    = `${config.api_url}/application/install/${explorer_id}`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method});
