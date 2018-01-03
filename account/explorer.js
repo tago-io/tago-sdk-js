@@ -62,12 +62,24 @@ class Explorer {
     return request(options);
   }
 
+  /** Get an application from explorer
+     * @param  {string} application_id
+     * @return {Promise}
+     */
+  getExplorer(application_id) {
+    const url    = `${config.api_url}/explorer/${application_id}`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+
   /** Get an application from your account
      * @param  {string} application_id
      * @return {Promise}
      */
   getApplication(application_id) {
-    const url    = `${config.api_url}/explorer/${application_id}`;
+    const url    = `${config.api_url}/application/${application_id}`;
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, {url, method});
