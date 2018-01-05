@@ -47,6 +47,17 @@ class Explorer {
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
+  /** Get an application from explorer
+     * @param  {string} application_id
+     * @return {Promise}
+     */
+  getExplorer(application_id) {
+    const url    = `${config.api_url}/explorer/${application_id}`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
 
   /** Install an application in your account
      * @param  {string} explorer_id
@@ -61,14 +72,13 @@ class Explorer {
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
-
-  /** Get an application from explorer
-     * @param  {string} application_id
+  /** Uninstall the application from your account
+     * @param  {String} application_id id
      * @return {Promise}
      */
-  getExplorer(application_id) {
-    const url    = `${config.api_url}/explorer/${application_id}`;
-    const method = 'GET';
+  uninstallApplication(application_id) {
+    const url    = `${config.api_url}/application/${application_id}`;
+    const method = 'DELETE';
 
     const options = Object.assign({}, this.default_options, {url, method});
     return request(options);
@@ -98,7 +108,7 @@ class Explorer {
     return request(options);
   }
 
-  /** Create an application
+  /** Create an application device
     * @param  {string} application_id
     * @param  {JSON} data
     * @param  {string} data.name
@@ -108,10 +118,22 @@ class Explorer {
     */
   createApplicationDevice(application_id, data) {
     data       = data || {};
-    const url    = `${config.api_url}/application/device/${application_id}`;
+    const url    = `${config.api_url}/application/${application_id}/device`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
+  /** Remove the application from your account
+     * @param  {String} application_id id from application
+     * @param  {String} device_id id from device
+     * @return {Promise}
+     */
+  deleteApplicationDevice(application_id, device_id) {
+    const url    = `${config.api_url}/explorer/${application_id}/device/${device_id}`;
+    const method = 'DELETE';
+
+    const options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
 
