@@ -114,6 +114,7 @@ class Explorer {
     * @param  {string} data.name
     * @param  {string} data.serie_number
     * @param  {string} data.verification_code
+    * @param  {string} data.device
     * @return {Promise}
     */
   createApplicationDevice(application_id, data) {
@@ -158,6 +159,19 @@ class Explorer {
   delete(explorer_id) {
     const url    = `${config.api_url}/explorer/${explorer_id}`;
     const method = 'DELETE';
+
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+
+  /** Create an application device
+    * @param  {string} user_id
+    * @param  {string} dashboard_id
+    * @return {Promise}
+    */
+  shareDashboard(user_id, dashboard_id) {
+    const url    = `${config.api_url}/explorer/share/${dashboard_id}/${user_id}`;
+    const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method});
     return request(options);
