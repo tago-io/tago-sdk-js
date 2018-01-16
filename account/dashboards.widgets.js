@@ -75,13 +75,14 @@ class Widgets {
   /** Get all data for the current widget
     * @param  {String} dashboard id
     * @param  {String} widget id
+    * @param  {JSON} overwrite It can overwrite 'start_date', 'end_date', 'timezone' fields.
     * @return {Promise}
     */
-  getData(dashboard_id, widget_id) {
+  getData(dashboard_id, widget_id, overwrite = {}) {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = Object.assign({}, this.default_options, { url, method, params: { overwrite } });
     return request(options);
   }
 
