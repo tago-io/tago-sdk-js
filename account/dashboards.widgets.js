@@ -3,6 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const Realtime        = require('../realtime');
+const paramsSerializer = require('../comum/paramsSerializer.js');
 
 class Widgets {
   constructor(acc_token) {
@@ -82,7 +83,12 @@ class Widgets {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method, params: { overwrite } });
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: { overwrite }
+    });
     return request(options);
   }
 
