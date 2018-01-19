@@ -4,7 +4,7 @@ const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const Realtime         = require('../realtime');
 
-class Explorer {
+class Explore {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
@@ -13,22 +13,22 @@ class Explorer {
     };
   }
 
-  /** List applications on explorer
+  /** List applications on explore
   */
   list() {
-    const url    = `${config.api_url}/explorer`;
+    const url    = `${config.api_url}/explore`;
     const method = 'GET';
 
     let options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
 
-  /** Get an application from explorer
+  /** Get an application from explore
      * @param  {string} data
      * @return {Promise}
      */
-  get(explorer_id) {
-    const url    = `${config.api_url}/explorer/${explorer_id}`;
+  get(explore_id) {
+    const url    = `${config.api_url}/explore/${explore_id}`;
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, {url, method});
@@ -41,18 +41,18 @@ class Explorer {
      */
   create(data) {
     data       = data || {};
-    const url    = `${config.api_url}/explorer`;
+    const url    = `${config.api_url}/explore`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
-  /** Get an application from explorer
+  /** Get an application from explore
      * @param  {string} application_id
      * @return {Promise}
      */
-  getExplorer(application_id) {
-    const url    = `${config.api_url}/explorer/${application_id}`;
+  getexplore(application_id) {
+    const url    = `${config.api_url}/explore/${application_id}`;
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, {url, method});
@@ -60,13 +60,13 @@ class Explorer {
   }
 
   /** Install an application in your account
-     * @param  {string} explorer_id
+     * @param  {string} explore_id
      * @param  {string} pincode pincode for installation, if needed
      * @return {Promise}
      */
-  installApplication(explorer_id, pincode) {
+  installApplication(explore_id, pincode) {
     const data       = {pincode};
-    const url    = `${config.api_url}/application/install/${explorer_id}`;
+    const url    = `${config.api_url}/application/install/${explore_id}`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
@@ -131,33 +131,33 @@ class Explorer {
      * @return {Promise}
      */
   deleteApplicationDevice(application_id, device_id) {
-    const url    = `${config.api_url}/explorer/${application_id}/device/${device_id}`;
+    const url    = `${config.api_url}/explore/${application_id}/device/${device_id}`;
     const method = 'DELETE';
 
     const options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
 
-  /** Edit the explorer
-     * @param  {String} explorer id
+  /** Edit the explore
+     * @param  {String} explore id
      * @param  {Object} data
      * @return {Promise}
      */
-  edit(explorer_id, data) {
+  edit(explore_id, data) {
     data       = data || {};
-    const url    = `${config.api_url}/explorer/${explorer_id}`;
+    const url    = `${config.api_url}/explore/${explore_id}`;
     const method = 'PUT';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
 
-  /** Delete the explorer
-     * @param  {String} explorer id
+  /** Delete the explore
+     * @param  {String} explore id
      * @return {Promise}
      */
-  delete(explorer_id) {
-    const url    = `${config.api_url}/explorer/${explorer_id}`;
+  delete(explore_id) {
+    const url    = `${config.api_url}/explore/${explore_id}`;
     const method = 'DELETE';
 
     const options = Object.assign({}, this.default_options, {url, method});
@@ -170,7 +170,7 @@ class Explorer {
     * @return {Promise}
     */
   shareDashboard(user_id, dashboard_id) {
-    const url    = `${config.api_url}/explorer/share/${dashboard_id}/${user_id}`;
+    const url    = `${config.api_url}/explore/share/${dashboard_id}/${user_id}`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method});
@@ -178,4 +178,4 @@ class Explorer {
   }
 }
 
-module.exports = Explorer;
+module.exports = Explore;
