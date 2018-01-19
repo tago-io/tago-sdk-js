@@ -3,6 +3,7 @@ const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const Realtime        = require('../realtime');
+const paramsSerializer = require('../comum/paramsSerializer.js');
 
 class Widgets {
   constructor(acc_token) {
@@ -75,13 +76,19 @@ class Widgets {
   /** Get all data for the current widget
     * @param  {String} dashboard id
     * @param  {String} widget id
+    * @param  {JSON} overwrite It can overwrite 'start_date', 'end_date', 'timezone' fields.
     * @return {Promise}
     */
-  getData(dashboard_id, widget_id) {
+  getData(dashboard_id, widget_id, overwrite = {}) {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: { overwrite }
+    });
     return request(options);
   }
 
