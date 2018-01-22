@@ -14,7 +14,7 @@ const Tags           = require('./tags.js');
 const PaymentMethods = require('./paymentMethods');
 const Plan           = require('./plan');
 const PaymentHistory = require('./paymentHistory');
-const Explorer = require('./explorer');
+const Explore = require('./explore');
 
 
 class Account {
@@ -292,8 +292,8 @@ class Account {
   get paymentHistory() {
     return new PaymentHistory(this.token);
   }
-  get explorer() {
-    return new Explorer(this.token);
+  get explore() {
+    return new Explore(this.token);
   }
 }
 
