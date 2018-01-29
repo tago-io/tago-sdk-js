@@ -119,7 +119,7 @@ class Explore {
     */
   createApplicationDevice(application_id, data) {
     data       = data || {};
-    const url    = `${config.api_url}/application/${application_id}/device`;
+    const url    = `${config.api_url}/application/device/${application_id}`;
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options, {url, method, data});
@@ -131,7 +131,7 @@ class Explore {
      * @return {Promise}
      */
   deleteApplicationDevice(application_id, device_id) {
-    const url    = `${config.api_url}/explore/${application_id}/device/${device_id}`;
+    const url    = `${config.api_url}/application/device/${application_id}/${device_id}`;
     const method = 'DELETE';
 
     const options = Object.assign({}, this.default_options, {url, method});
