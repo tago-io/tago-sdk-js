@@ -201,11 +201,11 @@ class Account {
      * @param  {boolean} newsletter - newsletter activated
      * @return {Promise}
      */
-  static create(name, email, password, cpassword, country, timezone, company, newsletter) {
+  static create(name, email, password, cpassword, country, timezone, company, newsletter, developer) {
     const url    = `${config.api_url}/account`;
     const method = 'POST';
     const data = {
-      name, email, password, cpassword, country, timezone, company, newsletter,
+      name, email, password, cpassword, country, timezone, company, newsletter, developer,
     };
 
     const headers = default_headers();
