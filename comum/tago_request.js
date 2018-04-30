@@ -16,11 +16,21 @@ function resultHandler(request_options, result) {
   return result.data.result;
 }
 
-function errorHandler(error) {
+function errorHandler(error, originalRequestObject) {
+  const errorAxios = {
+    code: error.code,
+    errno: error.errno,
+    syscall: error.syscall,
+    response: error.response,
+  };
+
+  console.log(originalRequestObject, errorAxios);
+
   if (!error.response || !error.response.data) {
     throw error;
   }
   const { message, status, result } = error.response.data;
+
   if (error.config.method != 'POST' && message && message.includes('Timeout')) {
     return 'Timeout';
   }
@@ -48,7 +58,7 @@ function tago_request(request_options) {
     let result;
     const _resultHandler = resultHandler.bind(null, request_options);
     for (let i = 1; i <= config.request_attempts; i+=1) {
-      result = yield _axios(request_options).then(_resultHandler, errorHandler);
+      result = yield _axios(request_options).then(_resultHandler).catch((error) => errorHandler(error, request_options));
       if (result !== 'Timeout') break;
 
       yield waitTime();
