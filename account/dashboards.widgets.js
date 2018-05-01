@@ -168,6 +168,20 @@ class Widgets {
 
     return Promise.resolve('Stopped listening Widget Data.');
   }
+
+  /** Generate a new token for the embed widgets
+   * It can regenerate the token if call it multi-times
+   * @param  {String} dashboard_id Dashboard ID
+   * @param  {String} widget_id Widget ID
+   * @return {Promise}
+  */
+  tokenGenerate(dashboard_id, widget_id) {
+    const url = `${config.api_url}/data/${dashboard_id}/${widget_id}/token`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
 }
 
 module.exports = Widgets;
