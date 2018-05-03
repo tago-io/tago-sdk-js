@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "5.4.16",
+  "version": "5.4.17",
   "description": "Tago SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
   "homepage": "https://tago.io",
