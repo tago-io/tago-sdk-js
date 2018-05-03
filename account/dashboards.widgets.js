@@ -176,7 +176,7 @@ class Widgets {
    * @return {Promise}
   */
   tokenGenerate(dashboard_id, widget_id) {
-    const url = `${config.api_url}/data/${dashboard_id}/${widget_id}/token`;
+    const url = `${config.api_url}/dashboard/${dashboard_id}/widget/${widget_id}/token`;
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, { url, method });
