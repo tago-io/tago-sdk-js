@@ -209,6 +209,18 @@ class Analysis {
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
+
+  /** Get a url to download the analysis.
+    * @param  {String} analysis id
+    * @return {Promise}
+    */
+  downloadScript(analyze_id) {
+    const url = `${config.api_url}/analysis/${analyze_id}/download`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
 }
 
 module.exports = Analysis;
