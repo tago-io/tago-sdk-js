@@ -85,13 +85,13 @@ class Device {
 
   /** Remove items
    * @param  {JSON} queryToDelete
-   * You can use the same json query on .find to delete items
+   * You can use the same JSON query from .find to delete items
    * @return {Promise} Promise - The string message from server
    */
   remove(...args) {
     let [ queryOrID, qty ] = args;
     if (typeof queryOrID !== 'object' || qty === 'all') {
-      console.warn('The remove method using variable or id is deprecated, it should has a json as parameter, see our documentation for more information');
+      console.warn('The remove method using variable or ID is deprecated, it should have a JSON as a parameter, see our documentation for more information');
       return this.removeDeprecated(...args);
     }
 
