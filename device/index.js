@@ -64,11 +64,12 @@ class Device {
   }
 
   /** remove
-     * @param  {string} variable_or_id
-     * @param  {number} [qty] default is 1
-     * @return {Promise}
-     */
-  remove(variable_or_id, qty) {
+   * @deprecated
+   * @param  {string} variable_or_id
+   * @param  {number} [qty] default is 1
+   * @return {Promise}
+   */
+  removeDeprecated(variable_or_id, qty) {
     let url    = `${config.api_url}/data`;
     if (variable_or_id) {
       url += `/${variable_or_id}`;
@@ -78,6 +79,34 @@ class Device {
     let method = 'DELETE';
 
     let options = Object.assign({}, this.default_options, {url, method, params});
+
+    return request(options);
+  }
+
+  /** Remove items
+   * @param  {JSON} queryToDelete
+   * You can use the same json query on .find to delete items
+   * @return {Promise} Promise - The string message from server
+   */
+  remove(...args) {
+    let [ queryOrID, qty ] = args;
+    if (typeof queryOrID !== 'object' || qty === 'all') {
+      console.warn('The remove method using variable or id is deprecated, it should has a json as parameter, see our documentation for more information');
+      return this.removeDeprecated(...args);
+    }
+
+    if (args.length === 0) {
+      queryOrID = {
+        query: 'last_item',
+      };
+    }
+
+    const query_obj = queryOrID || {};
+    const url = `${config.api_url}/data`;
+    const method = 'DELETE';
+    const params = Object.assign({}, this.default_options.qs || {}, query_obj);
+
+    const options = Object.assign({}, this.default_options, { url, method, params });
 
     return request(options);
   }
