@@ -32,7 +32,7 @@ Get all information from the device
 
 .insert
 *******
-Insert a new data into a bucket. You can get more information about what information can be passed with insert in our `api documentation <http://docs.tago.io/en/latest/api.html#send-data>`_
+Insert a new data into a bucket. You can get more information about what information can be passed with insert in our `api documentation <http://docs.tago.io/en/articles/34>`_
 
 | **Syntax**
 | *.insert(/data/)*
@@ -72,7 +72,7 @@ Insert a new data into a bucket. You can get more information about what informa
 
 .find
 *******
-Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <http://docs.tago.io/en/latest/api.html#get-data>`_
+Get a list of data from bucket respecting the query options passed. You can get more information about what information can be passed with .find in our `get documentation <http://docs.tago.io/en/articles/36>`_
 
 | **Syntax**
 | *.find(/filter/)*
@@ -111,18 +111,18 @@ Get a list of data from bucket respecting the query options passed. You can get 
 
 .remove
 *******
-Remove a data from the bucket. It's possible to remove in three ways:
-* The last data inserted by the device
-* The last data inserted by device into a variable
-* A specific data by it ID
+Remove a data from the bucket respecting the query options passed. You can get more information about what information can be passed with .remove in our `get documentation <http://docs.tago.io/en/articles/35>`_
 
 | **Syntax**
-| *.remove(/variable_or_id/, /qty/)*
+| *.remove(/filter/)*
 |
 | **Arguments**
-| *variable_or_id(string) a variable name or an specific ID. (optional)*
-| *qty(number) specify a number of records to be removed. You can pass "all" to remove all records. Default is 1. (optional)*
-| If no parameter is passed, it will automatically remove the last data inserted by this specific device.
+| *filter(object) filter options when retrieving data. (optional)*
+|   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ *to know what can be passed. (optional)*
+|   *\*end_date(string)*: *Get data older than a specific date. (optional)*
+|   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
+|   *\*qty(number)*: *Number of data to be retrieved. Default is 15. (optional)*
 |
 | **Returns**
 | *(Promise)*
@@ -131,39 +131,15 @@ Remove a data from the bucket. It's possible to remove in three ways:
 .. code-block:: javascript
 
     const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-
-    mydev.remove()
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-
-or 
-
-.. code-block:: javascript
-
-    const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-
-    mydev.remove('myvariable')
-        .then((result) => {
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-        
-or 
-
-.. code-block:: javascript
-
-    const Device = require('tago/device');
-    const mydev   = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
-
-    mydev.remove('577d81ac7ee399ef1a6e98da')
+    const mydev  = new Device('0e479db0-tag0-11e6-8888-790d555b633a');
+    var filter = {
+        'variable':   'myvar',
+        'query':      'last_value',
+        'end_date':   '2014-12-25 23:33:22',
+        'start_date': '2014-12-20 23:33:22'
+    };
+    
+    mydev.remove(filter)
         .then((result) => {
             //You can treat the result here
         })
