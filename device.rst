@@ -80,7 +80,7 @@ Get a list of data from bucket respecting the query options passed. You can get 
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
 |   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
-|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ *to know what can be passed. (optional)*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/articles/36>`_ *to know what can be passed. (optional)*
 |   *\*end_date(string)*: *Get data older than a specific date. (optional)*
 |   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
 |   *\*qty(number)*: *Number of data to be retrieved. Default is 15. (optional)*
@@ -119,7 +119,7 @@ Remove a data from the bucket respecting the query options passed. You can get m
 | **Arguments**
 | *filter(object) filter options when retrieving data. (optional)*
 |   *\*variable(string/array)*: *Filter by variable. If none is passed, get the last data (optional);*
-|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/latest/api.html#query>`_ *to know what can be passed. (optional)*
+|   *\*query(string)*: *Do a specific query. See the* `query documentation <http://docs.tago.io/en/articles/36>`_ *to know what can be passed. (optional)*
 |   *\*end_date(string)*: *Get data older than a specific date. (optional)*
 |   *\*start_date(string)*: *Get data newer than a specific date. (optional)*
 |   *\*qty(number)*: *Number of data to be retrieved. Default is 15. (optional)*
