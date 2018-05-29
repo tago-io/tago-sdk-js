@@ -111,7 +111,7 @@ Get a list of data from bucket respecting the query options passed. You can get 
 
 .remove
 *******
-Remove a data from the bucket respecting the query options passed. You can get more information about what information can be passed with .remove in our `get documentation <http://docs.tago.io/en/articles/35>`_
+Remove a data from the bucket respecting the query options passed. You can get more information about what information can be passed with .remove in our `delete documentation <http://docs.tago.io/en/articles/35>`_
 
 | **Syntax**
 | *.remove(/filter/)*
