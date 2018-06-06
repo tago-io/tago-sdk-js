@@ -1,7 +1,8 @@
 'use strict';
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const request         = require('../comum/tago_request.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
 
 const Actions        = require('./actions.js');
 const Analysis       = require('./analysis.js');
@@ -115,13 +116,51 @@ class Account {
   }
 
   /** List Tokens of the Account
-     * @return {Promise}
-     */
-  tokenList() {
-    const url    = `${config.api_url}/account/profile/token`;
+   * @param  {Number} page
+   * Page of list starting from 1
+   * Default: 1
+   * @param {Number} amount
+   * Amount of items will return
+   * Default is 20
+   * @param  {JSON} filter
+   * JSON of filter
+   * Without default
+   * Example: {name: 'Admin'}
+   * Values allowed: same of fields parameter.
+   *
+   * TIP: On name you can use * (asterisk) as wildcard.
+  * @param  {Array} fields
+    * Array of field names
+    * Default: ['name']
+    * Example: ['name', 'token']
+    *
+    * Values allowed:
+    * name, type, permission, token, expire_time, created_at.
+    * @param {String} orderBy
+    * Order by a field
+    * Examples:
+    *  'name,asc'
+    *  'name,desc'
+    *  'created_at' [default: desc]
+    * @return {Promise}
+    * Array of tokens in created_at order.
+  */
+  tokenList(page = 1, amount = 20, filter = {}, fields = ['name', 'token', 'permission'], orderBy = 'created_at,desc') {
+    const url = `${config.api_url}/account/profile/token`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    let options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: {
+        page,
+        filter,
+        amount,
+        orderBy,
+        fields,
+      },
+    });
     return request(options);
   }
 
