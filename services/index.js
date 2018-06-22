@@ -1,9 +1,10 @@
 'use strict';
-const Email   = require('./email.js');
-const SMS     = require('./sms.js');
-const Socket  = require('./socket.js');
-const Console = require('./console.js');
-const MQTT    = require('./mqtt.js');
+const Email      = require('./email.js');
+const SMS        = require('./sms.js');
+const Socket     = require('./socket.js');
+const Console    = require('./console.js');
+const MQTT       = require('./mqtt.js');
+const Attachment = require('./attachment.js');
 const Notification    = require('./notification.js');
 
 class Services {
@@ -31,6 +32,9 @@ class Services {
   }
   get Notification() {
     return new Notification(this.token);
+  }
+  get Attachment() {
+    return new Attachment(this.token);
   }
 }
 
