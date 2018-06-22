@@ -16,7 +16,7 @@ class Analysis {
     }
   }
 
-  run(environment, data, token) {
+  run(environment, data, analysis_id, token) {
     let tago_console = new Services(token).console;
     function log() {
       if (!process.env.TAGO_RUNTIME) console.log.apply(null, arguments);
@@ -43,7 +43,7 @@ class Analysis {
 
     scon.connect().then(() => {
       scon.listening('run:analysis', (scope) => {
-        this.run(scope.environment, scope.data, this._token);
+        this.run(scope.environment, scope.data, scope.analysis_id, this._token);
       });
     }).catch(console.error);
   }
