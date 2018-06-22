@@ -26,7 +26,8 @@ class Analysis {
     let context = {
       log,
       token,
-      environment
+      environment,
+      analysis_id
     };
     this._analysis(context, data || []);
   }
