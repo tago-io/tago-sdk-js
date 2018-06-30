@@ -13,12 +13,21 @@ class Plan {
     };
   }
 
-  /** Activate a plan
-  * @param  {JSON} data
-  * @argument {*String} data.plan the id of the plan to be activated
-  * @return {Promise}
-  */
-  activate(data) {
+  /**
+   * Active plan and set services limit
+   * @param {JSON} data
+   * @return {Promise<Boolean>}
+   * @example data
+    {
+      "plan": "59f77e5e647ee71b901d9885",
+      "sms": 100,
+      "email": 1000,
+      "data_records": 200000,
+      "device_request": 250,
+      "analysis": 1000
+    }
+   */
+  setPlanParameters(data) {
     data         = data || {};
     const url    = `${config.api_url}/account/plan`;
     const method = 'POST';
@@ -26,12 +35,12 @@ class Plan {
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
-  
-  /** Activate a plan
-  * @param  {*String} plan_id
-  * @return {Promise}
-  */
-  getCurrentValue(plan_id) {
+
+  /**
+   * Get price to update to new plan
+   * @param {String} plan_id New Plan ID
+   */
+  getPriceToUpdate(plan_id) {
     const url    = `${config.api_url}/account/plan_value`;
     const method = 'GET';
 
@@ -46,11 +55,42 @@ class Plan {
     return request(options);
   }
 
-  /** Activate a plan
-  * @return {Promise}
-  */
+  /**
+   * Get Active Plan and Services
+   * @return {Promise<JSON>}
+   * @example Return
+    {
+      "plan": "59f77e5e647ee71b901d9887",
+      "plan_next": "59f77e5e647ee71b901d9887",
+      "analysis": 10,
+      "data_backedup": 5,
+      "data_records": 21083,
+      "device_request": 1000,
+      "email": 10,
+      "middleware_request": 10,
+      "mqtt_publish": 10,
+      "mqtt_subscribe": 10,
+      "sms": 10
+    }
+   */
   getActivePlan() {
     const url    = `${config.api_url}/account/plan`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+    });
+    return request(options);
+  }
+
+  /**
+   * Get current Tago pricing
+   * @return {Promise<JSON>}
+   */
+  getCurrentPrices() {
+    const url = `${config.api_url}/pricing`;
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, {
