@@ -15,7 +15,7 @@ class Plan {
 
   /** Activate a plan
   * @param  {JSON} data
-  * @argument {*String} data.plan the id of the plan to be activated
+  * @argument {String} data.plan the id of the plan to be activated
   * @return {Promise}
   */
   activate(data) {
@@ -28,10 +28,17 @@ class Plan {
   }
   
   /** Activate a plan
-  * @param  {*String} plan_id
+  * @param  {JSON} services
+  * @argument {String} data.plan the id of the plan
+  * @argument {Number} data.sms the amount of sms
+  * @argument {Number} data.analysis the amount analysis
+  * @argument {Number} data.device_request the amount device_request
+  * @argument {Number} data.data_records the amount data_records
+  * @argument {Number} data.data_backedup the amount data_backedup
+  * @argument {Number} data.email the amount email
   * @return {Promise}
   */
-  getCurrentValue(plan_id) {
+  getCurrentValue(services) {
     const url    = `${config.api_url}/account/plan_value`;
     const method = 'GET';
 
@@ -39,9 +46,7 @@ class Plan {
       url,
       method,
       paramsSerializer,
-      params: {
-        id: plan_id,
-      },
+      params: services,
     });
     return request(options);
   }
