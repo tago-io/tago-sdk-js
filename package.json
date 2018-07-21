@@ -30,7 +30,8 @@
     "tago.io",
     "sdk",
     "analysis",
-    "device"
+    "device",
+    "tagoio"
   ],
   "bugs": {
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
@@ -42,9 +43,14 @@
     "socket.io-client": "2.1.1"
   },
   "devDependencies": {
-    "chai": "4.1.2",
     "eslint": "4.19.1",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-jasmine": "2.9.3",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.7.0",
+    "mocha": "5.2.0",
     "express": "4.16.3",
-    "mocha": "5.2.0"
+    "chai": "4.1.2"
   }
 }
