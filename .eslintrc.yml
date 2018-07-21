@@ -3,6 +3,11 @@ env:
   node: true
   mocha: true
 extends: 'eslint:recommended'
+parserOptions:
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+    jsx: false
+  sourceType: module
 rules:
   indent:
     - error
