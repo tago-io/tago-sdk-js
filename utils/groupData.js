@@ -1,6 +1,4 @@
 
-const device = require('../Device');
-
 /**
  * Group data by series or time
  * @param  {Array} variables
