@@ -6,6 +6,7 @@ const paramsSerializer = require('../comum/paramsSerializer.js');
 
 const Actions        = require('./actions.js');
 const Analysis       = require('./analysis.js');
+const Files          = require('./files.js');
 const Buckets        = require('./buckets.js');
 const Dashboards     = require('./dashboards.js');
 const Devices        = require('./devices.js');
@@ -306,6 +307,9 @@ class Account {
   }
   get buckets() {
     return new Buckets(this.token);
+  }
+  get files() {
+    return new Files(this.token);
   }
   get dashboards() {
     return new Dashboards(this.token);
