@@ -84,10 +84,12 @@ class Files {
 
   /**
    * Delete Folder or Files
-   * @param {String} path Path of whole folder or single file
+   * @param {Array<String>} arrayOfFiles Array with files to be deleted
    *
+   * Exemple:
+   * ['/myfiles/myOldName.ext', /myfiles/newFolder/test.ext']
    */
-  delete(path) {
+  delete(arrayOfFiles) {
     let url = `${config.api_url}/files`;
     let method = 'DELETE';
 
@@ -95,9 +97,7 @@ class Files {
       url,
       method,
       paramsSerializer,
-      params: {
-        path,
-      },
+      data: arrayOfFiles
     });
 
     return request(options);
