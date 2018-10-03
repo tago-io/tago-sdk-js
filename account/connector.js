@@ -1,0 +1,133 @@
+'use strict';
+const request          = require('../comum/tago_request.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
+
+class Connector {
+  constructor(acc_token) {
+    this.token = acc_token;
+    this.default_options = {
+      'json':    true,
+      'headers': default_headers(this)
+    };
+  }
+
+  /** List Connector
+   * @param  {Number} page
+   * Page of list starting from 1
+   * Default: 1
+   * @param  {Array} fields
+   * Array of field names
+   * Default: ['id', 'name', 'description_short']
+   * Example: ['id', 'name', 'public']
+   *
+   * Values allowed:
+   * id, name, description_short, description_full, public,
+   * account, logo_url, options, created_at, updated_at.
+   *
+   * @param  {JSON} filter
+   * JSON of filter
+   * Without default
+   * Example: {name: 'Motor'}
+   * Values allowed: same of fields parameter.
+   *
+   * TIP: On name you can use * (asterisk) as wildcard.
+   * @param {Number} amount
+   * Amount of items will return
+   * Default is 20
+   * @param {String} orderBy
+   * Order by a field
+   * Examples:
+   *  'name,asc'
+   *  'name,desc'
+   *  'name' [default: asc]
+   * @return {Promise}
+   * Array of Connector in alphabetically order.
+  */
+  list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
+    let url    = `${config.api_url}/connector`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: {
+        page,
+        filter,
+        fields,
+        amount,
+        orderBy,
+      },
+    });
+    return request(options);
+  }
+
+  /** Get Info of the Connector
+  * @param  {String} Connector id
+  * @return {Promise}
+  */
+  info(connector_id) {
+    if (!connector_id || connector_id == '') {
+      //If ID is send with null, it will get List instead info.
+      return new Promise((resolve,reject) => reject('Connector ID parameter is obrigatory.'));
+    }
+    const url    = `${config.api_url}/connector/${connector_id}`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+
+  /** Create a Connector
+  * @param  {object} data
+  * @param  {string} data.name - Name of the connector
+  * @param  {string} data.description_short - short description of the connector
+  * @param  {string} data.description_full - full description of the connector
+  * @param  {string} data.logo_url - public image url to use as logo
+  * @param  {Object} data.options - connector configurations
+  * @return {Promise}
+  */
+  create(data) {
+    data       = data || {};
+    let url    = `${config.api_url}/connector`;
+    let method = 'POST';
+
+    let options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
+
+  /** Edit the Connector
+  * @param  {String} connector id
+  * @param  {object} data
+  * @param  {string} data.name - Name of the connector
+  * @param  {string} data.description_short - short description of the connector
+  * @param  {string} data.description_full - full description of the connector
+  * @param  {string} data.logo_url - public image url to use as logo
+  * @param  {Object} data.options - connector configurations
+  * @return {Promise}
+  */
+  edit(connector_id, data) {
+    data       = data || {};
+    let url    = `${config.api_url}/connector/${connector_id}`;
+    let method = 'PUT';
+
+    let options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
+
+  /** Delete the Connector
+  * @param  {String} connector id
+  * @return {Promise}
+  */
+  delete(connector_id) {
+    let url    = `${config.api_url}/connector/${connector_id}`;
+    let method = 'DELETE';
+
+    let options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+}
+
+module.exports = Connector;
