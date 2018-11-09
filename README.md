@@ -1,6 +1,3 @@
-[![NPM](https://nodei.co/npm/tago.png?downloads=true&downloadRank=true)](https://nodei.co/npm/tago/)
-[![NPM](https://nodei.co/npm-dl/tago.png?months=6&height=3)](https://nodei.co/npm/tago/)
-
 [![Documentation Status](https://readthedocs.org/projects/tago-sdk-js-documentation/badge/?version=latest)](http://tago-sdk-js-documentation.readthedocs.io/en/latest/?badge=latest)
 [![Dependency Status](https://david-dm.org/tago-io/tago-sdk-js.svg)](https://david-dm.org/tago-io/tago-sdk-js)
 [![npm version](https://badge.fury.io/js/tago.svg?style=flat)](http://badge.fury.io/js/tago)
