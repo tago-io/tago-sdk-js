@@ -2,6 +2,7 @@
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
+const batchRequest    = require('../comum/batchRequest.js');
 
 /** Class for the device and data */
 class Device {
@@ -133,6 +134,22 @@ class Device {
     let method  = 'PUT';
     let options = Object.assign({}, this.default_options, {url, method});
     return request(options);
+  }
+
+  /**
+   * Send a batch commands
+   * @param {Array<JSON>} batchData
+   * @param {Boolean} async
+   * Async=true method send all commands in same time,
+   * Async=false send command one by one, and stop if got a error
+   * Examples:
+   * [
+   *   {"method": "GET", "endpoint": "/data", "headers": {"token": "38935657-8491-4702-b951-a03374410db0"} },
+   *   {"method": "GET", "endpoint": "/device" }
+   * ]
+   */
+  batch(batchData, async = false) {
+    return batchRequest.call(this, batchData, async);
   }
 }
 
