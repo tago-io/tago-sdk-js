@@ -19,6 +19,7 @@ const Plan           = require('./plan');
 const PaymentHistory = require('./paymentHistory');
 const Explore        = require('./explore');
 const Connector      = require('./connector');
+const Template       = require('./template');
 
 
 class Account {
@@ -357,6 +358,9 @@ class Account {
   }
   get connector() {
     return new Connector(this.token);
+  }
+  get template() {
+    return new Template(this.token);
   }
 }
 
