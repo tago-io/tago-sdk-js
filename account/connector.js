@@ -24,12 +24,12 @@ class Connector {
    *
    * Values allowed:
    * id, name, description_short, description_full, description_end, public,
-   * account, logo_url, options, created_at, updated_at, network_id.
+   * account, logo_url, options, created_at, updated_at, categories.
    *
    * @param  {JSON} filter
    * JSON of filter
    * Without default
-   * Example: {name: 'Motor'}
+   * Example: {name: 'Motor', categories: ['Sigfox']}
    * Values allowed: same of fields parameter.
    *
    * TIP: On name you can use * (asterisk) as wildcard.
@@ -47,55 +47,6 @@ class Connector {
   */
   list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
     let url    = `${config.api_url}/connector`;
-    let method = 'GET';
-
-    let options = Object.assign({}, this.default_options, {
-      url,
-      method,
-      paramsSerializer,
-      params: {
-        page,
-        filter,
-        fields,
-        amount,
-        orderBy,
-      },
-    });
-    return request(options);
-  }
-
-  /** List Connector Network
-   * @param  {Number} page
-   * Page of list starting from 1
-   * Default: 1
-   * @param  {Array} fields
-   * Array of field names
-   * Default: ['id', 'name', 'description_short']
-   *
-   * Values allowed:
-   * id, name, description_short, logo_url, created_at, updated_at.
-   *
-   * @param  {JSON} filter
-   * JSON of filter
-   * Without default
-   * Example: {name: 'Motor'}
-   * Values allowed: same of fields parameter.
-   *
-   * TIP: On name you can use * (asterisk) as wildcard.
-   * @param {Number} amount
-   * Amount of items will return
-   * Default is 20
-   * @param {String} orderBy
-   * Order by a field
-   * Examples:
-   *  'name,asc'
-   *  'name,desc'
-   *  'name' [default: asc]
-   * @return {Promise}
-   * Array of Connector in alphabetically order.
-  */
-  listNetwork(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
-    let url = `${config.api_url}/connector/network`;
     let method = 'GET';
 
     let options = Object.assign({}, this.default_options, {
