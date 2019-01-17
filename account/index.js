@@ -44,6 +44,17 @@ class Account {
     return request(options);
   }
 
+  /** Account Summary
+   * @return {Promise}
+   */
+  summary() {
+    const url = `${config.api_url}/account/summary`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
   /** Account statistics
      * @param  {Object} params
      * @param  {String} paramsmonth
