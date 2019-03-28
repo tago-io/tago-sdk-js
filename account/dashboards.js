@@ -179,6 +179,9 @@ class Dashboards {
     * @param  {String} data{}.email - Email to receive invitation
     * @param  {String} data{}.message - Scope message for the email
     * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @param  {String} data{}.whitelabel_url - Url without https. it's send email template
+    * @param  {boolean} data{}.allow_tags - Send dahsboard tags. Default false
+    * @param  {boolean} data{}.allow_share - Allow user to share dashboared with another emails. Default false
     * @return {Promise}
      */
   shareSendInvite(dashboard_id, data) {
