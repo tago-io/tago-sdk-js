@@ -24,12 +24,12 @@ class Connector {
    *
    * Values allowed:
    * id, name, description_short, description_full, description_end, public,
-   * account, logo_url, options, created_at, updated_at.
+   * account, logo_url, options, created_at, updated_at, categories.
    *
    * @param  {JSON} filter
    * JSON of filter
    * Without default
-   * Example: {name: 'Motor'}
+   * Example: {name: 'Motor', categories: ['Sigfox']}
    * Values allowed: same of fields parameter.
    *
    * TIP: On name you can use * (asterisk) as wildcard.

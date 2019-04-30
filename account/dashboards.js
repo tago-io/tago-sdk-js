@@ -137,6 +137,28 @@ class Dashboards {
     return request(options);
   }
 
+  /** Duplicate the dashboard to your own account
+    * @param  {String} dashboard id
+    * @param  {JSON} data - Name of the dashboard
+    * @param  {JSON} data{}.setup - special setup for duplicate
+    * @param  {boolean} data{}.new_label - optional new dashboard label
+    * @return {Promise}
+     */
+  duplicate(dashboard_id, data) {
+    data = data || {};
+    if (!dashboard_id || dashboard_id === '') {
+      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+    }
+
+    const url    = `${config.api_url}/dashboard/${dashboard_id}/duplicate`;
+    const method = 'POST';
+
+    const options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
+
+
+
   /******************************************* */
 
   /** Get share list of the dashboard
@@ -157,6 +179,9 @@ class Dashboards {
     * @param  {String} data{}.email - Email to receive invitation
     * @param  {String} data{}.message - Scope message for the email
     * @param  {boolean} data{}.copy_me - true to send a copy to yourself
+    * @param  {String} data{}.whitelabel_url - Url without https. it's sent email template
+    * @param  {boolean} data{}.allow_tags - Send dashboard tags. Default false
+    * @param  {boolean} data{}.allow_share - Allow the user to share dashboard with other emails. Default false
     * @return {Promise}
      */
   shareSendInvite(dashboard_id, data) {

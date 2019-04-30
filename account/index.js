@@ -3,6 +3,7 @@ const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
+const batchRequest     = require('../comum/batchRequest.js');
 
 const Actions        = require('./actions.js');
 const Analysis       = require('./analysis.js');
@@ -18,6 +19,7 @@ const Plan           = require('./plan');
 const PaymentHistory = require('./paymentHistory');
 const Explore        = require('./explore');
 const Connector      = require('./connector');
+const Template       = require('./template');
 
 
 class Account {
@@ -39,6 +41,17 @@ class Account {
     const method = 'GET';
 
     const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+
+  /** Account Summary
+   * @return {Promise}
+   */
+  summary() {
+    const url = `${config.api_url}/account/summary`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
     return request(options);
   }
 
@@ -296,7 +309,22 @@ class Account {
 
     const options = Object.assign({}, this.default_options, {url, method, params});
     return request(options);
+  }
 
+  /**
+   * Send a batch commands
+   * @param {Array<JSON>} batchData
+   * @param {Boolean} async
+   * Async=true method send all commands in same time,
+   * Async=false send command one by one, and stop if got a error
+   * Examples:
+   * [
+   *   {"method": "GET", "endpoint": "/data", "headers": {"token": "38935657-8491-4702-b951-a03374410db0"} },
+   *   {"method": "GET", "endpoint": "/device" }
+   * ]
+   */
+  batch(batchData, async = false) {
+    return batchRequest.call(this, batchData, async);
   }
 
   // ----------- Sub-methods -----------
@@ -341,6 +369,9 @@ class Account {
   }
   get connector() {
     return new Connector(this.token);
+  }
+  get template() {
+    return new Template(this.token);
   }
 }
 

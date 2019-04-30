@@ -15,16 +15,19 @@ class MQTT {
   /** publish MQTT
      * @param  {string} topic - topic of the message
      * @param  {string} message - Message scope
-     * @param  {string} [bucket] - Bucket to receive message
+     * @param  {string} bucket - Bucket to receive message
+     * @param  {object} [options] - Options of the publishing message
+     * @param  {string} [options.retain] - Default true
+     * @param  {string} [options.qos] - Default 0
      * @return {Promise}
      */
-  publish(topic, message, bucket) {
+  publish(topic, message, bucket, options = {}) {
     let url    = `${config.api_url}/analysis/services/mqtt/publish`;
     let method = 'POST';
-    let data = { topic, message, bucket };
+    let data = Object.assign({ topic, message, bucket}, options);
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
-    return request(options);
+    let paremeters = Object.assign({}, this.default_options, {url, method, data});
+    return request(paremeters);
   }
 
 
