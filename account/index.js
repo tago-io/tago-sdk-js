@@ -5,21 +5,22 @@ const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const batchRequest     = require('../comum/batchRequest.js');
 
-const Actions        = require('./actions.js');
-const Analysis       = require('./analysis.js');
-const Files          = require('./files.js');
-const Buckets        = require('./buckets.js');
-const Dashboards     = require('./dashboards.js');
-const Devices        = require('./devices.js');
-const Notifications  = require('./notifications.js');
-const Middlewares    = require('./middlewares.js');
-const Tags           = require('./tags.js');
-const PaymentMethods = require('./paymentMethods');
-const Plan           = require('./plan');
-const PaymentHistory = require('./paymentHistory');
-const Explore        = require('./explore');
-const Connector      = require('./connector');
-const Template       = require('./template');
+const Actions          = require('./actions.js');
+const Analysis         = require('./analysis.js');
+const Files            = require('./files.js');
+const Buckets          = require('./buckets.js');
+const Dashboards       = require('./dashboards.js');
+const Devices          = require('./devices.js');
+const Notifications    = require('./notifications.js');
+const Middlewares      = require('./middlewares.js');
+const Tags             = require('./tags.js');
+const PaymentMethods   = require('./paymentMethods');
+const Plan             = require('./plan');
+const PaymentHistory   = require('./paymentHistory');
+const Explore          = require('./explore');
+const Connector        = require('./connector');
+const Template         = require('./template');
+const AccessManagement = require('./accessManagement');
 
 
 class Account {
@@ -372,6 +373,9 @@ class Account {
   }
   get template() {
     return new Template(this.token);
+  }
+  get accessManagement() {
+    return new AccessManagement(this.token);
   }
 }
 
