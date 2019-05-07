@@ -21,6 +21,7 @@ const Explore          = require('./explore');
 const Connector        = require('./connector');
 const Template         = require('./template');
 const AccessManagement = require('./accessManagement');
+const TagoIORUN        = require('./run');
 
 
 class Account {
@@ -376,6 +377,9 @@ class Account {
   }
   get accessManagement() {
     return new AccessManagement(this.token);
+  }
+  get run() {
+    return new TagoIORUN(this.token);
   }
 }
 
