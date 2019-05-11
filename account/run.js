@@ -28,6 +28,31 @@ class TagoIORUN {
     let options = Object.assign({}, this.default_options, { url, method });
     return request(options);
   }
+
+  listUsers() {
+    let url = `${config.api_url}/run/users`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  getUserInfo(userID) {
+    let url = `${config.api_url}/run/users/${userID}`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  userEdit(userID, data) {
+    data = data || {};
+    let url = `${config.api_url}/run/users/${userID}`;
+    let method = 'PUT';
+
+    let options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
 }
 
 module.exports = TagoIORUN;
