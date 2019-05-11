@@ -74,6 +74,14 @@ class TagoIORUN {
     let options = Object.assign({}, this.default_options, { url, method, data });
     return request(options);
   }
+
+  deleteUser(userID) {
+    const url = `${config.api_url}/run/users/${userID}`;
+    const method = 'DELETE';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
 }
 
 module.exports = TagoIORUN;
