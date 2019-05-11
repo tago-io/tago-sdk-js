@@ -1,7 +1,8 @@
 'use strict';
-const request = require('../comum/tago_request.js');
-const config = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
+const request          = require('../comum/tago_request.js');
+const config           = require('../config.js');
+const paramsSerializer = require('../comum/paramsSerializer.js');
+const default_headers  = require('../comum/default_headers.js');
 
 class TagoIORUN {
   constructor(acc_token) {
@@ -29,11 +30,22 @@ class TagoIORUN {
     return request(options);
   }
 
-  listUsers() {
+  listUsers(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
     let url = `${config.api_url}/run/users`;
     let method = 'GET';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    let options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params: {
+        page,
+        filter,
+        fields,
+        amount,
+        orderBy,
+      },
+    });
     return request(options);
   }
 

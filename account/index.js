@@ -269,21 +269,6 @@ class Account {
     return request(options);
   }
 
-  /** Create new TagoIO Run User (Anonymous)
-   * @return {Promise}
-   */
-  static createUser(tagoRunURL, {name, email, password, timezone, company, newsletter}) {
-    const url = `${config.api_url}/run/${tagoRunURL}/signup`;
-    const method = 'POST';
-    const data = {
-      name, email, password, timezone, company, newsletter,
-    };
-
-    const headers = default_headers();
-    const options = { url, method, headers, data };
-    return request(options);
-  }
-
   /** Re-send confirmation account email
      * @param  {string} email - email of the account
      * @return {Promise}

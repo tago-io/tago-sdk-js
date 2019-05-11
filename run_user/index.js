@@ -26,12 +26,10 @@ class RunUser {
   /** Create new TagoIO Run User (Anonymous)
    * @return {Promise}
    */
-  static create(tagoRunURL, { name, email, password, timezone, company, newsletter }) {
+  static create(tagoRunURL, newUserObj) {
     const url = `${config.api_url}/run/${tagoRunURL}/signup`;
     const method = 'POST';
-    const data = {
-      name, email, password, timezone, company, newsletter,
-    };
+    const data = newUserObj;
 
     const headers = default_headers();
     const options = { url, method, headers, data };
