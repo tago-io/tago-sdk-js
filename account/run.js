@@ -65,6 +65,15 @@ class TagoIORUN {
     let options = Object.assign({}, this.default_options, { url, method, data });
     return request(options);
   }
+
+  createUser(data) {
+    data = data || {};
+    let url = `${config.api_url}/run/users`;
+    let method = 'POST';
+
+    let options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
 }
 
 module.exports = TagoIORUN;
