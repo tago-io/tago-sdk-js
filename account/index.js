@@ -47,13 +47,14 @@ class Account {
   }
 
   /** Account Summary
+   * @param  {Object} params [optional]
    * @return {Promise}
    */
-  summary() {
+  summary(params = undefined) {
     const url = `${config.api_url}/account/summary`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = Object.assign({}, this.default_options, { url, method, params });
     return request(options);
   }
 
