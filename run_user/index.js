@@ -50,6 +50,18 @@ class RunUser {
     const options = { url, method, headers, data };
     return request(options);
   }
+
+  /** Confirm User on TagoIO Run (Anonymous)
+ * @return {Promise}
+ */
+  static confirmUser(tagoRunURL, token) {
+    const url    = `${config.api_url}/run/${tagoRunURL}/confirm/${token}`;
+    const method = 'GET';
+
+    const headers = default_headers();
+    const options = {url, method, headers};
+    return request(options);
+  }
 }
 
 
