@@ -23,6 +23,19 @@ class RunUser {
     return request(options);
   }
 
+   /** Edit User Info
+   * @return {Promise}
+   */
+  editInfo(tagoRunURL, changes = {}) {
+    const url = `${config.api_url}/run/${tagoRunURL}/info`;
+    const method = 'PUT';
+    const data = changes;
+
+    const headers = default_headers();
+    const options = { url, method, headers, data };
+    return request(options);
+  }
+
   /** Create new TagoIO Run User (Anonymous)
    * @return {Promise}
    */
