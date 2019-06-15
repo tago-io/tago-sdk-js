@@ -206,14 +206,14 @@ class Account {
     return request(options);
   }
 
-  /** Retrieve list of profiles for login
+  /** Retrieve list of profiles for login and do Login
      * @param  {string} data.email - email for login
      * @param  {string} data.password - password for login
      * @return {Promise}
      */
   login(data) {
     data       = data || {};
-    const url    = `${config.api_url}/account/profile/login`;
+    const url    = `${config.api_url}/account/login`;
     const method = 'POST';
 
     const headers = default_headers();
