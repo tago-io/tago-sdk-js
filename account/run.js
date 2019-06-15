@@ -82,6 +82,15 @@ class TagoIORUN {
     const options = Object.assign({}, this.default_options, { url, method });
     return request(options);
   }
+
+  emailTest({ subject, body }) {
+    const url = `${config.api_url}/run/email_test`;
+    const method = 'POST';
+    const data = { subject, body };
+
+    const options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
 }
 
 module.exports = TagoIORUN;
