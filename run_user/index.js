@@ -31,8 +31,7 @@ class RunUser {
     const method = 'PUT';
     const data = changes;
 
-    const headers = default_headers();
-    const options = { url, method, headers, data };
+    const options = Object.assign({}, this.default_options, { url, method, data });
     return request(options);
   }
 
