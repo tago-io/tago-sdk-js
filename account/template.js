@@ -35,12 +35,16 @@ class Template {
   /**
    * Install template on account
    * @param {String} template_id Template ID
+   * @param {JSON} data
+     * Device params for auto-association (optional)
+     * Default: {}
+     * Example: { device: { id: 'XxxXx', bucket: 'XxxXXx' } }
    */
-  installTemplate(template_id) {
+  installTemplate(template_id, data = {}) {
     let url = `${config.api_url}/template/${template_id}`;
     let method = 'POST';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    let options = Object.assign({}, this.default_options, { url, method, data });
     return request(options);
   }
 
