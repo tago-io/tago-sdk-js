@@ -22,6 +22,7 @@ const Connector        = require('./connector');
 const Template         = require('./template');
 const AccessManagement = require('./accessManagement');
 const TagoIORUN        = require('./run');
+const Profiles         = require('./profiles');
 
 
 class Account {
@@ -381,6 +382,9 @@ class Account {
   }
   get run() {
     return new TagoIORUN(this.token);
+  }
+  get profiles() {
+    return new Profiles(this.token);
   }
 }
 
