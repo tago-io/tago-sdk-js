@@ -216,6 +216,57 @@ class Profile {
     const options = Object.assign({}, this.default_options, {url, method});
     return request(options);
   }
+
+  /**
+   * Fetches the information from auditlog of this profile.
+   * @param  {object} filter - auditlog filter
+   * @param  {string} filter.nextToken - next token for pagination
+   * @param  {string} filter.ref_id - id of an analysis, device, bucket, action, dashboard, or widget
+   * @param  {string} filter.find - text to find on log, can accept "*"
+   * @param  {string} filter.start_date - start date
+   * @param  {string} filter.end_date - end date
+   */
+  auditlog(profile_id, params = {}) {
+    const url    = `${config.api_url}/profile/${profile_id}/auditlog`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method, params });
+    return request(options);
+  }
+
+  /**
+   * Gets the information of addons for the profile.
+   */
+  addonList(profile_id) {
+    const url    = `${config.api_url}/profile/${profile_id}/addons`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options,  { url, method });
+    return request(options);
+  }
+
+  /**
+   * Sets the information of addons for the profile.
+   */
+  addonEdit(profile_id, data) {
+    const url    = `${config.api_url}/profile/${profile_id}/addons`;
+    const method = 'POST';
+
+    const options = Object.assign({}, this.default_options,  { url, method, data });
+    return request(options);
+  }
+
+  /**
+   * Sets the information of services for the profile. Services are the main resources
+   * in your profile, for example data input, data output, etc...
+   */
+  serviceEdit(profile_id, data) {
+    const url    = `${config.api_url}/profile/${profile_id}/services`;
+    const method = 'POST';
+
+    const options = Object.assign({}, this.default_options,  { url, method, data });
+    return request(options);
+  }
 }
 
 module.exports = Profile;
