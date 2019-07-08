@@ -207,7 +207,7 @@ class Profile {
    * Deletes a token from your profile.
    * @param {String} profile_id the id of the profile that has the token.
    * @param {string} token The token string.
-   *  This is usually the `id` field that you acquired from the `tokenList` call.
+   *  This is usually the `token` field that you acquired from the `tokenList` call.
    */
   tokenDelete(profile_id, token) {
     const url    = `${config.api_url}/profile/${profile_id}/token/${token}`;
@@ -265,6 +265,20 @@ class Profile {
     const method = 'POST';
 
     const options = Object.assign({}, this.default_options,  { url, method, data });
+    return request(options);
+  }
+
+  /**
+   * Transforms the current token to another profile. The current profile will
+   * no longer have the current token, as the current token will be acquired by the profile informed.
+   * After this call is done, other requests using this token will work solely for the new profile, and
+   * no longer for the current profile.
+   */
+  transferTokenToAnotherProfile(target_profile_id) {
+    const url    = `${config.api_url}/profile/switch/${target_profile_id}`;
+    const method = 'PUT';
+
+    const options = Object.assign({}, this.default_options, { url, method });
     return request(options);
   }
 }
