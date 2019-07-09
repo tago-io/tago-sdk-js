@@ -281,6 +281,22 @@ class Profile {
     const options = Object.assign({}, this.default_options, { url, method });
     return request(options);
   }
+
+  /**
+   * Summary of usage of this profile.
+   */
+  summary(profile_id, params) {
+    const url    = `${config.api_url}/profile/${profile_id}/summary`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, {
+      url,
+      method,
+      paramsSerializer,
+      params,
+    });
+    return request(options);
+  }
 }
 
 module.exports = Profile;
