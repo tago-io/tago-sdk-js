@@ -107,6 +107,17 @@ class Plan {
     });
     return request(options);
   }
+
+  /**
+   * Shows a summary of how much your account is costing, divided by sections.
+   */
+  summary() {
+    const url    = `${config.api_url}/billing`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
 }
 
 module.exports = Plan;
