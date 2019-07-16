@@ -67,7 +67,7 @@ class ServiceAuth {
     * @return {Promise}
      */
   tokenCreate(data) {
-    data           = data || {};
+    data = data || {};
 
     const url    = `${config.api_url}/serviceauth`;
     const method = 'POST';
@@ -85,6 +85,20 @@ class ServiceAuth {
     const method = 'DELETE';
 
     const options = Object.assign({}, this.default_options, {url, method});
+    return request(options);
+  }
+
+  /** Edit Token from the Authorization Service
+    * @param  {String} token id
+    * @param  {String} verification_code optional parameter
+    * @return {Promise}
+     */
+  tokenEdit(token, verification_code) {
+    const url    = `${config.api_url}/serviceauth/${token}`;
+    const method = 'PUT';
+    const data = { verification_code };
+
+    const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
 }

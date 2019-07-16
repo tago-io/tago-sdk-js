@@ -5,7 +5,6 @@ const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const batchRequest     = require('../comum/batchRequest.js');
 
-<<<<<<< HEAD
 const Actions                 = require('./actions.js');
 const Analysis                = require('./analysis.js');
 const Files                   = require('./files.js');
@@ -23,28 +22,8 @@ const Connector               = require('./connector');
 const Template                = require('./template');
 const AccessManagement        = require('./accessManagement');
 const TagoIORUN               = require('./run');
+const Profiles                = require('./profiles');
 const ServiceAuthorization    = require('./service.authorization');
-=======
-const Actions          = require('./actions.js');
-const Analysis         = require('./analysis.js');
-const Files            = require('./files.js');
-const Buckets          = require('./buckets.js');
-const Dashboards       = require('./dashboards.js');
-const Devices          = require('./devices.js');
-const Notifications    = require('./notifications.js');
-const Middlewares      = require('./middlewares.js');
-const Tags             = require('./tags.js');
-const PaymentMethods   = require('./paymentMethods');
-const Plan             = require('./plan');
-const PaymentHistory   = require('./paymentHistory');
-const Explore          = require('./explore');
-const Connector        = require('./connector');
-const Template         = require('./template');
-const AccessManagement = require('./accessManagement');
-const TagoIORUN        = require('./run');
-const Profiles         = require('./profiles');
->>>>>>> 4dcad20b211d609cf7eb112492945e63c3df5928
-
 
 class Account {
   constructor(token) {
