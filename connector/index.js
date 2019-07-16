@@ -35,7 +35,7 @@ class Connector {
   }
 
   resolveToken(serie_number, authorization) {
-    let url    = `${config.api_url}/info/${serie_number}`;
+    let url    = `${config.api_url}/connector/resolve/${serie_number}`;
     let method = 'GET';
 
     if (authorization) url = `${url}/${authorization}`;
