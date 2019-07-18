@@ -65,18 +65,22 @@ class Connector {
   }
 
   /** Get Info of the Connector
-  * @param  {String} Connector id
+  * @param  {String} connector_id id
+  * @param  {boolean} no_parent dont subscribe parameters with parent parameters
   * @return {Promise}
   */
-  info(connector_id) {
+  info(connector_id, no_parent = false) {
     if (!connector_id || connector_id == '') {
-      //If ID is send with null, it will get List instead info.
+    //If ID is send with null, it will get List instead info.
       return new Promise((resolve,reject) => reject('Connector ID parameter is obrigatory.'));
     }
     const url    = `${config.api_url}/connector/${connector_id}`;
     const method = 'GET';
+    const params = {
+      no_parent,
+    };
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = Object.assign({}, this.default_options, {url, method, params});
     return request(options);
   }
 
