@@ -74,6 +74,35 @@ class RunUser {
     const options = {url, method, headers};
     return request(options);
   }
+
+  /**
+   * Sends a password recover e-mail.
+   * @param  {String} tagoRunURL - the url of tago run.
+   * @param  {String} email - email of the account.
+   * @return {Promise}
+   */
+  static passwordRecover(tagoRunURL, email) {
+    const url    = `${config.api_url}/run/${tagoRunURL}/passwordreset/${email}`;
+    const method = 'GET';
+
+    const headers = default_headers();
+    const options = {url, method, headers};
+    return request(options);
+  }
+
+  /**
+   * Change password using token of the password recover.
+   * @param  {string} password - new password
+   * @return {Promise}
+   */
+  passwordChange(tagoRunURL, password) {
+    const data   = { password };
+    const url    = `${config.api_url}/run/${tagoRunURL}/passwordreset`;
+    const method = 'POST';
+
+    const options = Object.assign({}, this.default_options, {url, method, data});
+    return request(options);
+  }
 }
 
 
