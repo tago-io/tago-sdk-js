@@ -91,6 +91,42 @@ class TagoIORUN {
     const options = Object.assign({}, this.default_options, { url, method, data });
     return request(options);
   }
+
+  notificationCreate(user_id, data) {
+    data = data || {};
+    data.run_user = user_id;
+
+    let url = `${config.api_url}/run/notification`;
+    let method = 'POST';
+
+    let options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
+
+  notificationEdit(notification_id, data) {
+    data = data || {};
+    let url = `${config.api_url}/run/notification/${notification_id}`;
+    let method = 'PUT';
+
+    let options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
+
+  notificationDelete(notification_id) {
+    let url = `${config.api_url}/run/notification/${notification_id}`;
+    let method = 'DELETE';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  notificationList(user_id) {
+    let url = `${config.api_url}/run/notification/${user_id}`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
 }
 
 module.exports = TagoIORUN;

@@ -92,6 +92,7 @@ class RunUser {
 
   /**
    * Change password using token of the password recover.
+   * @param  {String} tagoRunURL - the url of tago run.
    * @param  {string} password - new password
    * @return {Promise}
    */
@@ -103,6 +104,70 @@ class RunUser {
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
   }
+
+  /**
+   * List notifications.
+   * @param  {String} tagoRunURL - the url of tago run.
+   * @param  {string} password - new password
+   * @return {Promise}
+   */
+  notificationList(tagoRunURL) {
+    const url    = `${config.api_url}/run/${tagoRunURL}/notification`;
+    const method = 'GET';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  /**
+   * Mark notification as read
+   * @param  {String} tagoRunURL - the url of tago run.
+   * @param  {string|array} notifications array of notification ids or single id
+   * @return {Promise}
+   */
+  notificationMarkRead(tagoRunURL, notifications) {
+    if (!Array.isArray(notifications)) {
+      notifications = [notifications];
+    }
+    const url    = `${config.api_url}/run/${tagoRunURL}/notification`;
+    const method = 'PUT';
+    const data = {
+      notification_ids: notifications,
+    };
+
+    const options = Object.assign({}, this.default_options, { url, method, data });
+    return request(options);
+  }
+
+  /**
+   * Trigger notification button
+   * @param  {String} tagoRunURL - the url of tago run.
+   * @param  {string} notification_id id of the notification
+   * @param  {string} btn_id id of the button
+   * @return {Promise}
+   */
+  notificationButton(tagoRunURL, notification_id, btn_id) {
+    const url  = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}/${btn_id}`;
+    const method = 'PUT';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  /**
+   * Delete notification
+   * @param  {String} tagoRunURL - the url of tago run.
+   * @param  {string} notification_id id of the notification
+   * @return {Promise}
+   */
+  notificationDelete(tagoRunURL, notification_id) {
+    const url    = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}`;
+    const method = 'DELETE';
+
+    const options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
 }
 
 
