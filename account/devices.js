@@ -23,7 +23,7 @@ class Devices {
      * Example: ['id', 'name', 'visible']
      *
      * Values allowed:
-     * id, name, description, visible, active, last_access, bucket,
+     * id, name, description, visible, active, bucket,
      * account, tags, created_at, updated_at.
      * @param  {JSON} filter
      * JSON of filter
@@ -75,7 +75,7 @@ class Devices {
   _list() {
     const parameters = [
       1,
-      ['active', 'bucket', 'created_at', 'id', 'last_access', 'name', 'tags', 'visible'],
+      ['active', 'bucket', 'created_at', 'id', 'name', 'tags', 'visible'],
       {},
       1000,
       'name',
