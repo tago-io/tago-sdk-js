@@ -57,6 +57,14 @@ class TagoIORUN {
     return request(options);
   }
 
+  loginAsUser(userID) {
+    let url = `${config.api_url}/run/users/${userID}/login`;
+    let method = 'GET';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
   userEdit(userID, data) {
     data = data || {};
     let url = `${config.api_url}/run/users/${userID}`;

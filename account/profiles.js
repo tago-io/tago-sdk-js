@@ -59,6 +59,18 @@ class Profile {
   }
 
   /**
+   * Delete profile
+   * @param {String} profile_id
+   */
+  delete(profile_id) {
+    let url = `${config.api_url}/profile/${profile_id}`;
+    let method = 'DEL';
+
+    let options = Object.assign({}, this.default_options, { url, method });
+    return request(options);
+  }
+
+  /**
    * Creates a profile.
    * @param {Object} date This is a profile object.
    */
