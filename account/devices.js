@@ -216,7 +216,7 @@ class Devices {
   info(device_id) {
     if (!device_id || device_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Device ID parameter is obrigatory.'));
+      return Promise.reject('Device ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/device/${device_id}`;
     const method = 'GET';

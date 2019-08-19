@@ -70,7 +70,7 @@ class Connector {
   info(connector_id, no_parent = false) {
     if (!connector_id || connector_id === '') {
     // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Connector ID parameter is obrigatory.'));
+      return Promise.reject('Connector ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/connector/${connector_id}`;
     const method = 'GET';

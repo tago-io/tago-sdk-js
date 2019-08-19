@@ -123,7 +123,7 @@ class Analysis {
   info(analyze_id) {
     if (!analyze_id || analyze_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Analyze ID parameter is obrigatory.'));
+      return Promise.reject('Analyze ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/analysis/${analyze_id}`;
     const method = 'GET';

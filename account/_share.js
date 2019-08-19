@@ -4,9 +4,9 @@ const config          = require('../config.js');
 function invite(type, ref_id, data, default_options) {
   data = data || {};
   if (!ref_id || ref_id === '') {
-    return new Promise((resolve, reject) => reject(`${type} ID parameter is obrigatory.`));
+    return Promise.reject(`${type} ID parameter is obrigatory.`);
   } else if (!data.email) {
-    return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+    return Promise.reject('data.email parameter is obrigatory.');
   }
 
   const url    = `${config.api_url}/share/${type}/${ref_id}`;
@@ -19,7 +19,7 @@ function invite(type, ref_id, data, default_options) {
 function edit(type, share_id, data, default_options) {
   data = data || {};
   if (!share_id || share_id === '') {
-    return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+    return Promise.reject('Share ID parameter is obrigatory.');
   }
 
   const url    = `${config.api_url}/share/${share_id}`;
@@ -31,7 +31,7 @@ function edit(type, share_id, data, default_options) {
 
 function list(type, ref_id, default_options) {
   if (!ref_id || ref_id === '') {
-    return new Promise((resolve, reject) => reject(`${type} ID parameter is obrigatory.`));
+    return Promise.reject(`${type} ID parameter is obrigatory.`);
   }
 
   const url    = `${config.api_url}/share/${type}/${ref_id}`;
@@ -43,7 +43,7 @@ function list(type, ref_id, default_options) {
 
 function remove(type, share_id, default_options) {
   if (!share_id || share_id === '') {
-    return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+    return Promise.reject('Share ID parameter is obrigatory.');
   }
 
   const url    = `${config.api_url}/share/${share_id}`;

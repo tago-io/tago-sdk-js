@@ -123,7 +123,7 @@ class Actions {
   info(action_id) {
     if (!action_id || action_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Action ID parameter is obrigatory.'));
+      return Promise.reject('Action ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/action/${action_id}`;
     const method = 'GET';

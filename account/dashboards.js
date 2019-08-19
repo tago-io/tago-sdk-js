@@ -126,7 +126,7 @@ class Dashboards {
   info(dashboard_id) {
     if (!dashboard_id || dashboard_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/dashboard/${dashboard_id}`;
     const method = 'GET';
@@ -145,7 +145,7 @@ class Dashboards {
   duplicate(dashboard_id, data) {
     data = data || {};
     if (!dashboard_id || dashboard_id === '') {
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
 
     const url    = `${config.api_url}/dashboard/${dashboard_id}/duplicate`;
@@ -166,7 +166,7 @@ class Dashboards {
   shareList(dashboard_id) {
     if (!dashboard_id || dashboard_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
     return share.list('dashboard', dashboard_id, this.default_options);
   }
@@ -185,9 +185,9 @@ class Dashboards {
   shareSendInvite(dashboard_id, data) {
     data = data || {};
     if (!dashboard_id || dashboard_id === '') {
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.invite('dashboard', dashboard_id, data, this.default_options);
   }
@@ -202,9 +202,9 @@ class Dashboards {
   shareEdit(share_id, data) {
     data = data || {};
     if (!share_id || share_id === '') {
-      return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+      return Promise.reject('Share ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.edit('dashboard', share_id, data, this.default_options);
   }
@@ -215,7 +215,7 @@ class Dashboards {
      */
   shareDelete(share_id) {
     if (!share_id || share_id === '') {
-      return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+      return Promise.reject('Share ID parameter is obrigatory.');
     }
     return share.remove('dashboard', share_id, this.default_options);
   }
@@ -230,7 +230,7 @@ class Dashboards {
   genPublicToken(dashboard_id, expire_time = 'never') {
     if (!dashboard_id || dashboard_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/dashboard/${dashboard_id}/share/public`;
     const method = 'GET';
@@ -252,9 +252,9 @@ class Dashboards {
   shareClone(dashboard_id, data) {
     data = data || {};
     if (!dashboard_id || dashboard_id === '') {
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
 
     const url    = `${config.api_url}/dashboard/${dashboard_id}/share/copy`;

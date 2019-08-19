@@ -33,7 +33,7 @@ class Profile {
    */
   info(profile_id) {
     if (!profile_id || profile_id === '') {
-      return new Promise((resolve, reject) => reject('Profile ID parameter is obrigatory.'));
+      return Promise.reject('Profile ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/profile/${profile_id}`;
     const method = 'GET';

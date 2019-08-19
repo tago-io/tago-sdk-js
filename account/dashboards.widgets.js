@@ -62,7 +62,7 @@ class Widgets {
   info(dash_id, widget_id) {
     if (!widget_id || widget_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Widget ID parameter is obrigatory.'));
+      return Promise.reject('Widget ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
     const method = 'GET';

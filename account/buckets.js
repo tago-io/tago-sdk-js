@@ -206,7 +206,7 @@ class Buckets {
   info(bkt_id) {
     if (!bkt_id || bkt_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Bucket ID parameter is obrigatory.'));
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/bucket/${bkt_id}`;
     const method = 'GET';
@@ -221,7 +221,7 @@ class Buckets {
      */
   backupInfo(backup_id) {
     if (!backup_id || backup_id === '') {
-      return new Promise((resolve, reject) => reject('Backup ID parameter is obrigatory.'));
+      return Promise.reject('Backup ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/backup/${backup_id}`;
     const method = 'GET';
@@ -247,7 +247,7 @@ class Buckets {
      */
   backupDelete(backup_id) {
     if (!backup_id || backup_id === '') {
-      return new Promise((resolve, reject) => reject('Backup ID parameter is obrigatory.'));
+      return Promise.reject('Backup ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/backup/${backup_id}`;
     const method = 'DELETE';
@@ -278,7 +278,7 @@ class Buckets {
   shareList(bucket_id) {
     if (!bucket_id || bucket_id === '') {
       // If ID is send with null, it will get List instead info.
-      return new Promise((resolve, reject) => reject('Bucket ID parameter is obrigatory.'));
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     }
     return share.list('bucket', bucket_id, this.default_options);
   }
@@ -295,9 +295,9 @@ class Buckets {
   shareSendInvite(bucket_id, data) {
     data = data || {};
     if (!bucket_id || bucket_id === '') {
-      return new Promise((resolve, reject) => reject('Bucket ID parameter is obrigatory.'));
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.invite('bucket', bucket_id, data, this.default_options);
   }
@@ -313,9 +313,9 @@ class Buckets {
   shareEdit(share_id, data) {
     data = data || {};
     if (!share_id || share_id === '') {
-      return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+      return Promise.reject('Share ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve, reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.edit('bucket', share_id, data, this.default_options);
   }
@@ -326,7 +326,7 @@ class Buckets {
      */
   shareDelete(share_id) {
     if (!share_id || share_id === '') {
-      return new Promise((resolve, reject) => reject('Share ID parameter is obrigatory.'));
+      return Promise.reject('Share ID parameter is obrigatory.');
     }
     return share.remove('bucket', share_id, this.default_options);
   }
@@ -346,9 +346,9 @@ class Buckets {
     buckets = buckets || [];
     options = options || {};
     if (!output || output === '') {
-      return new Promise((resolve, reject) => reject('Output parameter is obrigatory.'));
+      return Promise.reject('Output parameter is obrigatory.');
     } else if (!buckets || !buckets[0]) {
-      return new Promise((resolve, reject) => reject('Buckets parameter is obrigatory.'));
+      return Promise.reject('Buckets parameter is obrigatory.');
     }
 
     const data = { buckets, ...options };

@@ -36,10 +36,13 @@ class Currency {
         format: 1,
       };
 
-      const options = { ...this.default_options,
+      const options = {
+        ...this.default_options,
         url,
         method,
-        params };
+        params,
+      };
+
       request(options).then((result) => {
         if (!result.success) {
           return reject('Currency not found.');
