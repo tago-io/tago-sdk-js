@@ -1,4 +1,3 @@
-'use strict';
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
@@ -14,12 +13,12 @@ class Device {
   constructor(token, details) {
     this.token   = token;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
 
     if (details) {
-      this.default_options.qs = {'details': true};
+      this.default_options.qs = { details: true };
     }
   }
 
@@ -28,10 +27,10 @@ class Device {
      * @return {Promise}
      */
   info() {
-    let url    = `${config.api_url}/info`;
-    let method = 'GET';
+    const url    = `${config.api_url}/info`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -41,10 +40,10 @@ class Device {
      */
   insert(data) {
     data       = data || {};
-    let url    = `${config.api_url}/data`;
-    let method = 'POST';
+    const url    = `${config.api_url}/data`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -55,11 +54,11 @@ class Device {
      */
   find(query_obj) {
     query_obj  = query_obj || {};
-    let url    = `${config.api_url}/data`;
-    let method = 'GET';
-    let params = Object.assign({}, this.default_options.qs || {}, query_obj);
+    const url    = `${config.api_url}/data`;
+    const method = 'GET';
+    const params = { ...this.default_options.qs || {}, ...query_obj };
 
-    let options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
 
     return request(options);
   }
@@ -76,10 +75,10 @@ class Device {
       url += `/${variable_or_id}`;
     }
 
-    let params = Object.assign({}, this.default_options.qs || {}, qty ? {qty} : {});
-    let method = 'DELETE';
+    const params = { ...this.default_options.qs || {}, ...(qty ? { qty } : {}) };
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
 
     return request(options);
   }
@@ -90,7 +89,7 @@ class Device {
    * @return {Promise} Promise - The string message from server
    */
   remove(...args) {
-    let [ queryOrID, qty ] = args;
+    let [queryOrID, qty] = args; //eslint-disable-line
     if (typeof queryOrID !== 'object' || qty === 'all') {
       console.warn('The remove method using variable or ID is deprecated, it should have a JSON as a parameter, see our documentation for more information');
       return this.removeDeprecated(...args);
@@ -105,9 +104,9 @@ class Device {
     const query_obj = queryOrID || {};
     const url = `${config.api_url}/data`;
     const method = 'DELETE';
-    const params = Object.assign({}, this.default_options.qs || {}, query_obj);
+    const params = { ...this.default_options.qs || {}, ...query_obj };
 
-    const options = Object.assign({}, this.default_options, { url, method, params });
+    const options = { ...this.default_options, url, method, params };
 
     return request(options);
   }
@@ -116,12 +115,12 @@ class Device {
      * @return {Promise}
      */
   getParams(sent_status) {
-    let url     = `${config.api_url}/device/params`;
-    let method  = 'GET';
-    let params  = {
-      sent_status
+    const url     = `${config.api_url}/device/params`;
+    const method  = 'GET';
+    const params  = {
+      sent_status,
     };
-    let options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -130,9 +129,9 @@ class Device {
      * @return {Promise}
      */
   markParam(param_id) {
-    let url     = `${config.api_url}/device/params/${param_id}`;
-    let method  = 'PUT';
-    let options = Object.assign({}, this.default_options, {url, method});
+    const url     = `${config.api_url}/device/params/${param_id}`;
+    const method  = 'PUT';
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 

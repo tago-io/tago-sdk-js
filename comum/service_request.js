@@ -1,4 +1,4 @@
-'use strict';
+
 const axios = require('axios');
 
 module.exports = function service_request(request_options) {

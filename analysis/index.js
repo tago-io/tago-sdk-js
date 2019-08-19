@@ -1,4 +1,3 @@
-'use strict';
 const Services = require('../services/');
 const tagoSocket = require('../comum/tago_socket');
 
@@ -17,17 +16,17 @@ class Analysis {
   }
 
   run(environment, data, analysis_id, token) {
-    let tago_console = new Services(token).console;
-    function log() {
-      if (!process.env.TAGO_RUNTIME) console.log.apply(null, arguments);
-      return tago_console.log(Object.keys(arguments).map(x => stringify_msg(arguments[x])).join(' '));
+    const tago_console = new Services(token).console;
+    function log(...args) {
+      if (!process.env.TAGO_RUNTIME) console.log(...args);
+      return tago_console.log(Object.keys(args).map((x) => stringify_msg(args[x])).join(' '));
     }
 
-    let context = {
+    const context = {
       log,
       token,
       environment,
-      analysis_id
+      analysis_id,
     };
     this._analysis(context, data || []);
   }

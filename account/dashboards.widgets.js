@@ -1,4 +1,3 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
@@ -8,8 +7,8 @@ class Widgets {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -23,7 +22,7 @@ class Widgets {
     const url    = `${config.api_url}/dashboard/${dash_id}/widget/`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -38,7 +37,7 @@ class Widgets {
     const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -51,7 +50,7 @@ class Widgets {
     const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -61,14 +60,14 @@ class Widgets {
     * @return {Promise}
     */
   info(dash_id, widget_id) {
-    if (!widget_id || widget_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Widget ID parameter is obrigatory.'));
+    if (!widget_id || widget_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return new Promise((resolve, reject) => reject('Widget ID parameter is obrigatory.'));
     }
     const url    = `${config.api_url}/dashboard/${dash_id}/widget/${widget_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -82,12 +81,11 @@ class Widgets {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      params: { overwrite }
-    });
+      params: { overwrite } };
     return request(options);
   }
 
@@ -101,7 +99,7 @@ class Widgets {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -115,7 +113,7 @@ class Widgets {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}/run`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -130,7 +128,7 @@ class Widgets {
     const method = 'DELETE';
     const params = { ids };
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -144,7 +142,7 @@ class Widgets {
     const url = `${config.api_url}/dashboard/${dashboard_id}/widget/${widget_id}/token`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 }

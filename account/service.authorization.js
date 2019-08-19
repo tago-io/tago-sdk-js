@@ -1,4 +1,4 @@
-'use strict';
+
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -8,8 +8,8 @@ class ServiceAuth {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -47,7 +47,7 @@ class ServiceAuth {
     const url = `${config.api_url}/serviceauth`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -57,8 +57,7 @@ class ServiceAuth {
         amount,
         orderBy,
         fields,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -72,7 +71,7 @@ class ServiceAuth {
     const url    = `${config.api_url}/serviceauth`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -84,7 +83,7 @@ class ServiceAuth {
     const url    = `${config.api_url}/serviceauth/${token}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -98,7 +97,7 @@ class ServiceAuth {
     const method = 'PUT';
     const data = { verification_code };
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 }

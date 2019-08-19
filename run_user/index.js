@@ -1,4 +1,4 @@
-'use strict';
+
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const request         = require('../comum/tago_request.js');
@@ -7,8 +7,8 @@ class RunUser {
   constructor(token) {
     this.token = token;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -19,7 +19,7 @@ class RunUser {
     const url = `${config.api_url}/run/${tagoRunURL}/info`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -31,7 +31,7 @@ class RunUser {
     const method = 'PUT';
     const data = changes;
 
-    const options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -71,7 +71,7 @@ class RunUser {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -86,7 +86,7 @@ class RunUser {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -101,7 +101,7 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/passwordreset`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -115,7 +115,7 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/notification`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -135,7 +135,7 @@ class RunUser {
       notification_ids: notifications,
     };
 
-    const options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -150,7 +150,7 @@ class RunUser {
     const url  = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}/${btn_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -164,7 +164,7 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 }

@@ -16,7 +16,7 @@ function tagoSocket(token, socketIOExtraOptions = {}) {
   const socket = io.connect(config.realtime_url, {
     ...config.socket_opts,
     query: {
-      token: token,
+      token,
     },
     ...socketIOExtraOptions,
   });
@@ -28,7 +28,7 @@ tagoSocket.channels = {
   notification: 'notification::data',
   analysisConsole: 'analysis::console',
   analysisTrigger: 'analysis::trigger',
-  bucketData: 'bucket::data'
+  bucketData: 'bucket::data',
 };
 
 module.exports = tagoSocket;
