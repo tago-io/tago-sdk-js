@@ -95,11 +95,19 @@ class Widgets {
     * @param  {JSON} data
     * @return {Promise}
     */
-  sendData(dashboard_id, widget_id, data) {
+  sendData(dashboard_id, widget_id, data, bypassBucket) {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'POST';
 
-    const options = { ...this.default_options, url, method, data };
+    const options = {
+      ...this.default_options,
+      url,
+      method,
+      data,
+      paramsSerializer,
+      params: { bypass_bucket: bypassBucket || false },
+    };
+
     return request(options);
   }
 

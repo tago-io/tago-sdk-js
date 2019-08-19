@@ -63,7 +63,7 @@ class Profile {
    */
   delete(profile_id) {
     const url = `${config.api_url}/profile/${profile_id}`;
-    const method = 'DEL';
+    const method = 'DELETE';
 
     const options = { ...this.default_options, url, method };
     return request(options);
