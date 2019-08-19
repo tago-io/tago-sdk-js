@@ -1,6 +1,6 @@
 'use strict';
-const Services = require('./../services/');
-const Realtime = require('../realtime');
+const Services = require('../services/');
+const tagoSocket = require('../comum/tago_socket');
 
 function stringify_msg(msg) {
   return (typeof msg === 'object' && !Array.isArray(msg) ? JSON.stringify(msg) : String(msg));
@@ -36,17 +36,16 @@ class Analysis {
     if (!this._token) {
       throw 'To run locally, needs a token.';
     }
-    const scon = new Realtime(this._token);
-    scon.onConnect = () => console.info('Connected to Tago.');
-    scon.onDisconnect = () => console.info('Disconnected from Tago.');
-    scon.onError = (e) => console.error(e);
-    scon.onRegisterAnalysis = (analysis) => console.info(`Analysis [${analysis.name}] Started.`);
 
-    scon.connect().then(() => {
-      scon.listening('run:analysis', (scope) => {
-        this.run(scope.environment, scope.data, scope.analysis_id, this._token);
-      });
-    }).catch(console.error);
+    const socket = tagoSocket(this._token);
+
+    socket.on('connect', () => console.info('Connected to TagoIO.'));
+    socket.on('disconnect', () => console.info('Disconnected from TagoIO.\n\n'));
+    socket.on('error', (e) => console.error('Connection error', e));
+    socket.on('ready', (analysis) => console.info(`Analysis [${analysis.name}] Started.`));
+    socket.on(tagoSocket.channels.analysisTrigger, (scope) => {
+      this.run(scope.environment, scope.data, scope.analysis_id, scope.token);
+    });
   }
 }
 

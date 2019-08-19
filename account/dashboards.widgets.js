@@ -1,8 +1,7 @@
 'use strict';
-const request         = require('../comum/tago_request.js');
-const config          = require('../config.js');
-const default_headers = require('../comum/default_headers.js');
-const Realtime        = require('../realtime');
+const request          = require('../comum/tago_request.js');
+const config           = require('../config.js');
+const default_headers  = require('../comum/default_headers.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 
 class Widgets {
@@ -133,40 +132,6 @@ class Widgets {
 
     const options = Object.assign({}, this.default_options, {url, method, params});
     return request(options);
-  }
-
-  /** Start listening the widget data
-   * @param  {String} widget_id Widget ID
-   * @param  {function} func Function to run when realtime is triggered
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-  */
-  listening(widget_id, func, realtimeInstance) {
-    if (!widget_id || widget_id == '') {
-      return Promise.reject('Widget ID parameter is obrigatory.');
-    }
-
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.listening(`widget:${widget_id}`, func);
-
-    return Promise.resolve('Listening to Widget Data.');
-  }
-
-  /** Stop to listen widget data
-   * @param  {String} widget_id Widget ID
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-   * You should use same Realtime instance for listening and stopListening
-  */
-  stopListening(widget_id, realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.stopListening(`widget:${widget_id}`);
-
-    return Promise.resolve('Stopped listening Widget Data.');
   }
 
   /** Generate a new token for the embed widgets

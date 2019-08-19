@@ -1,8 +1,7 @@
 'use strict';
-const config = require('../config.js');
+const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const request = require('../comum/tago_request.js');
-const Realtime        = require('../realtime');
+const request         = require('../comum/tago_request.js');
 
 class RunUser {
   constructor(token) {
@@ -167,34 +166,6 @@ class RunUser {
 
     const options = Object.assign({}, this.default_options, { url, method });
     return request(options);
-  }
-
-  /** Start listening the notifications
-   * @param  {function} func Function to run when realtime is triggered
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-  */
-  listening(func, realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.listening('notification', func);
-
-    return Promise.resolve('Listening to Notifications.');
-  }
-
-  /** Stop to listen notifications events
- * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
- * You should use same Realtime instance for listening and stopListening
-*/
-  stopListening(realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.stopListening('notification');
-
-    return Promise.resolve('Stoped listening Notifications.');
   }
 }
 

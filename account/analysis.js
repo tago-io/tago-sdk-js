@@ -3,7 +3,6 @@ const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
-const Realtime         = require('../realtime');
 
 class Analysis {
   constructor(acc_token) {
@@ -147,40 +146,6 @@ class Analysis {
 
     const options = Object.assign({}, this.default_options, {url, method, data});
     return request(options);
-  }
-
-  /** Start listening the analyze console
-   * @param  {String} analyze_id Analyze ID
-   * @param  {function} func Function to run when realtime is triggered
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-  */
-  listening(analyze_id, func, realtimeInstance) {
-    if (!analyze_id || analyze_id == '') {
-      return Promise.reject('Analyze ID parameter is obrigatory.');
-    }
-
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.listening(`analysis:${analyze_id}`, func);
-
-    return Promise.resolve('Listening to Analysis Console.');
-  }
-
-  /** Stop to listen analyze console events
-   * @param  {String} analyze_id Analyze ID
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-   * You should use same Realtime instance for listening and stopListening
-  */
-  stopListening(analyze_id, realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.stopListening(`analysis:${analyze_id}`);
-
-    return Promise.resolve('Stopped listening Analysis Console.');
   }
 
   /** Generate a new token for the analysis
