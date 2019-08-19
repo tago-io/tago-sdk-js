@@ -64,7 +64,7 @@ class Profile {
    */
   delete(profile_id) {
     let url = `${config.api_url}/profile/${profile_id}`;
-    let method = 'DEL';
+    let method = 'DELETE';
 
     let options = Object.assign({}, this.default_options, { url, method });
     return request(options);
