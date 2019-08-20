@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "description": "TagoIO SDK for JavaScript in the browser and Node.js",
   "main": "index.js",
   "homepage": "https://tago.io",
@@ -38,7 +38,7 @@
     "socket.io-client": "2.2.0"
   },
   "devDependencies": {
-    "eslint": "6.2.0",
+    "eslint": "6.2.1",
     "eslint-config-airbnb": "18.0.1",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jasmine": "2.10.1",

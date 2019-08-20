@@ -21,7 +21,7 @@ function default_headers(class_context) {
   }
 
   if (!isBrowser) {
-    headers['User-Agent'] = `Tago-Nodelib-${pkg.version}`;
+    headers['User-Agent'] = `TagoIO-SDKJS-${pkg.version}`;
   }
 
   return headers;

@@ -37,28 +37,28 @@ function errorHandler(error, originalRequestObject) {
 
 const waitTime = () => new Promise((resolve) => setTimeout(() => resolve(), 1000));
 
-async function tago_request(request_options) {
-  let _axios = axios;
-  if (this && this.axios) _axios = this.axios;
+async function tagoRequest(request_options) {
+  request_options.timeout = config.request_timeout;
 
-  if (String(request_options.method).toLowerCase() === 'get') {
-    if (!request_options.params) {
-      request_options.params = {};
-    }
-    request_options.params.avoidCache = new Date().getTime();
-  }
+  // Prevent cache on IE
+  request_options.headers = {
+    ...request_options.headers,
+    Pragma: 'no-cache',
+    'Cache-Control': 'no-cache',
+  };
 
-  request_options.timeout = 60000;
   let result;
   const _resultHandler = resultHandler.bind(null, request_options);
+
   for (let i = 1; i <= config.request_attempts; i += 1) {
-    result = await _axios(request_options).then(_resultHandler).catch((error) => errorHandler(error, request_options));
+    result = await axios(request_options).then(_resultHandler).catch((error) => errorHandler(error, request_options));
     if (result !== 'Timeout') break;
 
     await waitTime();
   }
+
   if (result === 'Timeout') result = 'SDK: Request timed out';
   return result;
 }
 
-module.exports = tago_request;
+module.exports = tagoRequest;
