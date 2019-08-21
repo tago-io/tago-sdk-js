@@ -4,14 +4,13 @@
 
 # Description
 
-Tago SDK for JavaScript in the browser and Node.js.
+TagoIO SDK for JavaScript in the browser and Node.JS.
 
 | what                  | where                    |
 |-----------------------|--------------------------|
-| Tago website          | http://tago.io           |
+| TagoIO website        | http://tago.io           |
 | SDK documentation     | http://sdk.js.tago.io    |
 | General documentation | http://docs.tago.io      |
-| Slack / Community     | http://community.tago.io |
 
 # Installation
 
@@ -45,4 +44,4 @@ insertData();
 
 # License
 
-Tago SDK for JavaScript in the browser and Node.js is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-js/blob/master/LICENSE.md).
+TagoIO SDK for JavaScript in the browser and Node.js is released under the [Apache-2.0 License](https://github.com/tago-io/tago-sdk-js/blob/master/LICENSE.md).
