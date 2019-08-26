@@ -1,4 +1,4 @@
-'use strict';
+
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
@@ -7,8 +7,8 @@ class Socket {
   constructor(analysis_token) {
     this.token = analysis_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -19,15 +19,13 @@ class Socket {
      * @return {Promise}
      */
   send(bucket_id, data_entry) {
-    let url    = `${config.api_url}/analysis/services/socket/send`;
-    let method = 'post';
-    let data = { bucket_id, 'data':data_entry};
+    const url    = `${config.api_url}/analysis/services/socket/send`;
+    const method = 'post';
+    const data = { bucket_id, data: data_entry };
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
-
-
 }
 
 module.exports = Socket;

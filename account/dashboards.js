@@ -1,4 +1,3 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -10,8 +9,8 @@ class Dashboards {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -51,7 +50,7 @@ class Dashboards {
     const url = `${config.api_url}/dashboard`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -61,8 +60,7 @@ class Dashboards {
         fields,
         amount,
         orderBy,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -76,7 +74,7 @@ class Dashboards {
       ['account', 'created_at', 'group_by', 'id', 'label', 'tags', 'visible'],
       {},
       1000,
-      'label'
+      'label',
     ];
     return this.list.call(this, ...parameters);
   }
@@ -88,10 +86,10 @@ class Dashboards {
      */
   create(data) {
     data       = data || {};
-    let url    = `${config.api_url}/dashboard`;
-    let method = 'POST';
+    const url    = `${config.api_url}/dashboard`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -102,10 +100,10 @@ class Dashboards {
      */
   edit(dashboard_id, data) {
     data       = data || {};
-    let url    = `${config.api_url}/dashboard/${dashboard_id}`;
-    let method = 'PUT';
+    const url    = `${config.api_url}/dashboard/${dashboard_id}`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -114,10 +112,10 @@ class Dashboards {
     * @return {Promise}
      */
   delete(dashboard_id) {
-    let url    = `${config.api_url}/dashboard/${dashboard_id}`;
-    let method = 'DELETE';
+    const url    = `${config.api_url}/dashboard/${dashboard_id}`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -126,14 +124,14 @@ class Dashboards {
     * @return {Promise}
      */
   info(dashboard_id) {
-    if (!dashboard_id || dashboard_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+    if (!dashboard_id || dashboard_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
-    let url    = `${config.api_url}/dashboard/${dashboard_id}`;
-    let method = 'GET';
+    const url    = `${config.api_url}/dashboard/${dashboard_id}`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -147,28 +145,28 @@ class Dashboards {
   duplicate(dashboard_id, data) {
     data = data || {};
     if (!dashboard_id || dashboard_id === '') {
-      return new Promise((resolve, reject) => reject('Dashboard ID parameter is obrigatory.'));
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
 
     const url    = `${config.api_url}/dashboard/${dashboard_id}/duplicate`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
 
 
-  /******************************************* */
+  /** ***************************************** */
 
   /** Get share list of the dashboard
     * @param  {String} dashboard id
     * @return {Promise}
      */
   shareList(dashboard_id) {
-    if (!dashboard_id || dashboard_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+    if (!dashboard_id || dashboard_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
     return share.list('dashboard', dashboard_id, this.default_options);
   }
@@ -186,10 +184,10 @@ class Dashboards {
      */
   shareSendInvite(dashboard_id, data) {
     data = data || {};
-    if (!dashboard_id || dashboard_id == '') {
-      return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+    if (!dashboard_id || dashboard_id === '') {
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.invite('dashboard', dashboard_id, data, this.default_options);
   }
@@ -203,10 +201,10 @@ class Dashboards {
      */
   shareEdit(share_id, data) {
     data = data || {};
-    if (!share_id || share_id == '') {
-      return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
+    if (!share_id || share_id === '') {
+      return Promise.reject('Share ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.edit('dashboard', share_id, data, this.default_options);
   }
@@ -216,12 +214,12 @@ class Dashboards {
     * @return {Promise}
      */
   shareDelete(share_id) {
-    if (!share_id || share_id == '') {
-      return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
+    if (!share_id || share_id === '') {
+      return Promise.reject('Share ID parameter is obrigatory.');
     }
     return share.remove('dashboard', share_id, this.default_options);
   }
-  /******************************************* */
+  /** ***************************************** */
 
 
   /** Generate a new public token for the dashboard
@@ -230,15 +228,15 @@ class Dashboards {
     * @return {Promise}
      */
   genPublicToken(dashboard_id, expire_time = 'never') {
-    if (!dashboard_id || dashboard_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+    if (!dashboard_id || dashboard_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/dashboard/${dashboard_id}/share/public`;
     const method = 'GET';
     const params = { expire_time };
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -253,16 +251,16 @@ class Dashboards {
      */
   shareClone(dashboard_id, data) {
     data = data || {};
-    if (!dashboard_id || dashboard_id == '') {
-      return new Promise((resolve,reject) => reject('Dashboard ID parameter is obrigatory.'));
+    if (!dashboard_id || dashboard_id === '') {
+      return Promise.reject('Dashboard ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
 
-    let url    = `${config.api_url}/dashboard/${dashboard_id}/share/copy`;
-    let method = 'POST';
+    const url    = `${config.api_url}/dashboard/${dashboard_id}/share/copy`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -271,10 +269,10 @@ class Dashboards {
     * @return {Promise}
      */
   listDevicesRelated(dashboard_id) {
-    let url = `${config.api_url}/dashboard/${dashboard_id}/devices`;
-    let method = 'GET';
+    const url = `${config.api_url}/dashboard/${dashboard_id}/devices`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 

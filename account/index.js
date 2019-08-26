@@ -1,4 +1,4 @@
-'use strict';
+
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const request          = require('../comum/tago_request.js');
@@ -29,8 +29,8 @@ class Account {
   constructor(token) {
     this.token = token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -43,7 +43,7 @@ class Account {
     const url    = `${config.api_url}/account`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -55,7 +55,7 @@ class Account {
     const url = `${config.api_url}/account/summary`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method, params });
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -69,7 +69,7 @@ class Account {
     const url    = `${config.api_url}/statistics`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -83,7 +83,7 @@ class Account {
     const url    = `${config.api_url}/account`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -96,7 +96,7 @@ class Account {
     const url    = `${config.api_url}/account`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -107,7 +107,7 @@ class Account {
     const url    = `${config.api_url}/account/profile`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -119,7 +119,7 @@ class Account {
     const url    = `${config.api_url}/account/profile`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -130,7 +130,7 @@ class Account {
     const url    = `${config.api_url}/account/profile/${profile_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -168,7 +168,7 @@ class Account {
     const url = `${config.api_url}/account/profile/token`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -178,8 +178,7 @@ class Account {
         amount,
         orderBy,
         fields,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -192,7 +191,7 @@ class Account {
     const method = 'POST';
 
     const headers = default_headers();
-    const options = {url, method, data, headers};
+    const options = { url, method, data, headers };
     return request(options);
   }
 
@@ -203,7 +202,7 @@ class Account {
     const url    = `${config.api_url}/account/profile/token`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -218,7 +217,7 @@ class Account {
     const method = 'POST';
 
     const headers = default_headers();
-    const options = {url, method, data, headers};
+    const options = { url, method, data, headers };
     return request(options);
   }
 
@@ -231,7 +230,7 @@ class Account {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -244,7 +243,7 @@ class Account {
     const url    = `${config.api_url}/account/passwordreset`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -267,7 +266,7 @@ class Account {
     };
 
     const headers = default_headers();
-    const options = {url, method, headers, data};
+    const options = { url, method, headers, data };
     return request(options);
   }
 
@@ -280,7 +279,7 @@ class Account {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -293,9 +292,8 @@ class Account {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
-
   }
 
   /** Confirm account creation
@@ -311,7 +309,7 @@ class Account {
     const url    = `${config.api_url}/auditlog`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 

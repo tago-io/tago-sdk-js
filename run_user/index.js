@@ -1,15 +1,14 @@
-'use strict';
-const config = require('../config.js');
+
+const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
-const request = require('../comum/tago_request.js');
-const Realtime        = require('../realtime');
+const request         = require('../comum/tago_request.js');
 
 class RunUser {
   constructor(token) {
     this.token = token;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -20,7 +19,7 @@ class RunUser {
     const url = `${config.api_url}/run/${tagoRunURL}/info`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -32,7 +31,7 @@ class RunUser {
     const method = 'PUT';
     const data = changes;
 
-    const options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -72,7 +71,7 @@ class RunUser {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -87,7 +86,7 @@ class RunUser {
     const method = 'GET';
 
     const headers = default_headers();
-    const options = {url, method, headers};
+    const options = { url, method, headers };
     return request(options);
   }
 
@@ -102,7 +101,7 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/passwordreset`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -116,7 +115,7 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/notification`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -136,7 +135,7 @@ class RunUser {
       notification_ids: notifications,
     };
 
-    const options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -151,7 +150,7 @@ class RunUser {
     const url  = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}/${btn_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -165,36 +164,8 @@ class RunUser {
     const url    = `${config.api_url}/run/${tagoRunURL}/notification/${notification_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
-  }
-
-  /** Start listening the notifications
-   * @param  {function} func Function to run when realtime is triggered
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-  */
-  listening(func, realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.listening('notification', func);
-
-    return Promise.resolve('Listening to Notifications.');
-  }
-
-  /** Stop to listen notifications events
- * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
- * You should use same Realtime instance for listening and stopListening
-*/
-  stopListening(realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.stopListening('notification');
-
-    return Promise.resolve('Stoped listening Notifications.');
   }
 }
 

@@ -1,16 +1,14 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
-const Realtime         = require('../realtime');
 
 class Analysis {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -50,7 +48,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -60,8 +58,7 @@ class Analysis {
         fields,
         amount,
         orderBy,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -75,7 +72,7 @@ class Analysis {
       ['active', 'id', 'interval', 'language', 'last_run', 'name', 'run_on', 'tags'],
       {},
       1000,
-      'name'
+      'name',
     ];
     return this.list.call(this, ...parameters);
   }
@@ -89,7 +86,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -103,7 +100,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis/${analyze_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -115,7 +112,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis/${analyze_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -124,14 +121,14 @@ class Analysis {
      * @return {Promise}
      */
   info(analyze_id) {
-    if (!analyze_id || analyze_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Analyze ID parameter is obrigatory.'));
+    if (!analyze_id || analyze_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Analyze ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/analysis/${analyze_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -145,42 +142,8 @@ class Analysis {
     const url    = `${config.api_url}/analysis/${analyze_id}/run`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
-  }
-
-  /** Start listening the analyze console
-   * @param  {String} analyze_id Analyze ID
-   * @param  {function} func Function to run when realtime is triggered
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-  */
-  listening(analyze_id, func, realtimeInstance) {
-    if (!analyze_id || analyze_id == '') {
-      return Promise.reject('Analyze ID parameter is obrigatory.');
-    }
-
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.listening(`analysis:${analyze_id}`, func);
-
-    return Promise.resolve('Listening to Analysis Console.');
-  }
-
-  /** Stop to listen analyze console events
-   * @param  {String} analyze_id Analyze ID
-   * @param  {Realtime} realtimeInstance Realtime instance (const Realtime = require(tago/realtime);)
-   * You should use same Realtime instance for listening and stopListening
-  */
-  stopListening(analyze_id, realtimeInstance) {
-    if (!(realtimeInstance instanceof Realtime)) {
-      return Promise.reject('Invalid realtime instance');
-    }
-
-    realtimeInstance.stopListening(`analysis:${analyze_id}`);
-
-    return Promise.resolve('Stopped listening Analysis Console.');
   }
 
   /** Generate a new token for the analysis
@@ -191,7 +154,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis/${analyze_id}/token`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -206,7 +169,7 @@ class Analysis {
     const url    = `${config.api_url}/analysis/${analyze_id}/upload`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -218,7 +181,7 @@ class Analysis {
     const url = `${config.api_url}/analysis/${analyze_id}/download`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 }

@@ -1,4 +1,4 @@
-'use strict';
+
 const Email      = require('./email.js');
 const SMS        = require('./sms.js');
 const Socket     = require('./socket.js');

@@ -1,4 +1,3 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -8,8 +7,8 @@ class Connector {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -46,10 +45,10 @@ class Connector {
    * Array of Connector in alphabetically order.
   */
   list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
-    let url    = `${config.api_url}/connector`;
-    let method = 'GET';
+    const url    = `${config.api_url}/connector`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -59,8 +58,7 @@ class Connector {
         fields,
         amount,
         orderBy,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -70,9 +68,9 @@ class Connector {
   * @return {Promise}
   */
   info(connector_id, no_parent = false) {
-    if (!connector_id || connector_id == '') {
-    //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Connector ID parameter is obrigatory.'));
+    if (!connector_id || connector_id === '') {
+    // If ID is send with null, it will get List instead info.
+      return Promise.reject('Connector ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/connector/${connector_id}`;
     const method = 'GET';
@@ -80,7 +78,7 @@ class Connector {
       no_parent,
     };
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -96,10 +94,10 @@ class Connector {
   */
   create(data) {
     data       = data || {};
-    let url    = `${config.api_url}/connector`;
-    let method = 'POST';
+    const url    = `${config.api_url}/connector`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -116,10 +114,10 @@ class Connector {
   */
   edit(connector_id, data) {
     data       = data || {};
-    let url    = `${config.api_url}/connector/${connector_id}`;
-    let method = 'PUT';
+    const url    = `${config.api_url}/connector/${connector_id}`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -128,10 +126,10 @@ class Connector {
   * @return {Promise}
   */
   delete(connector_id) {
-    let url    = `${config.api_url}/connector/${connector_id}`;
-    let method = 'DELETE';
+    const url    = `${config.api_url}/connector/${connector_id}`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -170,7 +168,7 @@ class Connector {
     const url = `${config.api_url}/connector/token/${connector_id}`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -180,8 +178,7 @@ class Connector {
         amount,
         orderBy,
         fields,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -197,7 +194,7 @@ class Connector {
     const url    = `${config.api_url}/connector/token`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -209,7 +206,7 @@ class Connector {
     const url    = `${config.api_url}/connector/token/${token}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 }

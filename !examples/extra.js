@@ -1,4 +1,4 @@
-'use strict';
+
 const Extra = require('../extra');
 
 function getWeather(address) {
@@ -9,8 +9,8 @@ function getWeather(address) {
 getWeather('Paranavaí');
 
 /**
- * That analysis can run on your machine, 
- * or on Tago servers, 
- * if will run in Tago server, 
+ * That analysis can run on your machine,
+ * or on Tago servers,
+ * if will run in Tago server,
  * we will ignore analysis token.
  */

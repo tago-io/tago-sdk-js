@@ -1,8 +1,7 @@
-'use strict';
+
 const Services = require('../services');
 
 (function init() {
-
   const analysis_token = 'xxxxxxxxx'; // Analysis token from TAGO
   const email = new Services(analysis_token).email;
 
@@ -11,4 +10,4 @@ const Services = require('../services');
   const message = 'Scope of my message';
 
   email.send(to, subject, message).then(console.log).catch(console.log);
-})();
+}());

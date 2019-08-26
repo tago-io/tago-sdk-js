@@ -1,8 +1,7 @@
-'use strict';
-const request          = require('tago/comum/tago_request');
-const paramsSerializer = require('tago/comum/paramsSerializer');
-const config           = require('tago/config');
-const default_headers  = require('tago/comum/default_headers');
+const request          = require('../comum/tago_request');
+const paramsSerializer = require('../comum/paramsSerializer');
+const config           = require('../config');
+const default_headers  = require('../comum/default_headers');
 
 /**
  * This class is responsible for handling all the requests of profiles
@@ -12,8 +11,8 @@ class Profile {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -24,7 +23,7 @@ class Profile {
     const url    = `${config.api_url}/profile`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -33,13 +32,13 @@ class Profile {
    * @param {String} profile_id The id of the profile.
    */
   info(profile_id) {
-    if (!profile_id || profile_id == '') {
-      return new Promise((resolve,reject) => reject('Profile ID parameter is obrigatory.'));
+    if (!profile_id || profile_id === '') {
+      return Promise.reject('Profile ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/profile/${profile_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -51,10 +50,10 @@ class Profile {
    */
   edit(profile_id, data) {
     data       = data || {};
-    let url    = `${config.api_url}/profile/${profile_id}`;
-    let method = 'PUT';
+    const url    = `${config.api_url}/profile/${profile_id}`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -63,10 +62,10 @@ class Profile {
    * @param {String} profile_id
    */
   delete(profile_id) {
-    let url = `${config.api_url}/profile/${profile_id}`;
-    let method = 'DELETE';
+    const url = `${config.api_url}/profile/${profile_id}`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -76,10 +75,10 @@ class Profile {
    */
   create(data) {
     data       = data || {};
-    let url    = `${config.api_url}/profile`;
-    let method = 'POST';
+    const url    = `${config.api_url}/profile`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -93,15 +92,14 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/statistics`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
       params: {
         date,
         timezone,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -140,7 +138,7 @@ class Profile {
     const url = `${config.api_url}/profile/${profile_id}/token`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -150,8 +148,7 @@ class Profile {
         amount,
         orderBy,
         fields,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -163,7 +160,7 @@ class Profile {
     const url = `${config.api_url}/profile/${profile_id}/share`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -176,7 +173,7 @@ class Profile {
     const url = `${config.api_url}/profile/${profile_id}/share`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, { url, method, data: { email } });
+    const options = { ...this.default_options, url, method, data: { email } };
     return request(options);
   }
 
@@ -189,7 +186,7 @@ class Profile {
     const url = `${config.api_url}/profile/${profile_id}/share/${share_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -211,7 +208,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/token`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -225,7 +222,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/token/${token}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -242,7 +239,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/auditlog`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, { url, method, params });
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -253,7 +250,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/addons`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options,  { url, method });
+    const options = { ...this.default_options,  url, method };
     return request(options);
   }
 
@@ -264,7 +261,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/addons`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options,  { url, method, data });
+    const options = { ...this.default_options,  url, method, data };
     return request(options);
   }
 
@@ -276,7 +273,7 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/services`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options,  { url, method, data });
+    const options = { ...this.default_options,  url, method, data };
     return request(options);
   }
 
@@ -290,7 +287,7 @@ class Profile {
     const url    = `${config.api_url}/profile/switch/${target_profile_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -301,12 +298,11 @@ class Profile {
     const url    = `${config.api_url}/profile/${profile_id}/summary`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      params,
-    });
+      params };
     return request(options);
   }
 }

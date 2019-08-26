@@ -1,4 +1,3 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -8,8 +7,8 @@ class Devices {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -52,7 +51,7 @@ class Devices {
     const url    = `${config.api_url}/device`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -63,8 +62,7 @@ class Devices {
         amount,
         orderBy,
         resolveBucketName,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -79,10 +77,10 @@ class Devices {
       {},
       1000,
       'name',
-      true
+      true,
     ];
-    return this.list.call(this, ...parameters).then(result => {
-      return result.map(item => {
+    return this.list.call(this, ...parameters).then((result) => {
+      return result.map((item) => {
         item.bucket = {
           id: item.bucket,
           name: item.bucket_name,
@@ -102,7 +100,7 @@ class Devices {
     const url    = `${config.api_url}/device`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -116,7 +114,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -128,7 +126,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -169,7 +167,7 @@ class Devices {
     const url = `${config.api_url}/device/token/${device_id}`;
     const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -179,8 +177,7 @@ class Devices {
         amount,
         orderBy,
         fields,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -196,7 +193,7 @@ class Devices {
     const url    = `${config.api_url}/device/token`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -208,7 +205,7 @@ class Devices {
     const url    = `${config.api_url}/device/token/${token_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -217,14 +214,14 @@ class Devices {
     * @return {Promise}
      */
   info(device_id) {
-    if (!device_id || device_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Device ID parameter is obrigatory.'));
+    if (!device_id || device_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Device ID parameter is obrigatory.');
     }
     const url    = `${config.api_url}/device/${device_id}`;
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -241,7 +238,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}/params`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -254,7 +251,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}/params`;
     const method = 'POST';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -268,7 +265,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
     const method = 'PUT';
 
-    const options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -285,7 +282,7 @@ class Devices {
     };
     const method = 'GET';
 
-    const options = Object.assign({}, this.default_options, {url, method, params});
+    const options = { ...this.default_options, url, method, params };
     return request(options);
   }
 
@@ -298,7 +295,7 @@ class Devices {
     const url    = `${config.api_url}/device/${device_id}/params/${param_id}`;
     const method = 'DELETE';
 
-    const options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 }

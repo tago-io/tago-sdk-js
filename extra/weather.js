@@ -1,4 +1,4 @@
-'use strict';
+
 const request         = require('../comum/service_request.js');
 const default_headers = require('../comum/default_headers.js');
 
@@ -9,14 +9,14 @@ class Weather {
   constructor(key) {
     this.key = key;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
   /** set params for the Weather
      * @private
-     * @param  {object} params 
+     * @param  {object} params
      */
   _setParams(params) {
     this._query = params.query || null;
@@ -28,7 +28,7 @@ class Weather {
          */
   geolocation_verify(geolocation) {
     if (typeof geolocation === 'string') {
-      let geoplited = geolocation.split(',');
+      const geoplited = geolocation.split(',');
 
       if (geolocation.length > 1) {
         geolocation = [geoplited[0].trim(), geoplited[1].trim()];
@@ -44,7 +44,7 @@ class Weather {
     return [geolocation[0], geolocation[1]].join(',');
   }
 
-  /** 
+  /**
      * Get the current weather conditions.
      * @param  {string} query - Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full - Set to come with full description, or not
@@ -54,13 +54,12 @@ class Weather {
   current(query, full, lang) {
     return new Promise((resolve, reject) => {
       this._setParams({ query, full, lang });
-      let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/conditions/q/${encodeURIComponent(this._query)}.json`;
-      let method = 'GET';
+      const url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/conditions/q/${encodeURIComponent(this._query)}.json`;
+      const method = 'GET';
 
-      let options = Object.assign({}, this.default_options, {
+      const options = { ...this.default_options,
         url,
-        method
-      });
+        method };
 
       request(options).then((result) => {
         if (!result.current_observation && result.response.results) {
@@ -86,13 +85,11 @@ class Weather {
           console.log(`weather system, ${e}`);
         }
         resolve(result);
-
       }).catch((error) => reject(error));
     });
-
   }
 
-  /** 
+  /**
      * Get history of the weather broadcast in the last week
      * @param  {string} date - Get history until specified date
      * @param  {string|object} query - Could be an address name, a zipcode or a geojson.
@@ -109,14 +106,13 @@ class Weather {
       } catch (e) {
         return reject('Invalid date');
       }
-  
-      let url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/history_${date}/q/${encodeURIComponent(this._query)}.json`;
-      let method = 'GET';
 
-      let options = Object.assign({}, this.default_options, {
+      const url = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/history_${date}/q/${encodeURIComponent(this._query)}.json`;
+      const method = 'GET';
+
+      const options = { ...this.default_options,
         url,
-        method
-      });
+        method };
 
       request(options).then((result) => {
         result = result.history;
@@ -126,7 +122,7 @@ class Weather {
     });
   }
 
-  /** 
+  /**
      * Returns a summary of the weather for the next 10 days. This includes high and low temperatures, a string text forecast and the conditions.
      * @param  {string} query - Could be an address name, a zipcode or a geojson.
      * @param  {boolean} full - Set to come with full description, or not
@@ -136,18 +132,17 @@ class Weather {
   forecast(query, full, lang) {
     return new Promise((resolve, reject) => {
       this._setParams({ query, full, lang });
-      let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/forecast10day/q/${encodeURIComponent(this._query)}.json`;
-      let method = 'GET';
+      const url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/forecast10day/q/${encodeURIComponent(this._query)}.json`;
+      const method = 'GET';
 
-      let options = Object.assign({}, this.default_options, {
+      const options = { ...this.default_options,
         url,
-        method
-      });
+        method };
 
       request(options).then((result) => {
         try {
           result = result.forecast.simpleforecast.forecastday;
-          result.forEach(function (x) {
+          result.forEach((x) => {
             delete x.icon_url;
             delete x.skyicon;
           });
@@ -168,13 +163,12 @@ class Weather {
   alerts(query, full, lang) {
     return new Promise((resolve, reject) => {
       this._setParams({ query, full, lang });
-      let url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/alerts/q/${encodeURIComponent(this._query)}.json`;
-      let method = 'GET';
+      const url    = `http://api.wunderground.com/api/${this.key}/lang:${this._lang}/alerts/q/${encodeURIComponent(this._query)}.json`;
+      const method = 'GET';
 
-      let options = Object.assign({}, this.default_options, {
+      const options = { ...this.default_options,
         url,
-        method
-      });
+        method };
 
       request(options).then((result) => {
         delete result.response;

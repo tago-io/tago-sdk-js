@@ -1,4 +1,4 @@
-'use strict';
+
 const request = require('../comum/tago_request.js');
 const config = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
@@ -7,8 +7,8 @@ class Template {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -25,10 +25,10 @@ class Template {
    * @param {JSON} templateObj Template JSON
    */
   generateTemplate(templateObj) {
-    let url = `${config.api_url}/template`;
-    let method = 'POST';
+    const url = `${config.api_url}/template`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, { url, method, data: templateObj });
+    const options = { ...this.default_options, url, method, data: templateObj };
     return request(options);
   }
 
@@ -41,10 +41,10 @@ class Template {
      * Example: { device: { id: 'XxxXx', bucket: 'XxxXXx' } }
    */
   installTemplate(template_id, data = {}) {
-    let url = `${config.api_url}/template/${template_id}`;
-    let method = 'POST';
+    const url = `${config.api_url}/template/${template_id}`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -53,10 +53,10 @@ class Template {
    * @param {String} template_id Template ID
    */
   static getTemplate(template_id) {
-    let url = `${config.api_url}/template/${template_id}`;
-    let method = 'GET';
+    const url = `${config.api_url}/template/${template_id}`;
+    const method = 'GET';
 
-    let options = Object.assign({}, { url, method });
+    const options = { url, method };
     return request(options);
   }
 

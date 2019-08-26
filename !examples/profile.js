@@ -11,7 +11,7 @@
 //     .catch(result => console.log(result));
 
 
-'use strict';
+
 const Account = require('../account');
 const myacc = new Account('b609a400-d8ee-11e6-a756-7b141ff86390');
 

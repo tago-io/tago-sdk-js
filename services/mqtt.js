@@ -1,4 +1,4 @@
-'use strict';
+
 const request         = require('../comum/tago_request.js');
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
@@ -7,8 +7,8 @@ class MQTT {
   constructor(analysis_token) {
     this.token = analysis_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -22,15 +22,13 @@ class MQTT {
      * @return {Promise}
      */
   publish(topic, message, bucket, options = {}) {
-    let url    = `${config.api_url}/analysis/services/mqtt/publish`;
-    let method = 'POST';
-    let data = Object.assign({ topic, message, bucket}, options);
+    const url    = `${config.api_url}/analysis/services/mqtt/publish`;
+    const method = 'POST';
+    const data = { topic, message, bucket, ...options };
 
-    let paremeters = Object.assign({}, this.default_options, {url, method, data});
+    const paremeters = { ...this.default_options, url, method, data };
     return request(paremeters);
   }
-
-
 }
 
 module.exports = MQTT;

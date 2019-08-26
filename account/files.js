@@ -1,4 +1,4 @@
-'use strict';
+
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -8,8 +8,8 @@ class Files {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json': true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -20,19 +20,18 @@ class Files {
    * @param {Number} qty
    */
   list(path = '/', pagination_token = undefined, qty = 300) {
-    let url = `${config.api_url}/files`;
-    let method = 'GET';
+    const url = `${config.api_url}/files`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
       params: {
         path,
         pagination_token,
-        qty
-      },
-    });
+        qty,
+      } };
 
     return request(options);
   }
@@ -48,15 +47,14 @@ class Files {
    *  [ { filename: '/myfiles/myfile.ext', file: 'StringWithBase64' }]
    */
   uploadBase64(arrayOfFileObjects) {
-    let url = `${config.api_url}/files`;
-    let method = 'POST';
+    const url = `${config.api_url}/files`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      data: arrayOfFileObjects
-    });
+      data: arrayOfFileObjects };
 
     return request(options);
   }
@@ -69,15 +67,14 @@ class Files {
    *  [ { from: '/myfiles/myOldName.ext', to: '/myfiles/newFolder/andNewName.ext' }]
    */
   move(arrayOfFileObjects) {
-    let url = `${config.api_url}/files`;
-    let method = 'PUT';
+    const url = `${config.api_url}/files`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      data: arrayOfFileObjects
-    });
+      data: arrayOfFileObjects };
 
     return request(options);
   }
@@ -90,15 +87,14 @@ class Files {
    * ['/myfiles/myOldName.ext', /myfiles/newFolder/test.ext']
    */
   delete(arrayOfFiles) {
-    let url = `${config.api_url}/files`;
-    let method = 'DELETE';
+    const url = `${config.api_url}/files`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      data: arrayOfFiles
-    });
+      data: arrayOfFiles };
 
     return request(options);
   }
@@ -109,17 +105,16 @@ class Files {
    *
    */
   checkPermission(file) {
-    let url = `${config.api_url}/files/permission`;
-    let method = 'GET';
+    const url = `${config.api_url}/files/permission`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
       params: {
         file,
-      },
-    });
+      } };
 
     return request(options);
   }
@@ -132,15 +127,14 @@ class Files {
    *  [ { file: '/myfiles/myFile.txt', public: true }]
    */
   changePermission(arrayOfFileObjects) {
-    let url = `${config.api_url}/files/permission`;
-    let method = 'PUT';
+    const url = `${config.api_url}/files/permission`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
-      data: arrayOfFileObjects
-    });
+      data: arrayOfFileObjects };
 
     return request(options);
   }
@@ -156,13 +150,12 @@ class Files {
       return Promise.reject(`${url} is not a TagoIO files url`);
     }
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       params: {
         noRedirect: true,
-      }
-    });
+      } };
 
     return request(options);
   }

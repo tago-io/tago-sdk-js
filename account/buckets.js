@@ -1,4 +1,3 @@
-'use strict';
 const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
@@ -9,8 +8,8 @@ class Buckets {
   constructor(acc_token) {
     this.token = acc_token;
     this.default_options = {
-      'json':    true,
-      'headers': default_headers(this)
+      json: true,
+      headers: default_headers(this),
     };
   }
 
@@ -47,10 +46,10 @@ class Buckets {
     */
   list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc') {
     if (!arguments.length) return this._list(); // @deprecated
-    let url    = `${config.api_url}/bucket`;
-    let method = 'GET';
+    const url    = `${config.api_url}/bucket`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       paramsSerializer,
@@ -60,8 +59,7 @@ class Buckets {
         fields,
         amount,
         orderBy,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -75,7 +73,7 @@ class Buckets {
       ['account', 'backup', 'created_at', 'id', 'name', 'tags', 'visible'],
       {},
       1000,
-      'name'
+      'name',
     ];
     return this.list.call(this, ...parameters);
   }
@@ -92,10 +90,10 @@ class Buckets {
      */
   create(data) {
     data       = data || {};
-    let url    = `${config.api_url}/bucket`;
-    let method = 'POST';
+    const url    = `${config.api_url}/bucket`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -112,10 +110,10 @@ class Buckets {
      */
   edit(bkt_id, data) {
     data       = data || {};
-    let url    = `${config.api_url}/bucket/${bkt_id}`;
-    let method = 'PUT';
+    const url    = `${config.api_url}/bucket/${bkt_id}`;
+    const method = 'PUT';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -124,10 +122,10 @@ class Buckets {
     * @return {Promise}
      */
   delete(bkt_id) {
-    let url    = `${config.api_url}/bucket/${bkt_id}`;
-    let method = 'DELETE';
+    const url    = `${config.api_url}/bucket/${bkt_id}`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -140,10 +138,10 @@ class Buckets {
     */
   deleteVariable(bkt_id, data) {
     data = data || {};
-    let url = `${config.api_url}/bucket/${bkt_id}/variable`;
-    let method = 'DELETE';
+    const url = `${config.api_url}/bucket/${bkt_id}/variable`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, { url, method, data });
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -156,18 +154,17 @@ class Buckets {
     * @return {Promise}
     */
   listVariables(bkt_id, show_amount = false, show_deleted = false, resolveOriginName = false) {
-    let url = `${config.api_url}/bucket/${bkt_id}/variable`;
-    let method = 'GET';
+    const url = `${config.api_url}/bucket/${bkt_id}/variable`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {
+    const options = { ...this.default_options,
       url,
       method,
       params: {
         amount: show_amount,
         deleted: show_deleted,
         resolveOriginName,
-      },
-    });
+      } };
     return request(options);
   }
 
@@ -177,13 +174,13 @@ class Buckets {
    * @return {Promise} Array of Devices with ID and Name
    */
   getDevicesAssociated(bkt_id) {
-    if (!bkt_id || bkt_id == '') {
+    if (!bkt_id || bkt_id === '') {
       return Promise.reject('Bucket ID parameter is obrigatory.');
     }
-    let url = `${config.api_url}/bucket/${bkt_id}/device`;
-    let method = 'GET';
+    const url = `${config.api_url}/bucket/${bkt_id}/device`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -192,13 +189,13 @@ class Buckets {
     * @return {Promise} With number of amount
     */
   amount(bkt_id) {
-    if (!bkt_id || bkt_id == '') {
+    if (!bkt_id || bkt_id === '') {
       return Promise.reject('Bucket ID parameter is obrigatory.');
     }
-    let url = `${config.api_url}/bucket/${bkt_id}/data_amount`;
-    let method = 'GET';
+    const url = `${config.api_url}/bucket/${bkt_id}/data_amount`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, { url, method });
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -207,14 +204,14 @@ class Buckets {
     * @return {Promise}
     */
   info(bkt_id) {
-    if (!bkt_id || bkt_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
+    if (!bkt_id || bkt_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     }
-    let url    = `${config.api_url}/bucket/${bkt_id}`;
-    let method = 'GET';
+    const url    = `${config.api_url}/bucket/${bkt_id}`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -223,13 +220,13 @@ class Buckets {
     * @return {Promise}
      */
   backupInfo(backup_id) {
-    if (!backup_id || backup_id == '') {
-      return new Promise((resolve,reject) => reject('Backup ID parameter is obrigatory.'));
+    if (!backup_id || backup_id === '') {
+      return Promise.reject('Backup ID parameter is obrigatory.');
     }
-    let url    = `${config.api_url}/backup/${backup_id}`;
-    let method = 'GET';
+    const url    = `${config.api_url}/backup/${backup_id}`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -237,10 +234,10 @@ class Buckets {
     * @return {Promise}
      */
   backupList() {
-    let url    = `${config.api_url}/backup`;
-    let method = 'GET';
+    const url    = `${config.api_url}/backup`;
+    const method = 'GET';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -249,13 +246,13 @@ class Buckets {
     * @return {Promise}
      */
   backupDelete(backup_id) {
-    if (!backup_id || backup_id == '') {
-      return new Promise((resolve,reject) => reject('Backup ID parameter is obrigatory.'));
+    if (!backup_id || backup_id === '') {
+      return Promise.reject('Backup ID parameter is obrigatory.');
     }
-    let url    = `${config.api_url}/backup/${backup_id}`;
-    let method = 'DELETE';
+    const url    = `${config.api_url}/backup/${backup_id}`;
+    const method = 'DELETE';
 
-    let options = Object.assign({}, this.default_options, {url, method});
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
@@ -267,10 +264,10 @@ class Buckets {
      */
   backupRecover(data) {
     data       = data || {};
-    let url    = `${config.api_url}/backup/recover`;
-    let method = 'POST';
+    const url    = `${config.api_url}/backup/recover`;
+    const method = 'POST';
 
-    let options = Object.assign({}, this.default_options, {url, method, data});
+    const options = { ...this.default_options, url, method, data };
     return request(options);
   }
 
@@ -279,9 +276,9 @@ class Buckets {
     * @return {Promise}
      */
   shareList(bucket_id) {
-    if (!bucket_id || bucket_id == '') {
-      //If ID is send with null, it will get List instead info.
-      return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
+    if (!bucket_id || bucket_id === '') {
+      // If ID is send with null, it will get List instead info.
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     }
     return share.list('bucket', bucket_id, this.default_options);
   }
@@ -297,10 +294,10 @@ class Buckets {
      */
   shareSendInvite(bucket_id, data) {
     data = data || {};
-    if (!bucket_id || bucket_id == '') {
-      return new Promise((resolve,reject) => reject('Bucket ID parameter is obrigatory.'));
+    if (!bucket_id || bucket_id === '') {
+      return Promise.reject('Bucket ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.invite('bucket', bucket_id, data, this.default_options);
   }
@@ -315,10 +312,10 @@ class Buckets {
      */
   shareEdit(share_id, data) {
     data = data || {};
-    if (!share_id || share_id == '') {
-      return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
+    if (!share_id || share_id === '') {
+      return Promise.reject('Share ID parameter is obrigatory.');
     } else if (!data.email) {
-      return new Promise((resolve,reject) => reject('data.email parameter is obrigatory.'));
+      return Promise.reject('data.email parameter is obrigatory.');
     }
     return share.edit('bucket', share_id, data, this.default_options);
   }
@@ -328,8 +325,8 @@ class Buckets {
     * @return {Promise}
      */
   shareDelete(share_id) {
-    if (!share_id || share_id == '') {
-      return new Promise((resolve,reject) => reject('Share ID parameter is obrigatory.'));
+    if (!share_id || share_id === '') {
+      return Promise.reject('Share ID parameter is obrigatory.');
     }
     return share.remove('bucket', share_id, this.default_options);
   }
@@ -348,18 +345,18 @@ class Buckets {
   exportData(output, buckets, options) {
     buckets = buckets || [];
     options = options || {};
-    if (!output || output == '') {
-      return new Promise((resolve,reject) => reject('Output parameter is obrigatory.'));
+    if (!output || output === '') {
+      return Promise.reject('Output parameter is obrigatory.');
     } else if (!buckets || !buckets[0]) {
-      return new Promise((resolve,reject) => reject('Buckets parameter is obrigatory.'));
+      return Promise.reject('Buckets parameter is obrigatory.');
     }
 
-    const data = Object.assign({ buckets }, options);
+    const data = { buckets, ...options };
 
-    let url    = `${config.api_url}/data/export?output=${output}`;
-    let method = 'POST';
+    const url    = `${config.api_url}/data/export?output=${output}`;
+    const method = 'POST';
 
-    let request_options = Object.assign({}, this.default_options, {url, method, data});
+    const request_options = { ...this.default_options, url, method, data };
     return request(request_options);
   }
 }
