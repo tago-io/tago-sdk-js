@@ -28,7 +28,20 @@ class Analysis {
       environment,
       analysis_id,
     };
-    this._analysis(context, data || []);
+
+    if (!this._analysis || typeof this._analysis !== 'function') {
+      throw 'Invalid analysis function';
+    }
+
+    if (this._analysis.constructor.name === 'AsyncFunction') {
+      this._analysis(context, data || []).catch(log);
+    } else {
+      try {
+        this._analysis(context, data || []);
+      } catch (error) {
+        log(error);
+      }
+    }
   }
 
   localRuntime() {
