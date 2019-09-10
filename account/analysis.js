@@ -162,10 +162,11 @@ class Analysis {
      * @param  {String} analysis id
      * @param  {String} file_name name for the file
      * @param  {String} file file base64
+     * @param  {javascript|python} language the language of the script.
      * @return {Promise}
      */
-  uploadScript(analyze_id, file_name, file) {
-    const data = { file, file_name };
+  uploadScript(analyze_id, file_name, file, language) {
+    const data = { file, file_name, language };
     const url    = `${config.api_url}/analysis/${analyze_id}/upload`;
     const method = 'POST';
 
