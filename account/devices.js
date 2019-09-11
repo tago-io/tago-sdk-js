@@ -198,11 +198,11 @@ class Devices {
   }
 
   /** Delete Token from the Device
-    * @param  {String} token_id id
+    * @param  {String} token token of device
     * @return {Promise}
      */
-  tokenDelete(token_id) {
-    const url    = `${config.api_url}/device/token/${token_id}`;
+  tokenDelete(token) {
+    const url    = `${config.api_url}/device/token/${token}`;
     const method = 'DELETE';
 
     const options = { ...this.default_options, url, method };
