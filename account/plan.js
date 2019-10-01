@@ -37,6 +37,18 @@ class Plan {
   }
 
   /**
+   * Sets the support plan parameters.
+   */
+  setSupportPlanParameters(data) {
+    data         = data || {};
+    const url    = `${config.api_url}/account/plan_support`;
+    const method = 'POST';
+
+    const options = { ...this.default_options, url, method, data };
+    return request(options);
+  }
+
+  /**
    * Get price to update to new plan
    * @param {JSON} data
    * @example data
@@ -81,6 +93,20 @@ class Plan {
    */
   getActivePlan() {
     const url    = `${config.api_url}/account/plan`;
+    const method = 'GET';
+
+    const options = { ...this.default_options,
+      url,
+      method,
+      paramsSerializer };
+    return request(options);
+  }
+
+  /**
+   * Get Active Support Plan.
+   */
+  getActiveSupportPlan() {
+    const url    = `${config.api_url}/account/plan_support`;
     const method = 'GET';
 
     const options = { ...this.default_options,
