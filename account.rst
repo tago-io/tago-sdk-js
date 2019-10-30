@@ -1120,15 +1120,44 @@ Widgets
 ********
 Inside dashboards, you need widgets to show and control information inside buckets. Every widget have their data slighty different from each other, to know how do they work
 
-.create
-=======
-Generate and retrieve a new dashboard for the account
+.list
+=====
+Retrieve a list with all widgets from dashboard
 
 | **Syntax**
-| *.create(/data/)*
+| *.list()*
 |
 | **Arguments**
-| *data(object) options for the new dashboard.*
+| *dashboard_id(string) dashboard id for the dashboard.*
+| **Returns**
+| *(Promise)*
+|   *\*result(array)*: *Array list of widgets;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    const dashboard_id = '877c28d269d2861f1b2e96b1';
+    accdashboards.widgets.list(dashboard_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.create
+=======
+Generate and retrieve a new widget for the dashboard
+
+| **Syntax**
+| *.create(/dashboard_id/, /data/)*
+|
+| **Arguments**
+| *dashboard_id(string) dashboard id for the dashboard.*
+| *data(object) options for the new widget.*
 |   *\*label(string)*: *a label for the dashboards;*
 |   *\*arrangement(array)*: *array of objects with arrangement of the widget inside the dashboard. (optional)*
 |       *\*widget_id(string)*: *id of the widget*
@@ -1136,18 +1165,16 @@ Generate and retrieve a new dashboard for the account
 |       *\*y(number)*: *position y of the widget. 1 to 20*
 |       *\*width(number)*: *width of the widget. 1 to 4*
 |       *\*height(number)*: *height of the widget. 1 to 20*
-|   *\*tags(array)*: *An array of objects with key and value. (optional)*
 |
 | **Returns**
 | *(Promise)*
-|   *\*token*: *token for the generated dashboard;*
-|   *\*id*: *id of the new dashboard;*
 |
 
 .. code-block:: javascript
 
     const Account = require('tago/account');
     const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    const dashboard_id = '577c28d269d2861f1b2e93ba';
     var data = {
         "label":"My first dashboard",
         "arrangement": [
@@ -1158,7 +1185,7 @@ Generate and retrieve a new dashboard for the account
         ]
     };
 
-    accdashboards.create(data)
+    accdashboards.widgets.create(dashboard_id, data)
         .then((result) => { 
             //You can treat the result here
         })
@@ -1166,9 +1193,118 @@ Generate and retrieve a new dashboard for the account
             //You can treat errors here
         });
 
-notifications
+
+.edit
+=======
+Modify any property of the widget.
+
+| **Syntax**
+| *.edit(/dashboard_id/, /widge_id/, /data/)*
+|
+| **Arguments**
+| *dashboard_id(string) dashboard id for the dashboard.*
+| *widge_id(string) widget id for the dashboard.*
+| *data(object) options for the new widget.*
+|   *\*label(string)*: *a label for the dashboards;*
+|   *\*arrangement(array)*: *array of objects with arrangement of the widget inside the dashboard. (optional)*
+|       *\*widget_id(string)*: *id of the widget(optional)*
+|       *\*x(number)*: *position x of the widget. 1 to 4; (optional)*
+|       *\*y(number)*: *position y of the widget. 1 to 20(optional)*
+|       *\*width(number)*: *width of the widget. 1 to 4(optional)*
+|       *\*height(number)*: *height of the widget. 1 to 20(optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accdashboards   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    const dashboard_id = '577c28d269d2861f1b2e93ba';
+    const widget_id = '577c28d269d2861f1b2e93be';
+    var data = {
+        "label":"My first dashboard",
+        "arrangement": [
+            {"widget_id": "577c28d269d2861f1b2e93b8", "x":0, "y":0, "width":2, "height":3 }
+        ],
+        "tags": [
+            {"key": "client", "value": "Mark"}
+        ]
+    };
+
+    accdashboards.widgets.edit(dashboard_id, widget_id, data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.info
+=====
+Get information about the widget
+
+| **Syntax**
+| *.info(/dashboard_id/, /widge_id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the dashboard.*
+| *id(string) reference ID of the widget.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+    const dashboard_id = '576dc932415f403531fd2cf1';
+    const widget_id = '576dc932415f403531fd2cf6';
+    accdashboards.widgets.info(dashboard_id, widget_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.delete
+=======
+Delete access widget for the dashboard
+
+| **Syntax**
+| *.delete(/dashboard_id/, /widge_id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the dashboard.*
+| *id(string) reference ID of the widget.*
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+   const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
+
+    const dashboard_id = '576dc932415f403531fd2cf1';
+    const widget_id = '576dc932415f403531fd2cf6';
+
+    accdashboards.widgets.delete(dashboard_id, widget_id).then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+notifications to myself
 *************
-All accounts have an notification system, where you can see important alerts and accept/refuse share of dashboards, profiles and buckets.
+All accounts have an notification system, where you can see alerts of account limit and accept/refuse share of dashboards, profiles.
 
 .list
 =====
@@ -1282,3 +1418,559 @@ Refuse the notification if it has a condition.
         .catch((error) => {
             //You can treat errors here
         });
+
+
+TagoRun Users
+*************
+
+You can manage your TagoRun and Run Users. In order to modify, add, delete or do anything else with the data inside Run. See more about Tago Run `here <https://tago.elevio.help/en/articles/201>`_.
+
+To setup an device object, you need a account-token (that you need to get in our website). Be sure to use tokens with the correct write/read previlegies for the current function that you want to use. For example, a token with only read previlegies can't create, modify or delete anything from a Run.
+
+.info
+=====
+Get all information from the run 
+
+| **Syntax**
+| *.info()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accrun = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    
+    accrun.info()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+ 
+
+.listUsers
+=====
+Retrieve a list with all users from Run
+
+| **Syntax**
+| *.listUsers()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    
+    accrun.listUsers()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.getUserInfo
+=====
+Get run user information
+
+| **Syntax**
+| *.getUserInfo()*
+|
+|
+| **Arguments**
+| *\*user_id(string)*: *ID of the run user;*
+|
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    const user_id = '5d9c6e7945f7ab001b0a32c1';
+
+    myaccrun.getUserInfo(user_id)
+        .then((result) => {
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+
+.userEdit
+=====
+Modify any property of the Run User.
+
+| **Syntax**
+| *.userEdit(/id/, /data/)*
+|
+| **Arguments**
+| *id(string) reference ID of the run user.*
+| *data(object) options to be modified in the run user.*
+|   *\*name(string)*: *a name for the run user; (optional)*
+|   *\*email(string)*: *email for the run user. (optional)*
+|   *\*phone(string)*: *phone for the run user. (optional)*
+|   *\*timezone(string)*: *email for the run user. (optional)*
+|   *\*company(string)*: *company for the run user. (optional)*
+|   *\*active(bool)*: *Set if the run user will be active. Default True. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    var data = {
+        "name":"New name for my Run User",
+        "tags": [
+            {"key": "client", "value": "Mark"}
+        ]
+    };
+    const user_id = '5d9c6e7945f7ab001b0a32c1';
+    myaccrun.userEdit(user_id, data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+.createUser
+=====
+Create a new Run User.
+
+| **Syntax**
+| *.createUser(/data/)*
+|
+| **Arguments**
+| *data(object) options to be modified in the run user.*
+|   *\*name(string)*: *a name for the run user.*
+|   *\*email(string)*: *email for the run user.*
+|   *\*password(string)*: *password for the run user.*
+|   *\*phone(string)*: *phone for the run user. (optional)*
+|   *\*timezone(string)*: *email for the run user. (optional)*
+|   *\*company(string)*: *company for the run user. (optional)*
+|   *\*active(bool)*: *Set if the run user will be active. Default True. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    var data = {
+        "name":"John Doe",
+        "email": "jhon@doe.com",
+        "password": "123abc",
+        "tags": [
+            {"key": "employee", "value": "Manager"}
+        ]
+    };
+
+    myaccrun.userEdit(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.deleteUser
+=====
+Delete run user
+
+| **Syntax**
+| *.deleteUser()*
+|
+|
+| **Arguments**
+| *\*user_id(string)*: *ID of the run user;*
+|
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    const user_id = '5d9c6e7945f7ab001b0a32c1';
+
+    myaccrun.deleteUser(user_id)
+        .then((result) => {
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+Notification to users
+*************
+
+You can push notification messages directly to the users registered in your Run. See more about notification for users `here <https://tago.elevio.help/en/articles/223>`_.
+
+.notificationList
+=====
+Retrieve a list with all notifications for the Run user
+
+| **Syntax**
+| *.notificationList()*
+|
+| **Arguments**
+| *\*user_id(string)*: *ID of the run user;*
+|
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    
+    const user_id = '5d9c6e7945f7ab001b0a32c1';
+    accrun.notificationList(user_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.notificationEdit
+=====
+Modify any property of the user push notification.
+
+| **Syntax**
+| *.notificationEdit(/notification_id/, /data/)*
+|
+| **Arguments**
+| *notification_id(string) reference ID of the notification.*
+| *data(object) options to be modified in the notification.*
+|   *\*title(string)*: *a title for the notification. (optional)*
+|   *\*message(string)*: *message for the notification. (optional)*
+|   *\*buttons(array of object)*: *phone for the run user. (optional)*
+|      *\*label(string)*: *label for notification button. (optional)*
+|      *\*analysis(string)*: *analysis_id for notification button. This analysis is run when the button is pressed. (optional)*
+|      *\*url(string)*: *url for notification button. Open a link when the button is pressed. (optional)*
+|      *\*color(string)*: *color for notification button. Accept hexadecimal colors, like: '#bcbcbc'. (optional)*
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    const data = {
+        "title": "Temperature Alert",
+        "message": "The temperature is too high"
+        "buttons": [{
+            "label": "Go to device dashboard",
+            "url": "https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2",
+            "color": "red",
+            // "analysis": "5d9c6e7945f7ab001b0a32c2",
+            
+        }],
+    };
+    const notification_id = '5d9c6e7945f7ab001b0a32c1';
+    myaccrun.notificationEdit(notification_id, data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.notificationCreate
+=====
+
+Create a new push notification for the user.
+
+| **Syntax**
+| *.notificationCreate(/data/)*
+|
+| **Arguments**
+| *data(object) options to be modified in the notification.*
+|   *\*title(string)*: *a title for the notification.*
+|   *\*message(string)*: *message for the notification.*
+|   *\*buttons(array of object)*: *phone for the run user.*
+|      *\*label(string)*: *label for notification button.*
+|      *\*analysis(string)*: *analysis_id for notification button. This analysis is run when the button is pressed. (optional)*
+|      *\*url(string)*: *url for notification button. Open a link when the button is pressed. (optional)*
+|      *\*color(string)*: *color for notification button. Accept hexadecimal colors, like: '#bcbcbc'. (optional)*
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const myaccrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    const data = {
+        "title": "Temperature Alert",
+        "message": "The temperature is too high"
+        "buttons": [{
+            "label": "Go to device dashboard",
+            "url": "https://admin.tago.io/dashboard/info/5d9c6e7945f7ab001b0a32c2",
+            "color": "red",
+            // "analysis": "5d9c6e7945f7ab001b0a32c2",
+            
+        }],
+    };
+
+    myaccrun.notificationCreate(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.notificationDelete
+=====
+Delete push notifcation for the run user
+
+| **Syntax**
+| *.notificationDelete()*
+|
+|
+| **Arguments**
+| *\*notification_id(string)*: *ID of the notification;*
+|
+
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accrun   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').run;
+    
+    const notification_id = '5d9c6e7945f7ab001b0a32c1';
+    accrun.notificationDelete(notification_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+Access Management
+*******
+Access Management (AM) is a module that helps you securely grant access to certain resources in your account. You create Targets (users or things) and determine which type of Permissions for the resources they will have. See more about Access Management `here <https://tago.elevio.help/en/articles/183>`_.
+
+.list
+=====
+Retrieve a list with all access management from account.
+
+| **Syntax**
+| *.list()*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accam   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').accessManagement;
+    
+    accam.list()
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+.create
+=======
+Generate and retrieve a new access management for the account.
+
+| **Syntax**
+| *.create(/data/)*
+|
+| **Arguments**
+| *data(object) options for the new access management.*
+|   *\*name(string)*: *a name for the access management.*
+|   *\*permissions(array)*: *permissions for the access management.*
+|       *\*effect(string)*: *effect for the access management. access or deny.*
+|       *\*action(string)*: *action for the access management.*
+|       *\*resource(string)*: *resource for the access management.*
+|   *\*targets(array)*: *targets for the access management.*
+|   *\*active(bool)*: *Set if the access management will be visible. Default True. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|   *\*am_id*: *id of the new access management;*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
+    const user = {
+        id: '576dc932415f403531fd2cf6',
+        name: 'John Doe',
+    };
+    const data = {
+        name: `Dashboards for the user ${user.name}`,
+        tags: [{ key: 'client_id', value: user.id }],
+        targets: [
+        [
+            'run_user',
+            'id',
+            user.id,
+        ],
+        ],
+        permissions: [
+        {
+            effect: 'allow',
+            action: [
+            'access',
+            ],
+            resource: [
+            'dashboard',
+            'tag.key',
+            'client_id',
+            'tag.value',
+            user.id,
+            ],
+        },
+        ],
+    };
+
+    accam.create(data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.edit
+=====
+Modify any property of the access management.
+
+| **Syntax**
+| *.edit(/am_id/, /data/)*
+|
+| **Arguments**
+| *data(am_id) id for the new access management.*
+| *data(object) options for the new access management.*
+|   *\*name(string)*: *a name for the access management.(optional)*
+|   *\*permissions(array of object)*: *permissions for the access management.(optional)*
+|       *\*effect(string)*: *effect for the access management. access or deny (optional)*
+|       *\*action(string)*: *action for the access management.(optional)*
+|       *\*resource(string)*: *resource for the access management.(optional)*
+|   *\*targets(array of arrays)*: *targets for the access management.(optional)*
+|   *\*active(bool)*: *Set if the access management will be visible. Default True. (optional)*
+|   *\*tags(array)*: *An array of objects with key and value. (optional)*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account = require('tago/account');
+    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
+    const am_id = '576dc932415f403531fd2cf6'
+    const data = {
+        name: 'my new name of access management',
+    };
+
+    accam.create(am_id, data)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.info
+=====
+Get information about the access management
+
+| **Syntax**
+| *.info(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the access management.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
+    const access_management_id = '576dc932415f403531fd2cf6';
+    accam.info(access_management_id)
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+
+
+.delete
+=======
+Delete access management for the account
+
+| **Syntax**
+| *.delete(/id/)*
+|
+| **Arguments**
+| *id(string) reference ID of the access management.*
+|
+| **Returns**
+| *(Promise)*
+|
+
+.. code-block:: javascript
+
+    const Account    = require('tago/account');
+    const accam = new Account('0e479db0-tag0-11e6-8888-790d555b633a').AccessManagement;
+
+    const access_management_id = '576dc932415f403531fd2cf6';
+    accam.delete(access_management_id')
+        .then((result) => { 
+            //You can treat the result here
+        })
+        .catch((error) => {
+            //You can treat errors here
+        });
+

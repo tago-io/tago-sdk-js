@@ -248,7 +248,7 @@ Use this topic when you want to send a payload data in any format to be first pa
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
 
 
-Notification
+Notification to myself
 ============
 Sometimes you may want to send an alert to the account through notification system. You can do it in three ways: pointing to a dashboard, to a bucket or just a notification to the account itself.
 
