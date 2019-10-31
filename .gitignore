@@ -29,6 +29,9 @@ node_modules
 *.sublime-*
 .vscode
 
+# Local run python
+env/
+
 # Tago
 build/
 out/
