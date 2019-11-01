@@ -134,54 +134,6 @@ class Account {
     return request(options);
   }
 
-  /** List Tokens of the Account
-   * @param  {Number} page
-   * Page of list starting from 1
-   * Default: 1
-   * @param {Number} amount
-   * Amount of items will return
-   * Default is 20
-   * @param  {JSON} filter
-   * JSON of filter
-   * Without default
-   * Example: {name: 'Admin'}
-   * Values allowed: same of fields parameter.
-   *
-   * TIP: On name you can use * (asterisk) as wildcard.
-  * @param  {Array} fields
-    * Array of field names
-    * Default: ['name']
-    * Example: ['name', 'token']
-    *
-    * Values allowed:
-    * name, type, permission, token, expire_time, created_at.
-    * @param {String} orderBy
-    * Order by a field
-    * Examples:
-    *  'name,asc'
-    *  'name,desc'
-    *  'created_at' [default: desc]
-    * @return {Promise}
-    * Array of tokens in created_at order.
-  */
-  tokenList(page = 1, amount = 20, filter = {}, fields = ['name', 'token', 'permission'], orderBy = 'created_at,desc') {
-    const url = `${config.api_url}/account/profile/token`;
-    const method = 'GET';
-
-    const options = { ...this.default_options,
-      url,
-      method,
-      paramsSerializer,
-      params: {
-        page,
-        filter,
-        amount,
-        orderBy,
-        fields,
-      } };
-    return request(options);
-  }
-
   /** Generate Account Token
      * @return {Promise}
      */
@@ -192,17 +144,6 @@ class Account {
 
     const headers = default_headers();
     const options = { url, method, data, headers };
-    return request(options);
-  }
-
-  /** List Tokens of the Account
-     * @return {Promise}
-     */
-  tokenDelete() {
-    const url    = `${config.api_url}/account/profile/token`;
-    const method = 'DELETE';
-
-    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
