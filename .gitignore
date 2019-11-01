@@ -35,3 +35,5 @@ run_tests.sh
 .zsh_history
 _build/
 *LOCAL.*
+out
+env
