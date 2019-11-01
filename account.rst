@@ -35,7 +35,11 @@ Get all account information
 Get all tokens from the account
 
 | **Syntax**
-| *.tokenList()*
+| *.tokenList(profile_id)*
+|
+|
+| **Arguments**
+| *profile_id(string) id of the profile.*
 |
 | **Returns**
 | *(Promise)*
@@ -44,9 +48,10 @@ Get all tokens from the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').profiles;
 
-    myacc.tokenList()
+    const profile_id = '5d71b897631b9f001b2b66a1'
+    myacc.tokenList(profile_id)
         .then((result) => {
             //You can treat the result here
         })
@@ -89,7 +94,11 @@ Generate and retrieve a new token for the account
 Delete current token of the account
 
 | **Syntax**
-| *.tokenDelete()*
+| *.tokenDelete(profile_id)*
+|
+| **Arguments**
+| *profile_id(string) id of the profile.*
+|
 |
 | **Returns**
 | *(Promise)*
@@ -98,9 +107,10 @@ Delete current token of the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
+    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').profiles;
 
-    myacc.tokenDelete()
+    const profile_id = '5d71b897631b9f001b2b66a1'
+    myacc.tokenList(profile_id)
         .then((result) => {
             //You can treat the result here
         })
