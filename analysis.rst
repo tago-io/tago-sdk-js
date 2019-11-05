@@ -3,13 +3,13 @@ Analysis
 ********
 It's possible to run analysis scripts on your computer, or inside Tago server. In the follow pages, you will be instructed on how to setup an analysis on your computer, use our services, and manage any data from Tago.
 
-If you want to get instructions about how to upload your script or how to use third-party packages inside our server, take a look at `admin analysis documentation <http://docs.tago.io/en/latest/analysis.html>`_
+If you want to get instructions about how to upload your script or how to use third-party packages inside our server, take a look at `admin analysis documentation <https://tago.elevio.help/en/articles/29>`_
 
 Setting Up Analysis
 *******************
 Through analysis, it is possible to insert any calculation and manage your data from Tago in any way you want. We provide some services, such as SMS and email, but you are free to use any third party packages that you need.
 
-To setup an analysis, you first need a analysis token. That can be retrieved from the `admin analysis section. <http://docs.tago.io/en/latest/analysis.html#setting-up-analysis>`_.
+To setup an analysis, you first need a analysis token. That can be retrieved from the `admin analysis section. <https://tago.elevio.help/en/articles/120>`_.
 
 | **Syntax**
 | *new Analysis(/function/, /analysis_token/)*
@@ -50,7 +50,7 @@ As you can setup some predefined parameters in your analysis, it's possible to g
 
 scope
 *****
-Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <http://docs.tago.io/en/latest/dashboard.html#widget-form>`_, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate data in real time, and more easily the new values inserted in your bucket.
+Every time an action triggers a script, the variable **scope** will be generated. This scope will bring all others variables generated at the same time by the same event. For example, if you submit a `form <https://tago.elevio.help/en/articles/23>`_, together with the variable that the script is reading, the scope will return a list of all values/variable input in that form. This allows you to manipulate data in real time, and more easily the new values inserted in your bucket.
 
 Runtime Timeout
 ***************
@@ -210,7 +210,7 @@ MQTT
 =====
 This option gives you a lot of flexibility to interpret any kind of data depending on your application. You can send any data format with any content to this topic, your data will go directly to your Analysis inside the scope on the first position of the array. The data will not be stored automatically, your script need to take care of it.
 
-You can read more about MQTT on Tago in our `MQTT documentation <http://docs.tago.io/en/mqtt/mqtt.html>`_
+You can read more about MQTT on Tago in our `MQTT documentation <https://tago.elevio.help/en/articles/32>`_
 
 .send
 -----
