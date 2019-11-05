@@ -1,13 +1,13 @@
 ********
 Analysis
 ********
-It's possible to run analysis scripts on your computer, or inside Tago server. In the follow pages, you will be instructed on how to setup an analysis on your computer, use our services, and manage any data from Tago.
+It's possible to run analysis scripts on your computer, or inside TagoIO server. In the follow pages, you will be instructed on how to setup an analysis on your computer, use our services, and manage any data from Tago.
 
 If you want to get instructions about how to upload your script or how to use third-party packages inside our server, take a look at `admin analysis documentation <https://tago.elevio.help/en/articles/29>`_
 
 Setting Up Analysis
 *******************
-Through analysis, it is possible to insert any calculation and manage your data from Tago in any way you want. We provide some services, such as SMS and email, but you are free to use any third party packages that you need.
+Through analysis, it is possible to insert any calculation and manage your data from TagoIO in any way you want. We provide some services, such as SMS and email, but you are free to use any third party packages that you need.
 
 To setup an analysis, you first need a analysis token. That can be retrieved from the `admin analysis section. <https://tago.elevio.help/en/articles/120>`_.
 
@@ -54,13 +54,13 @@ Every time an action triggers a script, the variable **scope** will be generated
 
 Runtime Timeout
 ***************
-Tago Analysis has a mechanism that prevents scripts from being locked in their executions by applying a timeout of 30 seconds. It means that if a script takes more than 30 seconds to be completed, Tago will abort it, and the script will not be completed.
+TagoIO Analysis has a mechanism that prevents scripts from being locked in their executions by applying a timeout of 30 seconds. It means that if a script takes more than 30 seconds to be completed, TagoIO will abort it, and the script will not be completed.
 
 This limitation doesn't apply when running the analyze from your own machine.  Check the information below to learn how to run scripts from an external server (e.g. from your own computer).
 
 Running in your machine
 ***********************
-You always have the option to run your script from your own machine or from Tago server without any technical difference. When running the script from your machine, you will need to install all the packages used by your analysis by using the command  **npm install mypackage**.
+You always have the option to run your script from your own machine or from TagoIO server without any technical difference. When running the script from your machine, you will need to install all the packages used by your analysis by using the command  **npm install mypackage**.
 
 Be sure to set your analysis configuration with the option to run the script from "external". 
 And finally, get the analysis token from the same configuration screen, and put it on the second parameter when calling  **new Analysis**. Check out this example:
@@ -71,7 +71,7 @@ Tago-Builder and Using Another Packages
 ***************************************
 When you are programming, it can be useful to use another packages inside your code; Or you may want to organize your project using *require* and *subfoulders*.
 
-| Tago is friendly with some packages:
+| TagoIO is friendly with some packages:
 | * **moment** and **moment-timezone**
 | * **lodash**
 | * **co**
@@ -83,7 +83,7 @@ When you are programming, it can be useful to use another packages inside your c
 | So you don't need to generate a build if you are using **only** them.
 |
 
-Also, Tago only accepts one single .js file when uploading your script to our servers. ago provides a builder CLI that can build your entire project and generate a single .js file with the whole code. You can access the repository `clicking here <https://www.npmjs.com/package/tago-builder>`_
+Also, TagoIO only accepts one single .js file when uploading your script to our servers. ago provides a builder CLI that can build your entire project and generate a single .js file with the whole code. You can access the repository `clicking here <https://www.npmjs.com/package/tago-builder>`_
 
 To use our Tago-Builder, follow the following steps:
 
@@ -92,11 +92,11 @@ To use our Tago-Builder, follow the following steps:
 3. **Type** in your terminal **`tago-builder 'my script'.js 'new name'.tago.js** *(the last parameter is optional)*.
 4. **Upload** the generated **'my script'.tago.js** file to **Tago**.
 
-If everything is okay, a new file called 'my script'.tago.js will be generated. Now you can upload this file to Tago!
+If everything is okay, a new file called 'my script'.tago.js will be generated. Now you can upload this file to TagoIO!
 
 Services
 ********
-We provide some functions that can greatly help your application. When creating a analysis, you are can use Tago services on your own, just make sure you understand the policies and cost associate with the usage.
+We provide some functions that can greatly help your application. When creating a analysis, you are can use TagoIO services on your own, just make sure you understand the policies and cost associate with the usage.
 
 When setting up a service, you need to pass an analysis-token. For convenience, the context returns a property token that you can use to setup a service object.
 
@@ -147,7 +147,7 @@ Whenever you need to send a sms, use .send function.
         const sms = new Services(context.token).sms;
 
         const to      = '2693856214';
-        const message = 'Hi! This is a sms example sent from Tago. \nWith a breakline in the sms message.';
+        const message = 'Hi! This is a sms example sent from TagoIO. \nWith a breakline in the sms message.';
 
         sms.send(to, message).then(console.log).catch(console.log);
         //Print "Sending";
@@ -210,7 +210,7 @@ MQTT
 =====
 This option gives you a lot of flexibility to interpret any kind of data depending on your application. You can send any data format with any content to this topic, your data will go directly to your Analysis inside the scope on the first position of the array. The data will not be stored automatically, your script need to take care of it.
 
-You can read more about MQTT on Tago in our `MQTT documentation <https://tago.elevio.help/en/articles/32>`_
+You can read more about MQTT on TagoIO in our `MQTT documentation <https://tago.elevio.help/en/articles/32>`_
 
 .send
 -----

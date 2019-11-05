@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Tago SDK for JavaScript'
-copyright = u'2016, Tago LLC'
+project = u'TagoIO SDK for JavaScript'
+copyright = u'2019, Tago LLC'
 author = u'Tago LLC'
 
 # The version info for the project you're documenting, acts as replacement for
