@@ -16,4 +16,4 @@ TagoIO's SDK for JavaScript Documentation
    middleware
    Source Code <https://github.com/tago-io/tago-sdk-js>
    NPM <https://www.npmjs.com/package/tago>
-   Slack / Community <http://community.tago.io/>
+   TagoIO Community <https://community.tago.io/>
