@@ -50,7 +50,7 @@ Get all tokens from the account
     const Account = require('tago/account');
     const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').profiles;
 
-    const profile_id = '5d71b897631b9f001b2b66a1'
+    const profile_id = '5d71b897631b9f001b2b66a1';
     myacc.tokenList(profile_id)
         .then((result) => {
             //You can treat the result here
@@ -79,9 +79,9 @@ Generate and retrieve a new token for the account
 .. code-block:: javascript
 
     const Account = require('tago/account');
-    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a');
-
-    myacc.tokenCreate({"name":"My First Token", "expire_time": New Date()})
+    const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').profiles;
+    const profile_id = '5d71b897631b9f001b2b66a1';
+    myacc.tokenCreate(profile_id, {"name":"My First Token", "expire_time": New Date()})
         .then((result) => {
             //You can treat the result here
         })
@@ -110,7 +110,7 @@ Delete current token of the account
     const myacc   = new Account('0e479db0-tag0-11e6-8888-790d555b633a').profiles;
 
     const profile_id = '5d71b897631b9f001b2b66a1'
-    myacc.tokenList(profile_id)
+    myacc.tokenDelete(profile_id)
         .then((result) => {
             //You can treat the result here
         })
