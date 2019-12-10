@@ -5,6 +5,16 @@ const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const FormData         = require('form-data');
 
+/**
+ * Helper.
+ * Waits using a promise for X milliseconds.
+ */
+async function wait(millis) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, millis);
+  });
+}
+
 class Files {
   constructor(acc_token) {
     this.token = acc_token;
@@ -244,6 +254,9 @@ class Files {
     const url = `${config.api_url}/files`;
     const method = 'POST';
 
+    // we need to order the parts before sending them
+    const partsOrdered = parts.sort((a, b) => a.PartNumber - b.PartNumber);
+
     const options = {
       ...this.default_options,
       url,
@@ -253,11 +266,46 @@ class Files {
         multipart_action: 'end',
         upload_id: uploadID,
         filename,
-        parts,
+        parts: partsOrdered,
       },
     };
 
     return request(options);
+  }
+
+  /**
+   * Adds an upload to the queue.
+   *
+   *
+   * It will try to upload for 'opts.maxTriesForEachChunk' and fail
+   * if it couldn't upload after those many tries.
+   *
+   * @param {String} filename the path + filename for the file. (e.g. /myfiles/file.txt).
+   * @param {String} uploadID the upload ID acquired by the 'createMultipartUpload' function call.
+   * @param {Number} partNumber the sequential part number for the upload. This should be 1 in the first call, then 2 in the second call, so on and so forth.
+   * @param {Buffer | Blob} blob the portion of the file to be uploaded.
+   * @param {Object} opts see the uploadFile function.
+   * @private
+   */
+  async _addToQueue(filename, uploadID, partNumber, blob, opts) {
+    const maxTries = opts.maxTriesForEachChunk || 5;
+    const timeout  = opts.timeoutForEachFailedChunk || 2000;
+
+    let tries = 0;
+
+    while (tries < maxTries) {
+      try {
+        const result = await this._uploadPart(filename, uploadID, partNumber, blob);
+        return result;
+      } catch (ex) {
+        await wait(timeout); // waits a bit before trying again
+
+        tries += 1;
+        if (tries >= maxTries) {
+          throw new Error(`Could not upload part number ${partNumber}: ${ex.message}`);
+        }
+      }
+    }
   }
 
   /**
@@ -274,56 +322,118 @@ class Files {
    * @param {Boolean} opts.maxTriesForEachChunk the maximum amount of tries to upload each chunk to TagoIO. After this many unsuccessful tries of a single chunk, the upload is aborted.
    * @param {Boolean} opts.timeoutForEachFailedChunk timeout before trying to upload the same chunk if the request failed.
    * @param {Function} opts.onProgress will provide the upload percentage for this file.
+   * @param {Function} opts.onCancelToken will provide a cancel token for you to cancel the request.
    */
   async uploadFile(file, filename, opts = {}) {
+    let cancelled = 0;
+    if (opts.onCancelToken) {
+      opts.onCancelToken(() => {
+        cancelled = true; // marks the upload as cancelled.
+      });
+    }
+
+    if (cancelled) {
+      throw new Error('Cancelled request');
+    }
+
     const uploadID = await this._createMultipartUpload(filename, opts.isPublic);
 
-    const BYTES_PER_CHUNK = opts.chunkSize || 1024 * 1024 * 10; // 10MB chunk sizes if none is specified.
-    const FILE_SIZE       = file.length || file.size;
-    const MAX_TRIES       = opts.maxTriesForEachChunk || 5;
-    const TIMEOUT         = opts.timeoutForEachFailedChunk || 2000;
-    const CHUNK_AMOUNT    = Math.floor(FILE_SIZE / BYTES_PER_CHUNK) + 1;
+    const bytesPerChunk = opts.chunkSize || 1024 * 1024 * 7; // 10MB chunk sizes if none is specified.
+    const fileSize      = file.length || file.size;
+    const chunkAmount   = Math.floor(fileSize / bytesPerChunk) + 1;
+    const partsPerTime  = 3;
 
-    if (CHUNK_AMOUNT > 1 && BYTES_PER_CHUNK < 5242880) {
+    if (chunkAmount > 1 && bytesPerChunk < 5242880) {
       // chunks cannot be smaller than 5 megabytes if the upload has multiple parts
       throw new Error('Chunk sizes cannot be lower than 5mb if the upload will have multiple parts');
     }
 
     let start   = 0; // start offset
-    let end     = BYTES_PER_CHUNK; // end offset
+    let end     = bytesPerChunk; // end offset
     let part    = 1; // part number
-    let tries   = 0; // amount of tries for current chunk
+    let error   = null; // error thrown by a promise
     const parts = []; // upload results
+    const promises = [];
 
-    while (start < FILE_SIZE) {
+    if (cancelled) {
+      throw new Error('Cancelled request');
+    }
+
+    while (start < fileSize) {
       const sliced = file.slice(start, end);
 
-      try {
-        const result = await this._uploadPart(filename, uploadID, part, sliced);
+      while (promises.length >= partsPerTime) {
+        if (cancelled) {
+          throw new Error('Cancelled request');
+        }
+        if (error) {
+          throw error;
+        }
+        await wait(1000); // waits a bit
+      }
+
+      const promise = this._addToQueue(filename, uploadID, part, sliced, opts);
+      promises.push(promise);
+
+      promise.then((partData) => { // promise finished, remove it from the array
+        if (promises.indexOf(promise) >= 0) {
+          promises.splice(promises.indexOf(promise), 1);
+        }
+
+        // adds result to parts
+        parts.push(partData);
+
+        // reports progress
         if (opts.onProgress) {
-          const percentage = (part * 100) / CHUNK_AMOUNT;
+          const percentage = (parts.length * 100) / chunkAmount;
           const limitedPercentage = Math.min(percentage, 100).toFixed(2);
           const roundedPercentage = Number(limitedPercentage);
           opts.onProgress(roundedPercentage);
         }
-        parts.push(result);
-      } catch (ex) {
-        await new Promise((resolve) => setTimeout(resolve, TIMEOUT)); // waits a bit before trying again
+      });
 
-        tries += 1;
-        if (tries >= MAX_TRIES) {
-          throw new Error(`Could not upload part number ${part}: ${ex.message}`);
-        }
-        continue;
+      // eslint-disable-next-line no-loop-func
+      promise.catch((err) => { // promise threw
+        error = err;
+      });
+
+      if (cancelled) {
+        throw new Error('Cancelled request');
       }
 
-      tries = 0; // reset the tries to send the chunk
+      await wait(500); // waits a bit between chunks
+
       start = end; // increase the offset
-      end = start + BYTES_PER_CHUNK; // increase the offset
+      end = start + bytesPerChunk; // increase the offset
       part += 1; // increase the part
     }
 
-    return this._completeMultipartUpload(filename, uploadID, parts);
+    while (promises.length > 0) { // waits for all the chunks to finish
+      if (cancelled) {
+        throw new Error('Cancelled request');
+      }
+      if (error) {
+        throw error;
+      }
+      await wait(1000);
+    }
+
+    if (cancelled) {
+      throw new Error('Cancelled request');
+    }
+
+    for (let i = 0; i < 3; i += 1) {
+      // we need to make sure we close the upload, otherwise bad things can happen.
+      // so we try 3 times to close the multipart, just in case there is a slow connection.
+      try {
+        return this._completeMultipartUpload(filename, uploadID, parts);
+      } catch (ex) {
+        await wait(1000); // wait a bit before trying again
+        if (i === 2) {
+          throw ex;
+        }
+      }
+    }
   }
 }
 
