@@ -2,6 +2,7 @@
 const config          = require('../config.js');
 const default_headers = require('../comum/default_headers.js');
 const request         = require('../comum/tago_request.js');
+const SDB             = require('./sdb.js');
 
 class RunUser {
   constructor(token) {
@@ -166,6 +167,11 @@ class RunUser {
 
     const options = { ...this.default_options, url, method };
     return request(options);
+  }
+
+  // ----------- Sub-methods -----------
+  get SDB() {
+    return new SDB(this.token);
   }
 }
 
