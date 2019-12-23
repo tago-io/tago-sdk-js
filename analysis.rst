@@ -290,12 +290,13 @@ Use this topic to send a notification.
 
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
 
+
 Utils
-*****
+============
 This library provides some helping functions commonly used while writing analysis code. Using them can be time saving most times.
 
 .env_to_obj
------------
+-----
 Convert the Environment Variables from array to an object variable, making it easier to access through methods.
 It is not compatible with Environment Variables using same keys.
 
