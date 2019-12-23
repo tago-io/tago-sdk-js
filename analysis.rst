@@ -249,7 +249,7 @@ Use this topic when you want to send a payload data in any format to be first pa
 
 
 Notification to myself
-============
+======================
 Sometimes you may want to send an alert to the account through notification system. You can do it in three ways: pointing to a dashboard, to a bucket or just a notification to the account itself.
 
 When pointing to a dashboard or a bucket, the account owner and anyone he shared the dashboard/bucket will receive the notification.
@@ -292,11 +292,11 @@ Use this topic to send a notification.
 
 
 Utils
-============
+*****
 This library provides some helping functions commonly used while writing analysis code. Using them can be time saving most times.
 
 .env_to_obj
------
+==========
 Convert the Environment Variables from array to an object variable, making it easier to access through methods.
 It is not compatible with Environment Variables using same keys.
 
@@ -327,7 +327,7 @@ It is not compatible with Environment Variables using same keys.
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
 
 .getTokenByName
----------------
+==============
 Easy method to get tokens from a device.
 If a token name is not provided, returns the frist token of the device.
 
