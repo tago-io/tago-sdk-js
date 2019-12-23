@@ -289,3 +289,74 @@ Use this topic to send a notification.
     }
 
     module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+
+Utils
+*****
+This library provides some helping functions commonly used while writing analysis code. Using them can be time saving most times.
+
+.env_to_obj
+-----------
+Convert the Environment Variables from array to an object variable, making it easier to access through methods.
+It is not compatible with Environment Variables using same keys.
+
+| **Syntax**
+| *.env_to_obj(/environment/)*
+|
+| **Arguments**
+| *environment(array) array of objects containing key and value. Analysis send it as context.environment*
+|
+| **Returns**
+| *(Object)*
+|
+
+.. code-block:: javascript
+
+    'use strict';
+    const Analysis = require('tago/analysis');
+    const Utils = require('tago/utils');
+
+    //Main function to be executed when the analysis are called
+    function myanalysis(context, scope) {
+        const environment_variables = Utils.env_to_obj(context.environment);
+        context.log(environment_variables);
+
+        //Print "{ key: value }";
+    }
+
+    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
+
+.getTokenByName
+---------------
+Easy method to get tokens from a device.
+If a token name is not provided, returns the frist token of the device.
+
+| **Syntax**
+| *.getTokenByName(/account/, /device_id/, /token_name/)*
+|
+| **Arguments**
+| *account(tago/account) instanced tago account object*
+| *device_id(string) device ID*
+| *token_name(string) optional token name. Return first token found if not provided.*
+|
+| **Returns**
+| *(Object)*
+
+.. code-block:: javascript
+
+    'use strict';
+    const Analysis = require('tago/analysis');
+    const Account = require('tago/account');
+    const Utils = require('tago/utils');
+
+    //Main function to be executed when the analysis are called
+    async function myanalysis(context, scope) {
+        const tago_account = new Account('a13c0c50-38o2-11u6-966n-c34d980acc88')
+        const device_id = '5cdecbbf3474b7001deca551';
+
+        const token = await Utils.getTokenByName(tago_account, device_id);
+        context.log(token);
+
+        //Print device token "'d44e8650-3ae2-11u6-126n-c34dd80fc91'";
+    }
+
+    module.exports = new Analysis(myanalysis, 'c89f0d50-38e2-11e6-966e-b94d760acc7d');
