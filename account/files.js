@@ -177,10 +177,13 @@ class Files {
    * @param {Boolean} isPublic if the file can be accessed by anybody with a link or not.
    * @returns {String} The upload ID for the multipart upload. You should save this string
    *  to use on future requests using the uploadPart function.
+   * @param {Object} opts the upload options for this file.
    * @private
    */
-  _createMultipartUpload(filename, isPublic) {
-    const url = `${config.api_url}/files`;
+  _createMultipartUpload(filename, isPublic, opts) {
+    const url = (opts.dashboard && opts.widget)
+      ? `${config.api_url}/data/files/${opts.dashboard}/${opts.widget}`
+      : `${config.api_url}/files`;
     const method = 'POST';
 
     const options = {
@@ -204,10 +207,13 @@ class Files {
    * @param {String} uploadID the upload ID acquired by the 'createMultipartUpload' function call.
    * @param {Number} partNumber the sequential part number for the upload. This should be 1 in the first call, then 2 in the second call, so on and so forth.
    * @param {Buffer | Blob} blob the portion of the file to be uploaded.
+   * @param {Object} opts the upload options for this file.
    * @private
    */
-  async _uploadPart(filename, uploadID, partNumber, blob) {
-    const url = `${config.api_url}/files`;
+  async _uploadPart(filename, uploadID, partNumber, blob, opts) {
+    const url = (opts.dashboard && opts.widget)
+      ? `${config.api_url}/data/files/${opts.dashboard}/${opts.widget}`
+      : `${config.api_url}/files`;
     const method = 'POST';
 
     const form = new FormData();
@@ -248,10 +254,13 @@ class Files {
    * @param {String} uploadID the upload ID acquired by the 'createMultipartUpload' function call.
    * @param {Array<{ ETag: String, PartNumber: number }} parts all the parts uploaded to the file. This should be an array
    *  of the results acquired from the 'uploadPart' calls.
+   * @param {Object} opts the upload options for this file.
    * @private
    */
-  _completeMultipartUpload(filename, uploadID, parts) {
-    const url = `${config.api_url}/files`;
+  _completeMultipartUpload(filename, uploadID, parts, opts) {
+    const url = (opts.dashboard && opts.widget)
+      ? `${config.api_url}/data/files/${opts.dashboard}/${opts.widget}`
+      : `${config.api_url}/files`;
     const method = 'POST';
 
     // we need to order the parts before sending them
@@ -295,7 +304,7 @@ class Files {
 
     while (tries < maxTries) {
       try {
-        const result = await this._uploadPart(filename, uploadID, partNumber, blob);
+        const result = await this._uploadPart(filename, uploadID, partNumber, blob, opts);
         return result;
       } catch (ex) {
         await wait(timeout); // waits a bit before trying again
@@ -323,6 +332,8 @@ class Files {
    * @param {Boolean} opts.timeoutForEachFailedChunk timeout before trying to upload the same chunk if the request failed.
    * @param {Function} opts.onProgress will provide the upload percentage for this file.
    * @param {Function} opts.onCancelToken will provide a cancel token for you to cancel the request.
+   * @param {String} opts.dashboard will upload simulating an input form on the dashboard. widget also needs to be specified with this.
+   * @param {String} opts.widget will upload simulating an input form on the dashboard. dashboard also needs to be specified with this.
    */
   async uploadFile(file, filename, opts = {}) {
     let cancelled = 0;
@@ -336,7 +347,7 @@ class Files {
       throw new Error('Cancelled request');
     }
 
-    const uploadID = await this._createMultipartUpload(filename, opts.isPublic);
+    const uploadID = await this._createMultipartUpload(filename, opts.isPublic, opts);
 
     const bytesPerChunk = opts.chunkSize || 1024 * 1024 * 7; // 10MB chunk sizes if none is specified.
     const fileSize      = file.length || file.size;
@@ -426,7 +437,7 @@ class Files {
       // we need to make sure we close the upload, otherwise bad things can happen.
       // so we try 3 times to close the multipart, just in case there is a slow connection.
       try {
-        return this._completeMultipartUpload(filename, uploadID, parts);
+        return this._completeMultipartUpload(filename, uploadID, parts, opts);
       } catch (ex) {
         await wait(1000); // wait a bit before trying again
         if (i === 2) {
