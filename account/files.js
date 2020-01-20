@@ -171,6 +171,30 @@ class Files {
     return request(options);
   }
 
+
+  /**
+   * Get file md5 with authenticate token for privates files
+   * @param {String} url Full TagoIO File url
+   * Response is the md5 of the file
+   */
+  getFileMD5(url) {
+    const method = 'GET';
+    if (String(url).indexOf('.tago.io/file/') === -1) {
+      return Promise.reject(`${url} is not a TagoIO files url`);
+    }
+
+    const options = { ...this.default_options,
+      url,
+      method,
+      params: {
+        md5: true,
+        noRedirect: true,
+      } };
+
+    return request(options);
+  }
+
+
   /**
    * Creates a multipart upload instance.
    * @param {String} filename the path + filename for the file. (e.g. /myfiles/file.txt).
