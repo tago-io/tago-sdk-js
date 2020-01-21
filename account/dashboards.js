@@ -277,13 +277,13 @@ class Dashboards {
   }
 
   /**
-   * Runs an anlysis located in a widget's header button.
+   * Runs an analysis located in a widget's header button.
    * @param {String} analysis_id The id of the analysis to run.
    * @param {String} dashboard_id The id of the dashboard that contains the widget.
    * @param {String} widget_id The id of the widget that contains the header button.
    * @param {*} scope Data to send to the analysis.
    */
-  runAnalysis(analysis_id, dashboard_id, widget_id, scope) {
+  runWidgetHeaderButtonAnalysis(analysis_id, dashboard_id, widget_id, scope) {
     const data = { scope };
     const url    = `${config.api_url}/analysis/${analysis_id}/run/${dashboard_id}/${widget_id}`;
     const method = 'POST';
