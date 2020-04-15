@@ -1,19 +1,12 @@
 env:
-  browser: false
-  commonjs: true
-  es6: true
-  jasmine: true
+  es2020: true
   jest: true
+  node: true
 extends:
-  - plugin:jasmine/recommended
+  - plugin:jest/recommended
   - eslint:recommended
-  - airbnb
 parserOptions:
-  ecmaFeatures:
-    jsx: false
-  sourceType: module
-plugins:
-  - jasmine
+  ecmaVersion: 11
 rules:
   camelcase: 0
   arrow-body-style: 0
