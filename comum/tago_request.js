@@ -2,13 +2,13 @@ const axios  = require('axios');
 const config = require('../config');
 const waitTime = () => new Promise((resolve) => setTimeout(() => resolve(), 1500));
 
-function resultHandler(request_options, result) {
+function resultHandler(result) {
   if (!result.data) {
     throw result.statusText;
-  } else if (request_options.url.indexOf('/data/export') !== -1) {
+  } else if (result.config.url.includes('/data/export')) {
     return { data: result.data };
   } else if (!result.data.status) {
-    throw result.data.message || result;
+    return result.data.message || result;
   }
 
   return { data: result.data.result };
@@ -25,7 +25,7 @@ async function tagoRequest(request_options) {
   };
 
   const request = () => {
-    return axios(request_options).then((r) => resultHandler(request_options, r)).catch((error) => ({ error }));
+    return axios(request_options).then(resultHandler).catch((error) => ({ error }));
   };
 
   let result;
@@ -59,6 +59,7 @@ async function tagoRequest(request_options) {
 
     // ? Requests with client errors not retry.
     if (error.response && (error.response.status >= 400 || error.response.status < 500)) {
+      resulterror = resultHandler(error.response);
       break;
     }
 
