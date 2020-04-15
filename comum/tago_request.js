@@ -40,15 +40,19 @@ async function tagoRequest(request_options) {
     if (error.response) {
       resulterror = {
         from: 'SERVER_RESPONSE',
-        code: error.code || 'UNKNOWN',
+        url: error.config.url,
+        method: String(error.config.method).toUpperCase(),
         status: error.response.status,
+        code: error.code || 'UNKNOWN',
         statusText: error.response.statusText,
       };
     } else {
       resulterror = {
         from: 'CLIENT_REQUEST',
-        code: error.code || 'UNKNOWN',
+        url: error.config.url,
+        method: String(error.config.method).toUpperCase(),
         status: -1,
+        code: error.code || 'UNKNOWN',
         statusText: 'UNKNOWN',
       };
     }
