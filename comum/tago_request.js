@@ -7,12 +7,12 @@ function resultHandler(result) {
     throw result.statusText;
   }
 
-  if (result.data.status !== true) {
-    return result.data.message || result.data.result || result.data;
+  if (result.status === 200 && result.config.url.includes('/data/export')) {
+    return { data: result.data };
   }
 
-  if (result.config.url.includes('/data/export')) {
-    return { data: result.data };
+  if (result.data.status !== true) {
+    return result.data.message || result.data.result || result.data;
   }
 
   return { data: result.data.result };
