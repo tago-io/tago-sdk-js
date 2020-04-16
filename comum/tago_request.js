@@ -5,10 +5,14 @@ const waitTime = () => new Promise((resolve) => setTimeout(() => resolve(), 1500
 function resultHandler(result) {
   if (!result.data) {
     throw result.statusText;
-  } else if (result.config.url.includes('/data/export')) {
+  }
+
+  if (result.data.status !== true) {
+    return result.data.message || result.data.result || result.data;
+  }
+
+  if (result.config.url.includes('/data/export')) {
     return { data: result.data };
-  } else if (!result.data.status) {
-    return result.data.message || result;
   }
 
   return { data: result.data.result };
