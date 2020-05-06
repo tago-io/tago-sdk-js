@@ -1130,34 +1130,6 @@ Widgets
 ********
 Inside dashboards, you need widgets to show and control information inside buckets. Every widget have their data slighty different from each other, to know how do they work
 
-.list
-=====
-Retrieve a list with all widgets from dashboard
-
-| **Syntax**
-| *.list()*
-|
-| **Arguments**
-| *dashboard_id(string) dashboard id for the dashboard.*
-| **Returns**
-| *(Promise)*
-|   *\*result(array)*: *Array list of widgets;*
-|
-
-.. code-block:: javascript
-
-    const Account = require('tago/account');
-    const accdashboards = new Account('0e479db0-tag0-11e6-8888-790d555b633a').dashboards;
-    const dashboard_id = '877c28d269d2861f1b2e96b1';
-    accdashboards.widgets.list(dashboard_id)
-        .then((result) => { 
-            //You can treat the result here
-        })
-        .catch((error) => {
-            //You can treat errors here
-        });
-
-
 .create
 =======
 Generate and retrieve a new widget for the dashboard
