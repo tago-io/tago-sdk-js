@@ -1,41 +1,22 @@
 const axios  = require('axios');
 const config = require('../config');
+const waitTime = () => new Promise((resolve) => setTimeout(() => resolve(), 1500));
 
-function resultHandler(request_options, result) {
+function resultHandler(result) {
   if (!result.data) {
     throw result.statusText;
-  } else if (request_options.url.indexOf('/data/export') !== -1) {
-    return result.data;
-  } else if (!result.data.status) {
-    throw result.data.message || result;
   }
-  return result.data.result;
+
+  if (result.status === 200 && result.config.url.includes('/data/export')) {
+    return { data: result.data };
+  }
+
+  if (result.data.status !== true) {
+    return result.data.message || result.data.result || result.data;
+  }
+
+  return { data: result.data.result };
 }
-
-function errorHandler(error, originalRequestObject) {
-  const errorAxios = {
-    code: error.code,
-    errno: error.errno,
-    syscall: error.syscall,
-    response: error.response,
-  };
-
-  console.log(originalRequestObject, errorAxios);
-
-  if (!error.response || !error.response.data) {
-    throw error;
-  }
-  const { message, status, result } = error.response.data;
-
-  if (error.config.method !== 'POST' && message && message.includes('Timeout')) {
-    return 'Timeout';
-  } else if (!status) {
-    throw message || error;
-  }
-  throw result;
-}
-
-const waitTime = () => new Promise((resolve) => setTimeout(() => resolve(), 1000));
 
 async function tagoRequest(request_options) {
   request_options.timeout = config.request_timeout;
@@ -47,17 +28,52 @@ async function tagoRequest(request_options) {
     'Cache-Control': 'no-cache',
   };
 
-  let result;
-  const _resultHandler = resultHandler.bind(null, request_options);
+  const request = () => {
+    return axios(request_options).then(resultHandler).catch((error) => ({ error }));
+  };
 
+  let result;
+  let resulterror;
   for (let i = 1; i <= config.request_attempts; i += 1) {
-    result = await axios(request_options).then(_resultHandler).catch((error) => errorHandler(error, request_options));
-    if (result !== 'Timeout') break;
+    const { data, error } = await request();
+    if (!error) {
+      result = data;
+      break;
+    }
+
+    if (error.response) {
+      resulterror = {
+        from: 'SERVER_RESPONSE',
+        url: error.config.url,
+        method: String(error.config.method).toUpperCase(),
+        status: error.response.status,
+        code: error.code || 'UNKNOWN',
+        statusText: error.response.statusText,
+      };
+    } else {
+      resulterror = {
+        from: 'CLIENT_REQUEST',
+        url: error.config.url,
+        method: String(error.config.method).toUpperCase(),
+        status: -1,
+        code: error.code || 'UNKNOWN',
+        statusText: 'UNKNOWN',
+      };
+    }
+
+    // ? Requests with client errors not retry.
+    if (error.response && (error.response.status >= 400 || error.response.status < 500)) {
+      resulterror = resultHandler(error.response);
+      break;
+    }
 
     await waitTime();
   }
 
-  if (result === 'Timeout') result = 'SDK: Request timed out';
+  if (!result && resulterror) {
+    throw resulterror;
+  }
+
   return result;
 }
 

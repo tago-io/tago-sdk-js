@@ -210,16 +210,22 @@ class Files {
       : `${config.api_url}/files`;
     const method = 'POST';
 
+    const data = {
+      multipart_action: 'start',
+      filename,
+      public: isPublic,
+    };
+
+    if (opts.contentType) {
+      data.contentType = opts.contentType;
+    }
+
     const options = {
       ...this.default_options,
       url,
       method,
       paramsSerializer,
-      data: {
-        multipart_action: 'start',
-        filename,
-        public: isPublic,
-      },
+      data,
     };
 
     return request(options);
@@ -350,6 +356,7 @@ class Files {
    * @param {String} filename the path + filename for the file. (e.g. /myfiles/file.txt).
    * @param {Object} opts the upload options for this file.
    *
+   * @param {String} opts.contentType The file's content type. This is optional.
    * @param {Boolean} opts.isPublic if the file can be accessed by anybody with a link or not.
    * @param {Boolean} opts.chunkSize the byte size of each chunk sent to TagoIO. This will influence how many requests this function will perform.
    * @param {Boolean} opts.maxTriesForEachChunk the maximum amount of tries to upload each chunk to TagoIO. After this many unsuccessful tries of a single chunk, the upload is aborted.

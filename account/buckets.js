@@ -2,7 +2,6 @@ const request          = require('../comum/tago_request.js');
 const paramsSerializer = require('../comum/paramsSerializer.js');
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
-const share            = require('./_share.js');
 
 class Buckets {
   constructor(acc_token) {
@@ -271,67 +270,8 @@ class Buckets {
     return request(options);
   }
 
-  /** Get share list of the dashboard
-    * @param  {String} dashboard id
-    * @return {Promise}
-     */
-  shareList(bucket_id) {
-    if (!bucket_id || bucket_id === '') {
-      // If ID is send with null, it will get List instead info.
-      return Promise.reject('Bucket ID parameter is obrigatory.');
-    }
-    return share.list('bucket', bucket_id, this.default_options);
-  }
 
-  /** Share the bucket with another person
-    * @param  {String} bucket id
-    * @param  {JSON} data -
-    * @param  {String} data.email - Email to receive invitation
-    * @param  {String} data.message - Scope message for the email
-    * @param  {String} data.permission - Permission to be applied
-    * @param  {boolean} data.copy_me - true to send a copy to yourself
-    * @return {Promise}
-     */
-  shareSendInvite(bucket_id, data) {
-    data = data || {};
-    if (!bucket_id || bucket_id === '') {
-      return Promise.reject('Bucket ID parameter is obrigatory.');
-    } else if (!data.email) {
-      return Promise.reject('data.email parameter is obrigatory.');
-    }
-    return share.invite('bucket', bucket_id, data, this.default_options);
-  }
-
-  /** Change permissions of the bucket
-    * @param  {String} share id
-    * @param  {JSON} data -
-    * @param  {String} data.email - Email to change permissions
-    * @param  {String} data.permission - New Permission to be applied
-    * @param  {String} data.everyone
-    * @return {Promise}
-     */
-  shareEdit(share_id, data) {
-    data = data || {};
-    if (!share_id || share_id === '') {
-      return Promise.reject('Share ID parameter is obrigatory.');
-    } else if (!data.email) {
-      return Promise.reject('data.email parameter is obrigatory.');
-    }
-    return share.edit('bucket', share_id, data, this.default_options);
-  }
-
-  /** Remove share of the bucket
-    * @param  {String} share id
-    * @return {Promise}
-     */
-  shareDelete(share_id) {
-    if (!share_id || share_id === '') {
-      return Promise.reject('Share ID parameter is obrigatory.');
-    }
-    return share.remove('bucket', share_id, this.default_options);
-  }
-
-  /** Share the bucket with another person
+  /** Export Data from Bucket
     * @param  {String} output csv/json/xml
     * @param  {Object[]} buckets -
     * @param  {String} buckets[].id - bucket id to be filtred
