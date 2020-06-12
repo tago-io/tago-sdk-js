@@ -77,7 +77,7 @@ class Widgets {
     * @param  {JSON} overwrite It can overwrite 'start_date', 'end_date', 'timezone' fields.
     * @return {Promise}
     */
-  getData(dashboard_id, widget_id, overwrite = {}, shadow_devices = []) {
+  getData(dashboard_id, widget_id, overwrite = {}, blueprint_devices = []) {
     const url    = `${config.api_url}/data/${dashboard_id}/${widget_id}`;
     const method = 'GET';
 
@@ -85,7 +85,7 @@ class Widgets {
       url,
       method,
       paramsSerializer,
-      params: { shadow_devices, overwrite } };
+      params: { blueprint_devices, overwrite } };
     return request(options);
   }
 
