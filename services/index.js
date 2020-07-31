@@ -1,11 +1,10 @@
 
-const Email      = require('./email.js');
-const SMS        = require('./sms.js');
-const Socket     = require('./socket.js');
-const Console    = require('./console.js');
-const MQTT       = require('./mqtt.js');
-const Attachment = require('./attachment.js');
-const Notification    = require('./notification.js');
+const Email        = require('./email.js');
+const SMS          = require('./sms.js');
+const Console      = require('./console.js');
+const MQTT         = require('./mqtt.js');
+const Attachment   = require('./attachment.js');
+const Notification = require('./notification.js');
 
 class Services {
   constructor(token) {
@@ -24,15 +23,14 @@ class Services {
     return new Email(this.token);
   }
 
-  get socket() {
-    return new Socket(this.token);
-  }
   get MQTT() {
     return new MQTT(this.token);
   }
+
   get Notification() {
     return new Notification(this.token);
   }
+
   get Attachment() {
     return new Attachment(this.token);
   }

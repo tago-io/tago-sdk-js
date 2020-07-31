@@ -2,7 +2,6 @@
 const config           = require('../config.js');
 const default_headers  = require('../comum/default_headers.js');
 const request          = require('../comum/tago_request.js');
-const paramsSerializer = require('../comum/paramsSerializer.js');
 const batchRequest     = require('../comum/batchRequest.js');
 
 const Actions                 = require('./actions.js');

@@ -22,7 +22,7 @@ class Buckets {
      * Example: ['id', 'name', 'visible']
      *
      * Values allowed:
-     * id, name, description, visible, backup, data_retention, last_backup,
+     * id, name, description, visible, data_retention,
      * account, tags, created_at, updated_at.
      * @param  {JSON} filter
      * JSON of filter
@@ -69,7 +69,7 @@ class Buckets {
   _list() {
     const parameters = [
       1,
-      ['account', 'backup', 'created_at', 'id', 'name', 'tags', 'visible'],
+      ['account', 'created_at', 'id', 'name', 'tags', 'visible'],
       {},
       1000,
       'name',
@@ -213,63 +213,6 @@ class Buckets {
     const options = { ...this.default_options, url, method };
     return request(options);
   }
-
-  /** Get Info of the Backup
-    * @param  {String} backup id
-    * @return {Promise}
-     */
-  backupInfo(backup_id) {
-    if (!backup_id || backup_id === '') {
-      return Promise.reject('Backup ID parameter is obrigatory.');
-    }
-    const url    = `${config.api_url}/backup/${backup_id}`;
-    const method = 'GET';
-
-    const options = { ...this.default_options, url, method };
-    return request(options);
-  }
-
-  /** List all backups of the account
-    * @return {Promise}
-     */
-  backupList() {
-    const url    = `${config.api_url}/backup`;
-    const method = 'GET';
-
-    const options = { ...this.default_options, url, method };
-    return request(options);
-  }
-
-  /** Delete the Backup
-    * @param  {String} backup_id id
-    * @return {Promise}
-     */
-  backupDelete(backup_id) {
-    if (!backup_id || backup_id === '') {
-      return Promise.reject('Backup ID parameter is obrigatory.');
-    }
-    const url    = `${config.api_url}/backup/${backup_id}`;
-    const method = 'DELETE';
-
-    const options = { ...this.default_options, url, method };
-    return request(options);
-  }
-
-  /** Recover the Backup
-    * @param  {JSON} data object with parameters for recover
-    * @param  {String} data.id backup id to be recovered
-    * @param  {Array} data.ids multiple id's to be recovered
-    * @return {Promise}
-     */
-  backupRecover(data) {
-    data       = data || {};
-    const url    = `${config.api_url}/backup/recover`;
-    const method = 'POST';
-
-    const options = { ...this.default_options, url, method, data };
-    return request(options);
-  }
-
 
   /** Export Data from Bucket
     * @param  {String} output csv/json/xml

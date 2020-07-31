@@ -1,16 +1,13 @@
-[![Documentation Status](https://readthedocs.org/projects/tago-sdk-js-documentation/badge/?version=latest)](http://tago-sdk-js-documentation.readthedocs.io/en/latest/?badge=latest)
-[![Dependency Status](https://david-dm.org/tago-io/tago-sdk-js.svg)](https://david-dm.org/tago-io/tago-sdk-js)
-[![npm version](https://badge.fury.io/js/tago.svg?style=flat)](http://badge.fury.io/js/tago)
-
-# Description
+# TagoIO - SDK for Node.js (Deprecated - Support until 2030-07-20)
+> Use @tago-io/sdk instead. https://github.com/tago-io/sdk-js
 
 TagoIO SDK for JavaScript in the browser and Node.JS.
 
-| what                  | where                    |
-|-----------------------|--------------------------|
-| TagoIO website        | http://tago.io           |
-| SDK documentation     | http://sdk.js.tago.io    |
-| General documentation | http://docs.tago.io      |
+| what                  | where                                     |
+|-----------------------|-------------------------------------------|
+| TagoIO website        | https://tago.io                           |
+| SDK documentation     | http://tago-sdk-js-documentation.rtfd.io/ |
+| General documentation | https://docs.tago.io                      |
 
 # Installation
 

@@ -21,9 +21,6 @@ class Analysis {
    * Default: ['id', 'name']
    * Example: ['id', 'name', 'visible']
    *
-   * Values allowed:
-   * id, name, description, visible, backup, data_retention, last_backup,
-   * account, tags, created_at, updated_at.
    * @param  {JSON} filter
    * JSON of filter
    * Without default

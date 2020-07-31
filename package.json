@@ -1,7 +1,7 @@
 {
   "name": "tago",
-  "version": "9.2.2",
-  "description": "TagoIO SDK for JavaScript in the browser and Node.js",
+  "version": "9.2.3",
+  "description": "TagoIO SDK for Node.js - Deprecated - Support until 2030-07-20",
   "main": "index.js",
   "homepage": "https://tago.io",
   "engines": {
@@ -35,11 +35,11 @@
   "dependencies": {
     "axios": "0.19.2",
     "form-data": "3.0.0",
-    "qs": "6.9.3",
+    "qs": "6.9.4",
     "socket.io-client": "2.3.0"
   },
   "devDependencies": {
-    "eslint-plugin-jest": "23.8.2",
-    "eslint": "6.8.0"
+    "eslint-plugin-jest": "23.20.0",
+    "eslint": "7.5.0"
   }
 }
