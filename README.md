@@ -1,9 +1,9 @@
 # TagoIO - SDK for Node.js
 > (Deprecated - Support until 2030-07-20)
 
-> Use @tago-io/sdk instead. https://github.com/tago-io/sdk-js
+Use @tago-io/sdk instead. https://github.com/tago-io/sdk-js
 
-TagoIO SDK for JavaScript in the browser and Node.JS.
+---
 
 | what                  | where                                     |
 |-----------------------|-------------------------------------------|
