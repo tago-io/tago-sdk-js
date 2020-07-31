@@ -70,12 +70,17 @@ class Device {
    * @return {Promise}
    */
   removeDeprecated(variable_or_id, qty) {
-    let url    = `${config.api_url}/data`;
+    if (qty === 'all') qty = 10000;
+  
+    const url    = `${config.api_url}/data`;
+    const params = { ...this.default_options.qs || {}, ...(qty ? { qty } : {}) };
+
     if (variable_or_id) {
-      url += `/${variable_or_id}`;
+      const reg = new RegExp(/^[a-zA-Z0-9]*$/g);
+      if (variable_or_id.length === 24 && variable_or_id.match(reg)) params.id = variable_or_id;
+      else params.variable === variable_or_id;
     }
 
-    const params = { ...this.default_options.qs || {}, ...(qty ? { qty } : {}) };
     const method = 'DELETE';
 
     const options = { ...this.default_options, url, method, params };
