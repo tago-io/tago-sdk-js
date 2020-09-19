@@ -18,6 +18,7 @@ const Plan                    = require('./plan');
 const PaymentHistory          = require('./paymentHistory');
 const Explore                 = require('./explore');
 const Integrations            = require('./integrations');
+const Connector               = require('./connector');
 const Template                = require('./template');
 const AccessManagement        = require('./accessManagement');
 const TagoIORUN               = require('./run');
@@ -311,6 +312,9 @@ class Account {
   }
   get integrations() {
     return new Integrations(this.token);
+  }
+  get connector() {
+    return new Connector(this.token);
   }
   get template() {
     return new Template(this.token);
