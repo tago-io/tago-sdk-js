@@ -121,6 +121,18 @@ class Network {
     return request(options);
   }
 
+  /** Delete the Network
+    * @param  {String} network id
+    * @return {Promise}
+     */
+  delete(network_id) {
+    const url    = `${config.api_url}/integration/network/${network_id}`;
+    const method = 'DELETE';
+
+    const options = { ...this.default_options, url, method };
+    return request(options);
+  }
+
   /** List Networks Tokens
    * @param {String} network_id Network ID
    * @param  {Number} page

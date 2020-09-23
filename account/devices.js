@@ -46,7 +46,7 @@ class Devices {
      * @return {Promise}
      * Array of devices in alphabetically order.
     */
-  list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc', resolveBucketName = false) {
+  list(page = 1, fields = ['id', 'name'], filter = {}, amount = 20, orderBy = 'name,asc', resolveBucketName = false, resolveConnectorName = false) {
     if (!arguments.length) return this._list(); // @deprecated
     const url    = `${config.api_url}/device`;
     const method = 'GET';
@@ -62,6 +62,7 @@ class Devices {
         amount,
         orderBy,
         resolveBucketName,
+        resolveConnectorName,
       } };
     return request(options);
   }
