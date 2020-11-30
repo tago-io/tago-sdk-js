@@ -1,7 +1,7 @@
-const request          = require('tago/comum/tago_request');
-const paramsSerializer = require('tago/comum/paramsSerializer');
-const config           = require('tago/config');
-const default_headers  = require('tago/comum/default_headers');
+const request          = require('../comum/tago_request');
+const paramsSerializer = require('../comum/paramsSerializer');
+const config           = require('../config');
+const default_headers  = require('../comum/default_headers');
 
 class Connector {
   constructor(acc_token) {

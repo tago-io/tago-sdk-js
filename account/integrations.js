@@ -1,4 +1,4 @@
-const default_headers  = require('tago/comum/default_headers');
+const default_headers  = require('../comum/default_headers');
 const Connectors       = require('./integrations.connectors.js');
 const Networks         = require('./integrations.networks.js');
 
