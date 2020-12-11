@@ -276,6 +276,20 @@ class Dashboards {
     return request(options);
   }
 
+    /** Get list of analysis related with a dashboard
+    * @param  {String} dashboard id
+    * @return {Promise}
+     */
+    listAnalysisRelated(dashboard_id) {
+      const url = `${config.api_url}/dashboard/${dashboard_id}/analysis`;
+      const method = 'GET';
+
+      console.log('URL IS', url);
+
+      const options = { ...this.default_options, url, method };
+      return request(options);
+    }
+
   /**
    * Runs an analysis located in a widget's header button.
    * @param {String} analysis_id The id of the analysis to run.
