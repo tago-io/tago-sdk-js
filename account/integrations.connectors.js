@@ -120,6 +120,18 @@ class Connector {
     const options = { ...this.default_options, url, method, data };
     return request(options);
   }
+
+  /** Delete the Connector
+    * @param  {String} connector id
+    * @return {Promise}
+     */
+  delete(connector_id) {
+    const url    = `${config.api_url}/integration/connector/${connector_id}`;
+    const method = 'DELETE';
+
+    const options = { ...this.default_options, url, method };
+    return request(options);
+  }
 }
 
 module.exports = Connector;
