@@ -31,7 +31,7 @@ class Network {
     const url    = `${config.api_url}/info`;
     const method = 'GET';
 
-    const options = { ...this.default_options, url, method, params };
+    const options = { ...this.default_options, url, method };
     return request(options);
   }
 
