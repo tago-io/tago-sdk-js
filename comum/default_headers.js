@@ -21,7 +21,7 @@ function default_headers(class_context) {
   }
 
   if (!isBrowser && typeof process !== "undefined") {
-    const banner = !!process.env.TAGO_RUNTIME ? `(External; ${process.platform}/${process.arch})` : `(Running at TagoIO)`;
+    const banner = !process.env.TAGO_RUNTIME ? `(External; ${process.platform}/${process.arch})` : `(Running at TagoIO)`;
     headers['User-Agent'] = `TagoIO-SDK|JS|${pkg.version}-Deprecated ${banner}`;
   }
 
