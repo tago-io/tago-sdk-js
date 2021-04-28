@@ -20,8 +20,9 @@ function default_headers(class_context) {
     headers.Token = class_context.token;
   }
 
-  if (!isBrowser) {
-    headers['User-Agent'] = `TagoIO-SDKJS-${pkg.version}`;
+  if (!isBrowser && typeof process !== "undefined") {
+    const banner = !!process.env.TAGO_RUNTIME ? `(External; ${process.platform}/${process.arch})` : `(Running at TagoIO)`;
+    headers['User-Agent'] = `TagoIO-SDK|JS|${pkg.version}-Deprecated ${banner}`;
   }
 
   return headers;
