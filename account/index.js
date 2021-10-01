@@ -11,7 +11,6 @@ const Buckets                 = require('./buckets.js');
 const Dashboards              = require('./dashboards.js');
 const Devices                 = require('./devices.js');
 const Notifications           = require('./notifications.js');
-const Middlewares             = require('./middlewares.js');
 const Tags                    = require('./tags.js');
 const PaymentMethods          = require('./paymentMethods');
 const Plan                    = require('./plan');
@@ -291,9 +290,6 @@ class Account {
   }
   get notifications() {
     return new Notifications(this.token);
-  }
-  get middlewares() {
-    return new Middlewares(this.token);
   }
   get tags() {
     return new Tags(this.token);
