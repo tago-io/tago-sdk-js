@@ -7,9 +7,6 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "scripts": {
-    "test": "eslint . --fix"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tago-io/tago-sdk-js.git"
@@ -37,9 +34,5 @@
     "form-data": "4.0.0",
     "qs": "6.10.3",
     "socket.io-client": "4.4.1"
-  },
-  "devDependencies": {
-    "eslint-plugin-jest": "26.1.0",
-    "eslint": "8.8.0"
   }
 }
