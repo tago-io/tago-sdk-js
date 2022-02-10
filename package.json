@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "9.3.11",
+  "version": "9.3.12",
   "description": "TagoIO SDK for Node.js - Deprecated - Support until 2030-07-20",
   "main": "index.js",
   "homepage": "https://tago.io",
