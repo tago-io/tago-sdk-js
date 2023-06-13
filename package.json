@@ -1,6 +1,6 @@
 {
   "name": "tago",
-  "version": "9.3.13",
+  "version": "9.3.14",
   "description": "TagoIO SDK for Node.js - Deprecated - Support until 2030-07-20",
   "main": "index.js",
   "homepage": "https://tago.io",
@@ -30,9 +30,9 @@
     "url": "https://github.com/tago-io/tago-sdk-js/issues"
   },
   "dependencies": {
-    "axios": "0.27.2",
+    "axios": "1.4.0",
     "form-data": "4.0.0",
-    "qs": "6.10.5",
-    "socket.io-client": "4.5.1"
+    "qs": "6.11.2",
+    "socket.io-client": "4.6.2"
   }
 }
